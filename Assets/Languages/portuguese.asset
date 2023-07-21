@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad3de2ccec947c44c848c4f951a4c4cb, type: 3}
+  m_Name: portuguese
+  m_EditorClassIdentifier: 
+  language: portuguese
+  welcome: 'Bem-vindo '
+  objectif: "Vamos construir uma c\xE9lula de combust\xEDvel."
+  suivant: Prossiga
+  instruction: "Para mont\xE1-lo, siga as instru\xE7\xF5es escritas na tela."
+  suite: Prossiga
+  warning: "Preste aten\xE7\xE3o aos que est\xE3o ao seu redor, se n\xE3o se sentir
+    bem ou n\xE3o souber o que fazer, n\xE3o hesite em pedir ajuda."
+  montage: "Proceder \xE0 montagem da c\xE9lula de combust\xEDvel. "
+  stack: "O primeiro elemento que vamos colocar \xE9 o Stack, \xE9 um stack de membranas.
+    Essas membranas v\xE3o produzir eletricidade a partir do oxig\xE9nio e do hidrog\xE9nio.
+    Coloque a pilha no local do cubo cinza flutuante. "
+  H2: "Vamos agora tratar do circuito de Hidrog\xE9nio. \xC9 um dos reagentes necess\xE1rios
+    para a rea\xE7\xE3o eletroqu\xEDmica que ocorre dentro do Stack. O circuito de
+    Hidrog\xE9nio j\xE1 est\xE1 posicionado; conecte a Garrafa de Hidrog\xE9nio no
+    final do circuito."
+  compresseur: "Depois de conectar o hidrog\xE9nio, conectaremos o oxig\xE9nio. O
+    oxig\xE9nio \xE9 o outro reagente necess\xE1rio para a gera\xE7\xE3o de eletricidade.
+    No nosso caso, usaremos o Oxig\xE9nio contido no Ar. Um filtro de ar j\xE1 est\xE1
+    posicionado; cabe a si colocar o Compressor."
+  humidificateur: "As membranas que comp\xF5em o Stack s\xE3o elementos fr\xE1geis.
+    Para preserv\xE1-los, \xE9 importante adicionar Humidade ao Ar que entra na Pilha.
+    Portanto, deve colocar um humidificador entre o compressor e a pilha"
+  N2: "Agora vamos falar de seguran\xE7a. Como pode parar a c\xE9lula de combust\xEDvel
+    quando ela est\xE1 a funcionar? Introduzimos nitrog\xE9nio em vez de hidrog\xE9nio
+    no sistema; isso tem o efeito de interromper a rea\xE7\xE3o que ocorre dentro
+    da Pilha. Coloque a Garrafa de Nitrog\xE9nio."
+  ventilateur: "Voc\xEA deve ter notado, mas colocou a maioria dos elementos em um
+    espa\xE7o definido.\r\nSe <b>hidrog\xEAnio</b> vazar dentro deste espa\xE7o,
+    ele <b>acumular\xE1</b> e poder\xE1 causar uma <b>explos\xE3o</b>. Para evitar
+    esse <b>ac\xFAmulo</b>, coloque um <b>ventilador</b> na parte superior do espa\xE7o
+    definido.\r\n"
+  H2O: "A c\xE9lula de combust\xEDvel produz eletricidade, mas tamb\xE9m \xE1gua.
+    Esta \xC1gua deve ser evacuada, por isso iremos recolh\xEA-la num contentor.
+    Coloque o contentor no s\xEDtio certo.\r\n"
+  radiateur: "A rea\xE7\xE3o eletroqu\xEDmica que ocorre dentro da Pilha gera calor,
+    al\xE9m de eletricidade e \xE1gua. Para que a rea\xE7\xE3o seja o mais eficiente
+    poss\xEDvel, ela deve ocorrer numa determinada temperatura. Para manter esta
+    temperatura, o Stack \xE9 conectado a um sistema de refrigera\xE7\xE3o. Coloque
+    o Radiador."
+  pilotage: Agora dirija a pilha.
+  intensite: Intensidade da pilha
+  tension: "Tens\xE3o da pilha"
+  puissance: "Energia el\xE9trica"
+  debitHydrogene: "Fluxo de hidrog\xEAnio"
+  debitAir: Fluxo de ar
+  debitEau: "Fluxo de \xE1gua"
+  rendement: Colheita
+  temperature: Temperatura
+  endtitle: OBRIGADO
+  endtext: "Este \xE9 o fim do exerc\xEDcio, obrigado por participar, por favor,
+    pressione o bot\xE3o abaixo para salvar seu curso."
+  endbutton: Salve sua rota.

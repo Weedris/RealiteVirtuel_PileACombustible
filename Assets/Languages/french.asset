@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad3de2ccec947c44c848c4f951a4c4cb, type: 3}
+  m_Name: french
+  m_EditorClassIdentifier: 
+  language: french
+  welcome: Bienvenue
+  objectif: "Nous allons monter une pile \xE0 combustible."
+  suivant: "Passez \xE0 la suite"
+  instruction: "Afin de la monter, suivez les indications \xE9crites sur l\u2019\xE9cran."
+  suite: "Passer \xE0 la suite"
+  warning: "Faites tout de m\xEAme attention \xE0 votre entourage, si vous ne vous
+    sentez pas bien ou que vous ne savez pas quoi faire, n'h\xE9sitez pas \xE0 demander
+    de l\u2019aide."
+  montage: "Passez au montage de la pile \xE0 combustible."
+  stack: "Le premier \xE9l\xE9ment que nous allons placer est le <b>Stack</b>, c'est
+    un empilement de membranes. Ce sont ces membranes qui vont produire de l'\xE9lectricit\xE9
+    \xE0 partir d'<b>Oxyg\xE8ne</b> et d'<b>Hydrog\xE8ne</b>. Placez le <b>Stack</b>
+    \xE0 l'emplacement du cube gris qui flotte."
+  H2: "Nous allons maintenant nous occuper du circuit d'<b>Hydrog\xE8ne</b>. C'est
+    l'un des r\xE9actifs n\xE9cessaire pour la r\xE9action \xE9lectrochimique qui
+    prend place au sein du <b>Stack</b>. Le circuit d'<b>Hydrog\xE8ne</b> est d\xE9j\xE0
+    plac\xE9, raccordez la <b>Bouteille d'Hydrog\xE8ne</b> \xE0 l'extr\xE9mit\xE9
+    du circuit."
+  compresseur: "Apr\xE8s l'<b>Hydrog\xE8ne</b>, nous allons connecter l'<b>Oxyg\xE8ne</b>,
+    c'est l'autre r\xE9actif n\xE9cessaire \xE0 la g\xE9n\xE9ration d'\xE9lectricit\xE9.\r\nDans
+    notre cas, nous utiliserons l'<b>Oxyg\xE8ne</b> qui est contenu dans l'<b>Air</b>.
+    Un filtre \xE0 <b>Air</b> est plac\xE9, \xE0 vous de mettre le <b>Compresseur</b>.\r\n"
+  humidificateur: "Il faut savoir que les membranes, qui constituent le <b>Stack</b>,
+    sont des \xE9l\xE9ments fragiles. Nous ajoutons donc de l'<b>Humidit\xE9</b>
+    \xE0 l'<b>Air</b> entrant dans le <b>Stack</b>. Il nous faut donc placer un <b>Humidificateur</b>
+    entre le <b>Compresseur</b> et le <b>Stack</b>."
+  N2: "Parlons <b>S\xE9curit\xE9</b> d\xE9sormais.\r\nComment fait-on pour arr\xEAter
+    la <b>Pile \xE0 combustible</b> lorsqu'elle est en fonctionnement ?\n\r\nNous
+    introduisons de l'<b>Azote</b> dans le syst\xE8me, cela a pour effet d'arr\xEAter
+    la r\xE9action qui prend place au sein du <b>Stack</b>.\r\nPlacez donc la <b>Bouteille
+    d'Azote</b>.\r\n"
+  ventilateur: "Vous l'avez peut-\xEAtre remarqu\xE9, mais vous avez plac\xE9 la
+    plupart des \xE9l\xE9ments dans un espace d\xE9fini.\r\nSi une fuite d'<b>hydrog\xE8ne</b>
+    a lieu au sein de cet espace, il va s'<b>accumuler</b> jusqu'\xE0 potentiellement
+    causer une <b>explosion</b>. Afin d'\xE9viter cette <b>accumulation</b>, placez
+    un <b>ventilateur</b> au sommet de l'espace d\xE9fini.\r\n"
+  H2O: "La <b>Pile \xE0 combustible</b> produit de l'\xE9lectricit\xE9, mais \xE9galement
+    de l'<b>Eau</b>. Cette <b>Eau</b> doit \xEAtre \xE9vacu\xE9e, nous allons donc
+    la r\xE9cup\xE9rer dans un <b>Bac</b>. Placez-le."
+  radiateur: "La r\xE9action \xE9lectrochimique qui a lieu au sein du <b>Stack</b>
+    g\xE9n\xE8re de la <b>Chaleur</b> en plus de l'\xE9lectricit\xE9 et de l'eau.\r\nAfin
+    que la r\xE9action soit la plus efficace possible, elle doit avoir lieu \xE0
+    une certaine temp\xE9rature.\r\nAfin de maintenir cette temp\xE9rature, le <b>Stack</b>
+    est reli\xE9 \xE0 un syst\xE8me de refroidissement.\r\nPlacez le <b>Radiateur</b>.\r\n"
+  pilotage: Maintenant, pilotez la pile
+  intensite: "Intensit\xE9 du stack"
+  tension: Tension du stack
+  puissance: "Puissance \xE9lectrique"
+  debitHydrogene: "D\xE9bit d\u2019hydrog\xE8ne"
+  debitAir: "D\xE9bit d\u2019air"
+  debitEau: "D\xE9bit d\u2019eau"
+  rendement: Rendement du stack
+  temperature: "Temp\xE9rature"
+  endtitle: Merci
+  endtext: C'est la fin de l'exercice, merci d'avoir particitper, veuillez pressez
+    le bouton qui suit afin de sauvegarder votre parcours.
+  endbutton: Sauvegardez votre parcours
