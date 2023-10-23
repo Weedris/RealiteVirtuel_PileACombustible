@@ -10,6 +10,7 @@
  * 
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
         End
     }
 
+
     public State state;
 
     public GameObject PAC_prefab;
@@ -71,74 +73,32 @@ public class GameManager : MonoBehaviour
     public GameObject Instruction;
     public GameObject Warning;
 
+
     #endregion
 
     public void Start()
     {
         language = Languages.french;
         state = State.Initilazing;
-
     }
 
     public void NextState()
     {
-        if (state == State.Initilazing)
+        state += 1;
+        switch(state)
         {
-            state = State.Stack;
-            Stack();
+            case State.Stack: Stack();break;
+            case State.BombonneH2: BombonneH2();break;
+            case State.Compresseur: Compresseur();break;
+            case State.Humidificateur: Humidificateur();break;
+            case State.BombonneN2: BombonneN2();break;
+            case State.Ventilateur: Ventilateur();break;
+            case State.CollecteurEau: CollecteurEau();break;
+            case State.Pilotage: Pilotage();break;
+            case State.End: End();break;
+            default: Debug.Log("Shouldn't happen");break;
         }
-        else if (state == State.Stack)
-        {
-            state = State.BombonneH2;
-            BombonneH2();
-        }
-        else if (state == State.BombonneH2)
-        {
-            state = State.Compresseur;
-            Compresseur();
-        }
-        else if (state == State.Compresseur)
-        {
-            state = State.Humidificateur;
-            Humidificateur();
-        }
-        else if (state == State.Humidificateur)
-        {
-            state = State.BombonneN2;
-            BombonneN2();
-        }
-        else if (state == State.BombonneN2)
-        {
-            state = State.CollecteurEau;
-            state = State.Ventilateur;
-            Ventilateur();
-        }
-        else if (state == State.Ventilateur)
-        {
-            state = State.CollecteurEau;
-            CollecteurEau();
-        }
-        else if (state == State.CollecteurEau)
-        {
-            state = State.Radiateur;
-            Radiateur();
-        }
-        else if (state == State.Radiateur)
-        {
-            state = State.Pilotage;
-            Pilotage();
-
-        }
-        else if (state == State.Pilotage)
-        {
-            state = State.End;
-            End();
-        }
-
-
         traceParser.traceMainStep(state);
-
-        //text.text = state.ToString();
     }
 
     #region language
