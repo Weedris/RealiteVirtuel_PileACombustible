@@ -41,6 +41,8 @@ public class PilotagePile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameManager gm = FindFirstObjectByType<GameManager>();
+
         if (gm.state == GameManager.State.Pilotage)
         {
             if (intensite <= 29.7f)
@@ -119,8 +121,6 @@ public class PilotagePile : MonoBehaviour
             rendement = 50,7%
             Air = 66,3 l/min         
              */
-
-            GameManager gm = FindFirstObjectByType<GameManager>();
 
             string text = gm.giveCorectlanguage().tension + ": " + tension.ToString() + " V" + "\n";
             text += gm.giveCorectlanguage().intensite + ": " + intensite.ToString() + " A" + "\n";

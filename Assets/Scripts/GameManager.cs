@@ -81,7 +81,6 @@ public class GameManager : MonoBehaviour
     {
         language = Languages.french;
         state = State.Initilazing;
-        text.text = $"<align=center>{text.text}";
     }
 
     public void NextState()
