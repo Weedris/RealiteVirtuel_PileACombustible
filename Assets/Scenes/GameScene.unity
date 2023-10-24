@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17338721, g: 0.21673912, b: 0.29880837, a: 1}
+  m_IndirectSpecularColor: {r: 0.17338963, g: 0.21674274, b: 0.29881284, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15375,7 +15375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e06ecc1e195214081a7b7f5cf1ab4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sliderIntensite: {fileID: 1842031734}
+  IntensitySlider: {fileID: 1842031734}
   screen: {fileID: 2103845197}
 --- !u!114 &1271181166
 MonoBehaviour:
@@ -15417,7 +15417,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4e9794d972fc1ad4b8d6b0db23a8330b, type: 2}
   - {fileID: 11400000, guid: b3059c5584cfe9d4eb8874452a1109dc, type: 2}
   - {fileID: 11400000, guid: f1d7cee1081246642afbcbff30b6c71b, type: 2}
-  language: 2
 --- !u!1 &1281090789
 GameObject:
   m_ObjectHideFlags: 0
