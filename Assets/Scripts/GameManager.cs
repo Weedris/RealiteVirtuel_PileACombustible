@@ -160,6 +160,8 @@ public class GameManager : MonoBehaviour
         var next = Bvn.GetNamedChild("Suivant");
         var lang = giveCorectlanguage();
         GetHeader(textGameObject).text = lang.welcome;
+        text.text = lang.welcome;
+        text.text = $"<align=center>{text.text}";
         GetModalText(textGameObject).text = lang.objectif;
         GetTextTMP(next).text = lang.suivant;
 
