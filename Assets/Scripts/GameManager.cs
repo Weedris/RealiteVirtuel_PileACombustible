@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
             case State.BombonneN2: BombonneN2();break;
             case State.Ventilateur: Ventilateur();break;
             case State.CollecteurEau: CollecteurEau();break;
+            case State.Radiateur: Radiateur(); break;
             case State.Pilotage: Pilotage();break;
             case State.End: End();break;
             default: Debug.Log("Shouldn't happen");break;
