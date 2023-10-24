@@ -10,11 +10,6 @@
  * 
  */
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Resources;
-using System.Text;
 using TMPro;
 using Unity.XR.CoreUtils;
 using UnityEngine;
@@ -109,36 +104,33 @@ public class GameManager : MonoBehaviour
         return textGameObject.GetNamedChild("Text (TMP)").GetComponent<TextMeshProUGUI>();
     }
 
+    public void LoadLangIntoDisplay(GameObject go, string header, string body, string nextButtonMessage)
+    {
+		var textGameObject = go.GetNamedChild("Texte");
+		var next = go.GetNamedChild("Suivant");
+
+		GetHeader(textGameObject).text = header;
+		GetModalText(textGameObject).text = body;
+		GetTextTMP(next).text = nextButtonMessage;
+	}
+
     public void bvn()
     {
-        var textGameObject = Bvn.GetNamedChild("Texte");
-        var next = Bvn.GetNamedChild("Suivant");
         var lang = language.GiveCorrectlanguage();
-        GetHeader(textGameObject).text = lang.welcome;
         text.text = lang.welcome;
-        GetModalText(textGameObject).text = lang.objectif;
-        GetTextTMP(next).text = lang.suivant;
-
+        LoadLangIntoDisplay(Bvn, lang.welcome, lang.objectif, lang.suivant);
     }
 
     public void instru()
     {
-        var textGameObject = Instruction.GetNamedChild("Texte");
-        var next = Instruction.GetNamedChild("Suivant");
         var lang = language.GiveCorrectlanguage();
-        GetHeader(textGameObject).text = lang.welcome;
-        GetModalText(textGameObject).text = lang.instruction;
-        GetTextTMP(next).text = lang.suivant;
+		LoadLangIntoDisplay(Instruction, lang.welcome, lang.instruction, lang.suivant);
     }
 
     public void warning()
     {
-        var textGameObject = Warning.GetNamedChild("Texte");
-        var next = Warning.GetNamedChild("Suivant");
         var lang = language.GiveCorrectlanguage();
-        GetHeader(textGameObject).text = lang.welcome;
-        GetModalText(textGameObject).text = lang.warning;
-        GetTextTMP(next).text = lang.montage;
+		LoadLangIntoDisplay(Instruction, lang.welcome, lang.warning, lang.montage);
     }
 
     #endregion
