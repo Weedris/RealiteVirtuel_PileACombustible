@@ -7,21 +7,37 @@ public class LanguageManager : MonoBehaviour
 {
    public List<Language> languages;
 
-    public enum Languages
+	public enum Languages
+	{
+		french,
+		portuguese,
+		english
+	}
+	public Languages language;
+	public void SelecttLanguage(Languages l) 
+	{
+		language = l;
+	}
+
+	// maybe use a scriptableobject instead
+	public Language GiveCorectlanguage()
+	{
+		return languages[(int)language];
+	}
+
+    public void language_french()
     {
-        french,
-        portuguese,
-        english
-    }
-    public Languages language;
-    public void SelecttLanguage(Languages l) 
-    {
-        language = l;
+        SelecttLanguage(Languages.french);
     }
 
-    // maybe use a scriptableobject instead
-    public Language GiveCorectlanguage()
+    public void language_english()
     {
-        return languages[(int)language];
+        SelecttLanguage(Languages.english);
+
+    }
+
+    public void language_portuguese()
+    {
+        SelecttLanguage(Languages.portuguese);
     }
 }

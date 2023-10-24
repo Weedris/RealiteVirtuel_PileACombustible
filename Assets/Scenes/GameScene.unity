@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17338963, g: 0.21674274, b: 0.29881284, a: 1}
+  m_IndirectSpecularColor: {r: 0.17338721, g: 0.21673912, b: 0.29880837, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8168,8 +8168,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1271181164}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1271181168}
+        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
         m_MethodName: language_french
         m_Mode: 1
         m_Arguments:
@@ -13796,8 +13796,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1271181164}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1271181168}
+        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
         m_MethodName: language_english
         m_Mode: 1
         m_Arguments:
@@ -16334,8 +16334,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1271181164}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1271181168}
+        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
         m_MethodName: language_portuguese
         m_Mode: 1
         m_Arguments:
