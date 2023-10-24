@@ -46,6 +46,7 @@ public class Language : ScriptableObject
     [TextArea(3, 10)]
     public string pilotage;
 
+    public string intensityBarName;
 
     public string intensite;
     public string tension;

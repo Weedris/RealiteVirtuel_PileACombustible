@@ -140,7 +140,8 @@ public class GameManager : MonoBehaviour
     public void warning()
     {
         var lang = language.GiveCorrectlanguage();
-		LoadLangIntoDisplay(Instruction, lang.welcome, lang.warning, lang.montage);
+        Debug.Log(lang.warning);
+        LoadLangIntoDisplay(Warning, lang.welcome, lang.warning, lang.montage);
     }
 
     #endregion
@@ -205,6 +206,7 @@ public class GameManager : MonoBehaviour
 
         Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
         sliderIntensite.SetActive(true);
+        sliderIntensite.GetComponent<TextMeshProUGUI>().text = lang.intensityBarName;
         BoardTMPGUI.text = lang.pilotage;
         endButton.SetActive(true);
 
