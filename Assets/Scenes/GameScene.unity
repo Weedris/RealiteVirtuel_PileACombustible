@@ -15351,7 +15351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particle1: {fileID: 572678588}
   particle2: {fileID: 1037328488}
-  Tabellentext: {fileID: 0}
+  BoardTMPGUI: {fileID: 2103845197}
   language: {fileID: 1271181168}
   state: 10
   PAC_prefab: {fileID: 5511756333990301893, guid: ac2293cb44e7c974095a386ac83ac8c6,
@@ -15417,7 +15417,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4e9794d972fc1ad4b8d6b0db23a8330b, type: 2}
   - {fileID: 11400000, guid: b3059c5584cfe9d4eb8874452a1109dc, type: 2}
   - {fileID: 11400000, guid: f1d7cee1081246642afbcbff30b6c71b, type: 2}
-  language: 0
 --- !u!1 &1281090789
 GameObject:
   m_ObjectHideFlags: 0
@@ -17203,7 +17202,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Bienvenue
+  m_text: Welcome
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
