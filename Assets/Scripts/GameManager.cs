@@ -10,6 +10,8 @@
  * 
  */
 
+using System;
+using System.Collections.Generic;
 using TMPro;
 using Unity.XR.CoreUtils;
 using UnityEngine;
@@ -19,9 +21,7 @@ public class GameManager : MonoBehaviour
 	public GameObject particle1;
 	public GameObject particle2;
 
-
-	public TextMeshProUGUI Tabellentext;
-
+	public TextMeshProUGUI BoardTMPGUI;
 
     public LanguageManager language;
 
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
     public void bvn()
     {
         var lang = language.GiveCorrectlanguage();
-		Tabellentext.text = lang.welcome;
+		BoardTMPGUI.text = lang.welcome;
         LoadLangIntoDisplay(Bvn, lang.welcome, lang.objectif, lang.suivant);
     }
 
@@ -152,48 +152,48 @@ public class GameManager : MonoBehaviour
         Quaternion quat = new Quaternion(0.109381668f, 0.875426114f, -0.408217877f, 0.234569758f);
         Pac = Instantiate(PAC_prefab, coord, quat);
         Pac.GetComponent<ShowElement>().TuyauMetal.gameObject.SetActive(true);
-        Tabellentext.text = language.GiveCorrectlanguage().stack;
+        BoardTMPGUI.text = language.GiveCorrectlanguage().stack;
     }
 
     public void BombonneH2()
     {
         Pac.GetComponent<ShowElement>().H2_In.gameObject.SetActive(true);
-        Tabellentext.text = language.GiveCorrectlanguage().H2;
+        BoardTMPGUI.text = language.GiveCorrectlanguage().H2;
     }
 
     public void Compresseur()
     {
         Pac.GetComponent<ShowElement>().O2_In.SetActive(true);
-        Tabellentext.text = language.GiveCorrectlanguage().compresseur;
+        BoardTMPGUI.text = language.GiveCorrectlanguage().compresseur;
     }
 
     public void Humidificateur()
     {
-        Tabellentext.text = language.GiveCorrectlanguage().humidificateur;
+        BoardTMPGUI.text = language.GiveCorrectlanguage().humidificateur;
     }
 
     public void BombonneN2()
     {
         Pac.GetComponent<ShowElement>().N2_In.SetActive(true);
-        Tabellentext.text = language.GiveCorrectlanguage().N2;
+        BoardTMPGUI.text = language.GiveCorrectlanguage().N2;
     }
 
     public void Ventilateur()
     {
         Pac.GetComponent<ShowElement>().ventilloCapteur.SetActive(true);
-        Tabellentext.text = language.GiveCorrectlanguage().ventilateur;
+        BoardTMPGUI.text = language.GiveCorrectlanguage().ventilateur;
     }
 
     public void CollecteurEau()
     {
         Pac.GetComponent<ShowElement>().H2O_Out.SetActive(true);
-        Tabellentext.text = language.GiveCorrectlanguage().H2O;
+        BoardTMPGUI.text = language.GiveCorrectlanguage().H2O;
     }
 
     public void Radiateur()
     {
         Pac.GetComponent<ShowElement>().Refroidissement.SetActive(true);
-        Tabellentext.text = language.GiveCorrectlanguage().radiateur;
+        BoardTMPGUI.text = language.GiveCorrectlanguage().radiateur;
     }
     #endregion
 
@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour
 
         Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
         sliderIntensite.SetActive(true);
-        Tabellentext.text = lang.pilotage;
+        BoardTMPGUI.text = lang.pilotage;
         endButton.SetActive(true);
 
         GetHeader(textGameObject).text = lang.endtitle;
@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour
     public void End()
     {
         var lang = language.GiveCorrectlanguage();
-        Tabellentext.text = lang.endtext + " !";
+        BoardTMPGUI.text = lang.endtext + " !";
         particle1.SetActive(true);
         particle2.SetActive(true);
         saveInCSV.sauvegarde();
