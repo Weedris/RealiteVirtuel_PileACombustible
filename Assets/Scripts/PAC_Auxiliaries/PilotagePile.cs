@@ -41,7 +41,7 @@ public class PilotagePile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (end)//to do
+        if (gm.state == GameManager.State.Pilotage)
         {
             if (intensite <= 29.7f)
             {
@@ -83,9 +83,6 @@ public class PilotagePile : MonoBehaviour
                 debitAir = Mathf.Lerp(57.5f, 66.3f, A);
                 puissance = tension * intensite;
             }
-
-            writeValue();
-
             /*
             V = 18
             A = 20
@@ -123,28 +120,23 @@ public class PilotagePile : MonoBehaviour
             Air = 66,3 l/min         
              */
 
-        }
-    }
+            GameManager gm = FindFirstObjectByType<GameManager>();
 
-    public void writeValue()
-    {
+            string text = gm.giveCorectlanguage().tension + ": " + tension.ToString() + " V" + "\n";
+            text += gm.giveCorectlanguage().intensite + ": " + intensite.ToString() + " A" + "\n";
+            text += gm.giveCorectlanguage().puissance + ": " + puissance.ToString() + " W" + "\n";
+            text += gm.giveCorectlanguage().debitEau + ": " + debitEau.ToString() + " g/min" + "\n";
+            text += gm.giveCorectlanguage().debitHydrogene + ": " + debitHydrogene.ToString() + " L/min" + "\n";
+            text += gm.giveCorectlanguage().debitAir + ": " + debitAir.ToString() + " L/min" + "\n";
+            text += gm.giveCorectlanguage().rendement + ": " + rendement.ToString() + " %" + "\n";
 
-        GameManager gm = FindFirstObjectByType<GameManager>();
-
-        string text = gm.giveCorectlanguage().tension + ": " + tension.ToString() + " V" + "\n";
-        text += gm.giveCorectlanguage().intensite + ": " + intensite.ToString() + " A" + "\n";
-        text += gm.giveCorectlanguage().puissance + ": " + puissance.ToString() + " W" + "\n";
-        text += gm.giveCorectlanguage().debitEau + ": " + debitEau.ToString() + " g/min" + "\n";
-        text += gm.giveCorectlanguage().debitHydrogene + ": " + debitHydrogene.ToString() + " L/min" + "\n";
-        text += gm.giveCorectlanguage().debitAir + ": " + debitAir.ToString() + " L/min" + "\n";
-        text += gm.giveCorectlanguage().rendement + ": " + rendement.ToString() + " %" + "\n";
-
-        if (gm.state == GameManager.State.Pilotage)
-        {
             screen.text = text;
         }
 
-        screen.alignment = TextAlignmentOptions.Left;
+        if (gm.state != GameManager.State.Initilazing)
+        {
+            screen.alignment = TextAlignmentOptions.Left;
+        }
     }
 
     public void changeIntesite()
