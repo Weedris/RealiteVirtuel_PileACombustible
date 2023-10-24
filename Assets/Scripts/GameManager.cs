@@ -21,33 +21,29 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
-    public GameObject particle1;
-    public GameObject particle2;
+	public GameObject particle1;
+	public GameObject particle2;
 
 
 	public TextMeshProUGUI text;
 
 
+    public LanguageManager language;
 
-	public LanguageManager language;
-
-
-
-	public enum State
-	{
-		Initilazing,
-		Stack,
-		BombonneH2,
-		Compresseur,
-		Humidificateur,
-		BombonneN2,
-		Ventilateur,
-		CollecteurEau,
-		Radiateur,
-		Pilotage,
-		End
-	}
+    public enum State
+    {
+        Initilazing,
+        Stack,
+        BombonneH2,
+        Compresseur,
+        Humidificateur,
+        BombonneN2,
+        Ventilateur,
+        CollecteurEau,
+        Radiateur,
+        Pilotage,
+        End
+    }
 
 
 
@@ -76,7 +72,6 @@ public class GameManager : MonoBehaviour
 		language.SelecttLanguage(LanguageManager.Languages.french);
 		state = State.Initilazing;
 	}
-
 
 
     public void NextState()
@@ -256,5 +251,6 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
+
 
 }
