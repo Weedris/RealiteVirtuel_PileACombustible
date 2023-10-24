@@ -4,10 +4,6 @@
  * 
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -21,8 +17,8 @@ public class ComponentPlacement : MonoBehaviour
     public void Start()
     {
         GameManager = FindObjectOfType<GameManager>();
-        good = GameObject.Find("good");
-        bad = GameObject.Find("bad");
+        good = GameObject.Find("CorrectAnswerSound");
+        bad = GameObject.Find("IncorrectAnswerSound");
     }
 
     public void checkComponentPlacement(XRSocketInteractor socket)

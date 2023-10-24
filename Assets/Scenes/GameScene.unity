@@ -617,7 +617,7 @@ GameObject:
   m_Component:
   - component: {fileID: 180132174}
   m_Layer: 5
-  m_Name: Regarder les Instructions
+  m_Name: InstructionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7457,7 +7457,7 @@ GameObject:
   m_Component:
   - component: {fileID: 599059757}
   m_Layer: 5
-  m_Name: Warning
+  m_Name: WarningPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7956,7 +7956,7 @@ GameObject:
   - component: {fileID: 923892793}
   - component: {fileID: 923892792}
   m_Layer: 0
-  m_Name: bad
+  m_Name: IncorrectAnswerSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13322,7 +13322,7 @@ GameObject:
   - component: {fileID: 1047463901}
   - component: {fileID: 1047463900}
   m_Layer: 0
-  m_Name: XR Interaction Manager
+  m_Name: XRInteractionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13367,7 +13367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1085248857}
   m_Layer: 5
-  m_Name: language
+  m_Name: Language
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14491,6 +14491,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1238593590}
     m_Modifications:
+    - target: {fileID: 8969571751466764123, guid: 657321a07c3561043af55547ec4b0ed7,
+        type: 3}
+      propertyPath: m_Name
+      value: BackgroundColor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969571751541263787, guid: 657321a07c3561043af55547ec4b0ed7,
+        type: 3}
+      propertyPath: m_Name
+      value: HandleArea
+      objectReference: {fileID: 0}
     - target: {fileID: 8969571751951368413, guid: 657321a07c3561043af55547ec4b0ed7,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -14556,6 +14566,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -165
       objectReference: {fileID: 0}
+    - target: {fileID: 8969571752174639951, guid: 657321a07c3561043af55547ec4b0ed7,
+        type: 3}
+      propertyPath: m_Name
+      value: IntensityLabel
+      objectReference: {fileID: 0}
     - target: {fileID: 8969571752320557268, guid: 657321a07c3561043af55547ec4b0ed7,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -14585,6 +14600,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969571752612064771, guid: 657321a07c3561043af55547ec4b0ed7,
+        type: 3}
+      propertyPath: m_Name
+      value: ValueLabel
       objectReference: {fileID: 0}
     - target: {fileID: 8969571752612064772, guid: 657321a07c3561043af55547ec4b0ed7,
         type: 3}
@@ -14644,7 +14664,7 @@ PrefabInstance:
     - target: {fileID: 8969571752666551113, guid: 657321a07c3561043af55547ec4b0ed7,
         type: 3}
       propertyPath: m_Name
-      value: "Intesit\xE9"
+      value: IntensitySlider
       objectReference: {fileID: 0}
     - target: {fileID: 8969571752666551113, guid: 657321a07c3561043af55547ec4b0ed7,
         type: 3}
@@ -15586,7 +15606,7 @@ GameObject:
   - component: {fileID: 1289757436}
   - component: {fileID: 1289757435}
   m_Layer: 0
-  m_Name: good
+  m_Name: CorrectAnswerSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16210,7 +16230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1613139548}
   m_Layer: 5
-  m_Name: Bvn
+  m_Name: WelcomePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16420,7 +16440,7 @@ GameObject:
   - component: {fileID: 1717549878}
   - component: {fileID: 1717549877}
   m_Layer: 5
-  m_Name: Ecran
+  m_Name: Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16613,7 +16633,7 @@ GameObject:
   - component: {fileID: 1762641986}
   - component: {fileID: 1762641985}
   m_Layer: 0
-  m_Name: XR Origin
+  m_Name: XROrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16934,7 +16954,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "intensit\xE9"
+  m_text: Intensity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16961,7 +16981,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10.7
+  m_fontSize: 10.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
