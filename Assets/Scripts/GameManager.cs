@@ -22,14 +22,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-	public GameObject particle1;
-	public GameObject particle2;
+    public GameObject particle1;
+    public GameObject particle2;
+
 
 	public TextMeshProUGUI text;
 
-	//public Language french;
-	//public Language portuguese;
-	//public Language english;
+
 
 	public LanguageManager language;
 
@@ -49,6 +48,7 @@ public class GameManager : MonoBehaviour
 		Pilotage,
 		End
 	}
+
 
 
 	public State state;
@@ -77,170 +77,184 @@ public class GameManager : MonoBehaviour
 		state = State.Initilazing;
 	}
 
-	public void NextState()
-	{
-		state += 1;
-		switch(state)
-		{
-			case State.Stack: Stack();break;
-			case State.BombonneH2: BombonneH2();break;
-			case State.Compresseur: Compresseur();break;
-			case State.Humidificateur: Humidificateur();break;
-			case State.BombonneN2: BombonneN2();break;
-			case State.Ventilateur: Ventilateur();break;
-			case State.CollecteurEau: CollecteurEau();break;
-			case State.Radiateur: Radiateur(); break;
-			case State.Pilotage: Pilotage();break;
-			case State.End: End();break;
-			default: Debug.Log("Shouldn't happen");break;
-		}
-		traceParser.traceMainStep(state);
-	}
 
 
-	#region intro
+    public void NextState()
+    {
+        state += 1;
+        switch(state)
+        {
+            case State.Stack: Stack();break;
+            case State.BombonneH2: BombonneH2();break;
+            case State.Compresseur: Compresseur();break;
+            case State.Humidificateur: Humidificateur();break;
+            case State.BombonneN2: BombonneN2();break;
+            case State.Ventilateur: Ventilateur();break;
+            case State.CollecteurEau: CollecteurEau();break;
+            case State.Radiateur: Radiateur(); break;
+            case State.Pilotage: Pilotage();break;
+            case State.End: End();break;
+            default: Debug.Log("Shouldn't happen");break;
+        }
+        traceParser.traceMainStep(state);
+    }
 
-	public TextMeshProUGUI GetHeader(GameObject textGameObject)
-	{
-		return textGameObject.GetNamedChild("Header Text").GetComponent<TextMeshProUGUI>();
-	}
+    #region language
 
-	public TextMeshProUGUI GetModalText(GameObject textGameObject)
-	{
-		return textGameObject.GetNamedChild("Modal Text").GetComponent<TextMeshProUGUI>();
-	}
+    public void language_french()
+    {
+        language.SelecttLanguage(LanguageManager.Languages.french);
+    }
 
-	public TextMeshProUGUI GetTextTMP(GameObject textGameObject)
-	{
-		return textGameObject.GetNamedChild("Text (TMP)").GetComponent<TextMeshProUGUI>();
-	}
+    public void language_english()
+    {
+        language.SelecttLanguage(LanguageManager.Languages.english);
+        
+    }
 
-	public void bvn()
-	{
-		var textGameObject = Bvn.GetNamedChild("Texte");
-		var next = Bvn.GetNamedChild("Suivant");
-		var lang = language.GiveCorectlanguage();
-		GetHeader(textGameObject).text = lang.welcome;
-		text.text = lang.welcome;
-		GetModalText(textGameObject).text = lang.objectif;
-		GetTextTMP(next).text = lang.suivant;
+    public void language_portuguese()
+    {
+        language.SelecttLanguage(LanguageManager.Languages.portuguese);
+    }
+    #endregion
 
-	}
+    #region intro
+    public TextMeshProUGUI GetHeader(GameObject textGameObject)
+    {
+        return textGameObject.GetNamedChild("Header Text").GetComponent<TextMeshProUGUI>();
+    }
 
-	public void instru()
-	{
-		var textGameObject = Instruction.GetNamedChild("Texte");
-		var next = Instruction.GetNamedChild("Suivant");
-		var lang = language.GiveCorectlanguage();
-		GetHeader(textGameObject).text = lang.welcome;
-		GetModalText(textGameObject).text = lang.instruction;
-		GetTextTMP(next).text = lang.suivant;
-	}
+    public TextMeshProUGUI GetModalText(GameObject textGameObject)
+    {
+        return textGameObject.GetNamedChild("Modal Text").GetComponent<TextMeshProUGUI>();
+    }
 
-	public void warning()
-	{
-		var textGameObject = Warning.GetNamedChild("Texte");
-		var next = Warning.GetNamedChild("Suivant");
-		var lang = language.GiveCorectlanguage();
-		GetHeader(textGameObject).text = lang.welcome;
-		GetModalText(textGameObject).text = lang.warning;
-		GetTextTMP(next).text = lang.montage;
-	}
+    public TextMeshProUGUI GetTextTMP(GameObject textGameObject)
+    {
+        return textGameObject.GetNamedChild("Text (TMP)").GetComponent<TextMeshProUGUI>();
+    }
 
-	#endregion
+    public void bvn()
+    {
+        var textGameObject = Bvn.GetNamedChild("Texte");
+        var next = Bvn.GetNamedChild("Suivant");
+        var lang = language.GiveCorectlanguage();
+        GetHeader(textGameObject).text = lang.welcome;
+        text.text = lang.welcome;
+        GetModalText(textGameObject).text = lang.objectif;
+        GetTextTMP(next).text = lang.suivant;
 
-	#region montage
-	public void Stack()
-	{
-		Vector3 coord = new Vector3(-0.0900000036f, 1f, 1.13f);
-		Quaternion quat = new Quaternion(0.109381668f, 0.875426114f, -0.408217877f, 0.234569758f);
-		Pac = Instantiate(PAC_prefab, coord, quat);
-		Pac.GetComponent<ShowElement>().TuyauMetal.gameObject.SetActive(true);
-		text.text = language.GiveCorectlanguage().stack;
-	}
+    }
 
-	public void BombonneH2()
-	{
-		Pac.GetComponent<ShowElement>().H2_In.gameObject.SetActive(true);
-		text.text = language.GiveCorectlanguage().H2;
-	}
+    public void instru()
+    {
+        var textGameObject = Instruction.GetNamedChild("Texte");
+        var next = Instruction.GetNamedChild("Suivant");
+        var lang = language.GiveCorectlanguage();
+        GetHeader(textGameObject).text = lang.welcome;
+        GetModalText(textGameObject).text = lang.instruction;
+        GetTextTMP(next).text = lang.suivant;
+    }
 
-	public void Compresseur()
-	{
-		Pac.GetComponent<ShowElement>().O2_In.SetActive(true);
-		text.text = language.GiveCorectlanguage().compresseur;
-	}
+    public void warning()
+    {
+        var textGameObject = Warning.GetNamedChild("Texte");
+        var next = Warning.GetNamedChild("Suivant");
+        var lang = language.GiveCorectlanguage();
+        GetHeader(textGameObject).text = lang.welcome;
+        GetModalText(textGameObject).text = lang.warning;
+        GetTextTMP(next).text = lang.montage;
+    }
 
-	public void Humidificateur()
-	{
-		text.text = language.GiveCorectlanguage().humidificateur;
-	}
+    #endregion
 
-	public void BombonneN2()
-	{
-		Pac.GetComponent<ShowElement>().N2_In.SetActive(true);
-		text.text = language.GiveCorectlanguage().N2;
-	}
+    #region montage
+    public void Stack()
+    {
+        Vector3 coord = new Vector3(-0.0900000036f, 1f, 1.13f);
+        Quaternion quat = new Quaternion(0.109381668f, 0.875426114f, -0.408217877f, 0.234569758f);
+        Pac = Instantiate(PAC_prefab, coord, quat);
+        Pac.GetComponent<ShowElement>().TuyauMetal.gameObject.SetActive(true);
+        text.text = language.GiveCorectlanguage().stack;
+    }
 
-	public void Ventilateur()
-	{
-		Pac.GetComponent<ShowElement>().ventilloCapteur.SetActive(true);
-		text.text = language.GiveCorectlanguage().ventilateur;
-	}
+    public void BombonneH2()
+    {
+        Pac.GetComponent<ShowElement>().H2_In.gameObject.SetActive(true);
+        text.text = language.GiveCorectlanguage().H2;
+    }
 
-	public void CollecteurEau()
-	{
-		Pac.GetComponent<ShowElement>().H2O_Out.SetActive(true);
-		text.text = language.GiveCorectlanguage().H2O;
-	}
+    public void Compresseur()
+    {
+        Pac.GetComponent<ShowElement>().O2_In.SetActive(true);
+        text.text = language.GiveCorectlanguage().compresseur;
+    }
 
-	public void Radiateur()
-	{
-		Pac.GetComponent<ShowElement>().Refroidissement.SetActive(true);
-		text.text = language.GiveCorectlanguage().radiateur;
-	}
+    public void Humidificateur()
+    {
+        text.text = language.GiveCorectlanguage().humidificateur;
+    }
 
-	#endregion
+    public void BombonneN2()
+    {
+        Pac.GetComponent<ShowElement>().N2_In.SetActive(true);
+        text.text = language.GiveCorectlanguage().N2;
+    }
 
-	public void Pilotage()
-	{
-		var lang = language.GiveCorectlanguage();
-		var textGameObject = endButton.GetNamedChild("Texte");
-		var next = endButton.GetNamedChild("Suivant");
+    public void Ventilateur()
+    {
+        Pac.GetComponent<ShowElement>().ventilloCapteur.SetActive(true);
+        text.text = language.GiveCorectlanguage().ventilateur;
+    }
 
-		Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
-		sliderIntensite.SetActive(true);
-		text.text = lang.pilotage;
-		endButton.SetActive(true);
+    public void CollecteurEau()
+    {
+        Pac.GetComponent<ShowElement>().H2O_Out.SetActive(true);
+        text.text = language.GiveCorectlanguage().H2O;
+    }
 
-		GetHeader(textGameObject).text = lang.endtitle;
-		GetModalText(textGameObject).text = lang.endtext;
-		GetTextTMP(next).text = lang.endbutton;
-	}
+    public void Radiateur()
+    {
+        Pac.GetComponent<ShowElement>().Refroidissement.SetActive(true);
+        text.text = language.GiveCorectlanguage().radiateur;
+    }
+    #endregion
 
-	public void End()
-	{
-		var lang = language.GiveCorectlanguage();
-		text.text = lang.endtext + " !";
-		particle1.SetActive(true);
-		particle2.SetActive(true);
-		saveInCSV.sauvegarde();
+    public void Pilotage()
+    {
+        var lang = language.GiveCorectlanguage();
+        var textGameObject = endButton.GetNamedChild("Texte");
+        var next = endButton.GetNamedChild("Suivant");
 
-	}
+        Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
+        sliderIntensite.SetActive(true);
+        text.text = lang.pilotage;
+        endButton.SetActive(true);
 
+        GetHeader(textGameObject).text = lang.endtitle;
+        GetModalText(textGameObject).text = lang.endtext;
+        GetTextTMP(next).text = lang.endbutton;
+    }
 
-	#region utilities
+    public void End()
+    {
+        var lang = language.GiveCorectlanguage();
+        text.text = lang.endtext + " !";
+        particle1.SetActive(true);
+        particle2.SetActive(true);
+        saveInCSV.sauvegarde();
+    }
 
-	public void getMainComponentToTheirPlace()
-	{
-		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("mainComponent");
+    #region utilities
+    public void getMainComponentToTheirPlace()
+    {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("mainComponent");
 
-		foreach (GameObject go in gameObjects)
-		{
-			go.GetComponent<comeback>().returnToPosInit();
-		}
-	}
-
-	#endregion
+        foreach (GameObject go in gameObjects)
+        {
+            go.GetComponent<comeback>().returnToPosInit();
+        }
+    }
+    #endregion
 
 }
