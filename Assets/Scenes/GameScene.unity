@@ -15311,6 +15311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1271181163}
   - component: {fileID: 1271181164}
+  - component: {fileID: 1271181168}
   - component: {fileID: 1271181165}
   - component: {fileID: 1271181166}
   - component: {fileID: 1271181167}
@@ -15351,10 +15352,7 @@ MonoBehaviour:
   particle1: {fileID: 572678588}
   particle2: {fileID: 1037328488}
   text: {fileID: 2103845197}
-  french: {fileID: 11400000, guid: 4e9794d972fc1ad4b8d6b0db23a8330b, type: 2}
-  portuguese: {fileID: 11400000, guid: b3059c5584cfe9d4eb8874452a1109dc, type: 2}
-  english: {fileID: 11400000, guid: f1d7cee1081246642afbcbff30b6c71b, type: 2}
-  language: 0
+  language: {fileID: 1271181168}
   state: 10
   PAC_prefab: {fileID: 5511756333990301893, guid: ac2293cb44e7c974095a386ac83ac8c6,
     type: 3}
@@ -15362,7 +15360,6 @@ MonoBehaviour:
   saveInCSV: {fileID: 1271181166}
   traceParser: {fileID: 1271181167}
   endButton: {fileID: 262562402}
-  pile: {fileID: 1271181165}
   Bvn: {fileID: 1613139547}
   Instruction: {fileID: 180132173}
   Warning: {fileID: 599059756}
@@ -15380,7 +15377,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderIntensite: {fileID: 1842031734}
   screen: {fileID: 2103845197}
-  end: 0
 --- !u!114 &1271181166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15405,6 +15401,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc118b9f82465d4994e20b15bb3097a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1271181168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271181161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93b2f94292b4c643920ddccccfb507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languages:
+  - {fileID: 11400000, guid: 4e9794d972fc1ad4b8d6b0db23a8330b, type: 2}
+  - {fileID: 11400000, guid: b3059c5584cfe9d4eb8874452a1109dc, type: 2}
+  - {fileID: 11400000, guid: f1d7cee1081246642afbcbff30b6c71b, type: 2}
+  language: 0
 --- !u!1 &1281090789
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,18 +27,13 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI text;
 
-    public Language french;
-    public Language portuguese;
-    public Language english;
+    //public Language french;
+    //public Language portuguese;
+    //public Language english;
 
-    public enum Languages
-    {
-        french,
-        portuguese,
-        english
-    }
+    public languageManager language;
 
-    public Languages language;
+
 
     public enum State
     {
@@ -78,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        language = Languages.french;
+        language.selecttLanguage(languageManager.Languages.french);
         state = State.Initilazing;
     }
 
@@ -106,35 +101,21 @@ public class GameManager : MonoBehaviour
 
     public void language_french()
     {
-        language = Languages.french;
+        language.selecttLanguage(languageManager.Languages.french);
     }
 
     public void language_english()
     {
-        language = Languages.english;
+        language.selecttLanguage(languageManager.Languages.english);
+        
     }
 
     public void language_portuguese()
     {
-        language = Languages.portuguese;
+        language.selecttLanguage(languageManager.Languages.portuguese);
     }
 
-    // maybe use a scriptableobject instead
-    public Language giveCorectlanguage()
-    {
-        if (language == Languages.french)
-        {
-            return french;
-        }
-        else if (language == Languages.english)
-        {
-            return english;
-        }
-        else 
-        { 
-            return portuguese;
-        }
-    }
+    
 
     #endregion
 
@@ -159,7 +140,7 @@ public class GameManager : MonoBehaviour
     {
         var textGameObject = Bvn.GetNamedChild("Texte");
         var next = Bvn.GetNamedChild("Suivant");
-        var lang = giveCorectlanguage();
+        var lang = language.giveCorectlanguage();
         GetHeader(textGameObject).text = lang.welcome;
         text.text = lang.welcome;
         GetModalText(textGameObject).text = lang.objectif;
@@ -171,7 +152,7 @@ public class GameManager : MonoBehaviour
     {
         var textGameObject = Instruction.GetNamedChild("Texte");
         var next = Instruction.GetNamedChild("Suivant");
-        var lang = giveCorectlanguage();
+        var lang = language.giveCorectlanguage();
         GetHeader(textGameObject).text = lang.welcome;
         GetModalText(textGameObject).text = lang.instruction;
         GetTextTMP(next).text = lang.suivant;
@@ -181,7 +162,7 @@ public class GameManager : MonoBehaviour
     {
         var textGameObject = Warning.GetNamedChild("Texte");
         var next = Warning.GetNamedChild("Suivant");
-        var lang = giveCorectlanguage();
+        var lang = language.giveCorectlanguage();
         GetHeader(textGameObject).text = lang.welcome;
         GetModalText(textGameObject).text = lang.warning;
         GetTextTMP(next).text = lang.montage;
@@ -196,55 +177,55 @@ public class GameManager : MonoBehaviour
         Quaternion quat = new Quaternion(0.109381668f, 0.875426114f, -0.408217877f, 0.234569758f);
         Pac = Instantiate(PAC_prefab, coord, quat);
         Pac.GetComponent<ShowElement>().TuyauMetal.gameObject.SetActive(true);
-        text.text = giveCorectlanguage().stack;
+        text.text = language.giveCorectlanguage().stack;
     }
 
     public void BombonneH2()
     {
         Pac.GetComponent<ShowElement>().H2_In.gameObject.SetActive(true);
-        text.text = giveCorectlanguage().H2;
+        text.text = language.giveCorectlanguage().H2;
     }
 
     public void Compresseur()
     {
         Pac.GetComponent<ShowElement>().O2_In.SetActive(true);
-        text.text = giveCorectlanguage().compresseur;
+        text.text = language.giveCorectlanguage().compresseur;
     }
 
     public void Humidificateur()
     {
-        text.text = giveCorectlanguage().humidificateur;
+        text.text = language.giveCorectlanguage().humidificateur;
     }
 
     public void BombonneN2()
     {
         Pac.GetComponent<ShowElement>().N2_In.SetActive(true);
-        text.text = giveCorectlanguage().N2;
+        text.text = language.giveCorectlanguage().N2;
     }
 
     public void Ventilateur()
     {
         Pac.GetComponent<ShowElement>().ventilloCapteur.SetActive(true);
-        text.text = giveCorectlanguage().ventilateur;
+        text.text = language.giveCorectlanguage().ventilateur;
     }
 
     public void CollecteurEau()
     {
         Pac.GetComponent<ShowElement>().H2O_Out.SetActive(true);
-        text.text = giveCorectlanguage().H2O;
+        text.text = language.giveCorectlanguage().H2O;
     }
 
     public void Radiateur()
     {
         Pac.GetComponent<ShowElement>().Refroidissement.SetActive(true);
-        text.text = giveCorectlanguage().radiateur;
+        text.text = language.giveCorectlanguage().radiateur;
     }
 
     #endregion
 
     public void Pilotage()
     {
-        var lang = giveCorectlanguage();
+        var lang = language.giveCorectlanguage();
         var textGameObject = endButton.GetNamedChild("Texte");
         var next = endButton.GetNamedChild("Suivant");
 
@@ -260,7 +241,7 @@ public class GameManager : MonoBehaviour
 
     public void End()
     {
-        var lang = giveCorectlanguage();
+        var lang = language.giveCorectlanguage();
         text.text = lang.endtext + " !";
         particle1.SetActive(true);
         particle2.SetActive(true);
