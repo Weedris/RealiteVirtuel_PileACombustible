@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
     public traceParser traceParser;
 
     public GameObject endButton;
+    public PilotagePile pile;
 
     #region intro
     public GameObject Bvn;
@@ -266,6 +267,7 @@ public class GameManager : MonoBehaviour
         particle1.SetActive(true);
         particle2.SetActive(true);
         saveInCSV.sauvegarde();
+        pile.end = true;
     }
 
 
