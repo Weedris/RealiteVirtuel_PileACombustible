@@ -193,40 +193,30 @@ public class GameManager : MonoBehaviour
         Vector3 coord = new Vector3(-0.0900000036f, 1f, 1.13f);
         Quaternion quat = new Quaternion(0.109381668f, 0.875426114f, -0.408217877f, 0.234569758f);
         Pac = Instantiate(PAC_prefab, coord, quat);
-
         Pac.GetComponent<ShowElement>().TuyauMetal.gameObject.SetActive(true);
-
         text.text = giveCorectlanguage().stack;
-
-
     }
 
     public void BombonneH2()
     {
         Pac.GetComponent<ShowElement>().H2_In.gameObject.SetActive(true);
-
         text.text = giveCorectlanguage().H2;
-
     }
 
     public void Compresseur()
     {
         Pac.GetComponent<ShowElement>().O2_In.SetActive(true);
-
         text.text = giveCorectlanguage().compresseur;
     }
 
     public void Humidificateur()
     {
-
         text.text = giveCorectlanguage().humidificateur;
-
     }
 
     public void BombonneN2()
     {
         Pac.GetComponent<ShowElement>().N2_In.SetActive(true);
-
         text.text = giveCorectlanguage().N2;
     }
 
@@ -239,14 +229,12 @@ public class GameManager : MonoBehaviour
     public void CollecteurEau()
     {
         Pac.GetComponent<ShowElement>().H2O_Out.SetActive(true);
-
         text.text = giveCorectlanguage().H2O;
     }
 
     public void Radiateur()
     {
         Pac.GetComponent<ShowElement>().Refroidissement.SetActive(true);
-
         text.text = giveCorectlanguage().radiateur;
     }
 
@@ -254,33 +242,29 @@ public class GameManager : MonoBehaviour
 
     public void Pilotage()
     {
+        var lang = giveCorectlanguage();
+        var textGameObject = endButton.GetNamedChild("Texte");
+        var next = endButton.GetNamedChild("Suivant");
 
         Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
-
         sliderIntensite.SetActive(true);
-
-        text.text = giveCorectlanguage().pilotage;
-
+        text.text = lang.pilotage;
         endButton.SetActive(true);
 
-        endButton.gameObject.GetNamedChild("Texte").gameObject.GetNamedChild("Header Text").gameObject.GetComponent<TextMeshProUGUI>().text
-            = giveCorectlanguage().endtitle;
-        endButton.gameObject.GetNamedChild("Texte").gameObject.GetNamedChild("Modal Text").gameObject.GetComponent<TextMeshProUGUI>().text
-            = giveCorectlanguage().endtext;
-        endButton.gameObject.GetNamedChild("Suivant").gameObject.GetNamedChild("Text (TMP)").gameObject.GetComponent<TextMeshProUGUI>().text
-            = giveCorectlanguage().endbutton;
-
+        GetHeader(textGameObject).text = lang.endtitle;
+        GetModalText(textGameObject).text = lang.endtext;
+        GetTextTMP(next).text = lang.endbutton;
     }
 
     public void End()
     {
-        text.text = giveCorectlanguage().endtext + " !";
+        var lang = giveCorectlanguage();
+        text.text = lang.endtext + " !";
 
         particle1.SetActive(true);
         particle2.SetActive(true);
 
         saveInCSV.sauvegarde();
-
     }
 
 
