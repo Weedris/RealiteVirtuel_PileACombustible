@@ -9,7 +9,6 @@
  */
 
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using Slider = UnityEngine.UI.Slider;
 
@@ -24,7 +23,6 @@ public class PilotagePile : MonoBehaviour
 
     // Intensité = A
     // Tension = V
-    //public TextMeshProUGUI TextPuissance;
     // Puissance = W = V * A
 
 
@@ -44,8 +42,6 @@ public class PilotagePile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         if (gm.state == GameManager.State.Pilotage)
         {
             if (intensite <= 29.7f)

@@ -3,9 +3,6 @@
  * 
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using UnityEngine;
 
 
@@ -61,6 +58,4 @@ public class Language : ScriptableObject
     public string endtitle;
     public string endtext;
     public string endbutton;
-
-
 }

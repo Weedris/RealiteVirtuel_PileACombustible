@@ -54,7 +54,6 @@ MonoBehaviour:
     o Radiador."
   pilotage: Agora dirija a pilha.
   intensityBarName: Intensidade
-  intensityBarValue: Valor
   intensite: Intensidade da pilha
   tension: "Tens\xE3o da pilha"
   puissance: "Energia el\xE9trica"
