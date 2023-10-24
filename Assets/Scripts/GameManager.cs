@@ -151,35 +151,38 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI GetTextTMP(GameObject textGameObject)
     {
-        return textGameObject.GetNamedChild("Text (TMP)").gameObject.GetComponent<TextMeshProUGUI>();
+        return textGameObject.GetNamedChild("Text (TMP)").GetComponent<TextMeshProUGUI>();
     }
 
     public void bvn()
     {
         var textGameObject = Bvn.GetNamedChild("Texte");
+        var next = Bvn.GetNamedChild("Suivant");
         var lang = giveCorectlanguage();
         GetHeader(textGameObject).text = lang.welcome;
         GetModalText(textGameObject).text = lang.objectif;
-        GetTextTMP(textGameObject).text = lang.suivant;
+        GetTextTMP(next).text = lang.suivant;
 
     }
 
     public void instru()
     {
         var textGameObject = Instruction.GetNamedChild("Texte");
+        var next = Instruction.GetNamedChild("Suivant");
         var lang = giveCorectlanguage();
         GetHeader(textGameObject).text = lang.welcome;
         GetModalText(textGameObject).text = lang.instruction;
-        GetTextTMP(textGameObject).text = lang.suivant;
+        GetTextTMP(next).text = lang.suivant;
     }
 
     public void warning()
     {
         var textGameObject = Warning.GetNamedChild("Texte");
+        var next = Warning.GetNamedChild("Suivant");
         var lang = giveCorectlanguage();
         GetHeader(textGameObject).text = lang.welcome;
         GetModalText(textGameObject).text = lang.warning;
-        GetTextTMP(textGameObject).text = lang.montage;
+        GetTextTMP(next).text = lang.montage;
     }
 
     #endregion
