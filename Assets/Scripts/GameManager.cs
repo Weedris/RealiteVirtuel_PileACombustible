@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
     {
         language = Languages.french;
         state = State.Initilazing;
+        text.text = $"<align=center>{text.text}";
     }
 
     public void NextState()
@@ -262,17 +263,15 @@ public class GameManager : MonoBehaviour
     {
         var lang = giveCorectlanguage();
         text.text = lang.endtext + " !";
-
         particle1.SetActive(true);
         particle2.SetActive(true);
-
         saveInCSV.sauvegarde();
     }
 
 
     #region utilities
 
-    public void getMainComponentToTherePlace()
+    public void getMainComponentToTheirPlace()
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("mainComponent");
 
