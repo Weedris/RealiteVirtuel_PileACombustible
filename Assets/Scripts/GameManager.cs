@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
         language = Languages.portuguese;
     }
 
+    // maybe use a scriptableobject instead
     public Language giveCorectlanguage()
     {
         if (language == Languages.french)
@@ -138,35 +139,47 @@ public class GameManager : MonoBehaviour
 
     #region intro
 
+    public TextMeshProUGUI GetHeader(GameObject textGameObject)
+    {
+        return textGameObject.GetNamedChild("Header Text").GetComponent<TextMeshProUGUI>();
+    }
+
+    public TextMeshProUGUI GetModalText(GameObject textGameObject)
+    {
+        return textGameObject.GetNamedChild("Modal Text").GetComponent<TextMeshProUGUI>();
+    }
+
+    public TextMeshProUGUI GetTextTMP(GameObject textGameObject)
+    {
+        return textGameObject.GetNamedChild("Text (TMP)").gameObject.GetComponent<TextMeshProUGUI>();
+    }
+
     public void bvn()
     {
-        Bvn.gameObject.GetNamedChild("Texte").gameObject.GetNamedChild("Header Text").gameObject.GetComponent<TextMeshProUGUI>().text 
-            = giveCorectlanguage().welcome;
-        Bvn.gameObject.GetNamedChild("Texte").gameObject.GetNamedChild("Modal Text").gameObject.GetComponent<TextMeshProUGUI>().text
-            = giveCorectlanguage().objectif;
-        Bvn.gameObject.GetNamedChild("Suivant").gameObject.GetNamedChild("Text (TMP)").gameObject.GetComponent<TextMeshProUGUI>().text
-            = giveCorectlanguage().suivant;
+        var textGameObject = Bvn.GetNamedChild("Texte");
+        var lang = giveCorectlanguage();
+        GetHeader(textGameObject).text = lang.welcome;
+        GetModalText(textGameObject).text = lang.objectif;
+        GetTextTMP(textGameObject).text = lang.suivant;
 
     }
 
     public void instru()
     {
-        Instruction.gameObject.GetNamedChild("Texte").gameObject.GetNamedChild("Header Text").gameObject.GetComponent<TextMeshProUGUI>().text
-            = giveCorectlanguage().welcome;
-        Instruction.gameObject.GetNamedChild("Texte").gameObject.GetNamedChild("Modal Text").gameObject.GetComponent<TextMeshProUGUI>().text
-            = giveCorectlanguage().instruction;
-        Instruction.gameObject.GetNamedChild("Suivant").gameObject.GetNamedChild("Text (TMP)").gameObject.GetComponent<TextMeshProUGUI>().text
-            = giveCorectlanguage().suivant;
+        var textGameObject = Instruction.GetNamedChild("Texte");
+        var lang = giveCorectlanguage();
+        GetHeader(textGameObject).text = lang.welcome;
+        GetModalText(textGameObject).text = lang.instruction;
+        GetTextTMP(textGameObject).text = lang.suivant;
     }
 
     public void warning()
     {
-        Warning.gameObject.GetNamedChild("Texte").gameObject.GetNamedChild("Header Text").gameObject.GetComponent<TextMeshProUGUI>().text
-            = giveCorectlanguage().welcome;
-        Warning.gameObject.GetNamedChild("Texte").gameObject.GetNamedChild("Modal Text").gameObject.GetComponent<TextMeshProUGUI>().text
-            = giveCorectlanguage().warning;
-        Warning.gameObject.GetNamedChild("Suivant").gameObject.GetNamedChild("Text (TMP)").gameObject.GetComponent<TextMeshProUGUI>().text
-            = giveCorectlanguage().montage;
+        var textGameObject = Warning.GetNamedChild("Texte");
+        var lang = giveCorectlanguage();
+        GetHeader(textGameObject).text = lang.welcome;
+        GetModalText(textGameObject).text = lang.warning;
+        GetTextTMP(textGameObject).text = lang.montage;
     }
 
     #endregion
