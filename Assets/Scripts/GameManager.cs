@@ -64,10 +64,33 @@ public class GameManager : MonoBehaviour
 	public GameObject Instruction;
 	public GameObject Warning;
 
+    private Dictionary<State, Action> stateMethodMap = new Dictionary<State, Action>();
 
-	#endregion
+    public GameManager()
+    {
+        stateMethodMap[State.Stack] = Stack;
+        stateMethodMap[State.BombonneH2] = BombonneH2;
+        stateMethodMap[State.Compresseur] = Compresseur;
+        stateMethodMap[State.Humidificateur] = Humidificateur;
+        stateMethodMap[State.BombonneN2] = BombonneN2;
+        stateMethodMap[State.Ventilateur] = Ventilateur;
+        stateMethodMap[State.CollecteurEau] = CollecteurEau;
+        stateMethodMap[State.Radiateur] = Radiateur;
+        stateMethodMap[State.Pilotage] = Pilotage;
+        stateMethodMap[State.End] = End;
+    }
 
-	public void Start()
+    public void ExecuteState(State state)
+    {
+        if (stateMethodMap.TryGetValue(state, out var method))
+        {
+            method();
+        }
+    }
+
+    #endregion
+
+    public void Start()
 	{
 		state = State.Initilazing;
 	}
@@ -76,20 +99,7 @@ public class GameManager : MonoBehaviour
     public void NextState()
     {
         state += 1;
-        switch(state)
-        {
-            case State.Stack: Stack();break;
-            case State.BombonneH2: BombonneH2();break;
-            case State.Compresseur: Compresseur();break;
-            case State.Humidificateur: Humidificateur();break;
-            case State.BombonneN2: BombonneN2();break;
-            case State.Ventilateur: Ventilateur();break;
-            case State.CollecteurEau: CollecteurEau();break;
-            case State.Radiateur: Radiateur(); break;
-            case State.Pilotage: Pilotage();break;
-            case State.End: End();break;
-            default: Debug.Log("Shouldn't happen");break;
-        }
+        ExecuteState(state);
         traceParser.traceMainStep(state);
     }
 
