@@ -21,19 +21,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
     public GameObject particle1;
     public GameObject particle2;
 
     public TextMeshProUGUI text;
 
-    //public Language french;
-    //public Language portuguese;
-    //public Language english;
-
     public LanguageManager language;
-
-
 
     public enum State
     {
@@ -114,13 +107,9 @@ public class GameManager : MonoBehaviour
     {
         language.SelecttLanguage(LanguageManager.Languages.portuguese);
     }
-
-    
-
     #endregion
 
     #region intro
-
     public TextMeshProUGUI GetHeader(GameObject textGameObject)
     {
         return textGameObject.GetNamedChild("Header Text").GetComponent<TextMeshProUGUI>();
@@ -220,7 +209,6 @@ public class GameManager : MonoBehaviour
         Pac.GetComponent<ShowElement>().Refroidissement.SetActive(true);
         text.text = language.GiveCorectlanguage().radiateur;
     }
-
     #endregion
 
     public void Pilotage()
@@ -246,12 +234,9 @@ public class GameManager : MonoBehaviour
         particle1.SetActive(true);
         particle2.SetActive(true);
         saveInCSV.sauvegarde();
-
     }
 
-
     #region utilities
-
     public void getMainComponentToTheirPlace()
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("mainComponent");
@@ -261,7 +246,6 @@ public class GameManager : MonoBehaviour
             go.GetComponent<comeback>().returnToPosInit();
         }
     }
-
     #endregion
 
 }
