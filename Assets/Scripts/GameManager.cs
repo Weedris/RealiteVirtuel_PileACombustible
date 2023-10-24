@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 	public GameObject particle2;
 
 
-	public TextMeshProUGUI text;
+	public TextMeshProUGUI Tabellentext;
 
 
     public LanguageManager language;
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
         var next = Bvn.GetNamedChild("Suivant");
         var lang = language.GiveCorrectlanguage();
         GetHeader(textGameObject).text = lang.welcome;
-        text.text = lang.welcome;
+        Tabellentext.text = lang.welcome;
         GetModalText(textGameObject).text = lang.objectif;
         GetTextTMP(next).text = lang.suivant;
 
@@ -150,48 +150,48 @@ public class GameManager : MonoBehaviour
         Quaternion quat = new Quaternion(0.109381668f, 0.875426114f, -0.408217877f, 0.234569758f);
         Pac = Instantiate(PAC_prefab, coord, quat);
         Pac.GetComponent<ShowElement>().TuyauMetal.gameObject.SetActive(true);
-        text.text = language.GiveCorrectlanguage().stack;
+        Tabellentext.text = language.GiveCorrectlanguage().stack;
     }
 
     public void BombonneH2()
     {
         Pac.GetComponent<ShowElement>().H2_In.gameObject.SetActive(true);
-        text.text = language.GiveCorrectlanguage().H2;
+        Tabellentext.text = language.GiveCorrectlanguage().H2;
     }
 
     public void Compresseur()
     {
         Pac.GetComponent<ShowElement>().O2_In.SetActive(true);
-        text.text = language.GiveCorrectlanguage().compresseur;
+        Tabellentext.text = language.GiveCorrectlanguage().compresseur;
     }
 
     public void Humidificateur()
     {
-        text.text = language.GiveCorrectlanguage().humidificateur;
+        Tabellentext.text = language.GiveCorrectlanguage().humidificateur;
     }
 
     public void BombonneN2()
     {
         Pac.GetComponent<ShowElement>().N2_In.SetActive(true);
-        text.text = language.GiveCorrectlanguage().N2;
+        Tabellentext.text = language.GiveCorrectlanguage().N2;
     }
 
     public void Ventilateur()
     {
         Pac.GetComponent<ShowElement>().ventilloCapteur.SetActive(true);
-        text.text = language.GiveCorrectlanguage().ventilateur;
+        Tabellentext.text = language.GiveCorrectlanguage().ventilateur;
     }
 
     public void CollecteurEau()
     {
         Pac.GetComponent<ShowElement>().H2O_Out.SetActive(true);
-        text.text = language.GiveCorrectlanguage().H2O;
+        Tabellentext.text = language.GiveCorrectlanguage().H2O;
     }
 
     public void Radiateur()
     {
         Pac.GetComponent<ShowElement>().Refroidissement.SetActive(true);
-        text.text = language.GiveCorrectlanguage().radiateur;
+        Tabellentext.text = language.GiveCorrectlanguage().radiateur;
     }
     #endregion
 
@@ -203,7 +203,7 @@ public class GameManager : MonoBehaviour
 
         Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
         sliderIntensite.SetActive(true);
-        text.text = lang.pilotage;
+        Tabellentext.text = lang.pilotage;
         endButton.SetActive(true);
 
         GetHeader(textGameObject).text = lang.endtitle;
@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour
     public void End()
     {
         var lang = language.GiveCorrectlanguage();
-        text.text = lang.endtext + " !";
+        Tabellentext.text = lang.endtext + " !";
         particle1.SetActive(true);
         particle2.SetActive(true);
         saveInCSV.sauvegarde();
