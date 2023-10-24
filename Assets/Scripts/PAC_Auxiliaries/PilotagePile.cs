@@ -36,12 +36,15 @@ public class PilotagePile : MonoBehaviour
     private float debitAir = 0;
     private float debitEau = 0;
     private float rendement = 0;
-    public bool  end = false;
-
+    private GameManager gm;
+    private void Start()
+    {
+        gm = FindFirstObjectByType<GameManager>();
+    }
     // Update is called once per frame
     void Update()
     {
-        GameManager gm = FindFirstObjectByType<GameManager>();
+        
 
         if (gm.state == GameManager.State.Pilotage)
         {
