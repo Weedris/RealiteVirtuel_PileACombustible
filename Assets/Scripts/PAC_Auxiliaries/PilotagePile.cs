@@ -147,7 +147,7 @@ public class PilotagePile : MonoBehaviour
     public void changeIntesite()
     {
         intensite = IntensitySlider.value;
-        IntensitySlider.GetComponentInChildren<TextMeshProUGUI>().text = intensite.ToString().Substring(0, 4);
+        IntensitySlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = intensite.ToString().Substring(0, 4);
     }
 
     public void changeTemperature()

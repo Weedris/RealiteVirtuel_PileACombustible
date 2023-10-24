@@ -47,9 +47,9 @@ public class GameManager : MonoBehaviour
 	public GameObject PAC_prefab;
 	private GameObject Pac;
 
-	public GameObject sliderIntensite;
+    public GameObject sliderIntensite;
 
-	public SaveInCSV saveInCSV;
+    public SaveInCSV saveInCSV;
 	public traceParser traceParser;
 
 	public GameObject endButton;
@@ -206,7 +206,7 @@ public class GameManager : MonoBehaviour
 
         Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
         sliderIntensite.SetActive(true);
-        sliderIntensite.GetComponent<TextMeshProUGUI>().text = lang.intensityBarName;
+        sliderIntensite.GetComponentsInChildren<TextMeshProUGUI>()[1].text = lang.intensityBarName;
         BoardTMPGUI.text = lang.pilotage;
         endButton.SetActive(true);
 

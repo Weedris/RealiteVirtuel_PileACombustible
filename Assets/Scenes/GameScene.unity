@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17338963, g: 0.21674274, b: 0.29881284, a: 1}
+  m_IndirectSpecularColor: {r: 0.17338718, g: 0.21673912, b: 0.29880837, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15357,6 +15357,8 @@ MonoBehaviour:
   PAC_prefab: {fileID: 5511756333990301893, guid: ac2293cb44e7c974095a386ac83ac8c6,
     type: 3}
   sliderIntensite: {fileID: 64172244}
+  sliderIntensiteName: {fileID: 1974880132}
+  sliderIntensiteValue: {fileID: 1867052697}
   saveInCSV: {fileID: 1271181166}
   traceParser: {fileID: 1271181167}
   endButton: {fileID: 262562402}
@@ -16934,7 +16936,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "intensit\xE9"
+  m_text: Intensity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
