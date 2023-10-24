@@ -13,31 +13,31 @@ public class LanguageManager : MonoBehaviour
 		portuguese,
 		english
 	}
-	public Languages language;
-	public void SelecttLanguage(Languages l) 
+	private Languages language = Languages.english;
+	public void SelectLanguage(Languages l) 
 	{
 		language = l;
 	}
 
 	// maybe use a scriptableobject instead
-	public Language GiveCorectlanguage()
+	public Language GiveCorrectlanguage()
 	{
 		return languages[(int)language];
 	}
 
     public void language_french()
     {
-        SelecttLanguage(Languages.french);
+        SelectLanguage(Languages.french);
     }
 
     public void language_english()
     {
-        SelecttLanguage(Languages.english);
+        SelectLanguage(Languages.english);
 
     }
 
     public void language_portuguese()
     {
-        SelecttLanguage(Languages.portuguese);
+        SelectLanguage(Languages.portuguese);
     }
 }
