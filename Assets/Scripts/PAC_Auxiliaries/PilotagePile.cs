@@ -16,7 +16,7 @@ using Slider = UnityEngine.UI.Slider;
 public class PilotagePile : MonoBehaviour
 {
     [SerializeField]
-    private Slider sliderIntensite;
+    private Slider IntensitySlider;
     private Slider sliderTemperature;
 
     [SerializeField]
@@ -125,13 +125,15 @@ public class PilotagePile : MonoBehaviour
             Air = 66,3 l/min         
              */
 
-            string text = gm.language.GiveCorrectlanguage().tension + ": " + tension.ToString() + " V" + "\n";
-            text += gm.language.GiveCorrectlanguage().intensite + ": " + intensite.ToString() + " A" + "\n";
-            text += gm.language.GiveCorrectlanguage().puissance + ": " + puissance.ToString() + " W" + "\n";
-            text += gm.language.GiveCorrectlanguage().debitEau + ": " + debitEau.ToString() + " g/min" + "\n";
-            text += gm.language.GiveCorrectlanguage().debitHydrogene + ": " + debitHydrogene.ToString() + " L/min" + "\n";
-            text += gm.language.GiveCorrectlanguage().debitAir + ": " + debitAir.ToString() + " L/min" + "\n";
-            text += gm.language.GiveCorrectlanguage().rendement + ": " + rendement.ToString() + " %" + "\n";
+            var lang = gm.language.GiveCorrectlanguage();
+
+			string text = lang.tension + ": " + tension.ToString() + " V" + "\n"
+                + lang.intensite + ": " + intensite.ToString() + " A" + "\n"
+                + lang.puissance + ": " + puissance.ToString() + " W" + "\n"
+                + lang.debitEau + ": " + debitEau.ToString() + " g/min" + "\n"
+                + lang.debitHydrogene + ": " + debitHydrogene.ToString() + " L/min" + "\n"
+                + lang.debitAir + ": " + debitAir.ToString() + " L/min" + "\n"
+                + lang.rendement + ": " + rendement.ToString() + " %" + "\n";
 
             screen.text = text;
         }
@@ -144,8 +146,8 @@ public class PilotagePile : MonoBehaviour
 
     public void changeIntesite()
     {
-        intensite = sliderIntensite.value;
-        sliderIntensite.GetComponentInChildren<TextMeshProUGUI>().text = intensite.ToString().Substring(0, 4);
+        intensite = IntensitySlider.value;
+        IntensitySlider.GetComponentInChildren<TextMeshProUGUI>().text = intensite.ToString().Substring(0, 4);
     }
 
     public void changeTemperature()
