@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class languageManager : MonoBehaviour
+public class LanguageManager : MonoBehaviour
 {
    public List<Language> languages;
 
@@ -14,26 +14,14 @@ public class languageManager : MonoBehaviour
         english
     }
     public Languages language;
-    public void selecttLanguage(Languages l) 
+    public void SelecttLanguage(Languages l) 
     {
         language = l;
     }
 
     // maybe use a scriptableobject instead
-    public Language giveCorectlanguage()
+    public Language GiveCorectlanguage()
     {
-        /* if (language == Languages.french)
-         {
-             return french;
-         }
-         else if (language == Languages.english)
-         {
-             return english;
-         }
-         else
-         {
-             return portuguese;
-         }*/
         return languages[(int)language];
     }
 }

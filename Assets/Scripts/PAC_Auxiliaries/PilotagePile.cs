@@ -125,13 +125,13 @@ public class PilotagePile : MonoBehaviour
             Air = 66,3 l/min         
              */
 
-            string text = gm.language.giveCorectlanguage().tension + ": " + tension.ToString() + " V" + "\n";
-            text += gm.language.giveCorectlanguage().intensite + ": " + intensite.ToString() + " A" + "\n";
-            text += gm.language.giveCorectlanguage().puissance + ": " + puissance.ToString() + " W" + "\n";
-            text += gm.language.giveCorectlanguage().debitEau + ": " + debitEau.ToString() + " g/min" + "\n";
-            text += gm.language.giveCorectlanguage().debitHydrogene + ": " + debitHydrogene.ToString() + " L/min" + "\n";
-            text += gm.language.giveCorectlanguage().debitAir + ": " + debitAir.ToString() + " L/min" + "\n";
-            text += gm.language.giveCorectlanguage().rendement + ": " + rendement.ToString() + " %" + "\n";
+            string text = gm.language.GiveCorectlanguage().tension + ": " + tension.ToString() + " V" + "\n";
+            text += gm.language.GiveCorectlanguage().intensite + ": " + intensite.ToString() + " A" + "\n";
+            text += gm.language.GiveCorectlanguage().puissance + ": " + puissance.ToString() + " W" + "\n";
+            text += gm.language.GiveCorectlanguage().debitEau + ": " + debitEau.ToString() + " g/min" + "\n";
+            text += gm.language.GiveCorectlanguage().debitHydrogene + ": " + debitHydrogene.ToString() + " L/min" + "\n";
+            text += gm.language.GiveCorectlanguage().debitAir + ": " + debitAir.ToString() + " L/min" + "\n";
+            text += gm.language.GiveCorectlanguage().rendement + ": " + rendement.ToString() + " %" + "\n";
 
             screen.text = text;
         }
