@@ -66,7 +66,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject sliderIntensite;
 
-    public SaveInCSV saveInCSV;
 	public traceParser traceParser;
 
 	public GameObject endButton;
@@ -157,7 +156,6 @@ public class GameManager : MonoBehaviour
     public void warning()
     {
         var lang = language.GiveCorrectlanguage();
-        Debug.Log(lang.warning);
         LoadLangIntoDisplay(Warning, lang.welcome, lang.warning, lang.montage);
     }
 
@@ -238,7 +236,7 @@ public class GameManager : MonoBehaviour
         BoardTMPGUI.text = lang.endtext + " !";
         particle1.SetActive(true);
         particle2.SetActive(true);
-        saveInCSV.sauvegarde();
+        traceParser.save();
     }
 
     #region utilities

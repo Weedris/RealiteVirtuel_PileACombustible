@@ -5,54 +5,41 @@
  */
 
 
-
-using System.Collections;
-using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Text;
-using UnityEngine;
-using UnityEngine.Rendering;
-using System.Linq;
-using TMPro;
 
-public class SaveInCSV : MonoBehaviour
+public class SaveInCSV
 {
 
-    private List<string> data = new List<string>();
+    private StringBuilder stringBuilder;
+    private string saveFolder;
+
+    public SaveInCSV()
+    {
+        stringBuilder = new StringBuilder();
+        saveFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "CSV_PAC");
+        if (!Directory.Exists(saveFolder))
+        {
+            Directory.CreateDirectory(saveFolder);
+        }
+    }
 
     public void saveIt(string str)
     {
-        data.Add(str);
+        stringBuilder.AppendLine(str);
     }
 
-    public void sauvegarde()
+    public void save()
     {
-        StringBuilder sbtrue = new StringBuilder();
-
-        for (int i = 0; i < data.Count; i ++) 
-        {
-            sbtrue.AppendLine(data[i]);
-        }
-
-        string filePath = getPath();
-
-        StreamWriter outStream = System.IO.File.CreateText(filePath);
-        outStream.WriteLine(sbtrue);
+        StringBuilder fileBuilder = new StringBuilder();
+        fileBuilder.Append(saveFolder)
+                   .Append("/Save_")
+                   .Append(DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"))
+                   .Append("_data.csv");
+        StreamWriter outStream = System.IO.File.CreateText(fileBuilder.ToString());
+        outStream.WriteLine(stringBuilder);
         outStream.Close();
-    }
-
-    private string getPath()
-    {
-#if UNITY_EDITOR
-        return Application.dataPath + "/CSV/" + "Saved_data.csv";
-#elif UNITY_ANDROID
-        return Application.persistentDataPath+"Saved_data.csv";
-#elif UNITY_IPHONE
-        return Application.persistentDataPath+"/"+"Saved_data.csv";
-#else
-        return Application.dataPath +"/"+"Saved_data.csv";
-#endif
     }
 
 }
