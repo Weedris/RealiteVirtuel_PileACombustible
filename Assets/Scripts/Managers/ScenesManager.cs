@@ -29,7 +29,7 @@ public class ScenesManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
-    public void Chapter2()
+    public static void Chapter2()
     {
         SceneManager.LoadScene("GameScene");
     }
