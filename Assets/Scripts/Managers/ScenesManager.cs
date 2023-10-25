@@ -5,7 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
 {
-   public void chapter1() 
+
+    public static ScenesManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void chapter1() 
     {
         SceneManager.LoadScene("GameScene");
     }
