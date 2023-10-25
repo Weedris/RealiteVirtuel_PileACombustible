@@ -62,9 +62,9 @@ MonoBehaviour:
   intensite: "Stack\u2019s intensity"
   tension: "Stack\u2019s tension"
   puissance: 'Power '
-  debitHydrogene: Hydrogen debit
-  debitAir: Air debit
-  debitEau: Water debit
+  debitHydrogene: Hydrogen flow
+  debitAir: Air flow
+  debitEau: Water flow
   rendement: "Stack\u2019s yield"
   temperature: Temperature
   endtitle: Thanks
