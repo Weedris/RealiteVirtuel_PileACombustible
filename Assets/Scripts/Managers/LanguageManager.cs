@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class LanguageManager : MonoBehaviour
 {
-  public static LanguageManager instance;
+  public static LanguageManager Instance;
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -25,6 +25,7 @@ public class LanguageManager : MonoBehaviour
 		portuguese,
 		english
 	}
+
 	private Languages language = Languages.english;
 	public void SelectLanguage(Languages l) 
 	{

@@ -19,13 +19,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    public static GameManager instance;
+    public static GameManager Instance;
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
         Vector3 coord = new Vector3(-0.0900000036f, 1f, 1.13f);
         Quaternion quat = new Quaternion(0.109381668f, 0.875426114f, -0.408217877f, 0.234569758f);
         Pac = Instantiate(PAC_prefab, coord, quat);
-        Pac.GetComponent<ShowElement>().TuyauMetal.gameObject.SetActive(true);
+        Pac.GetComponent<ShowElement>().TuyauMetal.SetActive(true);
         BoardTMPGUI.text = language.GiveCorrectlanguage().stack;
     }
 

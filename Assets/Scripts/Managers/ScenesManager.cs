@@ -33,9 +33,5 @@ public class ScenesManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
-
-    /*Scene scene = SceneManager.GetActiveScene();
-    Debug.Log("La scène active est : " + scene.name);
-    */
     
 }

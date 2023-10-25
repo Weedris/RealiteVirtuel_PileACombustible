@@ -22,6 +22,4 @@ public class ShowElement : MonoBehaviour
     public GameObject Refroidissement;
 
     public GameObject TuyauMetal;
-
-
 }
