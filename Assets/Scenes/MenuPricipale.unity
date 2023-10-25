@@ -2904,7 +2904,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1271181169}
         m_TargetAssemblyTypeName: ScenesManager, Assembly-CSharp
-        m_MethodName: chapter1
+        m_MethodName: Chapter1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3924,7 +3924,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1271181169}
         m_TargetAssemblyTypeName: ScenesManager, Assembly-CSharp
-        m_MethodName: chapter2
+        m_MethodName: Chapter2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
