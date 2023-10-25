@@ -5,26 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
 {
-
-    public static ScenesManager instance;
+    public static ScenesManager Instance
+    {
+        get
+        {
+            instance ??= new ScenesManager();
+            return instance;
+        }
+    }
+    private static ScenesManager instance;
 
     private void Awake()
     {
-        if (instance == null)
+        if (instance != this)
         {
-            instance = this;
+            Debug.LogWarning("A SceneManager already exists, ignoring this");
+            return;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        DontDestroyOnLoad(gameObject);
     }
 
-    public void chapter1() 
+    public static void Chapter1() 
     {
         SceneManager.LoadScene("GameScene");
     }
-    public void chapter2()
+    public void Chapter2()
     {
         SceneManager.LoadScene("GameScene");
     }
