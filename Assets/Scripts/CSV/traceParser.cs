@@ -5,62 +5,81 @@
  * 
  */
 
-using System.Collections;
+using System;
+using System.Text;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class traceParser : MonoBehaviour
 {
-    private string text;
+    private StringBuilder text = new StringBuilder();
 
-    private GameManager gm;
+    private SaveInCSV saveInCSV = new SaveInCSV();
 
-    private void Start()
+    private Dictionary<Type, string> cmpntTypeToAction = new Dictionary<Type, string>
     {
-        gm = FindFirstObjectByType<GameManager>();
-    }
+        { typeof(ActionBasedController), ";Grab;" },
+        { typeof(XRGrabInteractable), ";Caught;" },
+        { typeof(XRSocketInteractor), ";PutInSocket;" }
+    };
 
     public void traceMainStep(GameManager.State state)
     {
-        text = "State;" + state.ToString() + ";" + Time.realtimeSinceStartup;
+        text.Append("ChangeStep;State;")
+            .Append(state.ToString())
+            .Append(";")
+            .Append(Time.realtimeSinceStartup);
 
-        sendIt(text);
+        sendIt(text.ToString());
     }
 
     public void traceSocket(XRSocketInteractor si, string str)
     {
-        text = str + ";receive;" + si.name;
+        text.Append("Receive;")
+            .Append(str)
+            .Append(";")
+            .Append(si.name)
+            .Append(";")
+            .Append(Time.realtimeSinceStartup);
 
-        sendIt(text);
+        sendIt(text.ToString());
     }
 
     public void traceInApp(GameObject go)
     {
-        if (go.GetComponent<ActionBasedController>() != null)
-        {
-            text = go.name + ";Grab;" + Time.realtimeSinceStartup;
-        }
-        else if (go.GetComponent<XRGrabInteractable>() != null)
-        {
-            text = go.name + ";Caught;" + Time.realtimeSinceStartup;
-        }
-        else if (go.GetComponent<XRSocketInteractor>() != null)
-        {
-            text = go.name + ";PutInSocket;" + Time.realtimeSinceStartup;
+        text.Append("Action;")
+            .Append(go.name);
+
+        Component[] components = go.GetComponents<Component>();
+        int i = 0;
+        bool notFound = true;
+        while(i < components.Length && notFound) {
+            Type componentType = components[i].GetType();
+            if (cmpntTypeToAction.ContainsKey(componentType))
+            {
+                notFound = false;
+                string customString = cmpntTypeToAction[componentType];
+                text.Append(customString);
+            }
+            i++;
         }
 
+        text.Append(Time.realtimeSinceStartup);
 
-        sendIt(text);
+        sendIt(text.ToString());
 
     }
 
     public void sendIt(string txt)
     {
+        saveInCSV.saveIt(txt);
+        text.Clear();
+    }
 
-        gm.saveInCSV.saveIt(text);
+    public void save()
+    {
+        saveInCSV.save();
     }
 
 }
