@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17338718, g: 0.21673912, b: 0.29880837, a: 1}
+  m_IndirectSpecularColor: {r: 0.17338721, g: 0.21673912, b: 0.29880837, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -158,6 +158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 90452791}
+  - component: {fileID: 90452792}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -182,6 +183,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &90452792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90452789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02789988fbd05fd438001d7895d3d205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipList:
+  - {fileID: 8300000, guid: 19ebbc45934d69d44a73e2ed6c4d6508, type: 3}
+  - {fileID: 8300000, guid: fd3e60af473936948bb6f3ca3449752f, type: 3}
+  audioSources: []
 --- !u!1 &94905563
 GameObject:
   m_ObjectHideFlags: 0
@@ -15279,8 +15296,6 @@ MonoBehaviour:
   PAC_prefab: {fileID: 5511756333990301893, guid: ac2293cb44e7c974095a386ac83ac8c6,
     type: 3}
   sliderIntensite: {fileID: 64172244}
-  sliderIntensiteName: {fileID: 1974880132}
-  sliderIntensiteValue: {fileID: 1867052697}
   saveInCSV: {fileID: 1271181166}
   traceParser: {fileID: 1271181167}
   endButton: {fileID: 262562402}
@@ -15854,10 +15869,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2793727289926329592, guid: 8862929c3ec14df4ebce204aa40c7c48,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8862929c3ec14df4ebce204aa40c7c48,
         type: 3}
       propertyPath: m_Name
       value: Piece
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185192959572181833, guid: 8862929c3ec14df4ebce204aa40c7c48,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8862929c3ec14df4ebce204aa40c7c48, type: 3}
