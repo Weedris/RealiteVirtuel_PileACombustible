@@ -18,7 +18,24 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public GameObject particle1;
+
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
+
+    public GameObject particle1;
 	public GameObject particle2;
 
 	public TextMeshProUGUI BoardTMPGUI;

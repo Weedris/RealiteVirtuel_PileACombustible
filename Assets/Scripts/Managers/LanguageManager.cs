@@ -3,7 +3,21 @@ using UnityEngine;
 
 public class LanguageManager : MonoBehaviour
 {
-   public List<Language> languages;
+  public static LanguageManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public List<Language> languages;
 
 	public enum Languages
 	{
