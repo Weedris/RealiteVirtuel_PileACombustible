@@ -1043,6 +1043,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3808a0088914844b06208a32ff0eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  good: {fileID: 0}
+  bad: {fileID: 0}
 --- !u!114 &5511756333990301895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4745,6 +4747,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Meuble
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8ad77a1d2127907449ad2f9e32dd9cd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ad77a1d2127907449ad2f9e32dd9cd8, type: 3}
