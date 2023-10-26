@@ -189,10 +189,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02789988fbd05fd438001d7895d3d205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipList:
-  - {fileID: 8300000, guid: 19ebbc45934d69d44a73e2ed6c4d6508, type: 3}
-  - {fileID: 8300000, guid: fd3e60af473936948bb6f3ca3449752f, type: 3}
-  audioSources: []
+  bgmSource: {fileID: 0}
+  sfxSource: {fileID: 0}
+  l_bgms:
+  - type: 0
+    clip: {fileID: 0}
+  l_sfxs:
+  - type: 0
+    clip: {fileID: 0}
+  - type: 0
+    clip: {fileID: 0}
 --- !u!1 &94905563
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,8 +2015,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1271181168}
-        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
+      - m_Target: {fileID: 1271181170}
+        m_TargetAssemblyTypeName: SelectSettings, Assembly-CSharp
         m_MethodName: language_french
         m_Mode: 1
         m_Arguments:
@@ -2033,18 +2039,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: bvn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
 --- !u!114 &945671568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2264,8 +2258,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1271181168}
-        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
+      - m_Target: {fileID: 1271181170}
+        m_TargetAssemblyTypeName: SelectSettings, Assembly-CSharp
         m_MethodName: language_english
         m_Mode: 1
         m_Arguments:
@@ -2288,18 +2282,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: bvn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
 --- !u!114 &1144131772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2878,30 +2860,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: instru
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1271181169}
         m_TargetAssemblyTypeName: ScenesManager, Assembly-CSharp
         m_MethodName: Chapter1
@@ -3098,6 +3056,7 @@ GameObject:
   - component: {fileID: 1271181168}
   - component: {fileID: 1271181167}
   - component: {fileID: 1271181169}
+  - component: {fileID: 1271181170}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3144,10 +3103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93b2f94292b4c643920ddccccfb507e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languages:
-  - {fileID: 11400000, guid: 4e9794d972fc1ad4b8d6b0db23a8330b, type: 2}
-  - {fileID: 11400000, guid: b3059c5584cfe9d4eb8874452a1109dc, type: 2}
-  - {fileID: 11400000, guid: f1d7cee1081246642afbcbff30b6c71b, type: 2}
+  settings: {fileID: 11400000, guid: 6c59aff7649dd3b48851a8287bd7ff76, type: 2}
+  language: {fileID: 0}
 --- !u!114 &1271181169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3160,6 +3117,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d7ea331d12c0b246901ff2683c2139b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1271181170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271181161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b287506c4d1200488267a60a10740fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languages:
+  - {fileID: 11400000, guid: 4e9794d972fc1ad4b8d6b0db23a8330b, type: 2}
+  - {fileID: 11400000, guid: b3059c5584cfe9d4eb8874452a1109dc, type: 2}
+  - {fileID: 11400000, guid: f1d7cee1081246642afbcbff30b6c71b, type: 2}
+  language: 0
+  settings: {fileID: 11400000, guid: 6c59aff7649dd3b48851a8287bd7ff76, type: 2}
 --- !u!4 &1285450354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5686134208185136544, guid: 1fd3a7c43c8190f4d8c167ebde694364,
@@ -3885,30 +3860,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: instru
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1271181169}
         m_TargetAssemblyTypeName: ScenesManager, Assembly-CSharp
         m_MethodName: Chapter2
@@ -4105,8 +4056,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1271181168}
-        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
+      - m_Target: {fileID: 1271181170}
+        m_TargetAssemblyTypeName: SelectSettings, Assembly-CSharp
         m_MethodName: language_portuguese
         m_Mode: 1
         m_Arguments:
@@ -4129,18 +4080,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: bvn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
 --- !u!114 &1712678481
 MonoBehaviour:
   m_ObjectHideFlags: 0
