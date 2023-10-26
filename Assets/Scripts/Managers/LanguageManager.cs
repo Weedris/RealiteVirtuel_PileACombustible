@@ -18,8 +18,15 @@ public class LanguageManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+    }
+    private void Start()
+    {
         updateLanguage();
     }
+
+    
+
 
     public void updateLanguage() 
     {
