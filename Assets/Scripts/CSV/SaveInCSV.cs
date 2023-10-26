@@ -10,11 +10,25 @@ using System.Text;
 public class SaveInCSV
 {
     private StringBuilder stringBuilder;
-    private string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+    private string saveFolder = null;
 
     public SaveInCSV()
     {
         stringBuilder = new();
+        string osType = Environment.OSVersion.VersionString;
+
+        if (osType.Contains("Windows"))
+        {
+            saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        }
+        else if (osType.Contains("Android"))
+        {
+            saveFolder = "/storage/emulated/0/Documents/";
+        }
+        else if (osType.Contains("Mac"))
+        {
+            saveFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Documents");
+        }
     }
 
     public void saveIt(string str)
@@ -24,6 +38,11 @@ public class SaveInCSV
 
     public void save()
     {
+        if (saveFolder == null)
+        {
+            saveFolder = UnityEngine.Application.persistentDataPath;
+        }
+        
         if (!Directory.Exists(saveFolder))
         {
             Directory.CreateDirectory(saveFolder);
@@ -42,10 +61,5 @@ public class SaveInCSV
         filePath = Path.Combine(filePath, fileBuilder.ToString());
         UnityEngine.Debug.Log(filePath);
         File.WriteAllText(filePath, stringBuilder.ToString());
-        /*
-        StreamWriter outStream = System.IO.File.CreateText(fileBuilder.ToString());
-        outStream.WriteLine(stringBuilder);
-        outStream.Close();
-        */
     }
 }
