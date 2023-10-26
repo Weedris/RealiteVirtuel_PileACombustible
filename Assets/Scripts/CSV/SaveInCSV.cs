@@ -6,33 +6,15 @@
 using System;
 using System.IO;
 using System.Text;
-using UnityEngine;
 
-public class SaveInCSV : MonoBehaviour
+public class SaveInCSV
 {
     private StringBuilder stringBuilder;
-    private string saveFolder;
+    private string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
     public SaveInCSV()
     {
         stringBuilder = new();
-    }
-
-    public void Awake()
-    {
-#if UNITY_EDITOR
-		saveFolder = Application.dataPath + "/CSV_PAC/";
-#elif UNITY_ANDROID
-        saveFolder = Application.persistentDataPath+"/CSV_PAC/";
-#elif UNITY_IPHONE
-        saveFolder = Application.persistentDataPath+"/CSV_PAC/";
-#else
-        saveFolder = Application.dataPath +"/CSV_PAC/";
-#endif
-		if (!Directory.Exists(saveFolder))
-        {
-            Directory.CreateDirectory(saveFolder);
-        }
     }
 
     public void saveIt(string str)
@@ -42,13 +24,28 @@ public class SaveInCSV : MonoBehaviour
 
     public void save()
     {
-        //StringBuilder fileBuilder = new();
-        //fileBuilder.Append(saveFolder)
-        //           .Append("Save_")
-        //           .Append(DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"))
-        //           .Append("_data.csv");
-        //StreamWriter outStream = System.IO.File.CreateText(fileBuilder.ToString());
-        //outStream.WriteLine(stringBuilder);
-        //outStream.Close();
+        if (!Directory.Exists(saveFolder))
+        {
+            Directory.CreateDirectory(saveFolder);
+        }
+        UnityEngine.Debug.Log(saveFolder);
+        string filePath = Path.Combine(saveFolder, "CSV_PAC");
+        if (!Directory.Exists(filePath))
+        {
+            Directory.CreateDirectory(filePath);
+        }
+        UnityEngine.Debug.Log(filePath);
+        StringBuilder fileBuilder = new();
+        fileBuilder.Append("Save_")
+                   .Append(DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"))
+                   .Append("_data.csv");
+        filePath = Path.Combine(filePath, fileBuilder.ToString());
+        UnityEngine.Debug.Log(filePath);
+        File.WriteAllText(filePath, stringBuilder.ToString());
+        /*
+        StreamWriter outStream = System.IO.File.CreateText(fileBuilder.ToString());
+        outStream.WriteLine(stringBuilder);
+        outStream.Close();
+        */
     }
 }
