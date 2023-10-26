@@ -6,7 +6,7 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Language", order = 2)]
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Language")]
 public class Language : ScriptableObject
 {
 

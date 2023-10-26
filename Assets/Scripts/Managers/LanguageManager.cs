@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class LanguageManager : MonoBehaviour
 {
-  public static LanguageManager Instance;
+    public static LanguageManager Instance;
 
+    //[SerializedField] 
+    public Settings settings;
+    public Language language;
     private void Awake()
     {
         if (Instance == null)
@@ -15,42 +18,21 @@ public class LanguageManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        updateLanguage();
     }
 
-    public List<Language> languages;
+    public void updateLanguage() 
+    {
+        this.language = settings.curentLanguage;
+    }
+    
 
-	public enum Languages
-	{
-		french,
-		portuguese,
-		english
-	}
-
-	private Languages language = Languages.english;
-	public void SelectLanguage(Languages l) 
-	{
-		language = l;
-	}
 
 	// maybe use a scriptableobject instead
 	public Language GiveCorrectlanguage()
 	{
-		return languages[(int)language];
+		return language;
 	}
 
-    public void language_french()
-    {
-        SelectLanguage(Languages.french);
-    }
-
-    public void language_english()
-    {
-        SelectLanguage(Languages.english);
-
-    }
-
-    public void language_portuguese()
-    {
-        SelectLanguage(Languages.portuguese);
-    }
+   
 }
