@@ -1,58 +1,53 @@
-/* This file is for saving the trace of the user
- * sooooo yeah that's it
- * 
- * 
+/*
+ * This file is for saving the trace of the user
  */
 
 
-
-using System.Collections;
-using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Text;
-using UnityEngine;
-using UnityEngine.Rendering;
-using System.Linq;
-using TMPro;
 
-public class SaveInCSV : MonoBehaviour
+public class SaveInCSV
 {
+    private StringBuilder stringBuilder;
+    private string saveFolder = null;
 
-    private List<string> data = new List<string>();
+    public SaveInCSV()
+    {
+        stringBuilder = new();
+        string osType = Environment.OSVersion.VersionString;
+
+        if (osType.Contains("Windows"))
+        {
+            saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        }
+        else
+        {
+            saveFolder = "/storage/emulated/0/Documents/";
+        }
+    }
 
     public void saveIt(string str)
     {
-        data.Add(str);
+        stringBuilder.AppendLine(str);
     }
 
-    public void sauvegarde()
-    {
-        StringBuilder sbtrue = new StringBuilder();
-
-        for (int i = 0; i < data.Count; i ++) 
+    public void save()
+    {   
+        if (!Directory.Exists(saveFolder))
         {
-            sbtrue.AppendLine(data[i]);
+            Directory.CreateDirectory(saveFolder);
         }
-
-        string filePath = getPath();
-
-        StreamWriter outStream = System.IO.File.CreateText(filePath);
-        outStream.WriteLine(sbtrue);
-        outStream.Close();
+        string filePath = Path.Combine(saveFolder, "CSV_PAC");
+        if (!Directory.Exists(filePath))
+        {
+            Directory.CreateDirectory(filePath);
+        }
+        StringBuilder fileBuilder = new();
+        fileBuilder.Append("Save_")
+                   .Append(DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"))
+                   .Append("_data.csv");
+        filePath = Path.Combine(filePath, fileBuilder.ToString());
+        File.WriteAllText(filePath, stringBuilder.ToString());
     }
-
-    private string getPath()
-    {
-#if UNITY_EDITOR
-        return Application.dataPath + "/CSV/" + "Saved_data.csv";
-#elif UNITY_ANDROID
-        return Application.persistentDataPath+"Saved_data.csv";
-#elif UNITY_IPHONE
-        return Application.persistentDataPath+"/"+"Saved_data.csv";
-#else
-        return Application.dataPath +"/"+"Saved_data.csv";
-#endif
-    }
-
 }

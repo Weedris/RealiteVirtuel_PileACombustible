@@ -53,6 +53,7 @@ MonoBehaviour:
     temperatura, o Stack \xE9 conectado a um sistema de refrigera\xE7\xE3o. Coloque
     o Radiador."
   pilotage: Agora dirija a pilha.
+  intensityBarName: Intensidade
   intensite: Intensidade da pilha
   tension: "Tens\xE3o da pilha"
   puissance: "Energia el\xE9trica"

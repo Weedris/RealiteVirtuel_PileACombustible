@@ -3,13 +3,10 @@
  * 
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Language", order = 2)]
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Language")]
 public class Language : ScriptableObject
 {
 
@@ -46,6 +43,8 @@ public class Language : ScriptableObject
     [TextArea(3, 10)]
     public string pilotage;
 
+    public string intensityBarName;
+    public string intensityBarValue;
 
     public string intensite;
     public string tension;
@@ -59,6 +58,4 @@ public class Language : ScriptableObject
     public string endtitle;
     public string endtext;
     public string endbutton;
-
-
 }

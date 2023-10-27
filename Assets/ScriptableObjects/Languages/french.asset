@@ -58,6 +58,7 @@ MonoBehaviour:
     une certaine temp\xE9rature.\r\nAfin de maintenir cette temp\xE9rature, le <b>Stack</b>
     est reli\xE9 \xE0 un syst\xE8me de refroidissement.\r\nPlacez le <b>Radiateur</b>.\r\n"
   pilotage: Maintenant, pilotez la pile
+  intensityBarName: "Intensit\xE9"
   intensite: "Intensit\xE9 du stack"
   tension: Tension du stack
   puissance: "Puissance \xE9lectrique"

@@ -80,7 +80,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: checkComponentPlacement
+        m_MethodName: CheckComponentPlacement
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4324472177863464815}
@@ -233,7 +233,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: checkComponentPlacement
+        m_MethodName: CheckComponentPlacement
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4423295181755489935}
@@ -347,7 +347,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: checkComponentPlacement
+        m_MethodName: CheckComponentPlacement
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8196346349217141671}
@@ -461,7 +461,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: checkComponentPlacement
+        m_MethodName: CheckComponentPlacement
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4992266510440689695}
@@ -575,7 +575,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: checkComponentPlacement
+        m_MethodName: CheckComponentPlacement
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 7902112607351577434}
@@ -689,7 +689,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: checkComponentPlacement
+        m_MethodName: CheckComponentPlacement
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4155811728766947074}
@@ -1215,7 +1215,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: checkComponentPlacement
+        m_MethodName: CheckComponentPlacement
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 734235264247290110}
@@ -1453,7 +1453,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: checkComponentPlacement
+        m_MethodName: CheckComponentPlacement
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4290259386634474495}
@@ -1830,7 +1830,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: caught
+        m_MethodName: Caught
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1302674595507282819}
@@ -2374,7 +2374,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: caught
+        m_MethodName: Caught
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4664841905533833740}
@@ -3202,7 +3202,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: caught
+        m_MethodName: Caught
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4664841905323680315}
@@ -3499,7 +3499,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: caught
+        m_MethodName: Caught
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4664841905269755244}
@@ -4104,7 +4104,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: caught
+        m_MethodName: Caught
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4664841904509531801}
@@ -4388,7 +4388,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: caught
+        m_MethodName: Caught
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4664841904706616960}
@@ -4746,6 +4746,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Meuble
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8ad77a1d2127907449ad2f9e32dd9cd8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ad77a1d2127907449ad2f9e32dd9cd8, type: 3}
 --- !u!1 &95343918872889213 stripped
@@ -4987,7 +4992,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: caught
+        m_MethodName: Caught
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4664841903778573022}
@@ -5367,7 +5372,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 461868103718848707}
         m_TargetAssemblyTypeName: ComponentPlacement, Assembly-CSharp
-        m_MethodName: caught
+        m_MethodName: Caught
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 4664841904240923237}

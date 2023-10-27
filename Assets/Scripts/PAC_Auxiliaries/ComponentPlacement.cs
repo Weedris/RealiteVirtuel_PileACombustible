@@ -4,49 +4,32 @@
  * 
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ComponentPlacement : MonoBehaviour
 {
 
-    private GameManager GameManager;
-    public GameObject good;
-    public GameObject bad;
-
-    public void Start()
-    {
-        GameManager = FindObjectOfType<GameManager>();
-        good = GameObject.Find("good");
-        bad = GameObject.Find("bad");
-    }
-
-    public void checkComponentPlacement(XRSocketInteractor socket)
+    public void CheckComponentPlacement(XRSocketInteractor socket)
     {
 
-        if (socket.GetOldestInteractableSelected().transform.name == socket.name && socket.name == GameManager.state.ToString())
+        if (socket.GetOldestInteractableSelected().transform.name == socket.name && socket.name == GameManager.Instance.state.ToString())
         {
             socket.GetOldestInteractableSelected().transform.GetComponent<Collider>().enabled = false;
             socket.GetOldestInteractableSelected().transform.tag = "Placed";
-            GameManager.NextState();
-
-            good.GetComponent<AudioSource>().Play();
-        }
+            GameManager.Instance.NextState();
+			SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
+		}
         else
         {
-            GameManager.traceParser.traceSocket(socket, socket.GetOldestInteractableSelected().transform.name);
-
-            bad.GetComponent<AudioSource>().Play();
+            GameManager.Instance.traceParser.traceSocket(socket, socket.GetOldestInteractableSelected().transform.name);
+            SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
         }
     }
 
-    public void caught(GameObject go)
+    public void Caught(GameObject go)
     {
-        GameManager.traceParser.traceInApp(go);
+        GameManager.Instance.traceParser.traceInApp(go);
     }
 
 }
