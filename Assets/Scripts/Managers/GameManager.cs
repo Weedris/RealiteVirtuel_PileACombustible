@@ -69,9 +69,12 @@ public class GameManager : MonoBehaviour
 	public traceParser traceParser;
 
 	public GameObject endButton;
+	double debutConstruction;
+    double TempsConstruction;
 
-	#region intro
-	public GameObject Bvn;
+
+    #region intro
+    public GameObject Bvn;
 	public GameObject Instruction;
 	public GameObject Warning;
 
@@ -171,7 +174,8 @@ public class GameManager : MonoBehaviour
 		Pac = Instantiate(PAC_prefab, coord, quat);
 		Pac.GetComponent<ShowElement>().TuyauMetal.SetActive(true);
 		BoardTMPGUI.text = language.GiveCorrectlanguage().stack;
-	}
+        debutConstruction = Time.realtimeSinceStartup;
+    }
 
 	public void BombonneH2()
 	{
@@ -230,7 +234,10 @@ public class GameManager : MonoBehaviour
 		GetHeader(textGameObject).text = lang.endtitle;
 		GetModalText(textGameObject).text = lang.endtext;
 		GetTextTMP(next).text = lang.endbutton;
-	}
+
+		TempsConstruction = Time.realtimeSinceStartup - debutConstruction;
+
+    }
 
 	public void End()
 	{
