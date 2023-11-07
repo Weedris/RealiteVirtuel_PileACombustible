@@ -13,7 +13,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class traceParser : MonoBehaviour
 {
-    private StringBuilder text = new StringBuilder();
+    private StringBuilder data = new StringBuilder();
+    private double lastTime;
+    private StringBuilder nbGrabObjects = new StringBuilder();
+    private Dictionary<string, int> nbGrabObjectsByState = new Dictionary<string, int>();
 
     private SaveInCSV saveInCSV = new SaveInCSV();
 
@@ -24,31 +27,79 @@ public class traceParser : MonoBehaviour
         { typeof(XRSocketInteractor), ";PutInSocket;" }
     };
 
+    private void chgNbGrabObjectsByState(GameObject go)
+    {
+        string name = go.name;
+        if(nbGrabObjectsByState.ContainsKey(name))
+        {
+            nbGrabObjectsByState[name] += 1;
+        }
+        else
+        {
+            nbGrabObjectsByState.Add(name, 1);
+        }
+    }
+
+    private void rstNbGrabObjectsByState(GameManager.State state)
+    {
+        nbGrabObjects.Append("State;")
+                     .Append(state.ToString())
+                     .AppendLine();
+        foreach (KeyValuePair<string, int> kvp in nbGrabObjectsByState)
+        {
+            nbGrabObjects.Append(kvp.Key)
+                         .Append(";")
+                         .Append(kvp.Value)
+                         .AppendLine();
+        }
+        nbGrabObjectsByState.Clear();
+    }
+
+    private double getTimeSinceStartState()
+    {
+        return Time.realtimeSinceStartup - lastTime;
+    }
+
+    private void setLastTime()
+    {
+        lastTime = Time.realtimeSinceStartup;
+    }
+
+    void Start()
+    { 
+        lastTime = Time.realtimeSinceStartup;
+    }
+
     public void traceMainStep(GameManager.State state)
     {
-        text.Append("ChangeStep;State;")
+        rstNbGrabObjectsByState(state);
+        data.Append("ChangeStep;State;")
             .Append(state.ToString())
             .Append(";")
-            .Append(Time.realtimeSinceStartup);
-
-        sendIt(text.ToString());
+            .Append(Time.realtimeSinceStartup)
+            .Append(";")
+            .Append(getTimeSinceStartState())
+            .AppendLine();
+        setLastTime();
     }
 
     public void traceSocket(XRSocketInteractor si, string str)
     {
-        text.Append("Receive;")
+        data.Append("Receive;")
             .Append(str)
             .Append(";")
             .Append(si.name)
             .Append(";")
-            .Append(Time.realtimeSinceStartup);
-
-        sendIt(text.ToString());
+            .Append(Time.realtimeSinceStartup)
+            .Append(";")
+            .Append(getTimeSinceStartState())
+            .AppendLine();
     }
 
     public void traceInApp(GameObject go)
     {
-        text.Append("Action;")
+        chgNbGrabObjectsByState(go);
+        data.Append("Action;")
             .Append(go.name);
 
         Component[] components = go.GetComponents<Component>();
@@ -60,26 +111,21 @@ public class traceParser : MonoBehaviour
             {
                 notFound = false;
                 string customString = cmpntTypeToAction[componentType];
-                text.Append(customString);
+                data.Append(customString);
             }
             i++;
         }
 
-        text.Append(Time.realtimeSinceStartup);
-
-        sendIt(text.ToString());
-
-    }
-
-    public void sendIt(string txt)
-    {
-        saveInCSV.saveIt(txt);
-        text.Clear();
+        data.Append(Time.realtimeSinceStartup)
+            .Append(";")
+            .Append(getTimeSinceStartState())
+            .AppendLine();
     }
 
     public void save()
     {
-        saveInCSV.save();
+        saveInCSV.saveNbGrabObject(nbGrabObjects);
+        saveInCSV.save(data);
     }
 
 }

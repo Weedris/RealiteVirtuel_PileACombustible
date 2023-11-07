@@ -9,12 +9,11 @@ using System.Text;
 
 public class SaveInCSV
 {
-    private StringBuilder stringBuilder;
     private string saveFolder = null;
+    private DateTime date;
 
     public SaveInCSV()
     {
-        stringBuilder = new();
         string osType = Environment.OSVersion.VersionString;
 
         if (osType.Contains("Windows"))
@@ -25,15 +24,11 @@ public class SaveInCSV
         {
             saveFolder = "/storage/emulated/0/Documents/";
         }
+        date = DateTime.Now;
     }
 
-    public void saveIt(string str)
+    private string checkDirectories()
     {
-        stringBuilder.AppendLine(str);
-    }
-
-    public void save()
-    {   
         if (!Directory.Exists(saveFolder))
         {
             Directory.CreateDirectory(saveFolder);
@@ -43,11 +38,26 @@ public class SaveInCSV
         {
             Directory.CreateDirectory(filePath);
         }
+        return filePath;
+    }
+
+    public void save(StringBuilder data)
+    {   
         StringBuilder fileBuilder = new();
         fileBuilder.Append("Save_")
-                   .Append(DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"))
+                   .Append(date.ToString("yyyy-MM-dd_HH-mm-ss"))
                    .Append("_data.csv");
-        filePath = Path.Combine(filePath, fileBuilder.ToString());
-        File.WriteAllText(filePath, stringBuilder.ToString());
+        string filePath = Path.Combine(checkDirectories(), fileBuilder.ToString());
+        File.WriteAllText(filePath, data.ToString());
+    }
+
+    public void saveNbGrabObject(StringBuilder nbGrabObjects)
+    {
+        StringBuilder fileBuilder = new();
+        fileBuilder.Append("Save_")
+                   .Append(date.ToString("yyyy-MM-dd_HH-mm-ss"))
+                   .Append("_nbGrabObjects.csv");
+        string filePath = Path.Combine(checkDirectories(), fileBuilder.ToString());
+        File.WriteAllText(filePath, nbGrabObjects.ToString());
     }
 }
