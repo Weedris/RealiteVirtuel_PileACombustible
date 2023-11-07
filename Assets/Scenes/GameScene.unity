@@ -382,6 +382,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PolarisationChart
       objectReference: {fileID: 0}
+    - target: {fileID: 3766118972565782865, guid: a494f8e7790c62b4494c2160ff714631,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6929462956067952679, guid: a494f8e7790c62b4494c2160ff714631,
         type: 3}
       propertyPath: m_Pivot.x
