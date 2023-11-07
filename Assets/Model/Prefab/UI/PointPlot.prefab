@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7248246554425590019}
   - component: {fileID: 8905877710548009700}
   - component: {fileID: 8431811328119913600}
+  - component: {fileID: 2773093673206810672}
   m_Layer: 0
   m_Name: PointPlot
   m_TagString: Untagged
@@ -76,3 +77,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2773093673206810672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642443173406820488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: debe5c722c3a54a47b4818b8a5e00932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

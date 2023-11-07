@@ -18,7 +18,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
 	public static GameManager Instance;
 
 	private void Awake()
@@ -32,8 +31,6 @@ public class GameManager : MonoBehaviour
 			Destroy(gameObject);
 		}
 	}
-
-
 
 	public GameObject particle1;
 	public GameObject particle2;
@@ -58,7 +55,6 @@ public class GameManager : MonoBehaviour
 	}
 
 
-
 	public State state;
 
 	public GameObject PAC_prefab;
@@ -70,11 +66,11 @@ public class GameManager : MonoBehaviour
 
 	public GameObject endButton;
 	double debutConstruction;
-    double TempsConstruction;
+	double TempsConstruction;
 
 
-    #region intro
-    public GameObject Bvn;
+	#region intro
+	public GameObject Bvn;
 	public GameObject Instruction;
 	public GameObject Warning;
 
@@ -174,8 +170,8 @@ public class GameManager : MonoBehaviour
 		Pac = Instantiate(PAC_prefab, coord, quat);
 		Pac.GetComponent<ShowElement>().TuyauMetal.SetActive(true);
 		BoardTMPGUI.text = language.GiveCorrectlanguage().stack;
-        debutConstruction = Time.realtimeSinceStartup;
-    }
+		debutConstruction = Time.realtimeSinceStartup;
+	}
 
 	public void BombonneH2()
 	{
@@ -237,7 +233,7 @@ public class GameManager : MonoBehaviour
 
 		TempsConstruction = Time.realtimeSinceStartup - debutConstruction;
 
-    }
+	}
 
 	public void End()
 	{
@@ -259,6 +255,5 @@ public class GameManager : MonoBehaviour
 		}
 	}
 	#endregion
-
 
 }
