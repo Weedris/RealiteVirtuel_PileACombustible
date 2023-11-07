@@ -10,6 +10,7 @@ using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using System.IO;
 
 public class traceParser : MonoBehaviour
 {
@@ -33,25 +34,25 @@ public class traceParser : MonoBehaviour
         {
             nbGrabObjectsByState[name] += 1;
         }
-        else
-        {
-            nbGrabObjectsByState.Add(name, 1);
-        }
     }
 
     private void rstNbGrabObjectsByState(GameManager.State state)
     {
-        nbGrabObjects.Append("State;")
-                     .Append(state.ToString())
-                     .AppendLine();
+        //Save nb grab objects:
+        StringBuilder sb = new StringBuilder();
+        sb.Append(state.ToString())
+          .Append(";");
         foreach (KeyValuePair<string, int> kvp in nbGrabObjectsByState)
         {
-            nbGrabObjects.Append(kvp.Key)
-                         .Append(";")
-                         .Append(kvp.Value)
-                         .AppendLine();
+            sb.Append(kvp.Value)
+              .Append(";");
         }
-        nbGrabObjectsByState.Clear();
+        saveInCSV.save(sb, "nbGrabObjects");
+        //Rst nb grab object to 0:
+        foreach (string key in new List<string>(nbGrabObjectsByState.Keys))
+        {
+            nbGrabObjectsByState[key] = 0;
+        }
     }
 
     private double getTimeSinceStartState()
@@ -66,7 +67,28 @@ public class traceParser : MonoBehaviour
     }
 
     void Start()
-    { 
+    {
+        string directoryPath = "Assets/Model/Prefab/Room/PAC_Components";
+        StringBuilder sb = new StringBuilder();
+        sb.Append(";");
+        if (Directory.Exists(directoryPath))
+        {
+            string[] fileNames = Directory.GetFiles(directoryPath);
+            foreach (string fileName in fileNames)
+            {
+                if (!fileName.Contains(".meta"))
+                {
+                    string cmpntName = fileName.Replace(directoryPath, "").Replace(".prefab", "").Replace("\\", "");
+                    nbGrabObjectsByState.Add(cmpntName, 0);
+                    sb.Append(cmpntName).Append(";");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("Le répertoire n'existe pas : " + directoryPath);
+        }
+        saveInCSV.save(sb, "nbGrabObjects");
         lastTime = Time.realtimeSinceStartup;
     }
 
@@ -127,13 +149,16 @@ public class traceParser : MonoBehaviour
 
     public void save()
     {
+        /*
         saveInCSV.save(nbGrabObjects, "nbGrabObjects");
+        /*
         StringBuilder data = new StringBuilder();
         data.Append("End;;;")
             .Append(Time.realtimeSinceStartup)
             .Append(";")
             .Append(getTimeSinceStartState());
         saveInCSV.save(data);
+        */
     }
 
 }
