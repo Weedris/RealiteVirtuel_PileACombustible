@@ -4,8 +4,8 @@ using TMPro;
 
 public class LevelMeter : MonoBehaviour
 {
-    [SerializeField] private string prefix;
-    [SerializeField] private string suffix;
+	[SerializeField] private string prefix;
+	[SerializeField] private string suffix;
 	[SerializeField] private Slider slider;
 	[SerializeField] private TMP_Text label;
 	[SerializeField] private bool prefixSpace;
