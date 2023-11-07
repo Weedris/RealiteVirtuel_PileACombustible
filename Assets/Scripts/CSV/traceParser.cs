@@ -69,8 +69,6 @@ public class traceParser : MonoBehaviour
     void Start()
     {
         string directoryPath = "Assets/Model/Prefab/Room/PAC_Components";
-        StringBuilder sb = new StringBuilder();
-        sb.Append(";");
         if (Directory.Exists(directoryPath))
         {
             string[] fileNames = Directory.GetFiles(directoryPath);
@@ -80,13 +78,18 @@ public class traceParser : MonoBehaviour
                 {
                     string cmpntName = fileName.Replace(directoryPath, "").Replace(".prefab", "").Replace("\\", "");
                     nbGrabObjectsByState.Add(cmpntName, 0);
-                    sb.Append(cmpntName).Append(";");
                 }
             }
         }
         else
         {
             Debug.LogError("Le répertoire n'existe pas : " + directoryPath);
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.Append(";");
+        foreach (string key in new List<string>(nbGrabObjectsByState.Keys))
+        {
+            sb.Append(key).Append(";");
         }
         saveInCSV.save(sb, "nbGrabObjects");
         lastTime = Time.realtimeSinceStartup;

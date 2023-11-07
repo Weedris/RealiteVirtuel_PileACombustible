@@ -16,9 +16,9 @@ public class ComponentPlacement : MonoBehaviour
 		{
 			socket.GetOldestInteractableSelected().transform.GetComponent<Collider>().enabled = false;
 			socket.GetOldestInteractableSelected().transform.tag = "Placed";
-			GameManager.Instance.NextState();
 			SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
-		}
+            GameManager.Instance.NextState();
+        }
 		else
 		{
 			GameManager.Instance.traceParser.traceSocket(socket, socket.GetOldestInteractableSelected().transform.name);
