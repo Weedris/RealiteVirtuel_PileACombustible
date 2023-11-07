@@ -13,7 +13,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class traceParser : MonoBehaviour
 {
-    private StringBuilder data = new StringBuilder();
     private double lastTime;
     private StringBuilder nbGrabObjects = new StringBuilder();
     private Dictionary<string, int> nbGrabObjectsByState = new Dictionary<string, int>();
@@ -57,7 +56,8 @@ public class traceParser : MonoBehaviour
 
     private double getTimeSinceStartState()
     {
-        return Time.realtimeSinceStartup - lastTime;
+        double time = Time.realtimeSinceStartup - lastTime;
+        return time<0.5?0:time;
     }
 
     private void setLastTime()
@@ -73,18 +73,20 @@ public class traceParser : MonoBehaviour
     public void traceMainStep(GameManager.State state)
     {
         rstNbGrabObjectsByState(state);
+        StringBuilder data = new StringBuilder();
         data.Append("ChangeStep;State;")
             .Append(state.ToString())
             .Append(";")
             .Append(Time.realtimeSinceStartup)
             .Append(";")
-            .Append(getTimeSinceStartState())
-            .AppendLine();
+            .Append(getTimeSinceStartState());
+        saveInCSV.save(data);
         setLastTime();
     }
 
     public void traceSocket(XRSocketInteractor si, string str)
     {
+        StringBuilder data = new StringBuilder();
         data.Append("Receive;")
             .Append(str)
             .Append(";")
@@ -92,13 +94,14 @@ public class traceParser : MonoBehaviour
             .Append(";")
             .Append(Time.realtimeSinceStartup)
             .Append(";")
-            .Append(getTimeSinceStartState())
-            .AppendLine();
+            .Append(getTimeSinceStartState());
+        saveInCSV.save(data);
     }
 
     public void traceInApp(GameObject go)
     {
         chgNbGrabObjectsByState(go);
+        StringBuilder data = new StringBuilder();
         data.Append("Action;")
             .Append(go.name);
 
@@ -118,13 +121,18 @@ public class traceParser : MonoBehaviour
 
         data.Append(Time.realtimeSinceStartup)
             .Append(";")
-            .Append(getTimeSinceStartState())
-            .AppendLine();
+            .Append(getTimeSinceStartState());
+        saveInCSV.save(data);
     }
 
     public void save()
     {
-        saveInCSV.saveNbGrabObject(nbGrabObjects);
+        saveInCSV.save(nbGrabObjects, "nbGrabObjects");
+        StringBuilder data = new StringBuilder();
+        data.Append("End;;;")
+            .Append(Time.realtimeSinceStartup)
+            .Append(";")
+            .Append(getTimeSinceStartState());
         saveInCSV.save(data);
     }
 

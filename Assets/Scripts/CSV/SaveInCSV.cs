@@ -10,7 +10,7 @@ using System.Text;
 public class SaveInCSV
 {
     private string saveFolder = null;
-    private DateTime date;
+    private string date;
 
     public SaveInCSV()
     {
@@ -24,7 +24,7 @@ public class SaveInCSV
         {
             saveFolder = "/storage/emulated/0/Documents/";
         }
-        date = DateTime.Now;
+        date = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
     }
 
     private string checkDirectories()
@@ -41,23 +41,22 @@ public class SaveInCSV
         return filePath;
     }
 
-    public void save(StringBuilder data)
+    public void save(StringBuilder data, string name = "data")
     {   
         StringBuilder fileBuilder = new();
         fileBuilder.Append("Save_")
-                   .Append(date.ToString("yyyy-MM-dd_HH-mm-ss"))
-                   .Append("_data.csv");
-        string filePath = Path.Combine(checkDirectories(), fileBuilder.ToString());
-        File.WriteAllText(filePath, data.ToString());
+                   .Append(date)
+                   .Append("_")
+                   .Append(name)
+                   .Append(".csv");
+        writeFile(Path.Combine(checkDirectories(), fileBuilder.ToString()), data.ToString());
+        /*File.WriteAllText(filePath, data.ToString());*/
     }
 
-    public void saveNbGrabObject(StringBuilder nbGrabObjects)
+    private void writeFile(string filePath, string text)
     {
-        StringBuilder fileBuilder = new();
-        fileBuilder.Append("Save_")
-                   .Append(date.ToString("yyyy-MM-dd_HH-mm-ss"))
-                   .Append("_nbGrabObjects.csv");
-        string filePath = Path.Combine(checkDirectories(), fileBuilder.ToString());
-        File.WriteAllText(filePath, nbGrabObjects.ToString());
+        using StreamWriter sw = new StreamWriter(filePath, true);
+        sw.WriteLine(text);
+        sw.Close();
     }
 }
