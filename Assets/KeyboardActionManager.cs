@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class KeyboardActionManager : MonoBehaviour
 {
@@ -10,6 +11,14 @@ public class KeyboardActionManager : MonoBehaviour
     public float sensitivity = 2f; // Sensibilité de la souris pour la rotation de la caméra
 
     private float rotationX = 0;
+
+    private GameObject grabbedObject;
+    private Rigidbody grabbedRigidbody;
+    private FixedJoint joint;
+
+    public float maxGrabDistance = 5f;
+    public Transform grabPoint; // Le point où l'objet sera attaché
+    public float objectDistanceFromCamera = 2f; // Distance entre la caméra et l'objet saisi
 
     void Start()
     {
@@ -43,10 +52,69 @@ public class KeyboardActionManager : MonoBehaviour
         {
             Jump();
         }
+
+        //Grab Down
+        if (Input.GetMouseButtonDown(0))
+        {
+            TryGrabObject();
+        }
+
+        //Grab Up
+        if (Input.GetMouseButtonUp(0))
+        {
+            ReleaseObject();
+        }
     }
 
     void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    void TryGrabObject()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, maxGrabDistance))
+        {
+            if (hit.collider.gameObject.GetComponent<XRGrabInteractable>() != null)
+            {
+                GrabObject(hit.collider.gameObject);
+            }
+        }
+    }
+
+    void GrabObject(GameObject objToGrab)
+    {
+        grabbedObject = objToGrab;
+        grabbedRigidbody = grabbedObject.GetComponent<Rigidbody>();
+
+        // Désactivez la gravité
+        grabbedRigidbody.useGravity = false;
+
+        // Créez un joint
+        joint = grabbedObject.AddComponent<FixedJoint>();
+        joint.connectedBody = rb; // Connectez l'objet saisi au joueur
+        joint.breakForce = Mathf.Infinity; // Ajustez la résistance du joint si nécessaire
+        joint.breakTorque = Mathf.Infinity;
+
+        // Ajustez la position de l'objet pour le placer devant la caméra
+        Vector3 offset = transform.forward * objectDistanceFromCamera;
+        grabbedObject.transform.position = transform.position + offset;
+    }
+
+    void ReleaseObject()
+    {
+        if (grabbedObject != null)
+        {
+            // Réactivez la gravité
+            grabbedRigidbody.useGravity = true;
+
+            // Détruisez le joint
+            Destroy(joint);
+
+            grabbedObject = null;
+        }
     }
 }
