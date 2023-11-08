@@ -5,6 +5,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class KeyboardActionManager : MonoBehaviour
 {
+    public static KeyboardActionManager Instance;
+
+
+        
+    
+
     private Rigidbody rb;
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
@@ -24,6 +30,14 @@ public class KeyboardActionManager : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         Cursor.lockState = CursorLockMode.Locked; // Verrouille le curseur au centre de l'écran
     }
 
@@ -104,6 +118,8 @@ public class KeyboardActionManager : MonoBehaviour
         Vector3 offset = transform.forward * objectDistanceFromCamera;
         grabbedObject.transform.position = transform.position + offset;
     }
+
+    public bool grabOn() { return (grabbedObject != null); }
 
     void ReleaseObject()
     {
