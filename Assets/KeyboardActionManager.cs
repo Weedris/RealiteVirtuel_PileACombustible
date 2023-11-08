@@ -14,6 +14,7 @@ public class KeyboardActionManager : MonoBehaviour
 
     private GameObject grabbedObject;
     private Rigidbody grabbedRigidbody;
+    public Rigidbody pointDeGrab;
     private FixedJoint joint;
 
     public float maxGrabDistance = 5f;
@@ -95,7 +96,7 @@ public class KeyboardActionManager : MonoBehaviour
 
         // Créez un joint
         joint = grabbedObject.AddComponent<FixedJoint>();
-        joint.connectedBody = rb; // Connectez l'objet saisi au joueur
+        joint.connectedBody = pointDeGrab; // Connectez l'objet saisi au joueur
         joint.breakForce = Mathf.Infinity; // Ajustez la résistance du joint si nécessaire
         joint.breakTorque = Mathf.Infinity;
 
