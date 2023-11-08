@@ -47,15 +47,6 @@ public class KeyboardActionManager : MonoBehaviour
 
     void Jump()
     {
-        if (IsGrounded())
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
-    }
-
-    bool IsGrounded()
-    {
-        RaycastHit hit;
-        return Physics.Raycast(transform.position, Vector3.down, out hit, 0.1f);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 }
