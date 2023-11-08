@@ -107,6 +107,10 @@ public class KeyboardActionManager : MonoBehaviour
             {
                 GrabObject(hit.collider.gameObject);
             }
+            else if (hit.collider.gameObject.GetComponent<XRSimpleInteractable>() != null)
+            {
+                GameManager.Instance.getMainComponentToTheirPlace();
+            }
         }
     }
 
