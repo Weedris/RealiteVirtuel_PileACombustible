@@ -122,6 +122,19 @@ public class traceParser : MonoBehaviour
             .Append(getTimeSinceStartState());
         saveInCSV.save(data);
     }
+    public void traceSocket(GameObject si, string str)
+    {
+        StringBuilder data = new StringBuilder();
+        data.Append("Receive;")
+            .Append(str)
+            .Append(";")
+            .Append(si.name)
+            .Append(";")
+            .Append(Time.realtimeSinceStartup)
+            .Append(";")
+            .Append(getTimeSinceStartState());
+        saveInCSV.save(data);
+    }
 
     public void traceInApp(GameObject go)
     {

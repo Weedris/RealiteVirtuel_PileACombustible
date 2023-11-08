@@ -4,12 +4,27 @@
  * 
  */
 
+using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ComponentPlacement : MonoBehaviour
 {
-	public void CheckComponentPlacement(XRSocketInteractor socket)
+    public static ComponentPlacement Instance;
+
+    private void Start()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+
+    public void CheckComponentPlacement(XRSocketInteractor socket)
 	{
 
 		if (socket.GetOldestInteractableSelected().transform.name == socket.name && socket.name == GameManager.Instance.state.ToString())
@@ -26,7 +41,24 @@ public class ComponentPlacement : MonoBehaviour
 		}
 	}
 
-	public void Caught(GameObject go)
+	public void CheckComponentPlacement(GameObject colider , GameObject objet)
+	{
+		if (objet.transform.name == colider.name && colider.name == GameManager.Instance.state.ToString())
+		{
+            objet.transform.GetComponent<Collider>().enabled = false;
+            objet.transform.tag = "Placed";
+            SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
+            GameManager.Instance.NextState();
+        }
+        else
+        {
+			GameManager.Instance.traceParser.traceSocket(colider, objet.transform.name);
+			SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
+		}
+	}
+
+
+    public void Caught(GameObject go)
 	{
 		GameManager.Instance.traceParser.traceInApp(go);
 	}
