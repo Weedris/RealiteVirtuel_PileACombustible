@@ -10,7 +10,7 @@ public class PlatformManager : MonoBehaviour
 
     void Start()
     {
-#if UNITY_STANDALONE
+#if UNITY_STANDALONE || UNITY_EDITOR
         // Code spécifique à PC
         changeToPC();
 #elif UNITY_ANDROID
