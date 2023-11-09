@@ -674,6 +674,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6161564811613993844, guid: 02ad804aa99cd8f44a4989514d595fc2,
         type: 3}
+      propertyPath: crouchSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6161564811613993844, guid: 02ad804aa99cd8f44a4989514d595fc2,
+        type: 3}
       propertyPath: pointDeGrab
       value: 
       objectReference: {fileID: 1073037871}

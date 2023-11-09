@@ -23,7 +23,7 @@ public class KeyboardActionManager : MonoBehaviour
     public float maxGrabDistance = 5f;
     public Transform grabPoint; // Le point où l'objet sera attaché
     public float objectDistanceFromCamera = 2f; // Distance entre la caméra et l'objet saisi
-    private float objectDistanceWithScroll = 2f;
+    private Vector3 objectScrollVector = new Vector3(0, 0, 0);
 
     private bool isCrouching = false; // Variable pour suivre l'état d'accroupissement
     public float crouchSpeed = 1.5f; // Vitesse pendant l'accroupissement
@@ -107,12 +107,10 @@ public class KeyboardActionManager : MonoBehaviour
         float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
         if (scrollWheel != 0f)
         {
-            // Faites quelque chose avec la valeur scrollWheel
-            objectDistanceWithScroll = Mathf.Clamp(objectDistanceWithScroll + scrollWheel, 1f, 3f);
             if (grabOn())
             {
-                Vector3 newAnchorPosition = new Vector3(0f, 0f, 1f) * objectDistanceWithScroll;
-                joint.connectedAnchor = joint.transform.TransformPoint(newAnchorPosition);
+                objectScrollVector.z = Mathf.Clamp(objectScrollVector.z + scrollWheel, -0.5f, 1f);
+                grabPoint.localPosition = objectScrollVector;
             }
         }
     }
@@ -191,6 +189,7 @@ public class KeyboardActionManager : MonoBehaviour
             // Détruisez le joint
             Destroy(joint);
 
+            objectScrollVector.z = 0;
             grabbedObject = null;
         }
     }
