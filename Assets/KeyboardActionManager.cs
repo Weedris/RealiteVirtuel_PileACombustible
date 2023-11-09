@@ -134,6 +134,7 @@ public class KeyboardActionManager : MonoBehaviour
         if (!isCrouching)
         {
             Camera.main.transform.localPosition = new Vector3(Camera.main.transform.localPosition.x, crouchHeight, Camera.main.transform.localPosition.z);
+            rb.GetComponent<CapsuleCollider>().height /= 1.5f;
             isCrouching = true;
         }
     }
@@ -143,6 +144,7 @@ public class KeyboardActionManager : MonoBehaviour
         if (isCrouching)
         {
             Camera.main.transform.localPosition = new Vector3(Camera.main.transform.localPosition.x, originalHeight, Camera.main.transform.localPosition.z);
+            rb.GetComponent<CapsuleCollider>().height *= 1.5f;
             isCrouching = false;
         }
     }
