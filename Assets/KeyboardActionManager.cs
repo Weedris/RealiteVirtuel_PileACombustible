@@ -107,7 +107,7 @@ public class KeyboardActionManager : MonoBehaviour
         float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
         if (scrollWheel != 0f)
         {
-            if (grabOn())
+            if (GrabOn())
             {
                 objectScrollVector.z = Mathf.Clamp(objectScrollVector.z + scrollWheel, -0.5f, 1f);
                 grabPoint.localPosition = objectScrollVector;
@@ -117,13 +117,13 @@ public class KeyboardActionManager : MonoBehaviour
 
     void Jump()
     {
-        if (isGrounded())
+        if (IsGrounded())
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 
-    private bool isGrounded()
+    private bool IsGrounded()
     {
         Vector3 position = rb.gameObject.transform.position;
         return position.y < 1;
@@ -180,7 +180,7 @@ public class KeyboardActionManager : MonoBehaviour
         SoundManager.Instance.PlaySFX(SfxType.GrabbedObject);
     }
 
-    public bool grabOn() { return (grabbedObject != null); }
+    public bool GrabOn() { return (grabbedObject != null); }
 
     void ReleaseObject()
     {
