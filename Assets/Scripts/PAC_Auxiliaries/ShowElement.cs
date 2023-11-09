@@ -10,9 +10,9 @@ using UnityEngine;
 public class ShowElement : MonoBehaviour
 {
 
-    
-    
-    public GameObject Vitre;
+
+
+	public GameObject Vitre;
 
 	public GameObject H2_In;
 

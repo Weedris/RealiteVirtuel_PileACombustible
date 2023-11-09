@@ -25,7 +25,7 @@ public class ScenesManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
-	public static void Chapter1() 
+	public static void Chapter1()
 	{
 		SceneManager.LoadScene("GameScene");
 	}
@@ -33,5 +33,5 @@ public class ScenesManager : MonoBehaviour
 	{
 		SceneManager.LoadScene("GameScene");
 	}
-	
+
 }

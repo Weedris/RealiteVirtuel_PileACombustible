@@ -39,7 +39,8 @@ public class PolarisationChart : MonoBehaviour
 
 		GameObject plot = Instantiate(_pointPrefab, _pointContainer);
 		plot.transform.localPosition = position;
-		plot.GetComponent<Button>().onClick.AddListener(delegate {
+		plot.GetComponent<Button>().onClick.AddListener(delegate
+		{
 			selectedPoint = position;
 			ShowContextMenu();
 		});
@@ -88,7 +89,7 @@ public class PolarisationChart : MonoBehaviour
 
 		csvString.AppendLine("X,Y");
 		foreach (Vector2 position in plots.Keys)
-		csvString.AppendLine($"{position.x},{position.y}");
+			csvString.AppendLine($"{position.x},{position.y}");
 
 		return csvString.ToString();
 	}

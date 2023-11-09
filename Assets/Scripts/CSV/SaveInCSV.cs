@@ -38,7 +38,7 @@ public class SaveInCSV
 	}
 
 	public void Save(StringBuilder data, string name = "data")
-	{   
+	{
 		StringBuilder fileBuilder = new();
 		fileBuilder.Append("Save_")
 				   .Append(date)

@@ -139,7 +139,7 @@ public class PilotagePile : MonoBehaviour
 		}
 	}
 
-    public void changeIntensite()
+	public void changeIntensite()
 	{
 		intensite = IntensitySlider.value;
 		IntensitySlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = intensite.ToString().Substring(0, 4);

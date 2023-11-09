@@ -27,7 +27,7 @@ public class ComponentPlacement : MonoBehaviour
 	public void CheckComponentPlacement(XRSocketInteractor socket)
 	{
 		traceParser.Instance.traceSocket(socket, socket.GetOldestInteractableSelected().transform.name);
-		
+
 		if (socket.GetOldestInteractableSelected().transform.name == socket.name && socket.name == GameManager.Instance.state.ToString())
 		{
 			socket.GetOldestInteractableSelected().transform.GetComponent<Collider>().enabled = false;
@@ -44,7 +44,7 @@ public class ComponentPlacement : MonoBehaviour
 	public void CheckComponentPlacement(Transform target, Transform objectToPlace)
 	{
 		traceParser.Instance.traceSocket(target.gameObject, objectToPlace.name);
-		if (objectToPlace.transform.name == target.name && target.name == GameManager.Instance.state.ToString() )
+		if (objectToPlace.transform.name == target.name && target.name == GameManager.Instance.state.ToString())
 		{
 			Rigidbody rb = objectToPlace.GetComponent<Rigidbody>();
 			rb.useGravity = false;

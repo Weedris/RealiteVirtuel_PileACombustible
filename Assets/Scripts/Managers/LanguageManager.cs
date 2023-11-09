@@ -21,7 +21,7 @@ public class LanguageManager : MonoBehaviour
 	}
 
 
-	public void updateLanguage() 
+	public void updateLanguage()
 	{
 		this.language = settings.curentLanguage;
 	}
