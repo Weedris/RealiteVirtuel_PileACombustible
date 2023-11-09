@@ -669,9 +669,19 @@ PrefabInstance:
       objectReference: {fileID: 1073037870}
     - target: {fileID: 6161564811613993844, guid: 02ad804aa99cd8f44a4989514d595fc2,
         type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6161564811613993844, guid: 02ad804aa99cd8f44a4989514d595fc2,
+        type: 3}
       propertyPath: pointDeGrab
       value: 
       objectReference: {fileID: 1073037871}
+    - target: {fileID: 6161564811613993844, guid: 02ad804aa99cd8f44a4989514d595fc2,
+        type: 3}
+      propertyPath: crouchHeight
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02ad804aa99cd8f44a4989514d595fc2, type: 3}
 --- !u!1 &391472848 stripped
@@ -11552,7 +11562,7 @@ PrefabInstance:
     - target: {fileID: 2630800242651296571, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 262.1
       objectReference: {fileID: 0}
     - target: {fileID: 2630800242651296571, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
@@ -11562,7 +11572,7 @@ PrefabInstance:
     - target: {fileID: 2630800242651296571, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 147.05
       objectReference: {fileID: 0}
     - target: {fileID: 2630800242651296571, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}

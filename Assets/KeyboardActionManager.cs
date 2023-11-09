@@ -8,12 +8,8 @@ public class KeyboardActionManager : MonoBehaviour
 {
     public static KeyboardActionManager Instance;
 
-
-        
-    
-
     private Rigidbody rb;
-    public float moveSpeed = 5f;
+    public float moveSpeed = 3f;
     public float jumpForce = 5f;
     public float sensitivity = 2f; // Sensibilité de la souris pour la rotation de la caméra
 
@@ -27,6 +23,12 @@ public class KeyboardActionManager : MonoBehaviour
     public float maxGrabDistance = 5f;
     public Transform grabPoint; // Le point où l'objet sera attaché
     public float objectDistanceFromCamera = 2f; // Distance entre la caméra et l'objet saisi
+    private float objectDistanceWithScroll = 2f;
+
+    private bool isCrouching = false; // Variable pour suivre l'état d'accroupissement
+    public float crouchSpeed = 1.5f; // Vitesse pendant l'accroupissement
+    public float crouchHeight = 0.7f; // Hauteur pendant l'accroupissement
+    private float originalHeight; // Hauteur originale du joueur
 
     void Start()
     {
@@ -40,6 +42,7 @@ public class KeyboardActionManager : MonoBehaviour
             Destroy(gameObject);
         }
         Cursor.lockState = CursorLockMode.Locked; // Verrouille le curseur au centre de l'écran
+        originalHeight = rb.transform.localScale.y; // Stockez la hauteur originale du joueur
     }
 
     void Update()
@@ -58,9 +61,18 @@ public class KeyboardActionManager : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(horizontalInput, 0, verticalInput) * moveSpeed * Time.deltaTime;
-        transform.Translate(movement);
+        Vector3 movement = Vector3.zero;
 
+        if (!isCrouching)
+        {
+            movement = new Vector3(horizontalInput, 0, verticalInput) * moveSpeed * Time.deltaTime;
+        }
+        else
+        {
+            movement = new Vector3(horizontalInput, 0, verticalInput) * crouchSpeed * Time.deltaTime;
+        }
+
+        rb.MovePosition(rb.position + transform.TransformDirection(movement));
         rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
 
         // Saut
@@ -80,6 +92,29 @@ public class KeyboardActionManager : MonoBehaviour
         {
             ReleaseObject();
         }
+
+        //Crouch
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Crouch();
+        }
+        else
+        {
+            StandUp();
+        }
+        
+        // Détection du roulement de la molette de la souris
+        float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
+        if (scrollWheel != 0f)
+        {
+            // Faites quelque chose avec la valeur scrollWheel
+            objectDistanceWithScroll = Mathf.Clamp(objectDistanceWithScroll + scrollWheel, 1f, 3f);
+            if (grabOn())
+            {
+                Vector3 newAnchorPosition = new Vector3(0f, 0f, 1f) * objectDistanceWithScroll;
+                joint.connectedAnchor = joint.transform.TransformPoint(newAnchorPosition);
+            }
+        }
     }
 
     void Jump()
@@ -94,6 +129,24 @@ public class KeyboardActionManager : MonoBehaviour
     {
         Vector3 position = rb.gameObject.transform.position;
         return position.y < 1;
+    }
+
+    void Crouch()
+    {
+        if (!isCrouching)
+        {
+            rb.transform.localScale = new Vector3(rb.transform.localScale.x, crouchHeight, rb.transform.localScale.z);
+            isCrouching = true;
+        }
+    }
+
+    void StandUp()
+    {
+        if (isCrouching)
+        {
+            rb.transform.localScale = new Vector3(rb.transform.localScale.x, originalHeight, rb.transform.localScale.z);
+            isCrouching = false;
+        }
     }
 
     void TryGrabObject()
@@ -119,18 +172,12 @@ public class KeyboardActionManager : MonoBehaviour
         grabbedObject = objToGrab;
         grabbedRigidbody = grabbedObject.GetComponent<Rigidbody>();
 
-        // Désactivez la gravité
-        grabbedRigidbody.useGravity = false;
-
         // Créez un joint
         joint = grabbedObject.AddComponent<FixedJoint>();
         joint.connectedBody = pointDeGrab; // Connectez l'objet saisi au joueur
         joint.breakForce = Mathf.Infinity; // Ajustez la résistance du joint si nécessaire
         joint.breakTorque = Mathf.Infinity;
 
-        // Ajustez la position de l'objet pour le placer devant la caméra
-        Vector3 offset = transform.forward * objectDistanceFromCamera;
-        grabbedObject.transform.position = transform.position + offset;
         traceParser.Instance.traceInApp(grabbedObject);
         SoundManager.Instance.PlaySFX(SfxType.GrabbedObject);
     }
@@ -141,9 +188,6 @@ public class KeyboardActionManager : MonoBehaviour
     {
         if (grabbedObject != null)
         {
-            // Réactivez la gravité
-            grabbedRigidbody.useGravity = true;
-
             // Détruisez le joint
             Destroy(joint);
 
