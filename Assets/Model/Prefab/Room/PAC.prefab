@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8429843395001623176}
   - component: {fileID: 1170078281330977631}
   - component: {fileID: 4324472177863464815}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BombonneN2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 200639057516558041}
   - component: {fileID: 2955084679560457697}
   - component: {fileID: 4423295181755489935}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Stack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 3527811779384763354}
   - component: {fileID: 8196346349217141671}
   - component: {fileID: 8288691488300299180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BombonneH2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 5133544574053451349}
   - component: {fileID: 139911426285466243}
   - component: {fileID: 4992266510440689695}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CollecteurEau
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -559,7 +559,7 @@ GameObject:
   - component: {fileID: 8423728780003311125}
   - component: {fileID: 8857537381646145263}
   - component: {fileID: 7902112607351577434}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Radiateur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 1692181225378829821}
   - component: {fileID: 4395291734283876242}
   - component: {fileID: 4155811728766947074}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ventilateur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1163,7 +1163,7 @@ GameObject:
   - component: {fileID: 2041588913477198552}
   - component: {fileID: 1514232543788829946}
   - component: {fileID: 734235264247290110}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Compresseur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1290,7 +1290,7 @@ GameObject:
   - component: {fileID: 2526200566923550639}
   - component: {fileID: 2660738532303566955}
   - component: {fileID: 4290259386634474495}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Humidificateur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
