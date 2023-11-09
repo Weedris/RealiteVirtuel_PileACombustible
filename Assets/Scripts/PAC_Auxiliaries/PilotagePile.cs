@@ -130,7 +130,6 @@ public class PilotagePile : MonoBehaviour
 				+ lang.debitHydrogene + ": " + debitHydrogene.ToString() + " L/min" + "\n"
 				+ lang.debitAir + ": " + debitAir.ToString() + " L/min" + "\n"
 				+ lang.rendement + ": " + rendement.ToString() + " %" + "\n";
-
 			screen.text = text;
 		}
 
@@ -140,7 +139,7 @@ public class PilotagePile : MonoBehaviour
 		}
 	}
 
-	public void changeIntesite()
+    public void changeIntensite()
 	{
 		intensite = IntensitySlider.value;
 		IntensitySlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = intensite.ToString().Substring(0, 4);
