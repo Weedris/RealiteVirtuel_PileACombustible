@@ -16,7 +16,7 @@ public class SaveInCSV
 	{
 		date = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
 
-		string osType = Environment.OSVersion.VersionString;
+		//string osType = Environment.OSVersion.VersionString;
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
 		saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 #elif UNITY_ANDROID
