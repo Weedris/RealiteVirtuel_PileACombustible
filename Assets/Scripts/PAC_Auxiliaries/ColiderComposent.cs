@@ -17,7 +17,7 @@ public class ColiderComposent : MonoBehaviour
 
    private void Verif(Collider other) 
     {
-        if (!KeyboardActionManager.Instance.grabOn())
+        if (!KeyboardActionManager.Instance.GrabOn())
             ComponentPlacement.Instance.CheckComponentPlacement(transform, other.transform);
     }
 }
