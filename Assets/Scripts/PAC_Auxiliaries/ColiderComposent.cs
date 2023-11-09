@@ -8,16 +8,16 @@ public class ColiderComposent : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        verif(other);
+        Verif(other);
     }
     private void OnTriggerExit(Collider other)
     {
-        verif(other);
+        Verif(other);
     }
 
-   private void verif(Collider other) 
+   private void Verif(Collider other) 
     {
-        if (KeyboardActionManager.Instance.grabOn() == false)
-            ComponentPlacement.Instance.CheckComponentPlacement(gameObject, other.gameObject);
+        if (!KeyboardActionManager.Instance.grabOn())
+            ComponentPlacement.Instance.CheckComponentPlacement(transform, other.transform);
     }
 }

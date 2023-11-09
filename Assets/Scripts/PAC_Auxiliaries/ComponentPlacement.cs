@@ -41,27 +41,26 @@ public class ComponentPlacement : MonoBehaviour
 		}
 	}
 
-	public void CheckComponentPlacement(GameObject colider , GameObject objet)
+	public void CheckComponentPlacement(Transform target, Transform objectToPlace)
 	{
-		if (objet.transform.name == colider.name && colider.name == GameManager.Instance.state.ToString() )
+		if (objectToPlace.transform.name == target.name && target.name == GameManager.Instance.state.ToString() )
 		{
-            objet.transform.GetComponent<Collider>().enabled = false;
-            objet.transform.tag = "Placed";
-            objet.transform.position = colider.transform.position;
-            objet.transform.rotation = colider.transform.rotation;
-            Rigidbody rb = objet.GetComponent<Rigidbody>();
-            rb.useGravity=false;
+            Rigidbody rb = objectToPlace.GetComponent<Rigidbody>();
+            rb.useGravity = false;
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+
+            objectToPlace.GetComponent<Collider>().enabled = false;
+            objectToPlace.tag = "Placed";
+            objectToPlace.SetPositionAndRotation(target.position, target.rotation);
+
             SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
             GameManager.Instance.NextState();
-            
         }
         else
         {
-			GameManager.Instance.traceParser.traceSocket(colider, objet.transform.name);
+			GameManager.Instance.traceParser.traceSocket(target.gameObject, objectToPlace.name);
 			SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
-            
         }
 	}
 
