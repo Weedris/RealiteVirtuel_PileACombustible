@@ -14,6 +14,20 @@ using System.IO;
 
 public class traceParser : MonoBehaviour
 {
+    public static traceParser Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private double lastTime;
     private StringBuilder nbGrabObjects = new StringBuilder();
     private Dictionary<string, int> nbGrabObjectsByState = new Dictionary<string, int>();

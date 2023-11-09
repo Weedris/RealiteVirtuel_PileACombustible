@@ -131,6 +131,8 @@ public class KeyboardActionManager : MonoBehaviour
         // Ajustez la position de l'objet pour le placer devant la caméra
         Vector3 offset = transform.forward * objectDistanceFromCamera;
         grabbedObject.transform.position = transform.position + offset;
+        traceParser.Instance.traceInApp(grabbedObject);
+        SoundManager.Instance.PlaySFX(SfxType.GrabbedObject);
     }
 
     public bool grabOn() { return (grabbedObject != null); }
