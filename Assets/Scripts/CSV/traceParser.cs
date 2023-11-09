@@ -61,7 +61,7 @@ public class traceParser : MonoBehaviour
             sb.Append(kvp.Value)
               .Append(";");
         }
-        saveInCSV.save(sb, "nbGrabObjects");
+        saveInCSV.Save(sb, "nbGrabObjects");
         //Rst nb grab object to 0:
         foreach (string key in new List<string>(nbGrabObjectsByState.Keys))
         {
@@ -105,7 +105,7 @@ public class traceParser : MonoBehaviour
         {
             sb.Append(key).Append(";");
         }
-        saveInCSV.save(sb, "nbGrabObjects");
+        saveInCSV.Save(sb, "nbGrabObjects");
         lastTime = Time.realtimeSinceStartup;
     }
 
@@ -119,7 +119,7 @@ public class traceParser : MonoBehaviour
             .Append(Time.realtimeSinceStartup)
             .Append(";")
             .Append(getTimeSinceStartState());
-        saveInCSV.save(data);
+        saveInCSV.Save(data);
         setLastTime();
     }
 
@@ -134,7 +134,7 @@ public class traceParser : MonoBehaviour
             .Append(Time.realtimeSinceStartup)
             .Append(";")
             .Append(getTimeSinceStartState());
-        saveInCSV.save(data);
+        saveInCSV.Save(data);
     }
     public void traceSocket(GameObject si, string str)
     {
@@ -147,7 +147,7 @@ public class traceParser : MonoBehaviour
             .Append(Time.realtimeSinceStartup)
             .Append(";")
             .Append(getTimeSinceStartState());
-        saveInCSV.save(data);
+        saveInCSV.Save(data);
     }
 
     public void traceInApp(GameObject go)
@@ -174,7 +174,7 @@ public class traceParser : MonoBehaviour
         data.Append(Time.realtimeSinceStartup)
             .Append(";")
             .Append(getTimeSinceStartState());
-        saveInCSV.save(data);
+        saveInCSV.Save(data);
     }
 
     public void save()
