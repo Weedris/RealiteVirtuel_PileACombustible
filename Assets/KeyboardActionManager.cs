@@ -27,7 +27,7 @@ public class KeyboardActionManager : MonoBehaviour
 
     private bool isCrouching = false; // Variable pour suivre l'état d'accroupissement
     public float crouchSpeed = 1.5f; // Vitesse pendant l'accroupissement
-    public float crouchHeight = 0.7f; // Hauteur pendant l'accroupissement
+    public float crouchHeight = 0.3f; // Hauteur pendant l'accroupissement
     private float originalHeight; // Hauteur originale du joueur
 
     void Start()
@@ -42,7 +42,7 @@ public class KeyboardActionManager : MonoBehaviour
             Destroy(gameObject);
         }
         Cursor.lockState = CursorLockMode.Locked; // Verrouille le curseur au centre de l'écran
-        originalHeight = rb.transform.localScale.y; // Stockez la hauteur originale du joueur
+        originalHeight = Camera.main.transform.localPosition.y; // Stockez la hauteur originale du joueur
     }
 
     void Update()
@@ -133,7 +133,7 @@ public class KeyboardActionManager : MonoBehaviour
     {
         if (!isCrouching)
         {
-            rb.transform.localScale = new Vector3(rb.transform.localScale.x, crouchHeight, rb.transform.localScale.z);
+            Camera.main.transform.localPosition = new Vector3(Camera.main.transform.localPosition.x, crouchHeight, Camera.main.transform.localPosition.z);
             isCrouching = true;
         }
     }
@@ -142,7 +142,7 @@ public class KeyboardActionManager : MonoBehaviour
     {
         if (isCrouching)
         {
-            rb.transform.localScale = new Vector3(rb.transform.localScale.x, originalHeight, rb.transform.localScale.z);
+            Camera.main.transform.localPosition = new Vector3(Camera.main.transform.localPosition.x, originalHeight, Camera.main.transform.localPosition.z);
             isCrouching = false;
         }
     }
