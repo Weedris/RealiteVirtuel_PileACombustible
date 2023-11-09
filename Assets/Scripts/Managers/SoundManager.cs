@@ -36,7 +36,8 @@ public enum BgmType
 public enum SfxType
 {
 	GoodAnswer,
-	BadAnswer
+	BadAnswer,
+    GrabbedObject
 }
 
 public class SoundManager : MonoBehaviour
