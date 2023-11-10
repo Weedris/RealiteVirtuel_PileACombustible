@@ -34,4 +34,10 @@ public class ScenesManager : MonoBehaviour
 		SceneManager.LoadScene("GameScene");
 	}
 
+    public static void Exit()
+    {
+        Application.Quit();
+		Debug.Log("la on à quitter l'application");
+    }
+
 }
