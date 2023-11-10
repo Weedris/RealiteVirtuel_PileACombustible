@@ -12,8 +12,9 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: "SGRL & IMT Mine Albi // By Thivet Judica\xEBl"
-  productName: VR_PAC
+  companyName: "SGRL & IMT Mine Albi // By Thivet Judica\xEBl, Morel Josu\xE9, Albenje
+    Joris, Rodriguez Vincent"
+  productName: VR_PAC_r1.1.4
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}

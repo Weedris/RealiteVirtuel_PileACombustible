@@ -6,16 +6,16 @@ using UnityEngine.InputSystem;
 public class AnimatedHandOnInput : MonoBehaviour
 {
 
-    public InputActionProperty pinchAnimationAction;
-    public InputActionProperty gripAnimationAction;
+	public InputActionProperty pinchAnimationAction;
+	public InputActionProperty gripAnimationAction;
 
-    public Animator handAnimator;
+	public Animator handAnimator;
 
-    // Update is called once per frame
-    void Update()
-    {
-        handAnimator.SetFloat("Trigger", pinchAnimationAction.action.ReadValue<float>());
+	// Update is called once per frame
+	void Update()
+	{
+		handAnimator.SetFloat("Trigger", pinchAnimationAction.action.ReadValue<float>());
 
-        handAnimator.SetFloat("Grip", gripAnimationAction.action.ReadValue<float>());
-    }
+		handAnimator.SetFloat("Grip", gripAnimationAction.action.ReadValue<float>());
+	}
 }

@@ -4,49 +4,31 @@
  * 
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ComponentPlacement : MonoBehaviour
 {
+	public void CheckComponentPlacement(XRSocketInteractor socket)
+	{
 
-    private GameManager GameManager;
-    public GameObject good;
-    public GameObject bad;
-
-    public void Start()
-    {
-        GameManager = FindObjectOfType<GameManager>();
-        good = GameObject.Find("good");
-        bad = GameObject.Find("bad");
-    }
-
-    public void checkComponentPlacement(XRSocketInteractor socket)
-    {
-
-        if (socket.GetOldestInteractableSelected().transform.name == socket.name && socket.name == GameManager.state.ToString())
-        {
-            socket.GetOldestInteractableSelected().transform.GetComponent<Collider>().enabled = false;
-            socket.GetOldestInteractableSelected().transform.tag = "Placed";
-            GameManager.NextState();
-
-            good.GetComponent<AudioSource>().Play();
+		if (socket.GetOldestInteractableSelected().transform.name == socket.name && socket.name == GameManager.Instance.state.ToString())
+		{
+			socket.GetOldestInteractableSelected().transform.GetComponent<Collider>().enabled = false;
+			socket.GetOldestInteractableSelected().transform.tag = "Placed";
+			SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
+            GameManager.Instance.NextState();
         }
-        else
-        {
-            GameManager.traceParser.traceSocket(socket, socket.GetOldestInteractableSelected().transform.name);
+		else
+		{
+			GameManager.Instance.traceParser.traceSocket(socket, socket.GetOldestInteractableSelected().transform.name);
+			SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
+		}
+	}
 
-            bad.GetComponent<AudioSource>().Play();
-        }
-    }
-
-    public void caught(GameObject go)
-    {
-        GameManager.traceParser.traceInApp(go);
-    }
+	public void Caught(GameObject go)
+	{
+		GameManager.Instance.traceParser.traceInApp(go);
+	}
 
 }

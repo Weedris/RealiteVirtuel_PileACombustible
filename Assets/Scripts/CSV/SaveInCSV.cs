@@ -1,58 +1,62 @@
-/* This file is for saving the trace of the user
- * sooooo yeah that's it
- * 
- * 
+/*
+ * This file is for saving the trace of the user
  */
 
 
-
-using System.Collections;
-using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Text;
-using UnityEngine;
-using UnityEngine.Rendering;
-using System.Linq;
-using TMPro;
 
-public class SaveInCSV : MonoBehaviour
+public class SaveInCSV
 {
+    private string saveFolder = null;
+    private string date;
 
-    private List<string> data = new List<string>();
-
-    public void saveIt(string str)
+    public SaveInCSV()
     {
-        data.Add(str);
-    }
+        string osType = Environment.OSVersion.VersionString;
 
-    public void sauvegarde()
-    {
-        StringBuilder sbtrue = new StringBuilder();
-
-        for (int i = 0; i < data.Count; i ++) 
+        if (osType.Contains("Windows"))
         {
-            sbtrue.AppendLine(data[i]);
+            saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         }
-
-        string filePath = getPath();
-
-        StreamWriter outStream = System.IO.File.CreateText(filePath);
-        outStream.WriteLine(sbtrue);
-        outStream.Close();
+        else
+        {
+            saveFolder = "/storage/emulated/0/Documents/";
+        }
+        date = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
     }
 
-    private string getPath()
+    private string checkDirectories()
     {
-#if UNITY_EDITOR
-        return Application.dataPath + "/CSV/" + "Saved_data.csv";
-#elif UNITY_ANDROID
-        return Application.persistentDataPath+"Saved_data.csv";
-#elif UNITY_IPHONE
-        return Application.persistentDataPath+"/"+"Saved_data.csv";
-#else
-        return Application.dataPath +"/"+"Saved_data.csv";
-#endif
+        if (!Directory.Exists(saveFolder))
+        {
+            Directory.CreateDirectory(saveFolder);
+        }
+        string filePath = Path.Combine(saveFolder, "CSV_PAC");
+        if (!Directory.Exists(filePath))
+        {
+            Directory.CreateDirectory(filePath);
+        }
+        return filePath;
     }
 
+    public void save(StringBuilder data, string name = "data")
+    {   
+        StringBuilder fileBuilder = new();
+        fileBuilder.Append("Save_")
+                   .Append(date)
+                   .Append("_")
+                   .Append(name)
+                   .Append(".csv");
+        writeFile(Path.Combine(checkDirectories(), fileBuilder.ToString()), data.ToString());
+        /*File.WriteAllText(filePath, data.ToString());*/
+    }
+
+    private void writeFile(string filePath, string text)
+    {
+        using StreamWriter sw = new StreamWriter(filePath, true);
+        sw.WriteLine(text);
+        sw.Close();
+    }
 }
