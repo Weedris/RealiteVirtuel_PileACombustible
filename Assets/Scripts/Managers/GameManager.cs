@@ -14,7 +14,9 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.XR.CoreUtils;
+using UnityEditor;
 using UnityEngine;
+using static Unity.VisualScripting.Icons;
 
 public class GameManager : MonoBehaviour
 {
@@ -67,10 +69,10 @@ public class GameManager : MonoBehaviour
 	public GameObject endButton;
 	double debutConstruction;
 	double TempsConstruction;
+    public GameObject exit;
 
-
-	#region intro
-	public GameObject Bvn;
+    #region intro
+    public GameObject Bvn;
 	public GameObject Instruction;
 	public GameObject Warning;
 
@@ -105,7 +107,16 @@ public class GameManager : MonoBehaviour
 		state = State.Initilazing;
 		language.updateLanguage();
 		bvn();
-	}
+
+        var OuiGameObject = exit.GetNamedChild("Oui");
+        var NonGameObject = exit.GetNamedChild("Non");
+
+        var lang = language.GiveCorrectlanguage();
+        GetHeader(exit).text = lang.Exit;
+        GetModalText(exit).text = lang.ExitMessage;
+		GetTextTMP(OuiGameObject).text = lang.oui;
+        GetTextTMP(NonGameObject).text = lang.non;
+    }
 
 
 	public void NextState()

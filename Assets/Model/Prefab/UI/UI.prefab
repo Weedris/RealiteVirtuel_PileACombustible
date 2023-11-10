@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 208411889925922478}
   - component: {fileID: 4077285342980233174}
   m_Layer: 5
-  m_Name: non
+  m_Name: Non
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1859,7 +1859,7 @@ PrefabInstance:
     - target: {fileID: 207044080565068890, guid: 16f461e44446c8a41919342e65063ade,
         type: 3}
       propertyPath: m_Name
-      value: oui
+      value: Oui
       objectReference: {fileID: 0}
     - target: {fileID: 207044081139845819, guid: 16f461e44446c8a41919342e65063ade,
         type: 3}
