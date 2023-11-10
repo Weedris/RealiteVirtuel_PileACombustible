@@ -8,6 +8,7 @@
  * 
  */
 
+using System;
 using TMPro;
 using UnityEngine;
 using Slider = UnityEngine.UI.Slider;
@@ -39,52 +40,27 @@ public class PilotagePile : MonoBehaviour
 	{
 		gm = FindFirstObjectByType<GameManager>();
 	}
-	// Update is called once per frame
-	void Update()
+
+	private float roundUp(float num)
+    {
+        return (float)(Math.Ceiling(num * 100) / 100);
+    }
+
+    // Update is called once per frame
+    void Update()
 	{
 		if (gm.state == GameManager.State.Pilotage)
-		{
-			if (intensite <= 29.7f)
-			{
-				float A = (intensite - 20) / 9.7f;
-				tension = Mathf.Lerp(18, 17.4f, A);
-				debitEau = Mathf.Lerp(2.7f, 4, A);
-				debitHydrogene = Mathf.Lerp(3.579f, 5.347f, A);
-				rendement = Mathf.Lerp(60, 57.9f, A);
-				debitAir = Mathf.Lerp(32.2f, 42.6f, A);
-				puissance = tension * intensite;
-			}
-			else if (intensite <= 39.8f)
-			{
-				float A = (intensite - 29.7f) / 10.1f;
-				tension = Mathf.Lerp(17.4f, 16.8f, A);
-				debitEau = Mathf.Lerp(4f, 5.3f, A);
-				debitHydrogene = Mathf.Lerp(5.347f, 7.113f, A);
-				rendement = Mathf.Lerp(57.9f, 55.7f, A);
-				debitAir = Mathf.Lerp(42.6f, 54.4f, A);
-				puissance = tension * intensite;
-			}
-			else if (intensite <= 49.8f)
-			{
-				float A = (intensite - 39.8f) / 10f;
-				tension = Mathf.Lerp(16.8f, 15.9f, A);
-				debitEau = Mathf.Lerp(5.3f, 6.7f, A);
-				debitHydrogene = Mathf.Lerp(7.113f, 8.85f, A);
-				rendement = Mathf.Lerp(55.7f, 52.9f, A);
-				debitAir = Mathf.Lerp(54.4f, 57.5f, A);
-				puissance = tension * intensite;
-			}
-			else if (intensite <= 59.8f)
-			{
-				float A = (intensite - 49.8f) / 10f;
-				tension = Mathf.Lerp(15.9f, 15.2f, A);
-				debitEau = Mathf.Lerp(6.7f, 8f, A);
-				debitHydrogene = Mathf.Lerp(8.85f, 10.57f, A);
-				rendement = Mathf.Lerp(52.9f, 50.7f, A);
-				debitAir = Mathf.Lerp(57.5f, 66.3f, A);
-				puissance = tension * intensite;
-			}
-			/*
+        {
+            float A = Mathf.Clamp((intensite - 20) / 39.8f, 0f, 1f);
+
+            tension = roundUp(Mathf.Lerp(18 - (0.6f * A), 15.2f, A));
+            debitEau = roundUp(Mathf.Lerp(2.7f + (1.3f * A), 8f, A));
+            debitHydrogene = roundUp(Mathf.Lerp(3.579f + (1.778f * A), 10.57f, A));
+            rendement = roundUp(Mathf.Lerp(60 - (2.1f * A), 50.7f, A));
+            debitAir = roundUp(Mathf.Lerp(32.2f + (10.2f * A), 66.3f, A));
+            puissance = roundUp(tension * intensite);
+            intensite = roundUp(tension * intensite);
+            /*
 			V = 18
 			A = 20
 			H2O = 2,7 g/min
@@ -121,7 +97,7 @@ public class PilotagePile : MonoBehaviour
 			Air = 66,3 l/min		 
 			 */
 
-			var lang = gm.language.GiveCorrectlanguage();
+            var lang = gm.language.GiveCorrectlanguage();
 
 			string text = lang.tension + ": " + tension.ToString() + " V" + "\n"
 				+ lang.intensite + ": " + intensite.ToString() + " A" + "\n"
