@@ -1576,6 +1576,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f1d7cee1081246642afbcbff30b6c71b, type: 2}
   language: 0
   settings: {fileID: 11400000, guid: 6c59aff7649dd3b48851a8287bd7ff76, type: 2}
+  menu: {fileID: 300302162}
 --- !u!4 &1410991651
 Transform:
   m_ObjectHideFlags: 0

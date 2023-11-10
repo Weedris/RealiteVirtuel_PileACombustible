@@ -16,6 +16,15 @@ MonoBehaviour:
   welcome: Welcome
   objectif: "We\u2019re gonna build a fuel cell."
   suivant: Next
+  oui: Yes
+  non: No
+  MenuPrincipale:
+  - 'Fitting a fuel cell
+
+'
+  - Using a fuel cell
+  Exit: Exit
+  ExitMessage: do you want to exit the application?
   instruction: To assemble it, follow the onscreen instructions.
   suite: Next
   warning: "Pay attention to those around you, if you don\u2019t feel well or don\u2019t
@@ -59,6 +68,7 @@ MonoBehaviour:
     the <b>Stack</b> is connected to a <b>cooling system</b>.\r\nPlace the <b>Radiator</b>.\r"
   pilotage: Now, Control the <b>Fuel Cell</b>.
   intensityBarName: Intensity
+  intensityBarValue: 
   intensite: "Stack\u2019s intensity"
   tension: "Stack\u2019s tension"
   puissance: 'Power '

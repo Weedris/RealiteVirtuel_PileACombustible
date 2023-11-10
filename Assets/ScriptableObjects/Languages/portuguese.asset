@@ -16,6 +16,13 @@ MonoBehaviour:
   welcome: 'Bem-vindo '
   objectif: "Vamos construir uma c\xE9lula de combust\xEDvel."
   suivant: Prossiga
+  oui: Sim
+  non: "N\xE3o"
+  MenuPrincipale:
+  - "Instalando uma c\xE9lula de combust\xEDvel"
+  - "Usando uma c\xE9lula de combust\xEDvel"
+  Exit: "Sa\xEDda"
+  ExitMessage: deseja sair do aplicativo?
   instruction: "Para mont\xE1-lo, siga as instru\xE7\xF5es escritas na tela."
   suite: Prossiga
   warning: "Preste aten\xE7\xE3o aos que est\xE3o ao seu redor, se n\xE3o se sentir
@@ -54,6 +61,7 @@ MonoBehaviour:
     o Radiador."
   pilotage: Agora dirija a pilha.
   intensityBarName: Intensidade
+  intensityBarValue: 
   intensite: Intensidade da pilha
   tension: "Tens\xE3o da pilha"
   puissance: "Energia el\xE9trica"

@@ -3,6 +3,7 @@
  * 
  */
 
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -14,7 +15,13 @@ public class Language : ScriptableObject
 	public string welcome;
 	public string objectif;
 	public string suivant;
-	[TextArea(3, 10)]
+    public string oui;
+    public string non;
+    [TextArea(3, 10)]
+    public List<string> MenuPrincipale =new List<string>();
+    public string Exit;
+    public string ExitMessage;
+    [TextArea(3, 10)]
 	public string instruction;
 	[TextArea(3, 10)]
 	public string suite;
