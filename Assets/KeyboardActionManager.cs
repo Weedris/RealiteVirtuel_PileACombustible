@@ -11,7 +11,8 @@ public class KeyboardActionManager : MonoBehaviour
 	private Rigidbody rb;
 	public float moveSpeed = 3f;
 	public float jumpForce = 5f;
-	public float sensitivity = 2f; // Sensibilité de la souris pour la rotation de la caméra
+	public GameObject ground;
+    public float sensitivity = 2f; // Sensibilité de la souris pour la rotation de la caméra
 
 	private float rotationX = 0;
 
@@ -125,9 +126,12 @@ public class KeyboardActionManager : MonoBehaviour
 
 	private bool IsGrounded()
 	{
-		Vector3 position = rb.gameObject.transform.position;
-		return position.y < 1;
-	}
+        Collider playerCollider = GetComponent<Collider>();
+        Collider groundCollider = ground.GetComponent<Collider>();
+
+        // Vérifier la collision en utilisant les méthodes d'Unity
+        return playerCollider.bounds.Intersects(groundCollider.bounds);
+    }
 
 	void Crouch()
 	{
