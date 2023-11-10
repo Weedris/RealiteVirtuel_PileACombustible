@@ -59,7 +59,6 @@ public class PilotagePile : MonoBehaviour
             rendement = roundUp(Mathf.Lerp(60 - (2.1f * A), 50.7f, A));
             debitAir = roundUp(Mathf.Lerp(32.2f + (10.2f * A), 66.3f, A));
             puissance = roundUp(tension * intensite);
-            intensite = roundUp(tension * intensite);
             /*
 			V = 18
 			A = 20
@@ -100,7 +99,7 @@ public class PilotagePile : MonoBehaviour
             var lang = gm.language.GiveCorrectlanguage();
 
 			string text = lang.tension + ": " + tension.ToString() + " V" + "\n"
-				+ lang.intensite + ": " + intensite.ToString() + " A" + "\n"
+				+ lang.intensite + ": " + roundUp(intensite).ToString() + " A" + "\n"
 				+ lang.puissance + ": " + puissance.ToString() + " W" + "\n"
 				+ lang.debitEau + ": " + debitEau.ToString() + " g/min" + "\n"
 				+ lang.debitHydrogene + ": " + debitHydrogene.ToString() + " L/min" + "\n"
