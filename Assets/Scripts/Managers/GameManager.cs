@@ -233,7 +233,8 @@ public class GameManager : MonoBehaviour
 
 	public void Pilotage()
 	{
-		var lang = language.GiveCorrectlanguage();
+		SoundManager.Instance.PlaySFX(SfxType.endAssembly);
+        var lang = language.GiveCorrectlanguage();
 		var textGameObject = endButton.GetNamedChild("Texte");
 		var next = endButton.GetNamedChild("Suivant");
 

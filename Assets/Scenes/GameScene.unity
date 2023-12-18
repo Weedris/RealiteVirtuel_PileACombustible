@@ -6085,7 +6085,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9181cc546c9e2d2429336d1e0a148fe7, type: 2}
+      objectReference: {fileID: 2100000, guid: 00cb0de678585be4e8dbc5cf471ae398, type: 2}
     - target: {fileID: 6599178403719779795, guid: 26814d1a071795442b2ee18d9e33d3e6,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -11691,7 +11691,7 @@ PrefabInstance:
     - target: {fileID: 2630800242651296571, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 262.1
       objectReference: {fileID: 0}
     - target: {fileID: 2630800242651296571, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
@@ -11701,7 +11701,7 @@ PrefabInstance:
     - target: {fileID: 2630800242651296571, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 147.05
       objectReference: {fileID: 0}
     - target: {fileID: 2630800242651296571, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
@@ -12329,10 +12329,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4782504646277125319, guid: 48d42afcbdfaf9548ad01773ecc68228,
+        type: 3}
+      propertyPath: Priority
+      value: 160
+      objectReference: {fileID: 0}
     - target: {fileID: 4782504647510508804, guid: 48d42afcbdfaf9548ad01773ecc68228,
         type: 3}
       propertyPath: l_bgms.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782504647510508804, guid: 48d42afcbdfaf9548ad01773ecc68228,
+        type: 3}
+      propertyPath: l_sfxs.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4782504647510508804, guid: 48d42afcbdfaf9548ad01773ecc68228,
         type: 3}
@@ -12348,6 +12358,26 @@ PrefabInstance:
         type: 3}
       propertyPath: l_bgms.Array.data[1].type
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782504647510508804, guid: 48d42afcbdfaf9548ad01773ecc68228,
+        type: 3}
+      propertyPath: l_bgms.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f0e1415fcb9c014a8fc4abc5d7b24e5, type: 3}
+    - target: {fileID: 4782504647510508804, guid: 48d42afcbdfaf9548ad01773ecc68228,
+        type: 3}
+      propertyPath: l_bgms.Array.data[2].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782504647510508804, guid: 48d42afcbdfaf9548ad01773ecc68228,
+        type: 3}
+      propertyPath: l_sfxs.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 60eeab037bc448d41b8482f71deba8fd, type: 3}
+    - target: {fileID: 4782504647510508804, guid: 48d42afcbdfaf9548ad01773ecc68228,
+        type: 3}
+      propertyPath: l_sfxs.Array.data[3].type
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4782504647510508809, guid: 48d42afcbdfaf9548ad01773ecc68228,
         type: 3}
@@ -12408,6 +12438,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4782504647752518148, guid: 48d42afcbdfaf9548ad01773ecc68228,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48d42afcbdfaf9548ad01773ecc68228, type: 3}
