@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class PlatformManager : MonoBehaviour
 {
 	public Settings settings;
 	public GameObject Pc;
 	public GameObject Vr;
+	public GameObject SocketMainComponent;
+	
 
 	void Start()
 	{
@@ -24,12 +27,25 @@ public class PlatformManager : MonoBehaviour
 		settings.platform = Platform.PC;
 		Vr.SetActive(false);
 		Pc.SetActive(true);
-	}
+
+
+		XRSocketInteractor[] childrens = SocketMainComponent.GetComponentsInChildren<XRSocketInteractor>();
+		foreach (XRSocketInteractor child in childrens)
+		{
+            Destroy(child);
+        }
+    }
 	private void changeToVR()
 	{
 		settings.platform = Platform.VR;
 		Pc.SetActive(false);
 		Vr.SetActive(true);
-	}
+
+        ColiderComposent[] childrens = SocketMainComponent.GetComponentsInChildren<ColiderComposent>();
+        foreach (ColiderComposent child in childrens)
+        {
+			Destroy(child);
+        }
+    }
 
 }
