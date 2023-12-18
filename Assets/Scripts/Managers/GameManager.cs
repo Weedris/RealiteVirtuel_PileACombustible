@@ -16,7 +16,7 @@ using TMPro;
 using Unity.XR.CoreUtils;
 using UnityEditor;
 using UnityEngine;
-using static Unity.VisualScripting.Icons;
+
 
 public class GameManager : MonoBehaviour
 {
