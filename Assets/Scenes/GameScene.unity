@@ -12377,6 +12377,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 245197895242068105, guid: 3c82e3892b6719440914fc0caeda90ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1086513641464744659, guid: 3c82e3892b6719440914fc0caeda90ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2954817300741244344, guid: 3c82e3892b6719440914fc0caeda90ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4590077728310630074, guid: 3c82e3892b6719440914fc0caeda90ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4974139258368936059, guid: 3c82e3892b6719440914fc0caeda90ec,
         type: 3}
       propertyPath: m_RootOrder
@@ -12441,6 +12461,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7147918722248349011, guid: 3c82e3892b6719440914fc0caeda90ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c82e3892b6719440914fc0caeda90ec, type: 3}
