@@ -11,7 +11,6 @@ public class SaveInCSV
 {
 	private readonly string saveFolder = null;
 	private readonly string date;
-	private readonly string osType;
 
 	public SaveInCSV()
 	{
