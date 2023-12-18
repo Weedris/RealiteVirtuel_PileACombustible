@@ -36,8 +36,11 @@ public class ScenesManager : MonoBehaviour
 
     public static void Exit()
     {
-        Application.Quit();
-		Debug.Log("la on à quitter l'application");
+		#if UNITY_EDITOR
+				UnityEditor.EditorApplication.isPlaying = false;
+		#else
+			Application.Quit();
+		#endif
     }
 
 }
