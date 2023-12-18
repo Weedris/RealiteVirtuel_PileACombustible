@@ -6016,6 +6016,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Circuit
       objectReference: {fileID: 0}
+    - target: {fileID: 2094754766499563187, guid: 26814d1a071795442b2ee18d9e33d3e6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2580667723217305243, guid: 26814d1a071795442b2ee18d9e33d3e6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3540500114788444078, guid: 26814d1a071795442b2ee18d9e33d3e6,
         type: 3}
       propertyPath: m_RootOrder
@@ -6075,6 +6085,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335971629234661269, guid: 26814d1a071795442b2ee18d9e33d3e6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6599178403719779795, guid: 26814d1a071795442b2ee18d9e33d3e6,
         type: 3}
