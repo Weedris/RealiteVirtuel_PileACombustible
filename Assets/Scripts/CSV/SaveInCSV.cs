@@ -11,6 +11,7 @@ public class SaveInCSV
 {
 	private readonly string saveFolder = null;
 	private readonly string date;
+	private readonly string osType;
 
 	public SaveInCSV()
 	{
@@ -19,12 +20,14 @@ public class SaveInCSV
 		//string osType = Environment.OSVersion.VersionString;
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
 		saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+		Save(new StringBuilder().Append("PC"));
 #elif UNITY_ANDROID
 		saveFolder = "/storage/emulated/0/Documents/";
+		Save(new StringBuilder().Append("VR"));
 #endif
-	}
+    }
 
-	private string CheckDirectories()
+    private string CheckDirectories()
 	{
 		if (!Directory.Exists(saveFolder))
 			Directory.CreateDirectory(saveFolder);
@@ -45,6 +48,7 @@ public class SaveInCSV
 				   .Append("_")
 				   .Append(name)
 				   .Append(".csv");
+		
 		WriteFile(Path.Combine(CheckDirectories(), fileBuilder.ToString()), data.ToString());
 		/*File.WriteAllText(filePath, data.ToString());*/
 	}

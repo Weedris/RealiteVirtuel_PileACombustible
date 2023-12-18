@@ -29,7 +29,6 @@ public class traceParser : MonoBehaviour
 	}
 
 	private double lastTime;
-	private StringBuilder nbGrabObjects = new StringBuilder();
 	private Dictionary<string, int> nbGrabObjectsByState = new Dictionary<string, int>();
 
 	private SaveInCSV saveInCSV = new SaveInCSV();
@@ -179,17 +178,8 @@ public class traceParser : MonoBehaviour
 	}
 
 	public void save()
-	{
-		/*
-        saveInCSV.save(nbGrabObjects, "nbGrabObjects");
-        /*
-        StringBuilder data = new StringBuilder();
-        data.Append("End;;;")
-            .Append(Time.realtimeSinceStartup)
-            .Append(";")
-            .Append(getTimeSinceStartState());
-        saveInCSV.save(data);
-        */
-	}
+    {
+        saveInCSV.Save(new StringBuilder().Append("END"));
+    }
 
 }
