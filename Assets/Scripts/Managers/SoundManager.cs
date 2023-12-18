@@ -30,7 +30,8 @@ using UnityEngine;
 
 public enum BgmType
 {
-	BGM1
+	BGM_Elcto,
+	BGM_Jazz
 }
 
 public enum SfxType
@@ -59,7 +60,9 @@ public class SoundManager : MonoBehaviour
 	{
 		public SfxType type;
 		public AudioClip clip;
-	}
+
+        
+    }
 
 	[Header("Background Musics in project")]
 	public List<Bgm> l_bgms = new List<Bgm>(new Bgm[System.Enum.GetNames(typeof(BgmType)).Length]);

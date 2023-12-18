@@ -14,8 +14,8 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.XR.CoreUtils;
-using UnityEditor;
 using UnityEngine;
+
 
 
 public class GameManager : MonoBehaviour
@@ -116,6 +116,13 @@ public class GameManager : MonoBehaviour
         GetModalText(exit).text = lang.ExitMessage;
 		GetTextTMP(OuiGameObject).text = lang.oui;
         GetTextTMP(NonGameObject).text = lang.non;
+
+		
+		if(UnityEngine.Random.Range(0, 2)==0)
+		{ SoundManager.Instance.PlayBGM(BgmType.BGM_Elcto);  }
+		else
+		{ SoundManager.Instance.PlayBGM(BgmType.BGM_Jazz); }
+
     }
 
 
