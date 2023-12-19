@@ -26,12 +26,14 @@ public class PlatformManager : MonoBehaviour
 		Vr.SetActive(false);
 		Pc.SetActive(true);
 
-
-		XRSocketInteractor[] childrens = SocketMainComponent.GetComponentsInChildren<XRSocketInteractor>();
-		foreach (XRSocketInteractor child in childrens)
+		if (SocketMainComponent != null)
 		{
-            Destroy(child);
-        }
+			XRSocketInteractor[] childrens = SocketMainComponent.GetComponentsInChildren<XRSocketInteractor>();
+			foreach (XRSocketInteractor child in childrens)
+			{
+				Destroy(child);
+			}
+		}
     }
 	private void changeToVR()
 	{
@@ -39,10 +41,13 @@ public class PlatformManager : MonoBehaviour
 		Pc.SetActive(false);
 		Vr.SetActive(true);
 
+		if(SocketMainComponent!=null)
+		{ 
         ColiderComposent[] childrens = SocketMainComponent.GetComponentsInChildren<ColiderComposent>();
         foreach (ColiderComposent child in childrens)
         {
 			Destroy(child);
+        }
         }
     }
 

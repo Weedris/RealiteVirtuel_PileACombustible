@@ -13,6 +13,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
@@ -122,6 +123,69 @@ public class GameManager : MonoBehaviour
 		{ SoundManager.Instance.PlayBGM(BgmType.BGM_Elcto);  }
 		else
 		{ SoundManager.Instance.PlayBGM(BgmType.BGM_Jazz); }
+
+        Debug.Log(Settings.Instance.get_pass_assembly());
+		if(Settings.Instance.get_pass_assembly())
+		{
+			GameObject socketMainComponent = Pac.GetNamedChild("SocketMainComponent");
+            GameObject mainComponents = Pac.GetNamedChild("MainComponents");
+
+            List<GameObject> childListeMainComponent = new List<GameObject>();
+
+            for (int i = 0; i < mainComponents.transform.childCount; i++)
+            {
+                // Ajoutez chaque enfant à la liste
+                Transform enfantTransform = mainComponents.transform.GetChild(i);
+                childListeMainComponent.Add(enfantTransform.gameObject);
+            }
+
+            foreach (GameObject childTransform in childListeMainComponent)
+			{
+                GameObject poss = socketMainComponent.GetNamedChild(childTransform.name);
+				if (poss != null)
+				{
+                    childTransform.transform.position = poss.transform.position;
+                    childTransform.transform.rotation = poss.transform.rotation;
+                    Rigidbody r = childTransform.GetComponent<Rigidbody>();
+					r.useGravity = false;
+                    r.isKinematic = true;
+                }
+				else 
+				{
+                    Debug.LogWarning("GameObject not found in MainComponents: " + childTransform.gameObject.name);
+                }
+            }
+
+            Pac.SetActive(true);
+            Pac.GetComponent<ShowElement>().TuyauMetal.SetActive(true);
+            Pac.GetComponent<ShowElement>().H2_In.gameObject.SetActive(true);
+            Pac.GetComponent<ShowElement>().O2_In.SetActive(true);
+            Pac.GetComponent<ShowElement>().N2_In.SetActive(true);
+            Pac.GetComponent<ShowElement>().ventilloCapteur.SetActive(true);
+            Pac.GetComponent<ShowElement>().H2O_Out.SetActive(true);
+            Pac.GetComponent<ShowElement>().Refroidissement.SetActive(true);
+            Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
+
+            Bvn.SetActive(false);
+			TempsConstruction = -1;
+
+
+
+            lang = language.GiveCorrectlanguage();
+            var textGameObject = endButton.GetNamedChild("Texte");
+            var next = endButton.GetNamedChild("Suivant");
+            endButton.SetActive(true);
+
+            sliderIntensite.SetActive(true);
+            sliderIntensite.GetComponentsInChildren<TextMeshProUGUI>()[1].text = lang.intensityBarName;
+            BoardTMPGUI.text = lang.pilotage;
+
+            GetHeader(textGameObject).text = lang.endtitle;
+            GetModalText(textGameObject).text = lang.endtext;
+            GetTextTMP(next).text = lang.endbutton;
+
+			state = State.Pilotage;
+        }
 
     }
 
@@ -234,15 +298,18 @@ public class GameManager : MonoBehaviour
 	public void Pilotage()
 	{
 		SoundManager.Instance.PlaySFX(SfxType.endAssembly);
+        particle1.SetActive(true);
+        Destroy(particle1, 5);
         var lang = language.GiveCorrectlanguage();
 		var textGameObject = endButton.GetNamedChild("Texte");
 		var next = endButton.GetNamedChild("Suivant");
+        endButton.SetActive(true);
 
-		Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
+        Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
 		sliderIntensite.SetActive(true);
 		sliderIntensite.GetComponentsInChildren<TextMeshProUGUI>()[1].text = lang.intensityBarName;
 		BoardTMPGUI.text = lang.pilotage;
-		endButton.SetActive(true);
+		
 
 		GetHeader(textGameObject).text = lang.endtitle;
 		GetModalText(textGameObject).text = lang.endtext;
@@ -256,9 +323,9 @@ public class GameManager : MonoBehaviour
 	{
 		var lang = language.GiveCorrectlanguage();
 		BoardTMPGUI.text = lang.endtext + " !";
-		particle1.SetActive(true);
 		particle2.SetActive(true);
-		traceParser.save();
+        Destroy(particle2, 5);
+        traceParser.save();
 	}
 
 	#region utilities

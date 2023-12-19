@@ -1562,6 +1562,7 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: 6c59aff7649dd3b48851a8287bd7ff76, type: 2}
   Pc: {fileID: 1135702441}
   Vr: {fileID: 676230852}
+  SocketMainComponent: {fileID: 0}
 --- !u!1001 &1463341427
 PrefabInstance:
   m_ObjectHideFlags: 0

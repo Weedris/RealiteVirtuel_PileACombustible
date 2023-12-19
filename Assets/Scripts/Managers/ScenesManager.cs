@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : MonoBehaviour
 {
-	public static ScenesManager Instance
+    public static ScenesManager Instance
 	{
 		get
 		{
@@ -20,19 +20,26 @@ public class ScenesManager : MonoBehaviour
 		if (instance != this)
 		{
 			Debug.LogWarning("A SceneManager already exists, ignoring this");
-			return;
+
+            return;
 		}
 		DontDestroyOnLoad(gameObject);
-	}
+        
+    }
 
 	public static void Chapter1()
 	{
-		SceneManager.LoadScene("GameScene");
+        Settings.Instance.set_pass_assembly(false);
+
+        SceneManager.LoadScene("GameScene");
 	}
 	public static void Chapter2()
 	{
-		SceneManager.LoadScene("GameScene");
-	}
+        Settings.Instance.set_pass_assembly(true)  ;
+		
+        SceneManager.LoadScene("GameScene");
+        
+    }
 
     public static void Exit()
     {
