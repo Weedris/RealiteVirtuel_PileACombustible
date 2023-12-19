@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -17,7 +15,7 @@ public class PlatformManager : MonoBehaviour
 		// Code spécifique à PC
 		changeToPC();
 #elif UNITY_ANDROID
-    // Code spécifique à Android (appareil 3D)
+		// Code spécifique à Android (appareil 3D)
         changeToVR();
 #endif
 	}
