@@ -41,7 +41,7 @@ public class PilotagePile : MonoBehaviour
 		gm = FindFirstObjectByType<GameManager>();
 	}
 
-	private float roundUp(float num)
+	public static float roundUp(float num)
     {
         return (float)(Math.Ceiling(num * 100) / 100);
     }
