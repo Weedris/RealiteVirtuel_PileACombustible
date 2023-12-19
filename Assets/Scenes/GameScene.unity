@@ -6400,6 +6400,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6397345986101646115}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &735376625 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 207044081139845820, guid: 16f461e44446c8a41919342e65063ade,
+    type: 3}
+  m_PrefabInstance: {fileID: 1963442634}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &802918834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11659,8 +11665,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IntensitySlider: {fileID: 1697190990}
   HydrogenLevel: {fileID: 188978473}
-  finalScoreCanvas: {fileID: 0}
-  finalScore: {fileID: 0}
+  finalScoreCanvas: {fileID: 735376625}
+  finalScore: {fileID: 1906734193}
 --- !u!1001 &1267552250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12433,6 +12439,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1906734193 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 207044080390288888, guid: 16f461e44446c8a41919342e65063ade,
+    type: 3}
+  m_PrefabInstance: {fileID: 1963442634}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1963442634
