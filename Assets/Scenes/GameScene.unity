@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17338718, g: 0.21673912, b: 0.29880837, a: 1}
+  m_IndirectSpecularColor: {r: 0.17338963, g: 0.21674274, b: 0.29881284, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -981,7 +981,7 @@ PrefabInstance:
     - target: {fileID: 2328806588550984031, guid: 02ad804aa99cd8f44a4989514d595fc2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2328806588550984031, guid: 02ad804aa99cd8f44a4989514d595fc2,
         type: 3}
@@ -1295,7 +1295,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &563558885
 MonoBehaviour:
@@ -1337,7 +1337,7 @@ GameObject:
   - component: {fileID: 572678590}
   - component: {fileID: 572678589}
   m_Layer: 0
-  m_Name: Particle System (2)
+  m_Name: PleaseDelete2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6136,7 +6136,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 180, y: 180, z: 180}
 --- !u!1001 &579595989
 PrefabInstance:
@@ -6145,6 +6145,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1717549880}
     m_Modifications:
+    - target: {fileID: 1523324565946614665, guid: a494f8e7790c62b4494c2160ff714631,
+        type: 3}
+      propertyPath: _intensitySlider
+      value: 
+      objectReference: {fileID: 1842031734}
     - target: {fileID: 3766118972565782865, guid: a494f8e7790c62b4494c2160ff714631,
         type: 3}
       propertyPath: m_Name
@@ -6387,7 +6392,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
 --- !u!1 &656082303 stripped
 GameObject:
@@ -6600,7 +6605,7 @@ GameObject:
   - component: {fileID: 1037328490}
   - component: {fileID: 1037328489}
   m_Layer: 0
-  m_Name: Particle System (1)
+  m_Name: PleaseDelete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11399,7 +11404,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &1045789745 stripped
 GameObject:
@@ -11599,7 +11604,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1173989677 stripped
 MonoBehaviour:
@@ -11664,7 +11669,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: eb765ef1f7293854e85bdd8d7ed05bb4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb765ef1f7293854e85bdd8d7ed05bb4,
         type: 3}
@@ -11774,7 +11779,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1271181164
 MonoBehaviour:
@@ -12409,7 +12414,7 @@ RectTransform:
   - {fileID: 2103845196}
   - {fileID: 579595990}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12887,7 +12892,7 @@ PrefabInstance:
     - target: {fileID: 2630800242722386454, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2630800242722386454, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
@@ -13164,6 +13169,21 @@ PrefabInstance:
       propertyPath: m_Type
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5567973530937997386, guid: c107f494381e0d2428e20a96a721bcb2,
+        type: 3}
+      propertyPath: m_Name
+      value: ExitButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6410921475670679004, guid: c107f494381e0d2428e20a96a721bcb2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6410921476054568520, guid: c107f494381e0d2428e20a96a721bcb2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6410921476054568522, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
@@ -13203,6 +13223,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6410921476106976725, guid: c107f494381e0d2428e20a96a721bcb2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6754187611957465972, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
@@ -13287,7 +13312,7 @@ PrefabInstance:
     - target: {fileID: 6754187613832290940, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
       propertyPath: m_Name
-      value: Exit
+      value: ExitContextMenu
       objectReference: {fileID: 0}
     - target: {fileID: 6754187613832290940, guid: c107f494381e0d2428e20a96a721bcb2,
         type: 3}
@@ -13554,7 +13579,7 @@ PrefabInstance:
     - target: {fileID: 4782504647510508811, guid: 48d42afcbdfaf9548ad01773ecc68228,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4782504647510508811, guid: 48d42afcbdfaf9548ad01773ecc68228,
         type: 3}
