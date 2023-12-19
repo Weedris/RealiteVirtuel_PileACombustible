@@ -18,36 +18,49 @@ public class PlatformManager : MonoBehaviour
 		// Code spécifique à Android (appareil 3D)
         changeToVR();
 #endif
-	}
-
-	private void changeToPC()
-	{
-		settings.platform = Platform.PC;
-		Vr.SetActive(false);
-		Pc.SetActive(true);
-
-		if (SocketMainComponent != null)
-		{
-			XRSocketInteractor[] childrens = SocketMainComponent.GetComponentsInChildren<XRSocketInteractor>();
-			foreach (XRSocketInteractor child in childrens)
-			{
-				Destroy(child);
-			}
-		}
     }
-	private void changeToVR()
-	{
-		settings.platform = Platform.VR;
-		Pc.SetActive(false);
-		Vr.SetActive(true);
 
-		if(SocketMainComponent!=null)
-		{ 
-        ColiderComposent[] childrens = SocketMainComponent.GetComponentsInChildren<ColiderComposent>();
-        foreach (ColiderComposent child in childrens)
+
+
+			
+
+    private void changeToPC()
+    {
+        settings.platform = Platform.PC;
+        Vr.SetActive(false);
+        Pc.SetActive(true);
+
+        SupprimerComposantsEnfants<XRSocketInteractor>(SocketMainComponent);
+
+        if (Settings.Instance.get_pass_assembly())
         {
-			Destroy(child);
+            SupprimerComposantsEnfants<ColiderComposent>(SocketMainComponent);
         }
+    }
+
+    private void changeToVR()
+    {
+        settings.platform = Platform.VR;
+        Pc.SetActive(false);
+        Vr.SetActive(true);
+
+        SupprimerComposantsEnfants<ColiderComposent>(SocketMainComponent);
+
+        if (Settings.Instance.get_pass_assembly())
+        {
+            SupprimerComposantsEnfants<XRSocketInteractor>(SocketMainComponent);
+        }
+    }
+
+    private void SupprimerComposantsEnfants<T>(GameObject parent)
+    {
+        if (parent != null)
+        {
+            T[] childrens = parent.GetComponentsInChildren<T>();
+            foreach (T child in childrens)
+            {
+                Destroy(child as Component);
+            }
         }
     }
 

@@ -31,17 +31,21 @@ public class KeyboardActionManager : MonoBehaviour
 	public float crouchHeight = 0.3f; // Hauteur pendant l'accroupissement
 	private float originalHeight; // Hauteur originale du joueur
 
+	private void Awake()
+	{
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		else
-		{
-			Destroy(gameObject);
-		}
+		
 		Cursor.lockState = CursorLockMode.Locked; // Verrouille le curseur au centre de l'écran
 		originalHeight = Camera.main.transform.localPosition.y; // Stockez la hauteur originale du joueur
 	}
