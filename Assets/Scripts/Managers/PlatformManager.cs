@@ -7,61 +7,53 @@ public class PlatformManager : MonoBehaviour
 	public GameObject Pc;
 	public GameObject Vr;
 	public GameObject SocketMainComponent;
-	
+
 
 	void Start()
 	{
 #if UNITY_STANDALONE || UNITY_EDITOR
-		// Code spécifique à PC
-		changeToPC();
+		// Code spécifique aux PC
+		ChangeToPC();
 #elif UNITY_ANDROID
-		// Code spécifique à Android (appareil 3D)
-        changeToVR();
+		// Code spécifique aux Android (casque VR)
+		ChangeToVR();
 #endif
-    }
+	}
 
+	private void ChangeToPC()
+	{
+		settings.platform = Platform.PC;
+		Vr.SetActive(false);
+		Pc.SetActive(true);
 
+		DeleteChidrens<XRSocketInteractor>(SocketMainComponent);
 
-			
+		if (Settings.Instance.isPlayerPastAssembly)
+			DeleteChidrens<ColiderComposent>(SocketMainComponent);
 
-    private void changeToPC()
-    {
-        settings.platform = Platform.PC;
-        Vr.SetActive(false);
-        Pc.SetActive(true);
+	}
 
-        SupprimerComposantsEnfants<XRSocketInteractor>(SocketMainComponent);
+	private void ChangeToVR()
+	{
+		settings.platform = Platform.VR;
+		Pc.SetActive(false);
+		Vr.SetActive(true);
 
-        if (Settings.Instance.get_pass_assembly())
-        {
-            SupprimerComposantsEnfants<ColiderComposent>(SocketMainComponent);
-        }
-    }
+		DeleteChidrens<ColiderComposent>(SocketMainComponent);
 
-    private void changeToVR()
-    {
-        settings.platform = Platform.VR;
-        Pc.SetActive(false);
-        Vr.SetActive(true);
+		if (Settings.Instance.isPlayerPastAssembly)
+			DeleteChidrens<XRSocketInteractor>(SocketMainComponent);
 
-        SupprimerComposantsEnfants<ColiderComposent>(SocketMainComponent);
+	}
 
-        if (Settings.Instance.get_pass_assembly())
-        {
-            SupprimerComposantsEnfants<XRSocketInteractor>(SocketMainComponent);
-        }
-    }
+	private void DeleteChidrens<T>(GameObject parent)
+	{
+		if (parent == null) return;
 
-    private void SupprimerComposantsEnfants<T>(GameObject parent)
-    {
-        if (parent != null)
-        {
-            T[] childrens = parent.GetComponentsInChildren<T>();
-            foreach (T child in childrens)
-            {
-                Destroy(child as Component);
-            }
-        }
-    }
-
+		T[] childrens = parent.GetComponentsInChildren<T>();
+		foreach (T child in childrens)
+		{
+			Destroy(child as Component);
+		}
+	}
 }

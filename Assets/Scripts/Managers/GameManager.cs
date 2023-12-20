@@ -16,8 +16,6 @@ using TMPro;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
-
-
 public class GameManager : MonoBehaviour
 {
 	#region fields
@@ -103,7 +101,7 @@ public class GameManager : MonoBehaviour
 	public void Start()
 	{
 		state = State.Initilazing;
-		language.updateLanguage();
+		language.UpdateLanguage();
 		bvn();
 
         var OuiGameObject = exit.GetNamedChild("Oui");
@@ -115,58 +113,53 @@ public class GameManager : MonoBehaviour
 		GetTextTMP(OuiGameObject).text = lang.oui;
         GetTextTMP(NonGameObject).text = lang.non;
 
-		
-		if(UnityEngine.Random.Range(0, 2)==0)
-		{ SoundManager.Instance.PlayBGM(BgmType.BGM_Elcto);  }
-		else
-		{ SoundManager.Instance.PlayBGM(BgmType.BGM_Jazz); }
+		// Choose a random BGM
+		SoundManager.Instance.PlayBGM((BgmType) UnityEngine.Random.Range(0, 2));
 
-        //Debug.Log(Settings.Instance.get_pass_assembly());
-		if(Settings.Instance.get_pass_assembly())
+
+		if (Settings.Instance.isPlayerPastAssembly)
 		{
 			GameObject socketMainComponent = Pac.GetNamedChild("SocketMainComponent");
             GameObject mainComponents = Pac.GetNamedChild("MainComponents");
 
-            List<GameObject> childListeMainComponent = new List<GameObject>();
+            List<GameObject> mainComponentChildren = new();
 
             for (int i = 0; i < mainComponents.transform.childCount; i++)
             {
                 // Ajoutez chaque enfant à la liste
-                Transform enfantTransform = mainComponents.transform.GetChild(i);
-                childListeMainComponent.Add(enfantTransform.gameObject);
+                Transform childTransform = mainComponents.transform.GetChild(i);
+                mainComponentChildren.Add(childTransform.gameObject);
             }
 
-            foreach (GameObject childTransform in childListeMainComponent)
+            foreach (GameObject child in mainComponentChildren)
 			{
-                GameObject poss = socketMainComponent.GetNamedChild(childTransform.name);
+                GameObject poss = socketMainComponent.GetNamedChild(child.name);
 				if (poss != null)
 				{
-                    childTransform.transform.position = poss.transform.position;
-                    childTransform.transform.rotation = poss.transform.rotation;
-                    Rigidbody r = childTransform.GetComponent<Rigidbody>();
+                    child.transform.SetPositionAndRotation(poss.transform.position, poss.transform.rotation);
+                    Rigidbody r = child.GetComponent<Rigidbody>();
 					r.useGravity = false;
                     r.isKinematic = true;
                 }
 				else 
 				{
-                    Debug.LogWarning("GameObject not found in MainComponents: " + childTransform.gameObject.name);
+                    Debug.LogWarning("GameObject not found in MainComponents: " + child.name);
                 }
             }
 
             Pac.SetActive(true);
-            Pac.GetComponent<ShowElement>().TuyauMetal.SetActive(true);
-            Pac.GetComponent<ShowElement>().H2_In.gameObject.SetActive(true);
-            Pac.GetComponent<ShowElement>().O2_In.SetActive(true);
-            Pac.GetComponent<ShowElement>().N2_In.SetActive(true);
-            Pac.GetComponent<ShowElement>().ventilloCapteur.SetActive(true);
-            Pac.GetComponent<ShowElement>().H2O_Out.SetActive(true);
-            Pac.GetComponent<ShowElement>().Refroidissement.SetActive(true);
-            Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
+			ShowElement PACElements = Pac.GetComponent<ShowElement>();
+			PACElements.TuyauMetal.SetActive(true);
+            PACElements.H2_In.SetActive(true);
+            PACElements.O2_In.SetActive(true);
+            PACElements.N2_In.SetActive(true);
+            PACElements.ventilloCapteur.SetActive(true);
+            PACElements.H2O_Out.SetActive(true);
+			PACElements.Refroidissement.SetActive(true);
+			PACElements.Vitre.SetActive(true);
 
             Bvn.SetActive(false);
 			TempsConstruction = -1;
-
-
 
             lang = language.GiveCorrectlanguage();
             var textGameObject = endButton.GetNamedChild("Texte");

@@ -17,13 +17,13 @@ public class LanguageManager : MonoBehaviour
 
 	private void Start()
 	{
-		updateLanguage();
+		UpdateLanguage();
 	}
 
 
-	public void updateLanguage()
+	public void UpdateLanguage()
 	{
-		this.language = settings.curentLanguage;
+		language = settings.curentLanguage;
 	}
 
 

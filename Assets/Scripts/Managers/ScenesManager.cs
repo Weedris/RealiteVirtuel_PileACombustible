@@ -29,13 +29,13 @@ public class ScenesManager : MonoBehaviour
 
 	public static void Chapter1()
 	{
-        Settings.Instance.set_pass_assembly(false);
+        Settings.Instance.isPlayerPastAssembly = false;
 
         SceneManager.LoadScene("GameScene");
 	}
 	public static void Chapter2()
 	{
-        Settings.Instance.set_pass_assembly(true)  ;
+        Settings.Instance.isPlayerPastAssembly = true;
 		
         SceneManager.LoadScene("GameScene");
         

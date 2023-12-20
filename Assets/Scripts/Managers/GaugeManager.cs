@@ -33,6 +33,7 @@ public class GaugeManager : MonoBehaviour
 
 	private void Awake()
 	{
+		// make sure it's a singleton
 		if (Instance == null) Instance = this;
 		else Destroy(gameObject);
 	}
@@ -54,7 +55,7 @@ public class GaugeManager : MonoBehaviour
 		ThermalLoss = Intensity * (nbCells * 1.48f - StackVoltage);
 		Efficiency = Power / (Power + ThermalLoss);
 
-		// L/min
+		// L/time
 		DihydrogenFlow = LAMBDA_H2 * nbCells * Intensity / (XH2 * 1.4358f);
 		AirFlow = LAMBDA_O2 * nbCells * Intensity / 60.3f;
 		WaterProduction = Intensity * nbCells / 2978;
