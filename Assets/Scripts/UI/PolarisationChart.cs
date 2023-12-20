@@ -90,7 +90,7 @@ public class PolarisationChart : MonoBehaviour
 	{
 		float zoom = _zoomSlider.value;
 		float scale = 1 / zoom;
-		_zoomSlider.transform.Find("ValueLabel").GetComponent<TMP_Text>().text = $"x{scale}";
+		_zoomSlider.transform.Find("ValueLabel").GetComponent<TMP_Text>().text = $"x{zoom}";
 		_gridImage.pixelsPerUnitMultiplier = zoom;
 		_pointContainer.localScale = new Vector2(scale, scale);
 	}

@@ -13,7 +13,6 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
@@ -21,19 +20,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+	#region fields
 	public static GameManager Instance;
-
-	private void Awake()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		else
-		{
-			Destroy(gameObject);
-		}
-	}
 
 	public GameObject particle1;
 	public GameObject particle2;
@@ -57,22 +45,25 @@ public class GameManager : MonoBehaviour
 		End
 	}
 
-
 	public State state;
-
 
     public GameObject Pac;
 
-	public GameObject sliderIntensite;
-
 	public traceParser traceParser;
 
-	public GameObject endButton;
 	double debutConstruction;
 	double TempsConstruction;
     public GameObject exit;
 
-    #region intro
+	[Header("Part2 (Pilotage)")]
+	[SerializeField] private GameObject endButton;
+	[SerializeField] private GameObject screenPart2;
+	[SerializeField] private GameObject sliderIntensite;
+	[SerializeField] private GameObject zoomSlider;
+	#endregion fields
+
+	#region intro
+	[Header("Intro")]
     public GameObject Bvn;
 	public GameObject Instruction;
 	public GameObject Warning;
@@ -100,8 +91,14 @@ public class GameManager : MonoBehaviour
 			method();
 		}
 	}
+	#endregion intro
 
-	#endregion
+	private void Awake()
+	{
+		// Singleton
+		if (Instance == null) Instance = this;
+		else Destroy(gameObject);
+	}
 
 	public void Start()
 	{
@@ -198,19 +195,19 @@ public class GameManager : MonoBehaviour
 	}
 
 	#region intro
-	public TextMeshProUGUI GetHeader(GameObject textGameObject)
+	public TMP_Text GetHeader(GameObject textGameObject)
 	{
-		return textGameObject.GetNamedChild("Header Text").GetComponent<TextMeshProUGUI>();
+		return textGameObject.GetNamedChild("Header Text").GetComponent<TMP_Text>();
 	}
 
-	public TextMeshProUGUI GetModalText(GameObject textGameObject)
+	public TMP_Text GetModalText(GameObject textGameObject)
 	{
-		return textGameObject.GetNamedChild("Modal Text").GetComponent<TextMeshProUGUI>();
+		return textGameObject.GetNamedChild("Modal Text").GetComponent<TMP_Text>();
 	}
 
-	public TextMeshProUGUI GetTextTMP(GameObject textGameObject)
+	public TMP_Text GetTextTMP(GameObject textGameObject)
 	{
-		return textGameObject.GetNamedChild("Text (TMP)").GetComponent<TextMeshProUGUI>();
+		return textGameObject.GetNamedChild("Text (TMP)").GetComponent<TMP_Text>();
 	}
 
 	public void LoadLangIntoDisplay(GameObject go, string header, string body, string nextButtonMessage)
@@ -297,17 +294,31 @@ public class GameManager : MonoBehaviour
 
 	public void Pilotage()
 	{
+		// close PEMFC with glass
+        Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
+		
+		// victory effects (SFX + VFX)
 		SoundManager.Instance.PlaySFX(SfxType.endAssembly);
-        particle1.SetActive(true);
-        Destroy(particle1, 5);
-        var lang = language.GiveCorrectlanguage();
+		particle1.SetActive(true);
+		Destroy(particle1, 5);
+
+		// display end popup
+		// might be removed in fture update
+		var lang = language.GiveCorrectlanguage();
 		var textGameObject = endButton.GetNamedChild("Texte");
 		var next = endButton.GetNamedChild("Suivant");
         endButton.SetActive(true);
 
-        Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
+		// change screen display
+		BoardTMPGUI.gameObject.SetActive(false);
+		screenPart2.SetActive(true);
+
+		// show sliders for part2
 		sliderIntensite.SetActive(true);
-		sliderIntensite.GetComponentsInChildren<TextMeshProUGUI>()[1].text = lang.intensityBarName;
+		zoomSlider.SetActive(true);
+
+		// set language for ui elements
+		sliderIntensite.GetComponentsInChildren<TMP_Text>()[1].text = lang.intensityBarName;
 		BoardTMPGUI.text = lang.pilotage;
 		
 
@@ -316,7 +327,6 @@ public class GameManager : MonoBehaviour
 		GetTextTMP(next).text = lang.endbutton;
 
 		TempsConstruction = Time.realtimeSinceStartup - debutConstruction;
-
 	}
 
 	public void End()
@@ -324,8 +334,8 @@ public class GameManager : MonoBehaviour
 		var lang = language.GiveCorrectlanguage();
 		BoardTMPGUI.text = lang.endtext + " !";
 		particle2.SetActive(true);
-        Destroy(particle2, 5);
-        traceParser.save();
+		Destroy(particle2, 5);
+		traceParser.save();
 	}
 
 	#region utilities
@@ -339,5 +349,4 @@ public class GameManager : MonoBehaviour
 		}
 	}
 	#endregion
-
 }
