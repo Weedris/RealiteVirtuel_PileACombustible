@@ -26,7 +26,7 @@ public class PolarisationChart : MonoBehaviour
 	{
 		_gaugeManager = GaugeManager.Instance;
 		_zoomSlider.onValueChanged.AddListener(delegate { OnZoomValueChanged(); });
-		_addPointButton.onClick.AddListener(delegate { OnAddPointButtonPressed(); });
+		//_addPointButton.onClick.AddListener(delegate { OnAddPointButtonPressed(); });
 	}
 
 	#region add_point

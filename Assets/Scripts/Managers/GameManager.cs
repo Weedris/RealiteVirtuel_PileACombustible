@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
 		else
 		{ SoundManager.Instance.PlayBGM(BgmType.BGM_Jazz); }
 
-        Debug.Log(Settings.Instance.get_pass_assembly());
+        //Debug.Log(Settings.Instance.get_pass_assembly());
 		if(Settings.Instance.get_pass_assembly())
 		{
 			GameObject socketMainComponent = Pac.GetNamedChild("SocketMainComponent");
