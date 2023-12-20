@@ -238,8 +238,7 @@ public class GameManager : MonoBehaviour
 		var lang = language.GiveCorrectlanguage();
 		LoadLangIntoDisplay(Warning, lang.welcome, lang.warning, lang.montage);
 	}
-
-	#endregion
+	#endregion intro
 
 	#region montage
 	public void Stack()
@@ -290,7 +289,7 @@ public class GameManager : MonoBehaviour
 		Pac.GetComponent<ShowElement>().Refroidissement.SetActive(true);
 		BoardTMPGUI.text = language.GiveCorrectlanguage().radiateur;
 	}
-	#endregion
+	#endregion montage
 
 	public void Pilotage()
 	{
