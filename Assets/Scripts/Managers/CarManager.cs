@@ -42,8 +42,6 @@ public class CarManager : MonoBehaviour
         if (HydrogenLevel == null) throw new Exception("HydrogenLevel null!");
         finalScoreCanvas.SetActive(false);
         intensite = IntensitySlider.value;
-        initialIntensityValue = IntensitySlider.value;
-        initialHydrogenValue = HydrogenLevel.value;
         ResetStats();
         PauseAnimator();
         InvokeRepeating("UpdateCar", 0.0f, 0.1f);
@@ -77,8 +75,12 @@ public class CarManager : MonoBehaviour
     public void ResetCarManager()
     {
         ResetStats();
-        IntensitySlider.value = initialIntensityValue;
-        HydrogenLevel.value = initialHydrogenValue;
+    }
+
+    public void SetHydrogenAndResetIntensity(float hydrogenValue)
+    {
+        HydrogenLevel.value = hydrogenValue;
+        IntensitySlider.value = IntensitySlider.minValue;
     }
 
     void SetCarSpeed(float speed)
@@ -116,14 +118,15 @@ public class CarManager : MonoBehaviour
         {
             hydrogen = HydrogenLevel.value;
 
-            float tension = PilotagePile.roundUp(Mathf.Lerp(18 - (0.6f * A), 15.2f, A));
+            float intensite = GaugeManager.Instance.Intensity;
+            float tension = GaugeManager.Instance.StackVoltage;
             float speedMultiplier = Mathf.Lerp(0.15f, 0.5f, PilotagePile.roundUp(tension * intensite));
-            float rndmnt = PilotagePile.roundUp(Mathf.Lerp(60 - (2.1f * A), 50.7f, A)) / 1000;
+            float efficiency = GaugeManager.Instance.Efficiency / 100;
 
-            float adjustedSpeed = speedMultiplier - (speedMultiplier * Mathf.Min(rndmnt, hydrogen));
+            float adjustedSpeed = speedMultiplier - (speedMultiplier * Mathf.Min(efficiency, hydrogen));
             SetCarSpeed(adjustedSpeed);
 
-            HydrogenLevel.value = Mathf.Max(0, hydrogen - rndmnt);
+            HydrogenLevel.value = Mathf.Max(0, hydrogen - efficiency);
 
             HydrogenLevel.GetComponentsInChildren<TextMeshProUGUI>()[0].text = HydrogenLevel.value.ToString("F2");
 
@@ -134,7 +137,7 @@ public class CarManager : MonoBehaviour
     public void changeIntensite()
     {
         intensite = IntensitySlider.value;
-        IntensitySlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = intensite.ToString().Substring(0, 4);
+        IntensitySlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = intensite.ToString("F2");
         A = Mathf.Clamp((intensite - 20) / 39.8f, 0f, 1f);
     }
 
