@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,9 +30,10 @@ public class GaugeManager : MonoBehaviour
 	public float DihydrogenFlow { get; private set; } // L/min
 	public float AirFlow { get; private set; } // L/min
 	public float WaterProduction { get; private set; } // Kg/h <=> L/h
-	#endregion
+    internal float Hydrogen { get => _hydrogenLevelSlider.value; } // A
+    #endregion
 
-	private void Awake()
+    private void Awake()
 	{
 		// make sure it's a singleton
 		if (Instance == null) Instance = this;
@@ -43,7 +45,20 @@ public class GaugeManager : MonoBehaviour
 		_intensitySlider.onValueChanged.AddListener(delegate { UpdateValues(); });
 	}
 
-	private void UpdateValues()
+	public void UpdateOutSliders()
+	{
+        _hydrogenLevelSlider.value = Mathf.Max(0, _hydrogenLevelSlider.value - Efficiency / 100);
+        _hydrogenLevelSlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = _hydrogenLevelSlider.value.ToString("F2");
+    }
+
+    internal void ResetValues(float hydrogen/*, float water*/)
+    {
+        _hydrogenLevelSlider.value = hydrogen;
+        _intensitySlider.value = _intensitySlider.minValue;
+		UpdateValues();
+    }
+
+    private void UpdateValues()
 	{
 		// U = RI
 		Intensity = _intensitySlider.value;
@@ -59,5 +74,8 @@ public class GaugeManager : MonoBehaviour
 		DihydrogenFlow = LAMBDA_H2 * nbCells * Intensity / (XH2 * 1.4358f);
 		AirFlow = LAMBDA_O2 * nbCells * Intensity / 60.3f;
 		WaterProduction = Intensity * nbCells / 2978;
-	}
+
+
+        _intensitySlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = _intensitySlider.value.ToString("F2");
+    }
 }

@@ -13,13 +13,6 @@ public class CarManager : MonoBehaviour
     private Animator Animator;
     private int lastPlayedClipHashStart, lastPlayedClipHashEnd;
     private float lapsTime;
-    [SerializeField]
-    private Slider IntensitySlider;
-    [SerializeField]
-    private Slider HydrogenLevel;
-    private float hydrogen;
-    private float intensite;
-    private float A;
 
     [SerializeField]
     private GameObject finalScoreCanvas;
@@ -29,19 +22,13 @@ public class CarManager : MonoBehaviour
     private float bestTimeLaps;
     private int totalLaps;
 
-    private float initialHydrogenValue;
-    private float initialIntensityValue;
-
     private const float ZeroTolerance = 0.0001f; // Tolerance for zero
 
     void Start()
     {
         Animator = GetComponent<Animator>();
         if (Animator == null) throw new Exception("Animator null!");
-        if (IntensitySlider == null) throw new Exception("IntensitySlider null!");
-        if (HydrogenLevel == null) throw new Exception("HydrogenLevel null!");
         finalScoreCanvas.SetActive(false);
-        intensite = IntensitySlider.value;
         ResetStats();
         PauseAnimator();
         InvokeRepeating("UpdateCar", 0.0f, 0.1f);
@@ -79,8 +66,7 @@ public class CarManager : MonoBehaviour
 
     public void SetHydrogenAndResetIntensity(float hydrogenValue)
     {
-        HydrogenLevel.value = hydrogenValue;
-        IntensitySlider.value = IntensitySlider.minValue;
+        GaugeManager.Instance.ResetValues(hydrogenValue);
     }
 
     void SetCarSpeed(float speed)
@@ -116,7 +102,7 @@ public class CarManager : MonoBehaviour
     {
         if (AnimatorIsPlaying())
         {
-            hydrogen = HydrogenLevel.value;
+            float hydrogen = GaugeManager.Instance.Hydrogen;
 
             float intensite = GaugeManager.Instance.Intensity;
             float tension = GaugeManager.Instance.StackVoltage;
@@ -126,19 +112,10 @@ public class CarManager : MonoBehaviour
             float adjustedSpeed = speedMultiplier - (speedMultiplier * Mathf.Min(efficiency, hydrogen));
             SetCarSpeed(adjustedSpeed);
 
-            HydrogenLevel.value = Mathf.Max(0, hydrogen - efficiency);
+            GaugeManager.Instance.UpdateOutSliders();
 
-            HydrogenLevel.GetComponentsInChildren<TextMeshProUGUI>()[0].text = HydrogenLevel.value.ToString("F2");
-
-            if (HydrogenLevel.value < ZeroTolerance) PauseAnimator(true);
+            if (GaugeManager.Instance.Hydrogen < ZeroTolerance) PauseAnimator(true);
         }
-    }
-
-    public void changeIntensite()
-    {
-        intensite = IntensitySlider.value;
-        IntensitySlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = intensite.ToString("F2");
-        A = Mathf.Clamp((intensite - 20) / 39.8f, 0f, 1f);
     }
 
     void OnAnimationStart()
