@@ -12,14 +12,14 @@ public class CarManager : MonoBehaviour
 {
     private Animator Animator;
     private int lastPlayedClipHashStart, lastPlayedClipHashEnd;
-    private float lapsTime;
+    private DateTime lapsTime;
 
     [SerializeField]
     private GameObject finalScoreCanvas;
     [SerializeField]
     private TextMeshProUGUI finalScore;
-    private float totalTime;
-    private float bestTimeLaps;
+    private DateTime totalTime;
+    private TimeSpan bestTimeLaps;
     private int totalLaps;
 
     private const float ZeroTolerance = 0.0001f; // Tolerance for zero
@@ -54,8 +54,8 @@ public class CarManager : MonoBehaviour
 
     private void ResetStats()
     {
-        totalTime = 0;
-        bestTimeLaps = -1;
+        totalTime = DateTime.MinValue;
+        bestTimeLaps = TimeSpan.MaxValue;
         totalLaps = 0;
     }
 
@@ -84,6 +84,7 @@ public class CarManager : MonoBehaviour
         Animator.speed = 0f;
         if (outOfHydrogen)
         {
+            AddLapsTime();
             finalScoreCanvas.SetActive(true);
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Total time : " + FormatTime(totalTime))
@@ -104,9 +105,7 @@ public class CarManager : MonoBehaviour
         {
             float hydrogen = GaugeManager.Instance.Hydrogen;
 
-            float intensite = GaugeManager.Instance.Intensity;
-            float tension = GaugeManager.Instance.StackVoltage;
-            float speedMultiplier = Mathf.Lerp(0.15f, 0.5f, PilotagePile.roundUp(tension * intensite));
+            float speedMultiplier = Mathf.Lerp(0.15f, 0.5f, GaugeManager.Instance.Power/3576.04f);
             float efficiency = GaugeManager.Instance.Efficiency / 100;
 
             float adjustedSpeed = speedMultiplier - (speedMultiplier * Mathf.Min(efficiency, hydrogen));
@@ -120,31 +119,32 @@ public class CarManager : MonoBehaviour
 
     void OnAnimationStart()
     {
-        //Debug.Log("Reset laps time !");
-        lapsTime = Time.time;
+        lapsTime = DateTime.Now;
     }
 
     void OnAnimationEnd()
     {
-        float elapsedTime = Time.time - lapsTime;
-        if (bestTimeLaps == -1)
-        {
-            bestTimeLaps = elapsedTime;
-        }
-        else if (elapsedTime < bestTimeLaps)
+        AddLapsTime(true);
+        totalLaps++;
+    }
+
+    void AddLapsTime(bool lapsFined = false)
+    {
+        TimeSpan elapsedTime = DateTime.Now - lapsTime;
+        if ((elapsedTime < bestTimeLaps) && lapsFined)
         {
             bestTimeLaps = elapsedTime;
         }
         totalTime += elapsedTime;
-        totalLaps++;
     }
 
-    string FormatTime(float seconds)
+    string FormatTime(TimeSpan time)
     {
-        int hours = Mathf.FloorToInt(seconds / 3600);
-        int minutes = Mathf.FloorToInt((seconds % 3600) / 60);
-        int remainingSeconds = Mathf.FloorToInt(seconds % 60);
+        return $"{time.Minutes:D2}:{time.Seconds:D2}:{time.Milliseconds:D3}";
+    }
 
-        return string.Format("{0:D2}:{1:D2}:{2:D2}", hours, minutes, remainingSeconds);
+    string FormatTime(DateTime time)
+    {
+        return $"{time.Minute:D2}:{time.Second:D2}:{time.Millisecond:D3}";
     }
 }

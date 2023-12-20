@@ -8,17 +8,19 @@ public class GaugeManager : MonoBehaviour
 	public static GaugeManager Instance;
 
 	[SerializeField] private Slider _intensitySlider;
-	[SerializeField] private Slider _hydrogenLevelSlider;
-	// todo [SerializeField] private Slider _waterLevel;
-	// todo [SerializeField] private Slider nbCells; replace const
+    [SerializeField] private Slider _resistanceSlider;
+    [SerializeField] private Slider _nbCellsSlider;
+    [SerializeField] private Slider _waterLevelSlider;
+    [SerializeField] private Slider _hydrogenLevelSlider;
+    [SerializeField] private TextMeshProUGUI _powerText;
 
-	#region values
-	public const float LAMBDA_H2 = 1.07f; // surstoichiometry coef of H2 (L/min)
+    #region values
+    public const float LAMBDA_H2 = 1.07f; // surstoichiometry coef of H2 (L/min)
 	public const float LAMBDA_O2 = 2f; // stoichiometry coef of O2 (L/min)
 	public const float XH2 = LAMBDA_H2 / (LAMBDA_H2 + 1); // % reactive gaz injected inside the anode
 	public const float N2PerStop = 11; // L (<~> 200 stop with 2.1 m^3)
-	public const int nbCells = 24; // nb cells in stack
-
+	
+	public int nbCells { get; private set; } // nb cells in stack
 	public float Intensity { get; private set; } // A
 	public float Resistance { get; private set; } // R
 	public float StackVoltage { get; private set; } // V
@@ -41,17 +43,21 @@ public class GaugeManager : MonoBehaviour
 	}
 
 	private void Start()
-	{
-		_intensitySlider.onValueChanged.AddListener(delegate { UpdateValues(); });
-	}
-
-	public void UpdateOutSliders()
-	{
-        _hydrogenLevelSlider.value = Mathf.Max(0, _hydrogenLevelSlider.value - Efficiency / 100);
-        _hydrogenLevelSlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = _hydrogenLevelSlider.value.ToString("F2");
+    {
+        _intensitySlider.onValueChanged.AddListener(delegate { UpdateValues(); });
+        _resistanceSlider.onValueChanged.AddListener(delegate { UpdateValues(); });
+        _nbCellsSlider.onValueChanged.AddListener(delegate { UpdateValues(); });
     }
 
-    internal void ResetValues(float hydrogen/*, float water*/)
+	public void UpdateOutSliders()
+    {
+        _hydrogenLevelSlider.value = Mathf.Max(0, _hydrogenLevelSlider.value - Efficiency / 100);
+        _hydrogenLevelSlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = _hydrogenLevelSlider.value.ToString("F2");
+        _waterLevelSlider.value += WaterProduction / 60;
+        _waterLevelSlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = _waterLevelSlider.value.ToString("F2");
+    }
+
+    internal void ResetValues(float hydrogen)
     {
         _hydrogenLevelSlider.value = hydrogen;
         _intensitySlider.value = _intensitySlider.minValue;
@@ -60,9 +66,12 @@ public class GaugeManager : MonoBehaviour
 
     private void UpdateValues()
 	{
-		// U = RI
-		Intensity = _intensitySlider.value;
-		Resistance = (float)(26.641 * Math.Pow(Intensity, -1.15));  // approximation from given data
+        //Variable values
+        nbCells = Mathf.RoundToInt(_nbCellsSlider.value);
+        Intensity = _intensitySlider.value * (nbCells/_nbCellsSlider.maxValue);
+		Resistance = _resistanceSlider.value; // 0.2412 to 0.8499 // (float)(26.641 * Math.Pow(Intensity, -1.15));  // approximation from given data
+
+        // U = RI
 		StackVoltage = Resistance * Intensity;
 
 		// W
@@ -75,7 +84,10 @@ public class GaugeManager : MonoBehaviour
 		AirFlow = LAMBDA_O2 * nbCells * Intensity / 60.3f;
 		WaterProduction = Intensity * nbCells / 2978;
 
-
+        //Texts Update
         _intensitySlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = _intensitySlider.value.ToString("F2");
+        _resistanceSlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = _resistanceSlider.value.ToString("F2");
+        _nbCellsSlider.GetComponentsInChildren<TextMeshProUGUI>()[0].text = nbCells.ToString();
+        _powerText.text = Power.ToString();
     }
 }
