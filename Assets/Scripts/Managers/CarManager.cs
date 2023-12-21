@@ -100,7 +100,6 @@ public class CarManager : MonoBehaviour
 
 	public void ResumeAnimator()
 	{
-		GaugeManager.Instance.isHydrogenConsumed = true;
 		Animator.speed = 1f;
 	}
 

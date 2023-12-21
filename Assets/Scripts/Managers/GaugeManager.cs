@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +27,7 @@ public class GaugeManager : MonoBehaviour
 	public float XH2 { get; private set; } // % reactive gaz injected inside the anode
 	public int NbCells { get; private set; } // nb cells in stack
 	public float Intensity { get; private set; } // A
-	public float Resistance { get; private set; } // R
+	public float Resistance { get; private set; } // Ω
 	public float StackVoltage { get; private set; } // V
 
 	public float Power { get; private set; } // W
@@ -69,7 +69,10 @@ public class GaugeManager : MonoBehaviour
 	{
 		// calculate elapsed time
 		if (!isHydrogenConsumed)
+		{ 
+			isHydrogenConsumed = true;
 			lastTimeHydrogenWasConsumed = Time.time;
+		}
 		float now = Time.time;
 		float elapsedTime = now - lastTimeHydrogenWasConsumed;  // seconds
 
@@ -97,7 +100,7 @@ public class GaugeManager : MonoBehaviour
 		//Variable values
 		NbCells = (int) _nbCellsSlider.value;
 		Intensity = _intensitySlider.value * (NbCells / _nbCellsSlider.maxValue);
-		Resistance = _resistanceSlider.value; // 0.2412 to 0.8499 // (float)(26.641 * Math.Pow(Intensity, -1.15));  // approximation from given data
+		Resistance = (float) (26.641 * Math.Pow(Intensity, -1.15)); // approximation from given data
 
 		// U = RI
 		StackVoltage = Resistance * Intensity;
@@ -115,5 +118,11 @@ public class GaugeManager : MonoBehaviour
 		// update gauges
 		_voltageLevelSlider.value = StackVoltage;
 		_powerText.text = Power.ToString();
+
+		if (Resistance < _resistanceSlider.minValue)
+			_resistanceSlider.minValue = Resistance;
+		if (Resistance > _resistanceSlider.maxValue)
+			_resistanceSlider.maxValue = Resistance;
+		_resistanceSlider.value = Resistance;
 	}
 }
