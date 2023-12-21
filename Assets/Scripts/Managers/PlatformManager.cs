@@ -43,17 +43,13 @@ public class PlatformManager : MonoBehaviour
 
 		if (Settings.Instance.isPlayerPastAssembly)
 			DeleteChidrens<XRSocketInteractor>(SocketMainComponent);
-
 	}
 
 	private void DeleteChidrens<T>(GameObject parent)
 	{
 		if (parent == null) return;
-
 		T[] childrens = parent.GetComponentsInChildren<T>();
 		foreach (T child in childrens)
-		{
 			Destroy(child as Component);
-		}
 	}
 }
