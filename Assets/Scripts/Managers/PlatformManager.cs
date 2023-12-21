@@ -9,18 +9,20 @@ public class PlatformManager : MonoBehaviour
 	public GameObject SocketMainComponent;
 
 
-	void Start()
-	{
+
+
+    void Awake()
+    {
 #if UNITY_STANDALONE || UNITY_EDITOR
-		// Code spécifique aux PC
-		ChangeToPC();
+        // Code spécifique aux PC
+        ChangeToPC();
 #elif UNITY_ANDROID
 		// Code spécifique aux Android (casque VR)
 		ChangeToVR();
 #endif
-	}
+    }
 
-	private void ChangeToPC()
+    private void ChangeToPC()
 	{
 		settings.platform = Platform.PC;
 		Vr.SetActive(false);
