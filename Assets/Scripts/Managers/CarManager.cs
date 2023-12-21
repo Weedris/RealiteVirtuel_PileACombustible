@@ -13,8 +13,14 @@ public class CarManager : MonoBehaviour
 	[SerializeField] private GameObject finalScoreCanvas;
 	[SerializeField] private TextMeshProUGUI finalScore;
 	[SerializeField] private Button _startButton;
+    [SerializeField] private MeshRenderer _carMesh;
+    [SerializeField] private ParticleSystem _smokeParticle;
+    private Color initialCarColor;
+    private int carBurningCount;
+    private const int BURNING_TIME = 30;
+    private const float OVERHEAT_VALUE = 0.65f;
 
-	private DateTime totalTime;
+    private DateTime totalTime;
 	private TimeSpan bestTimeLaps;
 	private int totalLaps;
 
@@ -25,7 +31,9 @@ public class CarManager : MonoBehaviour
 		if (!TryGetComponent(out Animator))
 			throw new Exception("Animator null!");
 		finalScoreCanvas.SetActive(false);
-		ResetStats();
+        initialCarColor = _carMesh.materials[0].color;
+        carBurningCount = BURNING_TIME;
+        ResetStats();
 		PauseAnimator();
 		InvokeRepeating(nameof(UpdateCar), 0.0f, 0.1f);
 		_startButton.onClick.AddListener(delegate { StartCar(); });
@@ -47,14 +55,38 @@ public class CarManager : MonoBehaviour
 				OnAnimationEnd();
 			}
 		}
-	}
+    }
 
-	private void ResetStats()
+    /* overHeat between 0 and 1 */
+    private void SetOverHeatCar(float overHeat)
+    {
+        _carMesh.materials[0].color = Color.Lerp(initialCarColor, Color.red, overHeat);
+        ParticleSystem.MainModule mainModule = _smokeParticle.main;
+        mainModule.maxParticles = (int)Mathf.Floor(overHeat * 10) * 10;
+        if (overHeat >= OVERHEAT_VALUE)
+        {
+            carBurningCount--;
+        }
+        else if (carBurningCount < BURNING_TIME)
+        {
+            carBurningCount++;
+        }
+
+        //Debug.Log(overHeat + " " + carBurningCount);
+        if (carBurningCount <= 0)
+        {
+            PauseAnimator();
+            Invoke("ResumeAnimator", 2f);
+        }
+    }
+
+    private void ResetStats()
 	{
 		totalTime = DateTime.MinValue;
 		bestTimeLaps = TimeSpan.MaxValue;
 		totalLaps = 0;
-	}
+        SetOverHeatCar(0);
+    }
 
 	public void ResetCarManager()
 	{
@@ -101,13 +133,16 @@ public class CarManager : MonoBehaviour
 	public void ResumeAnimator()
 	{
 		Animator.speed = 1f;
-	}
+        carBurningCount = BURNING_TIME;
+    }
 
 	private void UpdateCar()
 	{
 		if (AnimatorIsPlaying())
-		{
-			GaugeManager.Instance.ConsumeHydrogen();
+        {
+            SetOverHeatCar(1 - GaugeManager.Instance.Efficiency);
+
+            GaugeManager.Instance.ConsumeHydrogen();
 
 			float hydrogen = GaugeManager.Instance.Hydrogen;
 			float speedMultiplier = Mathf.Lerp(0.15f, 0.5f, GaugeManager.Instance.Power / 3039.276f);
