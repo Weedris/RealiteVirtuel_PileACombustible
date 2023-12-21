@@ -79,6 +79,7 @@ public class CarManager : MonoBehaviour
 	void PauseAnimator(bool outOfHydrogen = false)
 	{
 		Animator.speed = 0f;
+		GaugeManager.Instance.isHydrogenConsumed = false;
 		if (outOfHydrogen)
 		{
 			AddLapsTime();
@@ -99,6 +100,7 @@ public class CarManager : MonoBehaviour
 
 	public void ResumeAnimator()
 	{
+		GaugeManager.Instance.isHydrogenConsumed = true;
 		Animator.speed = 1f;
 	}
 
@@ -106,15 +108,14 @@ public class CarManager : MonoBehaviour
 	{
 		if (AnimatorIsPlaying())
 		{
-			float hydrogen = GaugeManager.Instance.Hydrogen;
+			GaugeManager.Instance.ConsumeHydrogen();
 
+			float hydrogen = GaugeManager.Instance.Hydrogen;
 			float speedMultiplier = Mathf.Lerp(0.15f, 0.5f, GaugeManager.Instance.Power / 3039.276f);
 			float efficiency = GaugeManager.Instance.Efficiency / 100;
 
 			float adjustedSpeed = speedMultiplier - (speedMultiplier * Mathf.Min(efficiency, hydrogen));
 			SetCarSpeed(adjustedSpeed);
-
-			GaugeManager.Instance.UpdateOutSliders();
 
 			if (GaugeManager.Instance.Hydrogen < ZeroTolerance)
 				PauseAnimator(true);
