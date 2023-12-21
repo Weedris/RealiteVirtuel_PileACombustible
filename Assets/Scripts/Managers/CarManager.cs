@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class CarManager : MonoBehaviour
 
 	[SerializeField] private GameObject finalScoreCanvas;
 	[SerializeField] private TextMeshProUGUI finalScore;
+	[SerializeField] private Button _startButton;
 
 	private DateTime totalTime;
 	private TimeSpan bestTimeLaps;
@@ -26,6 +28,7 @@ public class CarManager : MonoBehaviour
 		ResetStats();
 		PauseAnimator();
 		InvokeRepeating(nameof(UpdateCar), 0.0f, 0.1f);
+		_startButton.onClick.AddListener(delegate { StartCar(); });
 	}
 
 	void Update()
@@ -88,7 +91,13 @@ public class CarManager : MonoBehaviour
 		}
 	}
 
-	internal void ResumeAnimator()
+	public void StartCar()
+	{
+		ResumeAnimator();
+		_startButton.gameObject.SetActive(false);
+	}
+
+	public void ResumeAnimator()
 	{
 		Animator.speed = 1f;
 	}
@@ -107,7 +116,8 @@ public class CarManager : MonoBehaviour
 
 			GaugeManager.Instance.UpdateOutSliders();
 
-			if (GaugeManager.Instance.Hydrogen < ZeroTolerance) PauseAnimator(true);
+			if (GaugeManager.Instance.Hydrogen < ZeroTolerance)
+				PauseAnimator(true);
 		}
 	}
 
