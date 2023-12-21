@@ -16,12 +16,8 @@ public class ScenesManager : MonoBehaviour
 	private void Awake()
 	{
 		if (instance != this)
-		{
-			Debug.LogWarning("A SceneManager already exists, ignoring this");
 			return;
-		}
 		DontDestroyOnLoad(gameObject);
-
 	}
 
 	public static void Chapter1()

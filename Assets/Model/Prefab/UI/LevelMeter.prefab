@@ -359,6 +359,7 @@ MonoBehaviour:
   label: {fileID: 8861675096586008930}
   prefixSpace: 0
   suffixSpace: 0
+  precision: 2
 --- !u!1 &4322880862608268550
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,8 +457,8 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 15
-  m_fontSizeMax: 72
+  m_fontSizeMin: 10
+  m_fontSizeMax: 24
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256

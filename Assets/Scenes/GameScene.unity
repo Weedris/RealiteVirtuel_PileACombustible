@@ -969,6 +969,7 @@ MonoBehaviour:
   label: {fileID: 1134495988}
   prefixSpace: 0
   suffixSpace: 1
+  precision: 0
 --- !u!1001 &391472847
 PrefabInstance:
   m_ObjectHideFlags: 0

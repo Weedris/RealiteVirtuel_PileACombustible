@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+using System.Globalization;
 
 public class LevelMeter : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class LevelMeter : MonoBehaviour
 	[SerializeField] private TMP_Text label;
 	[SerializeField] private bool prefixSpace;
 	[SerializeField] private bool suffixSpace;
+	[SerializeField] private int precision = 2;
 
 	private void Start()
 	{
@@ -18,6 +21,6 @@ public class LevelMeter : MonoBehaviour
 
 	private void UpdateLabel()
 	{
-		label.text = prefix + (prefixSpace ? " " : "") + slider.value.ToString() + (suffixSpace ? " " : "") + suffix;
+		label.text = prefix + (prefixSpace ? " " : "") + slider.value.ToString($"F{precision}") + (suffixSpace ? " " : "") + suffix;
 	}
 }
