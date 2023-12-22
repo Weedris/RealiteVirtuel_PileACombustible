@@ -74,7 +74,7 @@ public class CarManager : MonoBehaviour
         }
         _carMesh.materials[0].color = Color.Lerp(initialCarColor, Color.red, (BURNING_TIME - (float) carBurningCount)/BURNING_TIME);
 
-        Debug.Log(overHeat + " " + carBurningCount);
+        //Debug.Log(overHeat + " " + carBurningCount);
         if (carBurningCount <= 0)
         {
             PauseAnimator();
