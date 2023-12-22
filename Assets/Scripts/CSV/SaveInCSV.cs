@@ -11,18 +11,18 @@ public class SaveInCSV
 {
 	private readonly string saveFolder = null;
 	private readonly string date;
+	private bool saveOSType;
 
 	public SaveInCSV()
 	{
 		date = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+		saveOSType = true;
 
 		//string osType = Environment.OSVersion.VersionString;
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
 		saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-		Save(new StringBuilder().Append("PC"));
 #elif UNITY_ANDROID
 		saveFolder = "/storage/emulated/0/Documents/";
-		Save(new StringBuilder().Append("VR"));
 #endif
     }
 
@@ -41,7 +41,16 @@ public class SaveInCSV
 
 	public void Save(StringBuilder data, string name = "data")
 	{
-		StringBuilder fileBuilder = new();
+		if (saveOSType)
+		{
+			saveOSType = false;
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+			Save(new StringBuilder().Append("PC"));
+#elif UNITY_ANDROID
+			Save(new StringBuilder().Append("VR"));
+#endif
+        }
+        StringBuilder fileBuilder = new();
 		fileBuilder.Append("Save_")
 				   .Append(date)
 				   .Append("_")

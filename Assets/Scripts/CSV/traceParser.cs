@@ -51,9 +51,12 @@ public class traceParser : MonoBehaviour
 
 	private void rstNbGrabObjectsByState(GameManager.State state)
 	{
-		//Save nb grab objects:
-		StringBuilder sb = new StringBuilder();
-		sb.Append(state.ToString())
+		GameManager.State stateCopy = state;
+		if (stateCopy > 0) stateCopy--;
+		Debug.Log(stateCopy.ToString() + " " + state.ToString());
+        //Save nb grab objects:
+        StringBuilder sb = new StringBuilder();
+		sb.Append(stateCopy.ToString())
 		  .Append(";");
 		foreach (KeyValuePair<string, int> kvp in nbGrabObjectsByState)
 		{
