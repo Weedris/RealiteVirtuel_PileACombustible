@@ -18,7 +18,7 @@ public class CarManager : MonoBehaviour
     private Color initialCarColor;
     private int carBurningCount;
     private const int BURNING_TIME = 30;
-    private const float OVERHEAT_VALUE = 0.65f;
+    private const float OVERHEAT_VALUE = 0.58f;
 
     private DateTime totalTime;
 	private TimeSpan bestTimeLaps;
@@ -60,19 +60,21 @@ public class CarManager : MonoBehaviour
     /* overHeat between 0 and 1 */
     private void SetOverHeatCar(float overHeat)
     {
-        _carMesh.materials[0].color = Color.Lerp(initialCarColor, Color.red, overHeat);
         ParticleSystem.MainModule mainModule = _smokeParticle.main;
         mainModule.maxParticles = (int)Mathf.Floor(overHeat * 10) * 10;
+        _smokeParticle.gameObject.SetActive(false);
         if (overHeat >= OVERHEAT_VALUE)
         {
+			_smokeParticle.gameObject.SetActive(true);
             carBurningCount--;
         }
         else if (carBurningCount < BURNING_TIME)
         {
             carBurningCount++;
         }
+        _carMesh.materials[0].color = Color.Lerp(initialCarColor, Color.red, (BURNING_TIME - (float) carBurningCount)/BURNING_TIME);
 
-        //Debug.Log(overHeat + " " + carBurningCount);
+        Debug.Log(overHeat + " " + carBurningCount);
         if (carBurningCount <= 0)
         {
             PauseAnimator();
