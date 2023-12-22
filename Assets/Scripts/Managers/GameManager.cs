@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
 	[Header("Part2 (Pilotage)")]
 	[SerializeField] private GameObject endButton;
 	[SerializeField] private GameObject screenPart2;
-	[SerializeField] private GameObject sliderIntensite;
 	[SerializeField] private GameObject zoomSlider;
 	#endregion fields
 
@@ -164,8 +163,6 @@ public class GameManager : MonoBehaviour
 			var next = endButton.GetNamedChild("Suivant");
 			endButton.SetActive(true);
 
-			sliderIntensite.SetActive(true);
-			sliderIntensite.GetComponentsInChildren<TextMeshProUGUI>()[1].text = lang.intensityBarName;
 			BoardTMPGUI.text = lang.pilotage;
 
 			GetHeader(textGameObject).text = lang.endtitle;
@@ -283,7 +280,7 @@ public class GameManager : MonoBehaviour
 
 	public void Pilotage()
 	{
-		// close PEMFC with glass
+		// enclose PEMFC with glass
 		Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
 
 		// victory effects (SFX + VFX)
@@ -292,7 +289,7 @@ public class GameManager : MonoBehaviour
 		Destroy(particle1, 5);
 
 		// display end popup
-		// might be removed in fture update
+		// might be removed in future update
 		var lang = language.GiveCorrectlanguage();
 		var textGameObject = endButton.GetNamedChild("Texte");
 		var next = endButton.GetNamedChild("Suivant");
@@ -303,13 +300,10 @@ public class GameManager : MonoBehaviour
 		screenPart2.SetActive(true);
 
 		// show sliders for part2
-		sliderIntensite.SetActive(true);
 		zoomSlider.SetActive(true);
 
 		// set language for ui elements
-		sliderIntensite.GetComponentsInChildren<TMP_Text>()[1].text = lang.intensityBarName;
 		BoardTMPGUI.text = lang.pilotage;
-
 
 		GetHeader(textGameObject).text = lang.endtitle;
 		GetModalText(textGameObject).text = lang.endtext;
