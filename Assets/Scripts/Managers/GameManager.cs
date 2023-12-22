@@ -177,8 +177,9 @@ public class GameManager : MonoBehaviour
 	public void NextState()
 	{
 		state += 1;
-		ExecuteState(state);
-		traceParser.traceMainStep(state);
+        traceParser.traceMainStep(state);
+        ExecuteState(state);
+		
 	}
 
 	#region intro
