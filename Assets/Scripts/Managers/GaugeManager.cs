@@ -90,7 +90,8 @@ public class GaugeManager : MonoBehaviour
 	{
 		_hydrogenLevelSlider.value = hydrogen;
 		_intensitySlider.value = _intensitySlider.minValue;
-		UpdateValues();
+        _waterLevelSlider.value = _waterLevelSlider.minValue;
+        UpdateValues();
 	}
 
 	private void UpdateValues()
