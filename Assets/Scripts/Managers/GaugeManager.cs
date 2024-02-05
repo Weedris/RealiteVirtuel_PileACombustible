@@ -15,8 +15,6 @@ public class GaugeManager : MonoBehaviour
 	[SerializeField] private Slider _hydrogenLevelSlider;
 	[SerializeField] private Slider _nitrogenLevelSlider;
 	[SerializeField] private Slider _voltageLevelSlider;
-
-	[Header("TMP_Text")]
 	[SerializeField] private TMP_Text _powerText;
 
 	#region values
@@ -118,7 +116,7 @@ public class GaugeManager : MonoBehaviour
 
 		// update gauges
 		_voltageLevelSlider.value = StackVoltage;
-		_powerText.text = Power.ToString();
+		_powerText.text = Power.ToString("F2") + " W";
 
 		if (Resistance < _resistanceSlider.minValue)
 			_resistanceSlider.minValue = Resistance;
