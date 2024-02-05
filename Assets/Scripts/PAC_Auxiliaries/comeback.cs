@@ -9,19 +9,19 @@ using UnityEngine;
 
 public class comeback : MonoBehaviour
 {
-    Vector3 pos;
-    Quaternion rot;
+	Vector3 pos;
+	Quaternion rot;
 
-    public void Start()
-    {
-        rot = transform.rotation;
-        pos = transform.position;
-    }
+	public void Start()
+	{
+		rot = transform.rotation;
+		pos = transform.position;
+	}
 
-    public void returnToPosInit()
-    {
-        transform.position = pos;
-        transform.rotation = rot;
-    }
+	public void returnToPosInit()
+	{
+		transform.position = pos;
+		transform.rotation = rot;
+	}
 
 }

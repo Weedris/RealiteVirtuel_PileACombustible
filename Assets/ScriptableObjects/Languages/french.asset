@@ -16,6 +16,13 @@ MonoBehaviour:
   welcome: Bienvenue
   objectif: "Nous allons monter une pile \xE0 combustible."
   suivant: "Passez \xE0 la suite"
+  oui: oui
+  non: non
+  MenuPrincipale:
+  - "Montage d'une pile \xE0 combustible"
+  - "Utilisation d'une pile \xE0 combustible"
+  Exit: Sortie
+  ExitMessage: voulez vous quitter l'application ?
   instruction: "Afin de la monter, suivez les indications \xE9crites sur l\u2019\xE9cran."
   suite: "Passer \xE0 la suite"
   warning: "Faites tout de m\xEAme attention \xE0 votre entourage, si vous ne vous
@@ -59,6 +66,7 @@ MonoBehaviour:
     est reli\xE9 \xE0 un syst\xE8me de refroidissement.\r\nPlacez le <b>Radiateur</b>.\r\n"
   pilotage: Maintenant, pilotez la pile
   intensityBarName: "Intensit\xE9"
+  intensityBarValue: 
   intensite: "Intensit\xE9 du stack"
   tension: Tension du stack
   puissance: "Puissance \xE9lectrique"

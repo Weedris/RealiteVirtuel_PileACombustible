@@ -18,22 +18,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
+	#region fields
 	public static GameManager Instance;
-
-	private void Awake()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		else
-		{
-			Destroy(gameObject);
-		}
-	}
-
-
 
 	public GameObject particle1;
 	public GameObject particle2;
@@ -57,20 +43,24 @@ public class GameManager : MonoBehaviour
 		End
 	}
 
-
-
 	public State state;
 
-	public GameObject PAC_prefab;
-	private GameObject Pac;
-
-	public GameObject sliderIntensite;
+	public GameObject Pac;
 
 	public traceParser traceParser;
 
-	public GameObject endButton;
+	double debutConstruction;
+	double TempsConstruction;
+	public GameObject exit;
+
+	[Header("Part2 (Pilotage)")]
+	[SerializeField] private GameObject endButton;
+	[SerializeField] private GameObject screenPart2;
+	[SerializeField] private GameObject zoomSlider;
+	#endregion fields
 
 	#region intro
+	[Header("Intro")]
 	public GameObject Bvn;
 	public GameObject Instruction;
 	public GameObject Warning;
@@ -98,38 +88,114 @@ public class GameManager : MonoBehaviour
 			method();
 		}
 	}
+	#endregion intro
 
-	#endregion
+	private void Awake()
+	{
+		// Singleton
+		if (Instance == null) Instance = this;
+		else Destroy(gameObject);
+	}
 
 	public void Start()
 	{
 		state = State.Initilazing;
-		language.updateLanguage();
+		language.UpdateLanguage();
 		bvn();
+
+		var OuiGameObject = exit.GetNamedChild("Oui");
+		var NonGameObject = exit.GetNamedChild("Non");
+
+		var lang = language.GiveCorrectlanguage();
+		GetHeader(exit).text = lang.Exit;
+		GetModalText(exit).text = lang.ExitMessage;
+		GetTextTMP(OuiGameObject).text = lang.oui;
+		GetTextTMP(NonGameObject).text = lang.non;
+
+		// Choose a random BGM
+		SoundManager.Instance.PlayBGM((BgmType)UnityEngine.Random.Range(0, 2));
+
+
+		if (Settings.Instance.isPlayerPastAssembly)
+		{
+			GameObject socketMainComponent = Pac.GetNamedChild("SocketMainComponent");
+			GameObject mainComponents = Pac.GetNamedChild("MainComponents");
+
+			List<GameObject> mainComponentChildren = new();
+
+			for (int i = 0; i < mainComponents.transform.childCount; i++)
+			{
+				// Ajoutez chaque enfant à la liste
+				Transform childTransform = mainComponents.transform.GetChild(i);
+				mainComponentChildren.Add(childTransform.gameObject);
+			}
+
+			foreach (GameObject child in mainComponentChildren)
+			{
+				GameObject poss = socketMainComponent.GetNamedChild(child.name);
+				if (poss != null)
+				{
+					child.transform.SetPositionAndRotation(poss.transform.position, poss.transform.rotation);
+					Rigidbody r = child.GetComponent<Rigidbody>();
+					r.useGravity = false;
+					r.isKinematic = true;
+				}
+				else
+					Debug.LogWarning("GameObject not found in MainComponents: " + child.name);
+			}
+
+			Pac.SetActive(true);
+			ShowElement PACElements = Pac.GetComponent<ShowElement>();
+			PACElements.TuyauMetal.SetActive(true);
+			PACElements.H2_In.SetActive(true);
+			PACElements.O2_In.SetActive(true);
+			PACElements.N2_In.SetActive(true);
+			PACElements.ventilloCapteur.SetActive(true);
+			PACElements.H2O_Out.SetActive(true);
+			PACElements.Refroidissement.SetActive(true);
+			PACElements.Vitre.SetActive(true);
+
+			Bvn.SetActive(false);
+			TempsConstruction = -1;
+
+			lang = language.GiveCorrectlanguage();
+			var textGameObject = endButton.GetNamedChild("Texte");
+			var next = endButton.GetNamedChild("Suivant");
+			endButton.SetActive(true);
+
+			BoardTMPGUI.text = lang.pilotage;
+
+			GetHeader(textGameObject).text = lang.endtitle;
+			GetModalText(textGameObject).text = lang.endtext;
+			GetTextTMP(next).text = lang.endbutton;
+
+			state = State.Pilotage;
+		}
 	}
 
 
 	public void NextState()
 	{
 		state += 1;
-		ExecuteState(state);
-		traceParser.traceMainStep(state);
+        traceParser.traceMainStep(state);
+        ExecuteState(state);
+		
 	}
 
 	#region intro
-	public TextMeshProUGUI GetHeader(GameObject textGameObject)
+	public TMP_Text GetHeader(GameObject textGameObject)
 	{
-		return textGameObject.GetNamedChild("Header Text").GetComponent<TextMeshProUGUI>();
+		return textGameObject.GetNamedChild("Header Text").GetComponent<TMP_Text>();
 	}
 
-	public TextMeshProUGUI GetModalText(GameObject textGameObject)
+	public TMP_Text GetModalText(GameObject textGameObject)
 	{
-		return textGameObject.GetNamedChild("Modal Text").GetComponent<TextMeshProUGUI>();
+		return textGameObject.GetNamedChild("Modal Text").GetComponent<TMP_Text>();
 	}
 
-	public TextMeshProUGUI GetTextTMP(GameObject textGameObject)
+	public TMP_Text GetTextTMP(GameObject textGameObject)
 	{
-		return textGameObject.GetNamedChild("Text (TMP)").GetComponent<TextMeshProUGUI>();
+		return textGameObject.GetNamedChild("Text (TMP)").GetComponent<TMP_Text>();
 	}
 
 	public void LoadLangIntoDisplay(GameObject go, string header, string body, string nextButtonMessage)
@@ -160,17 +226,15 @@ public class GameManager : MonoBehaviour
 		var lang = language.GiveCorrectlanguage();
 		LoadLangIntoDisplay(Warning, lang.welcome, lang.warning, lang.montage);
 	}
-
-	#endregion
+	#endregion intro
 
 	#region montage
 	public void Stack()
 	{
-		Vector3 coord = new Vector3(-0.0900000036f, 1f, 1.13f);
-		Quaternion quat = new Quaternion(0.109381668f, 0.875426114f, -0.408217877f, 0.234569758f);
-		Pac = Instantiate(PAC_prefab, coord, quat);
+		Pac.SetActive(true);
 		Pac.GetComponent<ShowElement>().TuyauMetal.SetActive(true);
 		BoardTMPGUI.text = language.GiveCorrectlanguage().stack;
+		debutConstruction = Time.realtimeSinceStartup;
 	}
 
 	public void BombonneH2()
@@ -213,31 +277,48 @@ public class GameManager : MonoBehaviour
 		Pac.GetComponent<ShowElement>().Refroidissement.SetActive(true);
 		BoardTMPGUI.text = language.GiveCorrectlanguage().radiateur;
 	}
-	#endregion
+	#endregion montage
 
 	public void Pilotage()
 	{
+		// enclose PEMFC with glass
+		Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
+
+		// victory effects (SFX + VFX)
+		SoundManager.Instance.PlaySFX(SfxType.endAssembly);
+		particle1.SetActive(true);
+		Destroy(particle1, 5);
+
+		// display end popup
+		// might be removed in future update
 		var lang = language.GiveCorrectlanguage();
 		var textGameObject = endButton.GetNamedChild("Texte");
 		var next = endButton.GetNamedChild("Suivant");
-
-		Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
-		sliderIntensite.SetActive(true);
-		sliderIntensite.GetComponentsInChildren<TextMeshProUGUI>()[1].text = lang.intensityBarName;
-		BoardTMPGUI.text = lang.pilotage;
 		endButton.SetActive(true);
+
+		// change screen display
+		BoardTMPGUI.gameObject.SetActive(false);
+		screenPart2.SetActive(true);
+
+		// show sliders for part2
+		zoomSlider.SetActive(true);
+
+		// set language for ui elements
+		BoardTMPGUI.text = lang.pilotage;
 
 		GetHeader(textGameObject).text = lang.endtitle;
 		GetModalText(textGameObject).text = lang.endtext;
 		GetTextTMP(next).text = lang.endbutton;
+
+		TempsConstruction = Time.realtimeSinceStartup - debutConstruction;
 	}
 
 	public void End()
 	{
 		var lang = language.GiveCorrectlanguage();
 		BoardTMPGUI.text = lang.endtext + " !";
-		particle1.SetActive(true);
 		particle2.SetActive(true);
+		Destroy(particle2, 5);
 		traceParser.save();
 	}
 
@@ -252,6 +333,4 @@ public class GameManager : MonoBehaviour
 		}
 	}
 	#endregion
-
-
 }

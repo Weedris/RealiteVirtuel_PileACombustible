@@ -18,10 +18,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - Cube
+  - Piece
+  - Player
+  - Object
+  - ObjectTagetPossition
   - 
   - 
   - 

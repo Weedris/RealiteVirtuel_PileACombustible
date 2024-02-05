@@ -3,36 +3,28 @@ using UnityEngine;
 
 public class LanguageManager : MonoBehaviour
 {
-    public static LanguageManager Instance;
+	public static LanguageManager Instance;
 
-    //[SerializedField] 
-    public Settings settings;
-    public Language language;
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        
-    }
-    private void Start()
-    {
-        updateLanguage();
-    }
-
-    
+	//[SerializedField] 
+	public Settings settings;
+	public Language language;
+	private void Awake()
+	{
+		if (Instance == null) Instance = this;
+		else Destroy(gameObject);
+	}
 
 
-    public void updateLanguage() 
-    {
-        this.language = settings.curentLanguage;
-    }
-    
+	private void Start()
+	{
+		UpdateLanguage();
+	}
+
+
+	public void UpdateLanguage()
+	{
+		language = settings.curentLanguage;
+	}
 
 
 	// maybe use a scriptableobject instead
@@ -41,5 +33,4 @@ public class LanguageManager : MonoBehaviour
 		return language;
 	}
 
-   
 }
