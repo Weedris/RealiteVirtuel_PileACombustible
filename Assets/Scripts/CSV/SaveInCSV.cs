@@ -1,58 +1,70 @@
-/* This file is for saving the trace of the user
- * sooooo yeah that's it
- * 
- * 
+/*
+ * This file is for saving the trace of the user
  */
 
 
-
-using System.Collections;
-using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Text;
-using UnityEngine;
-using UnityEngine.Rendering;
-using System.Linq;
-using TMPro;
 
-public class SaveInCSV : MonoBehaviour
+public class SaveInCSV
 {
+	private readonly string saveFolder = null;
+	private readonly string date;
+	private bool saveOSType;
 
-    private List<string> data = new List<string>();
+	public SaveInCSV()
+	{
+		date = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+		saveOSType = true;
 
-    public void saveIt(string str)
-    {
-        data.Add(str);
-    }
-
-    public void sauvegarde()
-    {
-        StringBuilder sbtrue = new StringBuilder();
-
-        for (int i = 0; i < data.Count; i ++) 
-        {
-            sbtrue.AppendLine(data[i]);
-        }
-
-        string filePath = getPath();
-
-        StreamWriter outStream = System.IO.File.CreateText(filePath);
-        outStream.WriteLine(sbtrue);
-        outStream.Close();
-    }
-
-    private string getPath()
-    {
-#if UNITY_EDITOR
-        return Application.dataPath + "/CSV/" + "Saved_data.csv";
+		//string osType = Environment.OSVersion.VersionString;
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+		saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 #elif UNITY_ANDROID
-        return Application.persistentDataPath+"Saved_data.csv";
-#elif UNITY_IPHONE
-        return Application.persistentDataPath+"/"+"Saved_data.csv";
-#else
-        return Application.dataPath +"/"+"Saved_data.csv";
+		saveFolder = "/storage/emulated/0/Documents/";
 #endif
     }
 
+    private string CheckDirectories()
+	{
+		if (!Directory.Exists(saveFolder))
+			Directory.CreateDirectory(saveFolder);
+
+		string filePath = Path.Combine(saveFolder, "CSV_PAC");  // folder not path
+
+		if (!Directory.Exists(filePath))
+			Directory.CreateDirectory(filePath);
+
+		return filePath;
+	}
+
+	public void Save(StringBuilder data, string name = "data")
+	{
+		if (saveOSType)
+		{
+			saveOSType = false;
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+			Save(new StringBuilder().Append("PC"));
+#elif UNITY_ANDROID
+			Save(new StringBuilder().Append("VR"));
+#endif
+        }
+        StringBuilder fileBuilder = new();
+		fileBuilder.Append("Save_")
+				   .Append(date)
+				   .Append("_")
+				   .Append(name)
+				   .Append(".csv");
+		
+		WriteFile(Path.Combine(CheckDirectories(), fileBuilder.ToString()), data.ToString());
+		/*File.WriteAllText(filePath, data.ToString());*/
+	}
+
+	private void WriteFile(string filePath, string text)
+	{
+		using StreamWriter sw = new StreamWriter(filePath, true);
+		sw.WriteLine(text);
+		sw.Close();
+	}
 }

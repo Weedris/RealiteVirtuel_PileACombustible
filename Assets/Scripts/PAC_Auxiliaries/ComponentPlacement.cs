@@ -4,49 +4,70 @@
  * 
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
+using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ComponentPlacement : MonoBehaviour
 {
+	public static ComponentPlacement Instance;
 
-    private GameManager GameManager;
-    public GameObject good;
-    public GameObject bad;
+	private void Start()
+	{
+		if (Instance == null)
+		{
+			Instance = this;
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
+	}
 
-    public void Start()
-    {
-        GameManager = FindObjectOfType<GameManager>();
-        good = GameObject.Find("good");
-        bad = GameObject.Find("bad");
-    }
+	public void CheckComponentPlacement(XRSocketInteractor socket)
+	{
+		traceParser.Instance.traceSocket(socket, socket.GetOldestInteractableSelected().transform.name);
 
-    public void checkComponentPlacement(XRSocketInteractor socket)
-    {
+		if (socket.GetOldestInteractableSelected().transform.name == socket.name && socket.name == GameManager.Instance.state.ToString())
+		{
+			socket.GetOldestInteractableSelected().transform.GetComponent<Collider>().enabled = false;
+			socket.GetOldestInteractableSelected().transform.tag = "Placed";
+			SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
+			GameManager.Instance.NextState();
+		}
+		else
+		{
+			SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
+		}
+	}
 
-        if (socket.GetOldestInteractableSelected().transform.name == socket.name && socket.name == GameManager.state.ToString())
-        {
-            socket.GetOldestInteractableSelected().transform.GetComponent<Collider>().enabled = false;
-            socket.GetOldestInteractableSelected().transform.tag = "Placed";
-            GameManager.NextState();
+	public void CheckComponentPlacement(Transform target, Transform objectToPlace)
+	{
+		traceParser.Instance.traceSocket(target.gameObject, objectToPlace.name);
+		if (objectToPlace.transform.name == target.name && target.name == GameManager.Instance.state.ToString())
+		{
+			Rigidbody rb = objectToPlace.GetComponent<Rigidbody>();
+			rb.useGravity = false;
+			rb.velocity = Vector3.zero;
+			rb.angularVelocity = Vector3.zero;
 
-            good.GetComponent<AudioSource>().Play();
-        }
-        else
-        {
-            GameManager.traceParser.traceSocket(socket, socket.GetOldestInteractableSelected().transform.name);
+			objectToPlace.GetComponent<Collider>().enabled = false;
+			objectToPlace.tag = "Placed";
+			objectToPlace.SetPositionAndRotation(target.position, target.rotation);
 
-            bad.GetComponent<AudioSource>().Play();
-        }
-    }
+			SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
+			GameManager.Instance.NextState();
+		}
+		else
+		{
+			SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
+		}
+	}
 
-    public void caught(GameObject go)
-    {
-        GameManager.traceParser.traceInApp(go);
-    }
+
+	public void Caught(GameObject go)
+	{
+		GameManager.Instance.traceParser.traceInApp(go);
+	}
 
 }

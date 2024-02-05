@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad3de2ccec947c44c848c4f951a4c4cb, type: 3}
+  m_Name: english
+  m_EditorClassIdentifier: 
+  language: english
+  welcome: Welcome
+  objectif: "We\u2019re gonna build a fuel cell."
+  suivant: Next
+  oui: Yes
+  non: No
+  MenuPrincipale:
+  - 'Fitting a fuel cell
+
+'
+  - Using a fuel cell
+  Exit: Exit
+  ExitMessage: do you want to exit the application?
+  instruction: To assemble it, follow the onscreen instructions.
+  suite: Next
+  warning: "Pay attention to those around you, if you don\u2019t feel well or don\u2019t
+    know what to do, feel free to ask for help."
+  montage: Proceed to fuel cell assembly.
+  stack: The first item we are going to place is the <b>Stack</b>, wich is mailny
+    made up of <b>membranes</b>. These membranes will produce electricity from <b>Oxygen</b>
+    and <b>Hydrogen</b>. Place the <b>Stack</b> on the location of the floating gray
+    cube.
+  H2: We are now going to deal with the <b>Hydrogen</b> circuit. It is one of the
+    reactants necessary for the electrochemical reaction to take place within the
+    <b>Stack</b>. The <b>Hydrogen</b> circuit is already positioned; connect the
+    <b>Hydrogen</b> bottle to the end of the circuit.
+  compresseur: After connecting the <b>Hydrogen</b>, we will connect the <b>Oxygen</b>.
+    <b>Oxygen</b> is the other reagent required for the generation of <b>electricity</b>.
+    In our case, we will use the <b>Oxygen</b> contained in the </b>Air. An Air filter
+    is already positioned; it's up to you to put the <b>Compressor</b>.
+  humidificateur: 'The membranes which make up the <b>Stack</b> are fragile components.
+    To protect them, it is important to add <b>Humidity</b> to the <b>Air</b> entering
+    the <b>Stack</b>.
+
+    Therefore you have to place a <b>Humidifier</b> between
+    the <b>Compressor</b> and the <b>Stack</b>.
+
+'
+  N2: "Now, Let's talk about security. \r\nHow do you stop the fuel cell when it
+    is running?\r\nWe introduce <b>Nitrogen</b> instead of <b>Hydrogen</b> into the
+    system; this  stops the reaction that takes place within the <b>Stack</b>. \r\nPlace
+    the <b>Nitrogen</b> bottle. \r\n"
+  ventilateur: "You may have noticed, but you\u2019ve placed the components at specific
+    places.\r\nIf there is a leak of <b>Hydrogen</b> in this space, the gas will
+    accumulate, and potentially cause an <b>explosion</b>. To avoid this accumulation,
+    put a <b>fan</b> on the top.\r\n"
+  H2O: "The <b>Fuel Cell</b> produces electricity, but also <b>water</b>. This Water
+    must be evacuated, so we will collect it in a <b>Bin</b>. \r\nPlace the <b>bin</b>
+    at the right place."
+  radiateur: "The electrochemical reaction that takes place within the <b>Stack</b>
+    generates <b>Heat</b> in addition to <b>electricity</b> and <b>water</b>.\r\nIn
+    order for the <b>reaction</b> to be as <b>efficient</b> as possible, it must
+    take place at a certain <b>temperature</b>.\r\nIn order to maintain this <b>temperature</b>,
+    the <b>Stack</b> is connected to a <b>cooling system</b>.\r\nPlace the <b>Radiator</b>.\r"
+  pilotage: Now, Control the <b>Fuel Cell</b>.
+  intensityBarName: Intensity
+  intensityBarValue: 
+  intensite: "Stack\u2019s intensity"
+  tension: "Stack\u2019s tension"
+  puissance: 'Power '
+  debitHydrogene: Hydrogen flow
+  debitAir: Air flow
+  debitEau: Water flow
+  rendement: "Stack\u2019s yield"
+  temperature: Temperature
+  endtitle: Thanks
+  endtext: This is the end of the exercise, thank you for participating, please press
+    the button down below to save your process.
+  endbutton: Save your process.
