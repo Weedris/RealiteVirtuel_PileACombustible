@@ -79,5 +79,5 @@ MonoBehaviour:
   temperature: Temperature
   endtitle: Thanks
   endtext: This is the end of the exercise, thank you for participating, please press
-    the button down below to save your process.
-  endbutton: Save your process.
+    the button down below to save your progress.
+  endbutton: Save your progress.

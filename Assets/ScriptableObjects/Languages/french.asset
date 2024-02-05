@@ -34,7 +34,7 @@ MonoBehaviour:
     \xE0 partir d'<b>Oxyg\xE8ne</b> et d'<b>Hydrog\xE8ne</b>. Placez le <b>Stack</b>
     \xE0 l'emplacement du cube gris qui flotte."
   H2: "Nous allons maintenant nous occuper du circuit d'<b>Hydrog\xE8ne</b>. C'est
-    l'un des r\xE9actifs n\xE9cessaire pour la r\xE9action \xE9lectrochimique qui
+    l'un des r\xE9actifs n\xE9cessaires pour la r\xE9action \xE9lectrochimique qui
     prend place au sein du <b>Stack</b>. Le circuit d'<b>Hydrog\xE8ne</b> est d\xE9j\xE0
     plac\xE9, raccordez la <b>Bouteille d'Hydrog\xE8ne</b> \xE0 l'extr\xE9mit\xE9
     du circuit."
