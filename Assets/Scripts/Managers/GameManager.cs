@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 	public GameObject Instruction;
 	public GameObject Warning;
 
-	private Dictionary<State, Action> stateMethodMap = new Dictionary<State, Action>();
+	private Dictionary<State, Action> stateMethodMap = new();
 
 	public GameManager()
 	{
