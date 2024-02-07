@@ -9,11 +9,10 @@ public class Settings : ScriptableObject
 	{
 		get
 		{
-			instance ??= new Settings();
+			instance ??= new();
 			return instance;
 		}
 	}
-
 
 	public Language curentLanguage;
 	public Platform platform;

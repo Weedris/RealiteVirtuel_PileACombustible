@@ -3,6 +3,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class CarManager : MonoBehaviour
 {
@@ -74,7 +75,6 @@ public class CarManager : MonoBehaviour
         }
         _carMesh.materials[0].color = Color.Lerp(initialCarColor, Color.red, (BURNING_TIME - (float) carBurningCount)/BURNING_TIME);
 
-        //Debug.Log(overHeat + " " + carBurningCount);
         if (carBurningCount <= 0)
         {
             PauseAnimator();
@@ -110,10 +110,9 @@ public class CarManager : MonoBehaviour
 		return Animator.speed > 0;
 	}
 
-	void PauseAnimator(bool outOfHydrogen = false)
+	public void PauseAnimator(bool outOfHydrogen = false)
 	{
 		Animator.speed = 0f;
-		GaugeManager.Instance.isHydrogenConsumed = false;
 		if (outOfHydrogen)
 		{
 			AddLapsTime();
@@ -123,6 +122,9 @@ public class CarManager : MonoBehaviour
 				.AppendLine("Total laps : " + totalLaps)
 				.AppendLine("Best Time Laps : " + FormatTime(bestTimeLaps));
 			finalScore.text = sb.ToString();
+
+			// Mark hydrogen consumption as inactive when car pauses
+			GaugeManager.Instance.isHydrogenConsumptionActive = false;
 		}
 	}
 
@@ -135,8 +137,10 @@ public class CarManager : MonoBehaviour
 	public void ResumeAnimator()
 	{
 		Animator.speed = 1f;
-        carBurningCount = BURNING_TIME;
-    }
+		carBurningCount = BURNING_TIME;
+		GaugeManager.Instance.isHydrogenConsumptionActive = true; // Mark hydrogen consumption as active when car resumes
+		GaugeManager.Instance.lastTimeHydrogenWasConsumed = Time.time;
+	}
 
 	private void UpdateCar()
 	{

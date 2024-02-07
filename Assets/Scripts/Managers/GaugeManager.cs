@@ -18,8 +18,8 @@ public class GaugeManager : MonoBehaviour
 	[SerializeField] private TMP_Text _powerText;
 
 	#region values
-	public const float LAMBDA_H2 = 1.07f; // surstoichiometry coef of H2 (L/min)
-	public const float LAMBDA_O2 = 2f; // stoichiometry coef of O2 (L/min)
+	public const float LAMBDA_H2 = 1.07f; // stoichiometry coef of H2
+	public const float LAMBDA_O2 = 2f; // stoichiometry coef of O2
 	public const float N2PerStop = 11; // L (<~> 200 stop with 2.1 m^3)
 
 	public float XH2 { get; private set; } // % reactive gaz injected inside the anode
@@ -39,8 +39,8 @@ public class GaugeManager : MonoBehaviour
 	#endregion values
 
 	#region control_variables
-	[NonSerialized] public bool isHydrogenConsumed;
-	private float lastTimeHydrogenWasConsumed;
+	[NonSerialized] public bool isHydrogenConsumptionActive = false;
+	public float lastTimeHydrogenWasConsumed;
 	# endregion control_variables
 
 	private void Awake()
@@ -61,27 +61,25 @@ public class GaugeManager : MonoBehaviour
 		_intensitySlider.onValueChanged.AddListener(delegate { UpdateValues(); });
 		_resistanceSlider.onValueChanged.AddListener(delegate { UpdateValues(); });
 		_nbCellsSlider.onValueChanged.AddListener(delegate { UpdateValues(); });
+		ResetValues(_hydrogenLevelSlider.maxValue);
 	}
 
 	public void ConsumeHydrogen()
 	{
-		// calculate elapsed time
-		if (!isHydrogenConsumed)
-		{ 
-			isHydrogenConsumed = true;
-			lastTimeHydrogenWasConsumed = Time.time;
+		if (isHydrogenConsumptionActive)
+		{
+			float now = Time.time;
+			float elapsedTime = now - lastTimeHydrogenWasConsumed;  // seconds
+
+			// calculate consumption
+			float consumedHydrogen = DihydrogenFlow * elapsedTime / 60f;
+			_hydrogenLevelSlider.value -= consumedHydrogen;
+			_waterLevelSlider.value += WaterProduction * elapsedTime / 3.6f;
+			Hydrogen = _hydrogenLevelSlider.value;
+
+			// actualize time
+			lastTimeHydrogenWasConsumed = now;
 		}
-		float now = Time.time;
-		float elapsedTime = now - lastTimeHydrogenWasConsumed;  // seconds
-
-		// calculate consumption
-		float consumedHydrogen = DihydrogenFlow * elapsedTime / 60f;
-		_hydrogenLevelSlider.value -= consumedHydrogen;
-		_waterLevelSlider.value += WaterProduction * elapsedTime / 3.6f;
-		Hydrogen = _hydrogenLevelSlider.value;
-
-		// actualise time
-		lastTimeHydrogenWasConsumed = now;
 	}
 
 	internal void ResetValues(float hydrogen)
@@ -94,7 +92,7 @@ public class GaugeManager : MonoBehaviour
 
 	private void UpdateValues()
 	{
-		XH2 = _intensitySlider.maxValue / _intensitySlider.value * 100;
+		XH2 = _intensitySlider.value/ _intensitySlider.maxValue * 100;
 
 		//Variable values
 		NbCells = (int) _nbCellsSlider.value;
@@ -123,5 +121,11 @@ public class GaugeManager : MonoBehaviour
 		if (Resistance > _resistanceSlider.maxValue)
 			_resistanceSlider.maxValue = Resistance;
 		_resistanceSlider.value = Resistance;
+	}
+
+
+	private void OnDestroy()
+	{
+		// TODO Remove listeners to prevent memory leaks
 	}
 }

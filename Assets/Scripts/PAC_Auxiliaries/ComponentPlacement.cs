@@ -4,7 +4,6 @@
  * 
  */
 
-using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -12,16 +11,10 @@ public class ComponentPlacement : MonoBehaviour
 {
 	public static ComponentPlacement Instance;
 
-	private void Start()
+	private void Awake()
 	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		else
-		{
-			Destroy(gameObject);
-		}
+		if (Instance == null) Instance = this;
+		else Destroy(gameObject);
 	}
 
 	public void CheckComponentPlacement(XRSocketInteractor socket)
@@ -35,10 +28,8 @@ public class ComponentPlacement : MonoBehaviour
 			SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
 			GameManager.Instance.NextState();
 		}
-		else
-		{
-			SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
-		}
+		else SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
+
 	}
 
 	public void CheckComponentPlacement(Transform target, Transform objectToPlace)
@@ -58,10 +49,8 @@ public class ComponentPlacement : MonoBehaviour
 			SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
 			GameManager.Instance.NextState();
 		}
-		else
-		{
-			SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
-		}
+		else SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
+
 	}
 
 

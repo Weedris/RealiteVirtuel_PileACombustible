@@ -109,9 +109,7 @@ public class PilotagePile : MonoBehaviour
 		}
 
 		if (gm.state != GameManager.State.Initilazing)
-		{
 			screen.alignment = TextAlignmentOptions.Left;
-		}
 	}
 
 	public void changeIntensite()
