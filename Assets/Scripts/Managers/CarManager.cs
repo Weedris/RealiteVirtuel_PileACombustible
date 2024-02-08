@@ -3,7 +3,6 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class CarManager : MonoBehaviour
 {
