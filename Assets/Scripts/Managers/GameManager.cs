@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
 	[Header("Part2 (Pilotage)")]
 	[SerializeField] private GameObject endButton;
 	[SerializeField] private GameObject screenPart2;
-	[SerializeField] private GameObject zoomSlider;
 	#endregion fields
 
 	#region intro
@@ -299,9 +298,6 @@ public class GameManager : MonoBehaviour
 		// change screen display
 		BoardTMPGUI.gameObject.SetActive(false);
 		screenPart2.SetActive(true);
-
-		// show sliders for part2
-		zoomSlider.SetActive(true);
 
 		// set language for ui elements
 		BoardTMPGUI.text = lang.pilotage;
