@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -46,14 +47,29 @@ public class Graph : MonoBehaviour
 	[SerializeField] private Color _axisColor = Color.white;
 	[SerializeField] private Color _scaleColor = Color.grey;
 	[SerializeField] private List<Color> _categoryColors = new() { Color.yellow, Color.green, Color.red, Color.blue, Color.cyan, Color.magenta };
-
-	[Header("Data")]
-	[SerializeField] private List<string> _categoryNames;
+	[SerializeField] private TMP_FontAsset _font = default;
 	#endregion fields
 
-	private MinMax2D _bounds;
+	#region variables
+	[Header("Data")]
+	[SerializeField] private List<string> _categoryNames;
 	private List<List<Vector3>> _plots = new();
 
+	private List<LineRenderer> _scaleHLR = new();
+	private List<LineRenderer> _scaleVLR = new();
+	private List<GameObject> _categoryLines = new();
+
+	private List<GameObject> _legendItems = new();
+
+	private Rect rect;
+	private Vector3 origin;
+	private Vector3 xEnd;
+	private Vector3 yEnd;
+	private Vector3 availableSpace;
+	private MinMax2D _bounds;
+	#endregion variables
+
+	#region init
 	private void Start()
 	{
 		_xAxis.startWidth = _axisWidth;
@@ -70,86 +86,45 @@ public class Graph : MonoBehaviour
 		StartCoroutine(LateStart(1f));
 	}
 
-	IEnumerator LateStart(float waitTime)
+	private IEnumerator LateStart(float waitTime)
 	{
 		yield return new WaitForSeconds(waitTime);
-		RedrawGraph();
-		RedrawLegend();
+
+		rect = _graph.rect;
+		origin = new(_margin.Left, _margin.Bottom);
+		xEnd = new(rect.width - _margin.Right, origin.y);
+		yEnd = new(origin.x, rect.height - _margin.Top);
+		availableSpace = new(xEnd.x - origin.x, yEnd.y - origin.y);
+
+		RecalculateBounds();
+		RedrawAxis();
+		RedrawScales();
 	}
+	#endregion init
 
-	#region data_gestion
-	public void AddPoint(float x, float y, string categoryName)
-	{
-		Vector3 position = new(x, y);
-		int lineID = GetCategoryIdFromName(categoryName);
-		List<Vector3> categoryPoints = _plots[lineID];
-
-		// insert point while making sure it's sorted by x values
-		bool reached = false;
-		int i = 0;
-		while (!reached && i < categoryPoints.Count)
-		{
-			if (categoryPoints[i].x > x)
-			{
-				categoryPoints.Insert(i, position);
-				reached = true;
-			}
-			i++;
-		}
-		if (!reached) categoryPoints.Append(position);
-
-		RedrawGraph();
-	}
-
-	public void AddPoints(List<Vector3> points, string categoryName)
-	{
-		int categoryID = GetCategoryIdFromName(categoryName);
-		List<Vector3> category = _plots[categoryID];
-		category.AddRange(points);
-		category = category.OrderBy(point => point.x).ToList();
-
-		RedrawGraph();
-	}
-
-	public void RemovePoint(Vector3 pointPosition, string category)
-	{
-		int lineID = GetCategoryIdFromName(category);
-		var line = _plots[lineID];
-		line.Remove(pointPosition);
-
-		RedrawGraph();
-	}
-
+	#region utility
 	private int GetCategoryIdFromName(string categoryName)
 	{
-		return _categoryNames.IndexOf(categoryName);
+		int lineID = 0;
+		bool categoryExists = false;
+		while (lineID < _categoryNames.Count && !categoryExists)
+		{
+			if (_categoryNames[lineID] == categoryName) categoryExists = true;
+			else lineID++;
+		}
+		if (!categoryExists && lineID == _categoryNames.Count) AddCategory(categoryName);
+		return lineID;
 	}
 
-	public void AddCategory(string name)
-	{
-		new GameObject(name, typeof(LineRenderer)).transform.parent = _linesContainer;
-		_categoryNames.Add(name);
-		_plots.Add(new());
-		RedrawLegend();
-	}
-
-	public void RemoveCategory(string categoryName)
-	{
-		int categoryID = GetCategoryIdFromName(categoryName);
-		Destroy(_linesContainer.GetChild(categoryID).gameObject);
-		_categoryNames.Remove(categoryName);
-		_plots.RemoveAt(categoryID);
-
-		RedrawGraph();
-		RedrawLegend();
-	}
-
-	private void CalculateMinMaxValues()
+	private void RecalculateBounds()
 	{
 		_bounds = new(Mathf.Infinity, Mathf.Infinity, -Mathf.Infinity, -Mathf.Infinity);
 
+		int nbMaxPoints = 0;
+		// calc bound
 		foreach (List<Vector3> category in _plots)
 		{
+			nbMaxPoints = Math.Max(nbMaxPoints, category.Count);
 			foreach (Vector3 point in category)
 			{
 				if (point.x < _bounds.MinX) _bounds.MinX = point.x;
@@ -158,140 +133,27 @@ public class Graph : MonoBehaviour
 				if (point.y > _bounds.MaxY) _bounds.MaxY = point.y;
 			}
 		}
-		if (_forceOrigin || _bounds.MinX == Mathf.Infinity) _bounds.MinX = _defaultBounds.MinX;
-		if (_forceOrigin || _bounds.MinY == Mathf.Infinity) _bounds.MinY = _defaultBounds.MinY;
-		if (_forceMaxX || _bounds.MaxX == -Mathf.Infinity) _bounds.MaxX = _defaultBounds.MaxX;
-		if (_forceMaxY || _bounds.MaxY == -Mathf.Infinity) _bounds.MaxY = _defaultBounds.MaxY;
+
+		bool hasMinimumPoints = nbMaxPoints > 1;
+		bool isMinXValid = _bounds.MinX == Mathf.Infinity;
+		bool isMinYValid = _bounds.MinY == Mathf.Infinity;
+		bool isMaxXValid = _bounds.MaxX == -Mathf.Infinity;
+		bool isMaxYValid = _bounds.MaxY == -Mathf.Infinity;
+
+		// recenter bounds depending on settings
+		if (!hasMinimumPoints || isMinXValid || _forceOrigin) _bounds.MinX = _defaultBounds.MinX;
+		if (!hasMinimumPoints || isMinYValid || _forceOrigin) _bounds.MinY = _defaultBounds.MinY;
+		if (!hasMinimumPoints || isMaxXValid || _forceMaxX) _bounds.MaxX = _defaultBounds.MaxX;
+		if (!hasMinimumPoints || isMaxYValid || _forceMaxY) _bounds.MaxY = _defaultBounds.MaxY;
 	}
-	#endregion data_gestion
-
-	#region redrawing
-	public void RedrawGraph()
-	{
-		CalculateMinMaxValues();
-
-		Rect rect = _graph.rect;
-		Vector3 origin = new(_margin.Left, _margin.Bottom);
-		Vector3 xEnd = new(rect.width - _margin.Right, origin.y);
-		Vector3 yEnd = new(origin.x, rect.height - _margin.Top);
-		Vector3 availableSpace = new(xEnd.x - origin.x, yEnd.y - origin.y);
-		float spaceBetweenHScales = availableSpace.y / (_nbScalesH + 1);
-		float spaceBetweenVScales = availableSpace.x / (_nbScalesV + 1);
-		float hxStartPosition = _margin.Left / 2;
-		float vyStartPosition = _margin.Bottom / 2;
-
-		// redraw axis
-		_xAxis.SetPositions(new[] { origin, xEnd });
-		_yAxis.SetPositions(new[] { origin, yEnd });
-
-		// delete old scales
-		while (_hScalesContainer.childCount > 0) Destroy(_hScalesContainer.GetChild(0).gameObject);
-		while (_vScalesContainer.childCount > 0) Destroy(_vScalesContainer.GetChild(0).gameObject);
-
-		// redraw H Scales
-		for (int i = 1; i < _nbScalesH + 1; i++)
-		{
-			LineRenderer hlr = CreateLR(_hScalesContainer, "ScaleH" + i, _scaleColor, _scaleWidth, _yAxis.material);
-
-			Vector3 startPosition = new(hxStartPosition, origin.y + spaceBetweenHScales * i);
-			Vector3 endPosition = new(xEnd.x, startPosition.y);
-			hlr.SetPositions(new[] { startPosition, endPosition });
-
-			// unit indicator
-			TMP_Text tmpText = CreateTMP(hlr.GetComponent<RectTransform>(), "UnitLabel", (_bounds.MinY + i * (_bounds.MaxY - _bounds.MinY) / (_nbScalesH + 1)).ToString("F2"));
-			tmpText.transform.localPosition = startPosition + new Vector3(-_margin.Left / 2, _margin.Bottom / 2);
-		}
-
-		TMP_Text maxYLabel = CreateTMP(_hScalesContainer, "MaxYLabel", _bounds.MaxY.ToString("F2"));
-		maxYLabel.transform.localPosition = yEnd + new Vector3(-_margin.Left, 0);
-
-		// redraw V Scales
-		for (int i = 1; i < _nbScalesV + 1; i++)
-		{
-			LineRenderer vlr = CreateLR(_vScalesContainer, "ScaleV" + i, _scaleColor, _scaleWidth, _yAxis.material);
-
-			Vector3 startPosition = new(origin.x + spaceBetweenVScales * i, vyStartPosition);
-			Vector3 endPosition = new(startPosition.x, yEnd.y);
-			vlr.SetPositions(new[] { startPosition, endPosition });
-
-			// unit indicator
-			TMP_Text tmpText = CreateTMP(vlr.GetComponent<RectTransform>(), "UnitLabel", (_bounds.MinX + i * (_bounds.MaxX - _bounds.MinX) / (_nbScalesV + 1)).ToString());
-			tmpText.transform.localPosition = startPosition + new Vector3(_margin.Left, 0);
-		}
-
-		TMP_Text maxXLabel = CreateTMP(_vScalesContainer, "MaxXLabel", _bounds.MaxX.ToString("F2"));
-		maxXLabel.transform.localPosition = xEnd + new Vector3(0, -_margin.Bottom / 2);
-
-		// redraw points
-		while (_linesContainer.childCount > 0)
-			Destroy(_linesContainer.GetChild(0).gameObject);
-
-		for (int i = 0; i < _categoryNames.Count; i++)
-		{
-			string categoryName = _categoryNames[i];
-			List<Vector3> categoryPoints = _plots[i];
-			Color categoryColor = _categoryColors[i];
-
-			LineRenderer lr = CreateLR(_linesContainer, categoryName, categoryColor, _lineWidth, _yAxis.material);
-			lr.positionCount = categoryPoints.Count;
-
-			lr.SetPositions(categoryPoints.Select(point =>
-			{
-				Vector3 normalizedPoint = new(
-					(point.x - _bounds.MinX) / (_bounds.MaxX - _bounds.MinX),
-					(point.y - _bounds.MinY) / (_bounds.MaxY - _bounds.MinY));
-				return origin + Vector3.Scale(normalizedPoint, availableSpace);
-			}).ToArray());
-		}
-	}
-
-	private void RedrawLegend()
-	{
-		while (_legend.childCount > 0)
-			Destroy(_legend.GetChild(0).gameObject);
-
-		for (int i = 0; i < _categoryNames.Count; i++)
-		{
-			string categoryName = _categoryNames[i];
-			Color categoryColor = _categoryColors[i];
-
-			GameObject hBox = new(categoryName, typeof(LayoutElement));
-			GameObject coloredLine = new("Line");
-			GameObject label = new("Label");
-
-			HorizontalLayoutGroup hBoxLayout = hBox.AddComponent<HorizontalLayoutGroup>();
-			hBoxLayout.childControlWidth = true;
-
-			LayoutElement colorLineLE = coloredLine.AddComponent<LayoutElement>();
-			LayoutElement labelLE = label.AddComponent<LayoutElement>();
-			colorLineLE.flexibleWidth = 0.2f;
-			labelLE.flexibleWidth = 0.8f;
-
-			RectTransform hBoxRT = hBox.AddComponent<RectTransform>();
-			RectTransform coloredLineRT = coloredLine.AddComponent<RectTransform>();
-			RectTransform labelRT = label.AddComponent<RectTransform>();
-			SetRectTransformBaseOptions(hBoxRT, _legend);
-			SetRectTransformBaseOptions(coloredLineRT, hBoxRT);
-			SetRectTransformBaseOptions(labelRT, hBoxRT);
-
-			LineRenderer colorLineLR = coloredLine.AddComponent<LineRenderer>();
-			SetLineRendererBaseOptions(colorLineLR, color: categoryColor, mat: _xAxis.material);
-
-			TMP_Text labelT = label.AddComponent<TextMeshProUGUI>();
-			SetLabelBaseOptions(labelT, categoryName);
-		}
-	}
-	#endregion redrawing
 
 	#region component_creation
-	private void SetRectTransformBaseOptions(RectTransform item, RectTransform parent, Vector3 localPosition = default, Quaternion rotation = default, Vector3? localScale = null)
+	private void SetRectTransformBaseOptions(RectTransform item, RectTransform parent, Vector3 localPosition = default, Quaternion rotation = default)
 	{
-		localScale ??= Vector3.one;
-
 		item.SetParent(parent);
 		item.rotation = rotation;
 		item.localPosition = localPosition;
-		item.localScale = (Vector3)localScale;
+		item.localScale = Vector3.one;
 	}
 
 	private void SetLineRendererBaseOptions(LineRenderer item, float width = 1f, Color color = default, Material mat = default)
@@ -304,18 +166,19 @@ public class Graph : MonoBehaviour
 		item.material = mat;
 	}
 
-	private void SetLabelBaseOptions(TMP_Text item, string text, float fontSize = 0.5f)
+	private void SetLabelBaseOptions(TMP_Text item, string text, float fontSize = 0.5f, TextAlignmentOptions textAlignment = TextAlignmentOptions.Center)
 	{
-		item.text = text;
-		item.alignment = TextAlignmentOptions.Center;
+		item.alignment = textAlignment;
 		item.fontSize = 0.5f;
+		item.font = _font;
+		item.text = text;
 	}
 
 	private LineRenderer CreateLR(RectTransform container, string name, Color color, float width, Material material)
 	{
-		GameObject go = new(name);
-		RectTransform t = go.AddComponent<RectTransform>();
-		SetRectTransformBaseOptions(t, container);
+		GameObject go = new(name, typeof(RectTransform));
+		RectTransform rt = go.GetComponent<RectTransform>();
+		SetRectTransformBaseOptions(rt, container);
 		LineRenderer lr = go.AddComponent<LineRenderer>();
 		SetLineRendererBaseOptions(lr, width, color, material);
 		return lr;
@@ -324,11 +187,235 @@ public class Graph : MonoBehaviour
 	private TMP_Text CreateTMP(RectTransform container, string name, string text)
 	{
 		GameObject go = new(name);
-		RectTransform t = go.AddComponent<RectTransform>();
-		SetRectTransformBaseOptions(t, container);
+		RectTransform rt = go.AddComponent<RectTransform>();
+		SetRectTransformBaseOptions(rt, container);
 		TMP_Text label = go.AddComponent<TextMeshProUGUI>();
 		SetLabelBaseOptions(label, text);
 		return label;
 	}
 	#endregion component_creation
+	#endregion utility
+
+	#region data_gestion
+	public void AddPoint(float x, float y, string categoryName)
+	{
+		int categoryID = GetCategoryIdFromName(categoryName);
+
+		List<Vector3> categoryPoints = _plots[categoryID];
+		Vector3 pointPosition = new(x, y);
+
+		// insert point while making sure it's sorted by x values
+		int i = 0;
+		bool reached = false;
+		while (!reached && i < categoryPoints.Count)
+		{
+			if (categoryPoints[i].x > x)
+			{
+				categoryPoints.Insert(i, pointPosition);
+				reached = true;
+				Debug.Log("point inserted");
+			}
+			i++;
+		}
+		if (!reached)
+			categoryPoints.Add(pointPosition);
+
+		// recalculate bounds
+		MinMax2D oldBounds = _bounds.Copy();
+		RecalculateBounds();
+		if (oldBounds.MinX != _bounds.MinX || oldBounds.MaxX != _bounds.MaxX)
+			RedrawVerticalScales();
+		if (oldBounds.MinY != _bounds.MinY || oldBounds.MaxY != _bounds.MaxY)
+			RedrawHorizontalScales();
+
+		RedrawPoints(categoryID);
+	}
+
+	public void AddPoints(List<Vector3> points, string categoryName)
+	{
+		int categoryID = GetCategoryIdFromName(categoryName);
+		List<Vector3> category = _plots[categoryID];
+		category.AddRange(points);
+		category = category.OrderBy(point => point.x).ToList();
+
+		RecalculateBounds();
+		RedrawPoints(categoryID);
+	}
+
+	public void RemovePoint(Vector3 pointPosition, string category)
+	{
+		// ignore nonsense
+		if (!_categoryNames.Contains(category)) return;
+
+		int categoryID = GetCategoryIdFromName(category);
+		_plots[categoryID].Remove(pointPosition);
+
+		RedrawPoints(categoryID);
+	}
+
+	public void AddCategory(string name)
+	{
+		Color categoryColor = _categoryColors[_categoryNames.Count];
+
+		GameObject line = new(name, typeof(RectTransform));
+		GameObject hBox = new(name, typeof(RectTransform), typeof(LayoutElement));
+		GameObject coloredLine = new("Line", typeof(RectTransform));
+		GameObject label = new("Label", typeof(RectTransform));
+
+		HorizontalLayoutGroup hBoxLayout = hBox.AddComponent<HorizontalLayoutGroup>();
+		LayoutElement colorLineLE = coloredLine.AddComponent<LayoutElement>();
+		LayoutElement labelLE = label.AddComponent<LayoutElement>();
+
+		RectTransform lineRT = line.GetComponent<RectTransform>();
+		RectTransform hBoxRT = hBox.GetComponent<RectTransform>();
+		RectTransform coloredLineRT = coloredLine.GetComponent<RectTransform>();
+		RectTransform labelRT = label.GetComponent<RectTransform>();
+
+		LineRenderer lineLR = line.AddComponent<LineRenderer>();
+		LineRenderer coloredLineLR = coloredLine.AddComponent<LineRenderer>();
+		TMP_Text labelT = label.AddComponent<TextMeshProUGUI>();
+
+		hBoxLayout.childForceExpandWidth = hBoxLayout.childForceExpandHeight = false;
+		hBoxLayout.childControlWidth = hBoxLayout.childControlHeight = true;
+		hBoxLayout.childAlignment = TextAnchor.MiddleLeft;
+		colorLineLE.flexibleWidth = 0.1f;
+		labelLE.flexibleWidth = 0.9f;
+
+		SetRectTransformBaseOptions(lineRT, _linesContainer);
+		SetRectTransformBaseOptions(hBoxRT, _legend);
+		SetRectTransformBaseOptions(coloredLineRT, hBoxRT);
+		SetRectTransformBaseOptions(labelRT, hBoxRT);
+		SetLineRendererBaseOptions(lineLR, _lineWidth, categoryColor, _xAxis.material);
+		SetLineRendererBaseOptions(coloredLineLR, 1f, categoryColor, _xAxis.material);
+		SetLabelBaseOptions(labelT, name, 1f);
+
+		coloredLineLR.SetPositions(new[] { Vector3.zero, new(_legend.rect.width * 0.1f, 0) });
+
+		_legendItems.Add(hBox);
+		_categoryLines.Add(line);
+		_categoryNames.Add(name);
+		_plots.Add(new());
+	}
+
+	public void RemoveCategory(string categoryName)
+	{
+		// ignore when nothing needs to be deleted
+		if (!_categoryNames.Contains(categoryName)) return;
+
+		// retrieve categoryID
+		int categoryID = GetCategoryIdFromName(categoryName);
+
+		// destroy UI elements
+		Destroy(_legendItems[categoryID]);
+		Destroy(_categoryLines[categoryID]);
+
+		// destroy related data
+		_categoryNames.RemoveAt(categoryID);
+		_categoryLines.RemoveAt(categoryID);
+		_legendItems.RemoveAt(categoryID);
+		_plots.RemoveAt(categoryID);
+	}
+	#endregion data_gestion
+
+	#region redrawing
+	private void RedrawHorizontalScales()
+	{
+		float spaceBetweenHScales = availableSpace.y / (_nbScalesH + 1);
+		float hxStartPosition = _margin.Left / 2;
+
+		// delete old horizontal scales
+		foreach (Transform scale in _hScalesContainer)
+			Destroy(scale.gameObject);
+		_scaleHLR.Clear();
+
+		// redraw horizontal scales
+		for (int i = 1; i < _nbScalesH + 1; i++)
+		{
+			LineRenderer hlr = CreateLR(_hScalesContainer, "ScaleH" + i, _scaleColor, _scaleWidth, _yAxis.material);
+			Vector3 startPosition = new(hxStartPosition, origin.y + spaceBetweenHScales * i);
+			Vector3 endPosition = new(xEnd.x, startPosition.y);
+			hlr.SetPositions(new[] { startPosition, endPosition });
+
+			// unit indicator
+			TMP_Text tmpText = CreateTMP(hlr.GetComponent<RectTransform>(), "UnitLabel", (_bounds.MinY + i * (_bounds.MaxY - _bounds.MinY) / (_nbScalesH + 1)).ToString("F2"));
+			tmpText.transform.localPosition = startPosition + new Vector3(-_margin.Left / 2, _margin.Bottom / 2);
+
+			// remember component
+			_scaleHLR.Add(hlr);
+		}
+
+		TMP_Text maxYLabel = CreateTMP(_hScalesContainer, "MaxYLabel", _bounds.MaxY.ToString("F2"));
+		maxYLabel.transform.localPosition = yEnd + new Vector3(-_margin.Left, 0);
+	}
+
+	private void RedrawVerticalScales()
+	{
+		float spaceBetweenVScales = availableSpace.x / (_nbScalesV + 1);
+		float vyStartPosition = _margin.Bottom / 2;
+
+		// destroy old vertical scales
+		foreach (Transform scale in _vScalesContainer)
+			Destroy(scale.gameObject);
+
+		_scaleVLR.Clear();
+
+		// redraw vertical scales
+		for (int i = 1; i < _nbScalesV + 1; i++)
+		{
+			LineRenderer vlr = CreateLR(_vScalesContainer, "ScaleV" + i, _scaleColor, _scaleWidth, _yAxis.material);
+
+			Vector3 startPosition = new(origin.x + spaceBetweenVScales * i, vyStartPosition);
+			Vector3 endPosition = new(startPosition.x, yEnd.y);
+			vlr.SetPositions(new[] { startPosition, endPosition });
+
+			// unit indicator
+			TMP_Text tmpText = CreateTMP(vlr.GetComponent<RectTransform>(), "UnitLabel", (_bounds.MinX + i * (_bounds.MaxX - _bounds.MinX) / (_nbScalesV + 1)).ToString("F2"));
+			tmpText.transform.localPosition = startPosition + new Vector3(_margin.Left, 0);
+
+			// remember component
+			_scaleVLR.Add(vlr);
+		}
+
+		TMP_Text maxXLabel = CreateTMP(_vScalesContainer, "MaxXLabel", _bounds.MaxX.ToString("F2"));
+		maxXLabel.transform.localPosition = xEnd + new Vector3(0, -_margin.Bottom / 2);
+	}
+
+	private void RedrawScales()
+	{
+		RedrawHorizontalScales();
+		RedrawVerticalScales();
+	}
+
+	private void RedrawAxis()
+	{
+		_xAxis.SetPositions(new[] { origin, xEnd });
+		_yAxis.SetPositions(new[] { origin, yEnd });
+	}
+
+	private void RedrawPoints(int categoryID)
+	{
+		LineRenderer lr = _categoryLines[categoryID].GetComponent<LineRenderer>();
+		List<Vector3> categoryPoints = _plots[categoryID];
+
+		Vector3[] fixedPositions = categoryPoints.Select(point =>
+		{
+			Vector3 normalizedPoint = new(
+				(point.x - _bounds.MinX) / (_bounds.MaxX - _bounds.MinX),
+				(point.y - _bounds.MinY) / (_bounds.MaxY - _bounds.MinY));
+			return origin + new Vector3(_margin.Left, 0) + Vector3.Scale(normalizedPoint, availableSpace);
+		}).ToArray();
+
+		if (categoryPoints.Count >= 2)
+		{
+			lr.positionCount = categoryPoints.Count;
+			lr.SetPositions(fixedPositions);
+		}
+		else
+		{
+			lr.positionCount = 2;
+			lr.SetPositions(new Vector3[] { new(_margin.Left, _margin.Bottom), new(_margin.Left, _margin.Bottom) });
+		}
+
+	}
+	#endregion redrawing
 }

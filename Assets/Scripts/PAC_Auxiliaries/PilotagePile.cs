@@ -17,6 +17,7 @@ public class PilotagePile : MonoBehaviour
 {
 	[SerializeField]
 	private Slider IntensitySlider;
+	[SerializeField]
 	private Slider sliderTemperature;
 
 	[SerializeField]

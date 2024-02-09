@@ -6,11 +6,16 @@ public class MinMax2D
 	public float MaxX;
 	public float MaxY;
 
-    public MinMax2D(float minX, float minY, float maxX, float maxY)
-    {
+	public MinMax2D(float minX, float minY, float maxX, float maxY)
+	{
 		MinX = minX;
 		MinY = minY;
 		MaxX = maxX;
 		MaxY = maxY;
-    }
+	}
+
+	public MinMax2D Copy()
+	{
+		return new(MinX, MinY, MaxX, MaxY);
+	}
 }
