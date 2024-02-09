@@ -58,10 +58,15 @@ public class GaugeManager : MonoBehaviour
 		_nitrogenLevelSlider.value = _nitrogenLevelSlider.maxValue;
 
 		// add listeners
-		_intensitySlider.onValueChanged.AddListener(delegate { UpdateValues(); });
-		_resistanceSlider.onValueChanged.AddListener(delegate { UpdateValues(); });
-		_nbCellsSlider.onValueChanged.AddListener(delegate { UpdateValues(); });
+		_intensitySlider.onValueChanged.AddListener(OnSliderValueChanged);
+		_resistanceSlider.onValueChanged.AddListener(OnSliderValueChanged);
+		_nbCellsSlider.onValueChanged.AddListener(OnSliderValueChanged);
 		ResetValues(_hydrogenLevelSlider.maxValue);
+	}
+
+	private void OnSliderValueChanged(float arg0)
+	{
+		UpdateValues();
 	}
 
 	public void ConsumeHydrogen()
@@ -126,6 +131,8 @@ public class GaugeManager : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		// TODO Remove listeners to prevent memory leaks
+		_intensitySlider.onValueChanged.RemoveListener(OnSliderValueChanged);
+		_resistanceSlider.onValueChanged.RemoveListener(OnSliderValueChanged);
+		_nbCellsSlider.onValueChanged.RemoveListener(OnSliderValueChanged);
 	}
 }
