@@ -48,6 +48,8 @@ public class Graph : MonoBehaviour
 	[SerializeField] private Color _scaleColor = Color.grey;
 	[SerializeField] private List<Color> _categoryColors = new() { Color.yellow, Color.green, Color.red, Color.blue, Color.cyan, Color.magenta };
 	[SerializeField] private TMP_FontAsset _font = default;
+	[SerializeField][Min(0)] private float _unitFontSize = 12;
+	[SerializeField][Min(0)] private float _legendFontSize = 12;
 	#endregion fields
 
 	#region variables
@@ -166,12 +168,18 @@ public class Graph : MonoBehaviour
 		item.material = mat;
 	}
 
-	private void SetLabelBaseOptions(TMP_Text item, string text, float fontSize = 0.5f, TextAlignmentOptions textAlignment = TextAlignmentOptions.Center)
+	private void SetLabelBaseOptions(TMP_Text item, string text, float fontSize = 0.5f, TextAlignmentOptions textAlignment = TextAlignmentOptions.Center, bool enableAutoSizing = false, Color? color = null)
 	{
+		if (color == null)
+			color = Color.white;
 		item.alignment = textAlignment;
-		item.fontSize = 0.5f;
+		item.fontSize = fontSize;
 		item.font = _font;
 		item.text = text;
+		item.enableAutoSizing = enableAutoSizing;
+		item.fontSizeMax = fontSize;
+		item.fontSizeMin = 0.5f;
+		item.color = (Color) color;
 	}
 
 	private LineRenderer CreateLR(RectTransform container, string name, Color color, float width, Material material)
@@ -184,13 +192,13 @@ public class Graph : MonoBehaviour
 		return lr;
 	}
 
-	private TMP_Text CreateTMP(RectTransform container, string name, string text)
+	private TMP_Text CreateTMP(RectTransform container, string name, string text, float fontSize)
 	{
 		GameObject go = new(name);
 		RectTransform rt = go.AddComponent<RectTransform>();
 		SetRectTransformBaseOptions(rt, container);
 		TMP_Text label = go.AddComponent<TextMeshProUGUI>();
-		SetLabelBaseOptions(label, text);
+		SetLabelBaseOptions(label, text, fontSize);
 		return label;
 	}
 	#endregion component_creation
@@ -213,7 +221,6 @@ public class Graph : MonoBehaviour
 			{
 				categoryPoints.Insert(i, pointPosition);
 				reached = true;
-				Debug.Log("point inserted");
 			}
 			i++;
 		}
@@ -259,42 +266,38 @@ public class Graph : MonoBehaviour
 
 		GameObject line = new(name, typeof(RectTransform));
 		GameObject hBox = new(name, typeof(RectTransform), typeof(LayoutElement));
-		GameObject coloredLine = new("Line", typeof(RectTransform));
 		GameObject label = new("Label", typeof(RectTransform));
 
 		HorizontalLayoutGroup hBoxLayout = hBox.AddComponent<HorizontalLayoutGroup>();
-		LayoutElement colorLineLE = coloredLine.AddComponent<LayoutElement>();
 		LayoutElement labelLE = label.AddComponent<LayoutElement>();
 
 		RectTransform lineRT = line.GetComponent<RectTransform>();
 		RectTransform hBoxRT = hBox.GetComponent<RectTransform>();
-		RectTransform coloredLineRT = coloredLine.GetComponent<RectTransform>();
 		RectTransform labelRT = label.GetComponent<RectTransform>();
 
 		LineRenderer lineLR = line.AddComponent<LineRenderer>();
-		LineRenderer coloredLineLR = coloredLine.AddComponent<LineRenderer>();
 		TMP_Text labelT = label.AddComponent<TextMeshProUGUI>();
 
 		hBoxLayout.childForceExpandWidth = hBoxLayout.childForceExpandHeight = false;
 		hBoxLayout.childControlWidth = hBoxLayout.childControlHeight = true;
 		hBoxLayout.childAlignment = TextAnchor.MiddleLeft;
-		colorLineLE.flexibleWidth = 0.1f;
-		labelLE.flexibleWidth = 0.9f;
 
 		SetRectTransformBaseOptions(lineRT, _linesContainer);
 		SetRectTransformBaseOptions(hBoxRT, _legend);
-		SetRectTransformBaseOptions(coloredLineRT, hBoxRT);
 		SetRectTransformBaseOptions(labelRT, hBoxRT);
 		SetLineRendererBaseOptions(lineLR, _lineWidth, categoryColor, _xAxis.material);
-		SetLineRendererBaseOptions(coloredLineLR, 1f, categoryColor, _xAxis.material);
-		SetLabelBaseOptions(labelT, name, 1f);
-
-		coloredLineLR.SetPositions(new[] { Vector3.zero, new(_legend.rect.width * 0.1f, 0) });
+		SetLabelBaseOptions(labelT, name, _legendFontSize, enableAutoSizing:true, color:categoryColor);
 
 		_legendItems.Add(hBox);
 		_categoryLines.Add(line);
 		_categoryNames.Add(name);
 		_plots.Add(new());
+
+		if (_categoryNames.Count == 1)
+		{
+			RedrawAxis();
+			RedrawScales();
+		}
 	}
 
 	public void RemoveCategory(string categoryName)
@@ -337,14 +340,15 @@ public class Graph : MonoBehaviour
 			hlr.SetPositions(new[] { startPosition, endPosition });
 
 			// unit indicator
-			TMP_Text tmpText = CreateTMP(hlr.GetComponent<RectTransform>(), "UnitLabel", (_bounds.MinY + i * (_bounds.MaxY - _bounds.MinY) / (_nbScalesH + 1)).ToString("F2"));
+			string text = (_bounds.MinY + i * (_bounds.MaxY - _bounds.MinY) / (_nbScalesH + 1)).ToString("F2");
+			TMP_Text tmpText = CreateTMP(hlr.GetComponent<RectTransform>(), "UnitLabel", text, _unitFontSize);
 			tmpText.transform.localPosition = startPosition + new Vector3(-_margin.Left / 2, _margin.Bottom / 2);
 
 			// remember component
 			_scaleHLR.Add(hlr);
 		}
 
-		TMP_Text maxYLabel = CreateTMP(_hScalesContainer, "MaxYLabel", _bounds.MaxY.ToString("F2"));
+		TMP_Text maxYLabel = CreateTMP(_hScalesContainer, "MaxYLabel", _bounds.MaxY.ToString("F2"), _unitFontSize);
 		maxYLabel.transform.localPosition = yEnd + new Vector3(-_margin.Left, 0);
 	}
 
@@ -369,14 +373,15 @@ public class Graph : MonoBehaviour
 			vlr.SetPositions(new[] { startPosition, endPosition });
 
 			// unit indicator
-			TMP_Text tmpText = CreateTMP(vlr.GetComponent<RectTransform>(), "UnitLabel", (_bounds.MinX + i * (_bounds.MaxX - _bounds.MinX) / (_nbScalesV + 1)).ToString("F2"));
+			string text = (_bounds.MinX + i * (_bounds.MaxX - _bounds.MinX) / (_nbScalesV + 1)).ToString("F2");
+			TMP_Text tmpText = CreateTMP(vlr.GetComponent<RectTransform>(), "UnitLabel", text, _unitFontSize);
 			tmpText.transform.localPosition = startPosition + new Vector3(_margin.Left, 0);
 
 			// remember component
 			_scaleVLR.Add(vlr);
 		}
 
-		TMP_Text maxXLabel = CreateTMP(_vScalesContainer, "MaxXLabel", _bounds.MaxX.ToString("F2"));
+		TMP_Text maxXLabel = CreateTMP(_vScalesContainer, "MaxXLabel", _bounds.MaxX.ToString("F2"), _unitFontSize);
 		maxXLabel.transform.localPosition = xEnd + new Vector3(0, -_margin.Bottom / 2);
 	}
 
@@ -402,7 +407,7 @@ public class Graph : MonoBehaviour
 			Vector3 normalizedPoint = new(
 				(point.x - _bounds.MinX) / (_bounds.MaxX - _bounds.MinX),
 				(point.y - _bounds.MinY) / (_bounds.MaxY - _bounds.MinY));
-			return origin + new Vector3(_margin.Left, 0) + Vector3.Scale(normalizedPoint, availableSpace);
+			return origin + Vector3.Scale(normalizedPoint, availableSpace);
 		}).ToArray();
 
 		if (categoryPoints.Count >= 2)

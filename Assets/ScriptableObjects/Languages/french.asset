@@ -38,10 +38,11 @@ MonoBehaviour:
     prend place au sein du <b>Stack</b>. Le circuit d'<b>Hydrog\xE8ne</b> est d\xE9j\xE0
     plac\xE9, raccordez la <b>Bouteille d'Hydrog\xE8ne</b> \xE0 l'extr\xE9mit\xE9
     du circuit."
-  compresseur: "Apr\xE8s l'<b>Hydrog\xE8ne</b>, nous allons connecter l'<b>Oxyg\xE8ne</b>,
-    c'est l'autre r\xE9actif n\xE9cessaire \xE0 la g\xE9n\xE9ration d'\xE9lectricit\xE9.\r\nDans
-    notre cas, nous utiliserons l'<b>Oxyg\xE8ne</b> qui est contenu dans l'<b>Air</b>.
-    Un filtre \xE0 <b>Air</b> est plac\xE9, \xE0 vous de mettre le <b>Compresseur</b>.\r\n"
+  compresseur: "Apr\xE8s l'<color=\"red\">Hydrog\xE8ne</color>, nous allons connecter
+    l'<color=#19f>Oxyg\xE8ne</color>, c'est l'autre r\xE9actif n\xE9cessaire \xE0
+    la g\xE9n\xE9ration d'\xE9lectricit\xE9.\r\nDans notre cas, nous utiliserons
+    l'<color=#19f>Oxyg\xE8ne</color> qui est contenu dans l'Air. Un filtre \xE0 Air
+    est plac\xE9, \xE0 vous de mettre le <b><color=#19f>Compresseur</color></b>."
   humidificateur: "Il faut savoir que les membranes, qui constituent le <b>Stack</b>,
     sont des \xE9l\xE9ments fragiles. Nous ajoutons donc de l'<b>Humidit\xE9</b>
     \xE0 l'<b>Air</b> entrant dans le <b>Stack</b>. Il nous faut donc placer un <b>Humidificateur</b>

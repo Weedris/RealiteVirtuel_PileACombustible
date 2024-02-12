@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
 
 	public void LoadLangIntoDisplay(GameObject go, string header, string body, string nextButtonMessage)
 	{
-		var textGameObject = go.GetNamedChild("Texte");
+		var textGameObject = go.GetNamedChild("Text");
 		var next = go.GetNamedChild("Suivant");
 
 		GetHeader(textGameObject).text = header;
