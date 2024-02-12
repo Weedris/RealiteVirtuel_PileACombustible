@@ -106,8 +106,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Bienvenue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 68c92e052a81a8745992deb2fbcf328f, type: 2}
+  m_sharedMaterial: {fileID: 8584240149684594481, guid: 68c92e052a81a8745992deb2fbcf328f,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -416,8 +417,9 @@ MonoBehaviour:
     pas bien ou que vous ne savez pas quoi faire n'h\xE9sitez pas \xE0 demande de
     l'aide."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5c9df54d3694cf84b81ca37bbbafc029, type: 2}
+  m_sharedMaterial: {fileID: 7037796928443660993, guid: 5c9df54d3694cf84b81ca37bbbafc029,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -755,8 +757,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Passez au montage de la Pile \xE0 combustible."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5c9df54d3694cf84b81ca37bbbafc029, type: 2}
+  m_sharedMaterial: {fileID: 7037796928443660993, guid: 5c9df54d3694cf84b81ca37bbbafc029,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -780,7 +783,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10.75
+  m_fontSize: 11.65
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

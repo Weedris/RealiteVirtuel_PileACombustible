@@ -1,16 +1,17 @@
 fileFormatVersion: 2
-guid: 5a4172b9029c9da4f80d7f2bbd80993b
+guid: 6a2719b7b6bc99c4b84ac657be034b60
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 20
+  fontSize: 16
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Flipahaus
-  fallbackFontReferences: []
+  - Nova Flat Slim
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 140c492a13ba1eb4e8ffd2388e1c080e, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
