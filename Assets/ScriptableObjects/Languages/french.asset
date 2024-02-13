@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3de2ccec947c44c848c4f951a4c4cb, type: 3}
   m_Name: french
   m_EditorClassIdentifier: 
-  language: french
+  language: 
   welcome: Bienvenue
   objectif: "Nous allons monter une pile \xE0 combustible."
   suivant: "Passez \xE0 la suite"
@@ -29,34 +29,34 @@ MonoBehaviour:
     sentez pas bien ou que vous ne savez pas quoi faire, n'h\xE9sitez pas \xE0 demander
     de l\u2019aide."
   montage: "Passez au montage de la pile \xE0 combustible."
-  stack: "Le premier \xE9l\xE9ment que nous allons placer est le <b>Stack</b>, c'est
-    un empilement de membranes. Ce sont ces membranes qui vont produire de l'\xE9lectricit\xE9
-    \xE0 partir d'<b>Oxyg\xE8ne</b> et d'<b>Hydrog\xE8ne</b>. Placez le <b>Stack</b>
-    \xE0 l'emplacement du cube gris qui flotte."
-  H2: "Nous allons maintenant nous occuper du circuit d'<b>Hydrog\xE8ne</b>. C'est
-    l'un des r\xE9actifs n\xE9cessaires pour la r\xE9action \xE9lectrochimique qui
-    prend place au sein du <b>Stack</b>. Le circuit d'<b>Hydrog\xE8ne</b> est d\xE9j\xE0
-    plac\xE9, raccordez la <b>Bouteille d'Hydrog\xE8ne</b> \xE0 l'extr\xE9mit\xE9
-    du circuit."
-  compresseur: "Apr\xE8s l'<color=\"red\">Hydrog\xE8ne</color>, nous allons connecter
-    l'<color=#19f>Oxyg\xE8ne</color>, c'est l'autre r\xE9actif n\xE9cessaire \xE0
+  stack: "Le premier \xE9l\xE9ment que nous allons placer est le <color=#ffc821>Stack</color>,
+    c'est un empilement de membranes. Ce sont ces membranes qui vont produire de
+    l'\xE9lectricit\xE9 \xE0 partir d'<color=#1199ff>Oxyg\xE8ne</color> et d'<color=#ff0000>Hydrog\xE8ne</color>.
+    Placez le <color=#ffc821>Stack</color> \xE0 l'emplacement du cube gris qui flotte."
+  H2: "Nous allons maintenant nous occuper du circuit d'<color=#ff0000>Hydrog\xE8ne</color>.
+    C'est l'un des r\xE9actifs n\xE9cessaires pour la r\xE9action \xE9lectrochimique
+    qui prend place au sein du <color=#ffc821>Stack</color>. Le circuit d'<color=#ff0000>Hydrog\xE8ne</color>
+    est d\xE9j\xE0 plac\xE9, raccordez la <color=#ff0000>Bouteille d'Hydrog\xE8ne</color>
+    \xE0 l'extr\xE9mit\xE9 du circuit."
+  compresseur: "Apr\xE8s l'<color=#ff0000>Hydrog\xE8ne</color>, nous allons connecter
+    l'<color=#1199ff>Oxyg\xE8ne</color>, c'est l'autre r\xE9actif n\xE9cessaire \xE0
     la g\xE9n\xE9ration d'\xE9lectricit\xE9.\r\nDans notre cas, nous utiliserons
-    l'<color=#19f>Oxyg\xE8ne</color> qui est contenu dans l'Air. Un filtre \xE0 Air
-    est plac\xE9, \xE0 vous de mettre le <b><color=#19f>Compresseur</color></b>."
-  humidificateur: "Il faut savoir que les membranes, qui constituent le <b>Stack</b>,
+    l'<color=#1199ff>Oxyg\xE8ne</color> qui est contenu dans l'Air. Un filtre \xE0
+    Air est plac\xE9, \xE0 vous de mettre le <color=#1199ff>Compresseur</color>."
+  humidificateur: "Il faut savoir que les membranes, qui constituent le <color=#ffc821>Stack</color>,
     sont des \xE9l\xE9ments fragiles. Nous ajoutons donc de l'<b>Humidit\xE9</b>
-    \xE0 l'<b>Air</b> entrant dans le <b>Stack</b>. Il nous faut donc placer un <b>Humidificateur</b>
-    entre le <b>Compresseur</b> et le <b>Stack</b>."
-  N2: "Parlons <b>S\xE9curit\xE9</b> d\xE9sormais.\r\nComment fait-on pour arr\xEAter
-    la <b>Pile \xE0 combustible</b> lorsqu'elle est en fonctionnement ?\n\r\nNous
-    introduisons de l'<b>Azote</b> dans le syst\xE8me, cela a pour effet d'arr\xEAter
-    la r\xE9action qui prend place au sein du <b>Stack</b>.\r\nPlacez donc la <b>Bouteille
-    d'Azote</b>.\r\n"
+    \xE0 l'<color=#1199ff>Air</color> entrant dans le <color=#ffc821>Stack</color>.
+    Il nous faut donc placer un <b>Humidificateur</b> entre le <color=#19f>Compresseur</color>
+    et le <color=#ffc821>Stack</color>."
+  N2: "Parlons S\xE9curit\xE9 d\xE9sormais.\r\nComment fait-on pour arr\xEAter la
+    Pile \xE0 combustible lorsqu'elle est en fonctionnement ?\n\r\nNous introduisons
+    de l'<b>Azote</b> dans le syst\xE8me, cela a pour effet d'arr\xEAter la r\xE9action
+    qui prend place au sein du <b>Stack</b>.\r\nPlacez donc la <b>Bouteille d'Azote</b>.\r"
   ventilateur: "Vous l'avez peut-\xEAtre remarqu\xE9, mais vous avez plac\xE9 la
     plupart des \xE9l\xE9ments dans un espace d\xE9fini.\r\nSi une fuite d'<b>hydrog\xE8ne</b>
-    a lieu au sein de cet espace, il va s'<b>accumuler</b> jusqu'\xE0 potentiellement
-    causer une <b>explosion</b>. Afin d'\xE9viter cette <b>accumulation</b>, placez
-    un <b>ventilateur</b> au sommet de l'espace d\xE9fini.\r\n"
+    a lieu au sein de cet espace, il va s'accumuler jusqu'\xE0 potentiellement causer
+    une explosion. Afin d'\xE9viter cette accumulation, placez un <b>ventilateur</b>
+    au sommet de l'espace d\xE9fini.\r"
   H2O: "La <b>Pile \xE0 combustible</b> produit de l'\xE9lectricit\xE9, mais \xE9galement
     de l'<b>Eau</b>. Cette <b>Eau</b> doit \xEAtre \xE9vacu\xE9e, nous allons donc
     la r\xE9cup\xE9rer dans un <b>Bac</b>. Placez-le."
@@ -64,8 +64,8 @@ MonoBehaviour:
     g\xE9n\xE8re de la <b>Chaleur</b> en plus de l'\xE9lectricit\xE9 et de l'eau.\r\nAfin
     que la r\xE9action soit la plus efficace possible, elle doit avoir lieu \xE0
     une certaine temp\xE9rature.\r\nAfin de maintenir cette temp\xE9rature, le <b>Stack</b>
-    est reli\xE9 \xE0 un syst\xE8me de refroidissement.\r\nPlacez le <b>Radiateur</b>.\r\n"
-  pilotage: Maintenant, pilotez la pile
+    est reli\xE9 \xE0 un syst\xE8me de refroidissement.\r\nPlacez le <b>Radiateur</b>.\r"
+  pilotage: 
   intensityBarName: "Intensit\xE9"
   intensityBarValue: 
   intensite: "Intensit\xE9 du stack"
