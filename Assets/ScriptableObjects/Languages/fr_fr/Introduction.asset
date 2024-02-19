@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6a5c3192af5d14db952b28776c29f0, type: 3}
+  m_Name: Introduction
+  m_EditorClassIdentifier: 
+  nextButtonText: Suivant
+  welcome: Bienvenue
+  goal: "L'objectif est de monter une pile \xE0 combustible."
+  instruction: "Pour ce faire, veuillez suivre les instructions affich\xE9 \xE0 l'\xE9cran
+    se situant \xE0 votre gauche."
+  warning: Attention
+  warningMessage: "Par mesure de s\xE9curit\xE9, faites attention \xE0 votre entourage.
+    Si vous ne vous sentez pas bien, enlevez immediatement le casque."
+  buildingMessage: Appuyez sur <u>Suivant</u> pour commencer.

@@ -17,21 +17,7 @@ public class ComponentPlacement : MonoBehaviour
 		else Destroy(gameObject);
 	}
 
-	public void CheckComponentPlacement(XRSocketInteractor socket)
-	{
-		traceParser.Instance.traceSocket(socket, socket.GetOldestInteractableSelected().transform.name);
-
-		if (socket.GetOldestInteractableSelected().transform.name == socket.name && socket.name == GameManager.Instance.state.ToString())
-		{
-			socket.GetOldestInteractableSelected().transform.GetComponent<Collider>().enabled = false;
-			socket.GetOldestInteractableSelected().transform.tag = "Placed";
-			SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
-			GameManager.Instance.NextState();
-		}
-		else SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
-
-	}
-
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
 	public void CheckComponentPlacement(Transform target, Transform objectToPlace)
 	{
 		traceParser.Instance.traceSocket(target.gameObject, objectToPlace.name);
@@ -52,8 +38,22 @@ public class ComponentPlacement : MonoBehaviour
 		else SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
 
 	}
+#elif UNITY_ANDROID
+	public void CheckComponentPlacement(XRSocketInteractor socket)
+	{
+		traceParser.Instance.traceSocket(socket, socket.GetOldestInteractableSelected().transform.name);
 
+		if (socket.GetOldestInteractableSelected().transform.name == socket.name && socket.name == GameManager.Instance.state.ToString())
+		{
+			socket.GetOldestInteractableSelected().transform.GetComponent<Collider>().enabled = false;
+			socket.GetOldestInteractableSelected().transform.tag = "Placed";
+			SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
+			GameManager.Instance.NextState();
+		}
+		else SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
 
+	}
+#endif
 	public void Caught(GameObject go)
 	{
 		GameManager.Instance.traceParser.traceInApp(go);

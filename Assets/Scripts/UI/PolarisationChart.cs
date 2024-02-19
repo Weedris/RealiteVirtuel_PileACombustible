@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
 public class PolarisationChart : MonoBehaviour
 {
-	[SerializeField] private Graph polarisationChart;
+	[SerializeField] private Graph graph;
 	[SerializeField] private Button polarisationPlotButton;
 
 	private void Start()
@@ -17,7 +16,7 @@ public class PolarisationChart : MonoBehaviour
 	public void OnPolarisationPlotButtonPressed()
 	{
 		GaugeManager gm = GaugeManager.Instance;
-		polarisationChart.AddPoint(gm.Intensity, gm.StackVoltage, "Polarisation");
+		graph.AddPoint(gm.Intensity, gm.StackVoltage, "Polarisation");
 	}
 
 	private void OnDestroy()

@@ -75,23 +75,15 @@ public class SoundManager : MonoBehaviour
 	void Awake()
 	{
 		if (Instance == null)
-		{
 			Instance = this;
-		}
 		else
-		{
 			Destroy(gameObject);
-		}
 
 		foreach (var bgm in l_bgms)
-		{
 			d_AllBgm.Add(bgm.type, bgm.clip);
-		}
 
 		foreach (var sfx in l_sfxs)
-		{
 			d_AllSfx.Add(sfx.type, sfx.clip);
-		}
 	}
 
 	/// <summary>Plays the bgm attached to an given BgmType</summary>
@@ -180,13 +172,9 @@ public class SoundManager : MonoBehaviour
 	public void PauseBgm(bool pause)
 	{
 		if (pause)
-		{
 			bgmSource.Pause();
-		}
 		else
-		{
 			bgmSource.UnPause();
-		}
 	}
 
 	/// <summary>Pause the sound of the SFX AudioSource</summary>
@@ -194,13 +182,9 @@ public class SoundManager : MonoBehaviour
 	public void PauseSfx(bool pause)
 	{
 		if (pause)
-		{
 			sfxSource.Pause();
-		}
 		else
-		{
 			sfxSource.UnPause();
-		}
 	}
 
 	/// <summary>Stop the current sound of the BGM AudioSource</summary>

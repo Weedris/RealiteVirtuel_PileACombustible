@@ -53,7 +53,6 @@ public class traceParser : MonoBehaviour
 	{
 		GameManager.State stateCopy = state;
 		if (stateCopy > 0) stateCopy--;
-		Debug.Log(stateCopy.ToString() + " " + state.ToString());
         //Save nb grab objects:
         StringBuilder sb = new StringBuilder();
 		sb.Append(stateCopy.ToString())

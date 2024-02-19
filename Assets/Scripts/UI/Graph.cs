@@ -355,7 +355,7 @@ public class Graph : MonoBehaviour
 	private void RedrawVerticalScales()
 	{
 		float spaceBetweenVScales = availableSpace.x / (_nbScalesV + 1);
-		float vyStartPosition = _margin.Bottom / 2;
+		float vyStartPosition = _margin.Bottom / 2;  // y position all scales start from
 
 		// destroy old vertical scales
 		foreach (Transform scale in _vScalesContainer)
@@ -397,6 +397,10 @@ public class Graph : MonoBehaviour
 		_yAxis.SetPositions(new[] { origin, yEnd });
 	}
 
+	/// <summary>
+	/// Redraw points/lines/curves of the specified category.
+	/// </summary>
+	/// <param name="categoryID">The place of the category within the _categoryNames List</param>
 	private void RedrawPoints(int categoryID)
 	{
 		LineRenderer lr = _categoryLines[categoryID].GetComponent<LineRenderer>();
@@ -420,7 +424,6 @@ public class Graph : MonoBehaviour
 			lr.positionCount = 2;
 			lr.SetPositions(new Vector3[] { new(_margin.Left, _margin.Bottom), new(_margin.Left, _margin.Bottom) });
 		}
-
 	}
 	#endregion redrawing
 }

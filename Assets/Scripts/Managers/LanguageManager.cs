@@ -1,36 +1,38 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LanguageManager : MonoBehaviour
 {
 	public static LanguageManager Instance;
 
-	//[SerializedField] 
-	public Settings settings;
-	public Language language;
+	[SerializeField] private Translation translations;
+	[SerializeField] private Language currentLanguage;
+	[SerializeField] private GameObject[] toUpdateOnLangChanged;
+
 	private void Awake()
 	{
 		if (Instance == null) Instance = this;
 		else Destroy(gameObject);
 	}
 
-
 	private void Start()
 	{
-		UpdateLanguage();
+		UpdateUI();
 	}
 
-
-	public void UpdateLanguage()
+	public void SwitchLanguage(Language lang)
 	{
-		language = settings.curentLanguage;
+		if (lang == currentLanguage) return;
+		currentLanguage = lang;
+		UpdateUI();
 	}
 
-
-	// maybe use a scriptableobject instead
-	public Language GiveCorrectlanguage()
+	private void UpdateUI()
 	{
-		return language;
+		foreach (GameObject element in toUpdateOnLangChanged)
+		{
+			element
+				.GetComponent<ILangUpdatable>()
+				.UpdateLang(translations.refs[(int)currentLanguage]);
+		}
 	}
-
 }

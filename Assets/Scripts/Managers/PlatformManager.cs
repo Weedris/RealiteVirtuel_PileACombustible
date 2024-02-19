@@ -29,10 +29,6 @@ public class PlatformManager : MonoBehaviour
 		Pc.SetActive(true);
 
 		DeleteChidrens<XRSocketInteractor>(SocketMainComponent);
-
-		if (Settings.Instance.isPlayerPastAssembly)
-			DeleteChidrens<ColiderComposent>(SocketMainComponent);
-
 	}
 
 	private void ChangeToVR()
@@ -42,9 +38,6 @@ public class PlatformManager : MonoBehaviour
 		Vr.SetActive(true);
 
 		DeleteChidrens<ColiderComposent>(SocketMainComponent);
-
-		if (Settings.Instance.isPlayerPastAssembly)
-			DeleteChidrens<XRSocketInteractor>(SocketMainComponent);
 	}
 
 	private void DeleteChidrens<T>(GameObject parent)

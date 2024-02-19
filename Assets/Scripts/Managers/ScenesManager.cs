@@ -20,17 +20,6 @@ public class ScenesManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
-	public static void Chapter1()
-	{
-		Settings.Instance.isPlayerPastAssembly = false;
-		SceneManager.LoadScene("GameScene");
-	}
-	public static void Chapter2()
-	{
-		Settings.Instance.isPlayerPastAssembly = true;
-		SceneManager.LoadScene("GameScene");
-	}
-
 	public static void Exit()
 	{
 #if UNITY_EDITOR

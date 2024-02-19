@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6a5c3192af5d14db952b28776c29f0, type: 3}
+  m_Name: Introduction
+  m_EditorClassIdentifier: 
+  nextButtonText: "Pr\xF3ximo"
+  welcome: Bem-vindo
+  goal: "O objetivo \xE9 construir uma c\xE9lula de combust\xEDvel."
+  instruction: "Para mont\xE1-lo, siga as instru\xE7\xF5es escritas na tela."
+  warning: Aviso
+  warningMessage: "Preste aten\xE7\xE3o aos que est\xE3o ao seu redor, se n\xE3o
+    se sentir bem ou n\xE3o souber o que fazer, n\xE3o hesite em pedir ajuda."
+  buildingMessage: "Pressione <u>Pr\xF3ximo</u> para come\xE7ar."
