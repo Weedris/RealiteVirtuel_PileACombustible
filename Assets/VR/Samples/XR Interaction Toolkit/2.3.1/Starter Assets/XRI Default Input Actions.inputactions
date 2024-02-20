@@ -2124,6 +2124,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Player",
+            "id": "41dc09b8-20f1-4489-947d-23d3771da029",
+            "actions": [
+                {
+                    "name": "move",
+                    "type": "Button",
+                    "id": "02d301e6-9a76-44eb-bf0a-4239e36aa33e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2efc3a0e-4247-4e8b-a64a-1dd016071ecd",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
