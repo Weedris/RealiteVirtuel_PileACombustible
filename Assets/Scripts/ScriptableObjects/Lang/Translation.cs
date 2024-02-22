@@ -5,19 +5,18 @@ public enum Language
 {
 	ENGLISH,
 	FRENCH,
-	PORTUGUES
+	PORTUGUESE
 }
 
 [Serializable]
 public class LanguageRef
 {
-	public Language language;
-	public ContextAssembly assemblyContext;
-	public ContextExitDialog exitDialogContext;
-	public ContextIntroductionDialogs introductionDialogsContext;
-	public ContextMainMenu mainMenuContext;
-	public ContextPerformanceLab performanceLabContext;
-
+	public Language Language;
+	public ContextAssembly AssemblyContext;
+	public ContextExitDialog ExitDialogContext;
+	public ContextIntroductionDialogs IntroductionDialogsContext;
+	public ContextMainMenu MainMenuContext;
+	public ContextPerformanceLab PerformanceLabContext;
 }
 
 [CreateAssetMenu(fileName = "Translation", menuName = "ScriptableObjects/Lang/Translation")]

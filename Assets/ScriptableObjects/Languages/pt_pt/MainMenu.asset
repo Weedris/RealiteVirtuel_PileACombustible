@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9c832250bb61a4293d10b222f0e8a9, type: 3}
   m_Name: MainMenu
   m_EditorClassIdentifier: 
-  go: 
-  part1Label: 
-  part2Label: 
+  SessionChooserHeader: "Escolha uma sess\xE3o"
+  StartSession: "Iniciar sess\xE3o"
+  Sessions:
+  - Scene: 1
+    Description: "Construa uma c\xE9lula de combust\xEDvel"
+  - Scene: 2
+    Description: "Use uma c\xE9lula de combust\xEDvel"

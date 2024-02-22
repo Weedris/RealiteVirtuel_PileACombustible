@@ -4,35 +4,36 @@ public class LanguageManager : MonoBehaviour
 {
 	public static LanguageManager Instance;
 
+	[SerializeField] private Settings settings;
 	[SerializeField] private Translation translations;
-	[SerializeField] private Language currentLanguage;
 	[SerializeField] private GameObject[] toUpdateOnLangChanged;
 
 	private void Awake()
 	{
+		// singleton
 		if (Instance == null) Instance = this;
 		else Destroy(gameObject);
 	}
 
 	private void Start()
 	{
-		UpdateUI();
+		Invoke(nameof(UpdateUI), 0.2f);
 	}
 
 	public void SwitchLanguage(Language lang)
 	{
-		if (lang == currentLanguage) return;
-		currentLanguage = lang;
+		settings.curentLanguage = lang;
 		UpdateUI();
 	}
 
 	private void UpdateUI()
 	{
+		LanguageRef translation = translations.refs[(int)settings.curentLanguage];
 		foreach (GameObject element in toUpdateOnLangChanged)
 		{
 			element
 				.GetComponent<ILangUpdatable>()
-				.UpdateLang(translations.refs[(int)currentLanguage]);
+				.UpdateLang(translation);
 		}
 	}
 }

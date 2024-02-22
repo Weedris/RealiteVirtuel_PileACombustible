@@ -24,8 +24,7 @@ public class GameManager : MonoBehaviour
 		End
 	}
 
-	// TODO Remove this shit
-	public State state;
+	[NonSerialized] public State state;
 
 	public GameObject Pac;
 
@@ -33,7 +32,6 @@ public class GameManager : MonoBehaviour
 
 	double debutConstruction;
 	double TempsConstruction;
-	public GameObject exit;
 
 	[Header("Part2 (Pilotage)")]
 	[SerializeField] private GameObject endButton;
@@ -70,7 +68,11 @@ public class GameManager : MonoBehaviour
 		SoundManager.Instance.PlayBGM((BgmType)UnityEngine.Random.Range(0, 2));
 
 		// change state after instructions (start game)
-		introductionDialog.OnDialogEnd += NextState;
+		introductionDialog.OnDialogEnd += () =>
+		{
+			NextState();
+			Destroy(introductionDialog.gameObject);
+		};
 	}
 
 	public void ExecuteState(State state)
@@ -81,7 +83,7 @@ public class GameManager : MonoBehaviour
 
 	public void NextState()
 	{
-		state += 1;
+		state++;
 		traceParser.traceMainStep(state);
 		screenInstruction.NextInstruction();
 		ExecuteState(state);
@@ -130,12 +132,12 @@ public class GameManager : MonoBehaviour
 	{
 		TempsConstruction = Time.realtimeSinceStartup - debutConstruction;
 
+		// victory feedback
+		SoundManager.Instance.PlaySFX(SfxType.Win);
 		// enclose PEMFC with glass
 		Pac.GetComponent<ShowElement>().Vitre.SetActive(true);
 
-		// victory effects (SFX + VFX)
-		SoundManager.Instance.PlaySFX(SfxType.endAssembly);
-
+		// save data
 		traceParser.save();
 	}
 

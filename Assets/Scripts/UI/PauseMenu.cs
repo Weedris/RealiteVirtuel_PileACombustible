@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-	[SerializeField] private Settings settings;
-
 	[Header("Icons")]
 	[SerializeField] private Sprite iconBgmOn;
 	[SerializeField] private Sprite iconBgmOff;
@@ -23,31 +21,28 @@ public class PauseMenu : MonoBehaviour
 	[Header("Language")]
 	[SerializeField] private Transform languageButtonsContainer;
 
-
-	private void Start()
+	private void OnEnable()
 	{
-		SelectLanguage(settings.curentLanguage);
-		SetBgmLevel(settings.BgmLevel);
-		SetSfxLevel(settings.SfxLevel);
-
 		AddListeners();
 	}
 
-	public void SelectLanguage(Language lang)
+	private void OnDisable()
 	{
-		settings.curentLanguage = lang;
+		RemoveListeners();
+	}
+
+	private void SelectLanguage(Language lang)
+	{
 		LanguageManager.Instance.SwitchLanguage(lang);
 	}
 
-	public void SetBgmLevel(float level)
+	private void SetBgmLevel(float level)
 	{
-		settings.BgmLevel = level;
 		SoundManager.Instance.ChangeBgmVolume(level);
 	}
 
-	public void SetSfxLevel(float level)
+	private void SetSfxLevel(float level)
 	{
-		settings.SfxLevel = level;
 		SoundManager.Instance.ChangeSfxVolume(level);
 	}
 
@@ -77,11 +72,5 @@ public class PauseMenu : MonoBehaviour
 				.onClick
 				.RemoveAllListeners();
 		}
-	}
-
-	private void OnDestroy()
-	{
-		// prevents memory leak
-		RemoveListeners();
 	}
 }

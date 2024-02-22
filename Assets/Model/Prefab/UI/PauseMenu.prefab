@@ -352,8 +352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b287506c4d1200488267a60a10740fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 6c59aff7649dd3b48851a8287bd7ff76, type: 2}
-  languageManager: {fileID: 0}
   iconBgmOn: {fileID: 21300000, guid: 62cb4843a57a7d54baa9fc4f232e9999, type: 3}
   iconBgmOff: {fileID: 21300000, guid: a56ba3e375c06ed4a8d1cf5eaa6e4185, type: 3}
   iconSfxOn: {fileID: 21300000, guid: 738be1fce7372484f8daa61fe74cd2fc, type: 3}
@@ -777,7 +775,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -2
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2570,7 +2568,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -2
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

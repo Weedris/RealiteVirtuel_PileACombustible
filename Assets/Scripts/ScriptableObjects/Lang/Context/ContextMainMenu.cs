@@ -1,10 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
+
+[Serializable]
+public class Session
+{
+	public ScenesManager.Scene Scene;
+	[TextArea]public string Description;
+}
 
 [CreateAssetMenu(fileName = "MainMenu", menuName = "ScriptableObjects/Lang/Context/MainMenu")]
 public class ContextMainMenu : Context
 {
-	[SerializeField] private string go;
-	[SerializeField][TextArea(3, 5)] private string part1Label;
-	[SerializeField][TextArea(3, 5)] private string part2Label;
+	public string SessionChooserHeader;
+	public string StartSession;
+	public Session[] Sessions;
 }

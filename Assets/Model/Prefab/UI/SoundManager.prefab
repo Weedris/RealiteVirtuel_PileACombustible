@@ -174,11 +174,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02789988fbd05fd438001d7895d3d205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 0}
   bgmSource: {fileID: 4782504647752518148}
   sfxSource: {fileID: 4782504646277125319}
   l_bgms:
   - type: 0
-    clip: {fileID: 8300000, guid: fddeae45aabf4bc468b5f63a645af760, type: 3}
+    clip: {fileID: 8300000, guid: 6e51c7dbe4be16a449833878c77d5aad, type: 3}
+  - type: 1
+    clip: {fileID: 8300000, guid: 8f0e1415fcb9c014a8fc4abc5d7b24e5, type: 3}
   l_sfxs:
   - type: 0
     clip: {fileID: 8300000, guid: a6ad843afdffa784c8c1354a10d7d8f1, type: 3}
@@ -186,6 +189,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 19ebbc45934d69d44a73e2ed6c4d6508, type: 3}
   - type: 2
     clip: {fileID: 8300000, guid: a5c2f4d06dd8b284eb441462f1247bfe, type: 3}
+  - type: 3
+    clip: {fileID: 8300000, guid: 60eeab037bc448d41b8482f71deba8fd, type: 3}
 --- !u!1 &4782504647752518155
 GameObject:
   m_ObjectHideFlags: 0

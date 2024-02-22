@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9c832250bb61a4293d10b222f0e8a9, type: 3}
   m_Name: MainMenu
   m_EditorClassIdentifier: 
-  go: Start
-  part1Label: Build a fuel cell
-  part2Label: Use a fuel cell
+  SessionChooserHeader: Choose a session
+  StartSession: Start
+  Sessions:
+  - Scene: 1
+    Description: Build a fuel cell
+  - Scene: 2
+    Description: Use a fuel cell

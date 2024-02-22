@@ -28,21 +28,24 @@ MonoBehaviour:
   - sequence: <water>
     replaceWith: Water
     color: {r: 0.14901961, g: 1, b: 1, a: 1}
+  - sequence: <oxygen>
+    replaceWith: Oxygen
+    color: {r: 0.06666667, g: 0.6, b: 1, a: 1}
   - sequence: <radiator>
     replaceWith: Radiator
     color: {r: 0.77254903, g: 0.31505957, b: 0.15052801, a: 1}
   - sequence: <humidity>
     replaceWith: Humidity
     color: {r: 0.14901961, g: 1, b: 1, a: 1}
-  - sequence: <humidifier>
-    replaceWith: Humidifier
-    color: {r: 0.06666667, g: 0.6, b: 1, a: 1}
   - sequence: <nitrogen>
     replaceWith: Nitrogen
     color: {r: 0.14901961, g: 0.3019608, b: 0.14901961, a: 1}
   - sequence: <pemfc>
     replaceWith: Full Cell
     color: {r: 0.37647063, g: 0.015686275, b: 0.027450982, a: 1}
+  - sequence: <humidifier>
+    replaceWith: Humidifier
+    color: {r: 0.06666667, g: 0.6, b: 1, a: 1}
   - sequence: <compressor>
     replaceWith: Compressor
     color: {r: 0.08846561, g: 0.26432884, b: 0.3962264, a: 1}
@@ -54,6 +57,9 @@ MonoBehaviour:
     color: {r: 0.14901961, g: 1, b: 1, a: 1}
   - sequence: <hydrogen_bottle>
     replaceWith: Hydrogen Bottle
+    color: {r: 1, g: 0, b: 0, a: 1}
+  - sequence: <hydrogen>
+    replaceWith: Hydrogen
     color: {r: 1, g: 0, b: 0, a: 1}
   - sequence: <nitrogen_bottle>
     replaceWith: Nitrogen Bottle

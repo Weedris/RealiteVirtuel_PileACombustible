@@ -8,9 +8,6 @@ public class PlatformManager : MonoBehaviour
 	public GameObject Vr;
 	public GameObject SocketMainComponent;
 
-
-
-
     void Awake()
     {
 #if UNITY_STANDALONE || UNITY_EDITOR

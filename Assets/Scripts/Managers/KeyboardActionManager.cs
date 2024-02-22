@@ -160,7 +160,7 @@ public class KeyboardActionManager : MonoBehaviour
 		joint.breakTorque = Mathf.Infinity;
 
 		traceParser.Instance.traceInApp(grabbedObject);
-		SoundManager.Instance.PlaySFX(SfxType.GrabbedObject);
+		SoundManager.Instance.PlaySFX(SfxType.Grab);
 	}
 
 	public bool GrabOn() { return (grabbedObject != null); }

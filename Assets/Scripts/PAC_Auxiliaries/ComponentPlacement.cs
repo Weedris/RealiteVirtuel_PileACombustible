@@ -17,7 +17,6 @@ public class ComponentPlacement : MonoBehaviour
 		else Destroy(gameObject);
 	}
 
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
 	public void CheckComponentPlacement(Transform target, Transform objectToPlace)
 	{
 		traceParser.Instance.traceSocket(target.gameObject, objectToPlace.name);
@@ -38,7 +37,7 @@ public class ComponentPlacement : MonoBehaviour
 		else SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
 
 	}
-#elif UNITY_ANDROID
+
 	public void CheckComponentPlacement(XRSocketInteractor socket)
 	{
 		traceParser.Instance.traceSocket(socket, socket.GetOldestInteractableSelected().transform.name);
@@ -53,7 +52,7 @@ public class ComponentPlacement : MonoBehaviour
 		else SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
 
 	}
-#endif
+
 	public void Caught(GameObject go)
 	{
 		GameManager.Instance.traceParser.traceInApp(go);

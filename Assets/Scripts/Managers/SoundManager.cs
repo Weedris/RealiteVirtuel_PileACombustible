@@ -38,12 +38,13 @@ public enum SfxType
 {
 	GoodAnswer,
 	BadAnswer,
-	GrabbedObject,
-    endAssembly
+	Grab,
+	Win
 }
 
 public class SoundManager : MonoBehaviour
 {
+	public Settings settings;
 	public static SoundManager Instance;
 	[SerializeField]
 	private AudioSource bgmSource;
@@ -61,24 +62,27 @@ public class SoundManager : MonoBehaviour
 	{
 		public SfxType type;
 		public AudioClip clip;
-
-        
-    }
+	}
 
 	[Header("Background Musics in project")]
-	public List<Bgm> l_bgms = new List<Bgm>(new Bgm[System.Enum.GetNames(typeof(BgmType)).Length]);
+	public List<Bgm> l_bgms = new(new Bgm[System.Enum.GetNames(typeof(BgmType)).Length]);
 	[Header("Sound Effects in project")]
-	public List<Sfx> l_sfxs = new List<Sfx>(new Sfx[System.Enum.GetNames(typeof(SfxType)).Length]);
-	private Dictionary<BgmType, AudioClip> d_AllBgm = new Dictionary<BgmType, AudioClip>();
-	private Dictionary<SfxType, AudioClip> d_AllSfx = new Dictionary<SfxType, AudioClip>();
+	public List<Sfx> l_sfxs = new(new Sfx[System.Enum.GetNames(typeof(SfxType)).Length]);
+	private Dictionary<BgmType, AudioClip> d_AllBgm = new();
+	private Dictionary<SfxType, AudioClip> d_AllSfx = new();
 
 	void Awake()
 	{
+		// singleton
 		if (Instance == null)
+		{
 			Instance = this;
+			DontDestroyOnLoad(gameObject);
+		}
 		else
 			Destroy(gameObject);
 
+		// initialize dictionaries
 		foreach (var bgm in l_bgms)
 			d_AllBgm.Add(bgm.type, bgm.clip);
 
@@ -115,6 +119,7 @@ public class SoundManager : MonoBehaviour
 	/// <param name="value">Sound volume between 0.0 and 1.0</param>
 	public void ChangeBgmVolume(float value)
 	{
+		settings.BgmLevel = value;
 		bgmSource.volume = value;
 	}
 
@@ -122,6 +127,7 @@ public class SoundManager : MonoBehaviour
 	/// <param name="value">Sound volume between 0.0 and 1.0</param>
 	public void ChangeSfxVolume(float value)
 	{
+		settings.SfxLevel = value;
 		sfxSource.volume = value;
 	}
 

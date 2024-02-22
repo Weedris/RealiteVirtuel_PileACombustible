@@ -30,8 +30,8 @@ public class ScreenInstructionsBuilding : MonoBehaviour, ILangUpdatable
 
 	public void UpdateLang(LanguageRef lang)
 	{
-		ContextAssembly assemblyContext = lang.assemblyContext;
-		string welcome = lang.introductionDialogsContext.GetMessages()[0];
+		ContextAssembly assemblyContext = lang.AssemblyContext;
+		string welcome = lang.IntroductionDialogsContext.GetMessages()[0];
 		string[] assemblyInstructions = assemblyContext.GetAllInstructions();
 		instructions = new[] { welcome }.Concat(assemblyInstructions).ToArray();
 		UpdateCurrentInstruction();
