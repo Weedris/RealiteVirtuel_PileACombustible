@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SceneChooserDialog : MonoBehaviour, ILangUpdatable
+public class SceneChooserDialog : LangUpdatable
 {
 	[Header("Buttons")]
 	[SerializeField] private Button nextButton;
@@ -55,7 +55,7 @@ public class SceneChooserDialog : MonoBehaviour, ILangUpdatable
 		currentSessionDescription.text = sessions[index].Description;
 	}
 
-	public void UpdateLang(LanguageRef lang)
+	public override void UpdateLang(Translation lang)
 	{
 		ContextMainMenu mainMenuContext = lang.MainMenuContext;
 		sessions = mainMenuContext.Sessions;

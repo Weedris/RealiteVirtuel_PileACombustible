@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LanguageManager : MonoBehaviour
@@ -5,8 +7,7 @@ public class LanguageManager : MonoBehaviour
 	public static LanguageManager Instance;
 
 	[SerializeField] private Settings settings;
-	[SerializeField] private Translation translations;
-	[SerializeField] private GameObject[] toUpdateOnLangChanged;
+	private HashSet<LangUpdatable> toUpdateOnLangChanged = new();
 
 	private void Awake()
 	{
@@ -17,23 +18,27 @@ public class LanguageManager : MonoBehaviour
 
 	private void Start()
 	{
-		Invoke(nameof(UpdateUI), 0.2f);
+		Invoke(nameof(UpdateLang), 0.2f);
 	}
 
-	public void SwitchLanguage(Language lang)
+	private void UpdateLang()
 	{
-		settings.curentLanguage = lang;
-		UpdateUI();
+		foreach (LangUpdatable element in toUpdateOnLangChanged)
+			element.UpdateLang(settings.currentLanguage);
 	}
 
-	private void UpdateUI()
+	public void SwitchLanguage(Translation lang)
 	{
-		LanguageRef translation = translations.refs[(int)settings.curentLanguage];
-		foreach (GameObject element in toUpdateOnLangChanged)
-		{
-			element
-				.GetComponent<ILangUpdatable>()
-				.UpdateLang(translation);
-		}
+		settings.currentLanguage = lang;
+		UpdateLang();
+	}
+
+	public void RegisterUpdatable(LangUpdatable lu)
+	{
+		toUpdateOnLangChanged.Add(lu);
+	}
+	public void ForgetUpdatable(LangUpdatable lu)
+	{
+		toUpdateOnLangChanged.Remove(lu);
 	}
 }

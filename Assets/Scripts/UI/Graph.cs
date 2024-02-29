@@ -30,7 +30,9 @@ public class Graph : MonoBehaviour
 	[SerializeField] private float _lineWidth = 0.01f;
 	[SerializeField] private float _axisWidth = 0.01f;
 	[SerializeField] private Margin _margin = new(1, 1, 2, 1);
-	[SerializeField] private MinMax2D _defaultBounds = new(0, 0, 100, 50);
+	[SerializeField]
+	[Tooltip("The values bounds by default that need to be used if exactly 0 or 1 points are present")]
+	private MinMax2D _defaultBounds = new(0, 0, 100, 50);
 	[SerializeField]
 	[Tooltip("Wether you want the origin to stay at the specified minX and minY")]
 	private bool _forceOrigin = false;
@@ -42,8 +44,8 @@ public class Graph : MonoBehaviour
 	private bool _forceMaxY = false;
 
 	[Header("Theme")]
-	[SerializeField] private GameObject _pointPrefab;
-	[SerializeField] private float _pointRadius = 1f;
+	//[SerializeField] private GameObject _pointPrefab;
+	//[SerializeField] private float _pointRadius = 1f;
 	[SerializeField] private Color _axisColor = Color.white;
 	[SerializeField] private Color _scaleColor = Color.grey;
 	[SerializeField] private List<Color> _categoryColors = new() { Color.yellow, Color.green, Color.red, Color.blue, Color.cyan, Color.magenta };
@@ -398,9 +400,9 @@ public class Graph : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Redraw points/lines/curves of the specified category.
+	/// Redraw (points/lines/curves) of the specified category.
 	/// </summary>
-	/// <param name="categoryID">The place of the category within the _categoryNames List</param>
+	/// <param name="categoryID">The index of the category within the _categoryNames List</param>
 	private void RedrawPoints(int categoryID)
 	{
 		LineRenderer lr = _categoryLines[categoryID].GetComponent<LineRenderer>();

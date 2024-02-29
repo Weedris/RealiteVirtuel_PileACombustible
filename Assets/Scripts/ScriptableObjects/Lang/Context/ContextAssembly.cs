@@ -3,17 +3,20 @@
 [CreateAssetMenu(fileName = "Assembly", menuName = "ScriptableObjects/Lang/Context/Assembly")]
 public class ContextAssembly : Context
 {
+	#region fields
 	[SerializeField] private TextTag[] tags;
 
-	[SerializeField] [TextArea(3, 10)] private string StackInstructions;
-	[SerializeField] [TextArea(3, 10)] private string DihydrogenInstructions;
-	[SerializeField] [TextArea(3, 10)] private string AirCompressorInstructions;
-	[SerializeField] [TextArea(3, 10)] private string HumidifierInstructions;
-	[SerializeField] [TextArea(3, 10)] private string NitrogenInstructions;
-	[SerializeField] [TextArea(3, 10)] private string FanInstructions;
-	[SerializeField] [TextArea(3, 10)] private string WaterInstructions;
-	[SerializeField] [TextArea(3, 10)] private string RadiatorInstructions;
+	[SerializeField][TextArea(3, 10)] private string StackInstructions;
+	[SerializeField][TextArea(3, 10)] private string DihydrogenInstructions;
+	[SerializeField][TextArea(3, 10)] private string AirCompressorInstructions;
+	[SerializeField][TextArea(3, 10)] private string HumidifierInstructions;
+	[SerializeField][TextArea(3, 10)] private string NitrogenInstructions;
+	[SerializeField][TextArea(3, 10)] private string FanInstructions;
+	[SerializeField][TextArea(3, 10)] private string WaterInstructions;
+	[SerializeField][TextArea(3, 10)] private string RadiatorInstructions;
+	#endregion fields
 
+	#region getters
 	public string GetStackInstructions() { return GetFormatedText(StackInstructions); }
 	public string GetDihydrogenInstructions() { return GetFormatedText(DihydrogenInstructions); }
 	public string GetAirCompressorInstructions() { return GetFormatedText(AirCompressorInstructions); }
@@ -22,7 +25,15 @@ public class ContextAssembly : Context
 	public string GetFanInstructions() { return GetFormatedText(FanInstructions); }
 	public string GetWaterInstructions() { return GetFormatedText(WaterInstructions); }
 	public string GetRadiatorInstructions() { return GetFormatedText(RadiatorInstructions); }
+	#endregion getters
 
+	
+	/// <summary>
+	/// Apply the translation with used tags
+	/// Ex: "<hydrogen>" is replaced with "Hydrogen" with a red color
+	/// </summary>
+	/// <param name="text"></param>
+	/// <returns></returns>
 	private string GetFormatedText(string text)
 	{
 		// can be optimised by looking at balises instead
@@ -49,6 +60,6 @@ public class ContextAssembly : Context
 
 	private void Awake()
 	{
-		System.Array.Sort(tags, (TextTag a,TextTag b) => Mathf.Clamp(a.replaceWith.Length - b.replaceWith.Length, -1, 1));
+		System.Array.Sort(tags, (TextTag a, TextTag b) => Mathf.Clamp(a.replaceWith.Length - b.replaceWith.Length, -1, 1));
 	}
 }

@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ContinualDialog : MonoBehaviour, ILangUpdatable, IEndable
+public class ContinualDialog : LangUpdatable , IEndable
 {
 	public event Action OnDialogEnd;
 	[SerializeField] private TMP_Text message;
@@ -35,11 +35,16 @@ public class ContinualDialog : MonoBehaviour, ILangUpdatable, IEndable
 	private void OnDisable()
 	{
 		nextButton.onClick.RemoveListener(NextMessage);
+	}
+
+	private new void OnDestroy()
+	{
+		base.OnDestroy();
 		foreach (Delegate d in OnDialogEnd.GetInvocationList())
 			OnDialogEnd -= (Action)d;
 	}
 
-	public void UpdateLang(LanguageRef lang)
+	public override void UpdateLang(Translation lang)
 	{
 		ContextIntroductionDialogs introductionContext = lang.IntroductionDialogsContext;
 		messages = introductionContext.GetMessages();

@@ -58,7 +58,6 @@ public class SaveInCSV
 				   .Append(".csv");
 		
 		WriteFile(Path.Combine(CheckDirectories(), fileBuilder.ToString()), data.ToString());
-		/*File.WriteAllText(filePath, data.ToString());*/
 	}
 
 	private void WriteFile(string filePath, string text)

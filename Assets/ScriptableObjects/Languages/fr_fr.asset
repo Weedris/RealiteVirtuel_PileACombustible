@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d590773df134ff14a93524debb2f574b, type: 3}
+  m_Name: fr_fr
+  m_EditorClassIdentifier: 
+  FlagSprite: {fileID: 21300000, guid: 15f0110b6561d064e9c5f77dd9df3a56, type: 3}
+  AssemblyContext: {fileID: 11400000, guid: 08f4c5438ee291f4e968ddc19085a577, type: 2}
+  ExitDialogContext: {fileID: 11400000, guid: 37b8c895692997241a06519f4c6f5937, type: 2}
+  IntroductionDialogsContext: {fileID: 11400000, guid: ab0963e7aa8a080478f8ec2a6ab1830a,
+    type: 2}
+  MainMenuContext: {fileID: 11400000, guid: 64327b0929fc0744a8f638af0f362125, type: 2}
+  PerformanceLabContext: {fileID: 11400000, guid: efde8010a21e91246a24fdd3f9e90ac4,
+    type: 2}
+  EndDialogContext: {fileID: 11400000, guid: d22dcdf820be446459545cb3d52f1b70, type: 2}

@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class ScenesManager : MonoBehaviour
 {
-	public static ScenesManager Instance { get; private set; }
-
 	public enum Scene
 	{
 		MAIN_MENU,
 		ASSEMBLY_SCENE,
 		PERFORMANCE_LAB
 	}
+
+	public static ScenesManager Instance { get; private set; }
+
+
+	public Scene currentScene = Scene.MAIN_MENU;
 
 	// A remplir avec les noms de scenes
 	private Dictionary<Scene, string> scenes = new()
@@ -49,7 +52,7 @@ public class ScenesManager : MonoBehaviour
 	}
 
 
-	public static void Exit()
+	public static void QuitApplication()
 	{
 #if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false;

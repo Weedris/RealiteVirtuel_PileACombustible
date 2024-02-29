@@ -1,26 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public enum Language
+[CreateAssetMenu(fileName = "Translation", menuName = "ScriptableObjects/Lang/Translation")]
+public class Translation: ScriptableObject
 {
-	ENGLISH,
-	FRENCH,
-	PORTUGUESE
-}
-
-[Serializable]
-public class LanguageRef
-{
-	public Language Language;
+	public Sprite FlagSprite;
 	public ContextAssembly AssemblyContext;
 	public ContextExitDialog ExitDialogContext;
 	public ContextIntroductionDialogs IntroductionDialogsContext;
 	public ContextMainMenu MainMenuContext;
 	public ContextPerformanceLab PerformanceLabContext;
-}
-
-[CreateAssetMenu(fileName = "Translation", menuName = "ScriptableObjects/Lang/Translation")]
-public class Translation : ScriptableObject
-{
-	public LanguageRef[] refs;
+	public ContextEndDialog EndDialogContext;
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   platform: 0
-  curentLanguage: 1
-  BgmLevel: 0.8
+  currentLanguage: {fileID: 11400000, guid: c068bbc85baf93240a13b06f78a0e280, type: 2}
+  BgmLevel: 0.9889136
   SfxLevel: 1

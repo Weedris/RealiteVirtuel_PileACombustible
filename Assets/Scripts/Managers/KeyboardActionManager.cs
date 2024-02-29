@@ -1,3 +1,4 @@
+using Assets.Scripts.PEMFC;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -80,18 +81,16 @@ public class KeyboardActionManager : MonoBehaviour
 		if (Input.GetMouseButtonUp(0))
 			ReleaseObject();
 
-
 		//Crouch
-		if (Input.GetKey(KeyCode.LeftShift))
-			Crouch();
-		else
-			StandUp();
+		if (Input.GetKey(KeyCode.LeftShift)) Crouch();
+		else StandUp();
 
-		// Détection du roulement de la molette de la souris
-		float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
-		if (scrollWheel != 0f)
+		// Grab interaction
+		if (grabbedObject != null)
 		{
-			if (GrabOn())
+			// Détection du roulement de la molette de la souris
+			float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
+			if (scrollWheel != 0f)
 			{
 				objectScrollVector.z = Mathf.Clamp(objectScrollVector.z + scrollWheel, -0.5f, 1f);
 				grabPoint.localPosition = objectScrollVector;
@@ -137,14 +136,13 @@ public class KeyboardActionManager : MonoBehaviour
 	void TryGrabObject()
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;
 
-		if (Physics.Raycast(ray, out hit, maxGrabDistance))
+		if (Physics.Raycast(ray, out RaycastHit hit, maxGrabDistance))
 		{
-			if (hit.collider.gameObject.GetComponent<XRGrabInteractable>() != null)
-				GrabObject(hit.collider.gameObject);
-			else if (hit.collider.gameObject.GetComponent<XRSimpleInteractable>() != null)
-				GameManager.Instance.getMainComponentToTheirPlace();
+			if (hit.collider.TryGetComponent(out FuelCellMainComponent component))
+				GrabObject(component.gameObject);
+			else if (hit.collider.GetComponent<XRSimpleInteractable>() != null) // exception for the red button i guess
+				AssemblyGameManager.Instance.ResetComponentsPositionAndRotation();
 		}
 	}
 
@@ -153,27 +151,27 @@ public class KeyboardActionManager : MonoBehaviour
 		grabbedObject = objToGrab;
 		grabbedRigidbody = grabbedObject.GetComponent<Rigidbody>();
 
+		// why is there french comments ?
 		// Créez un joint
 		joint = grabbedObject.AddComponent<FixedJoint>();
 		joint.connectedBody = pointDeGrab; // Connectez l'objet saisi au joueur
 		joint.breakForce = Mathf.Infinity; // Ajustez la résistance du joint si nécessaire
 		joint.breakTorque = Mathf.Infinity;
 
-		traceParser.Instance.traceInApp(grabbedObject);
-		SoundManager.Instance.PlaySFX(SfxType.Grab);
+		SoundManager.Instance.PlaySFX(SfxType.GrabbedObject);
 	}
-
-	public bool GrabOn() { return (grabbedObject != null); }
 
 	void ReleaseObject()
 	{
-		if (grabbedObject != null)
-		{
-			// Détruisez le joint
-			Destroy(joint);
+		if (grabbedObject == null)
+			return;
 
-			objectScrollVector.z = 0;
-			grabbedObject = null;
-		}
+		Destroy(joint);
+		objectScrollVector.z = 0;
+
+		if (grabbedObject.TryGetComponent(out FuelCellMainComponent component))
+			component.TryPlace();
+
+		grabbedObject = null;
 	}
 }

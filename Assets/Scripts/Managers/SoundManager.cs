@@ -38,13 +38,13 @@ public enum SfxType
 {
 	GoodAnswer,
 	BadAnswer,
-	Grab,
-	Win
+	GrabbedObject,
+	endAssembly
 }
 
 public class SoundManager : MonoBehaviour
 {
-	public Settings settings;
+	[SerializeField] private Settings settings;
 	public static SoundManager Instance;
 	[SerializeField]
 	private AudioSource bgmSource;

@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-public class ScreenInstructionsBuilding : MonoBehaviour, ILangUpdatable
+public class ScreenInstructionsBuilding : LangUpdatable
 {
 	[SerializeField] TMP_Text screenText;
 
@@ -14,13 +14,6 @@ public class ScreenInstructionsBuilding : MonoBehaviour, ILangUpdatable
 		currentIndex++;
 		if (currentIndex < instructions.Length)
 			UpdateCurrentInstruction();
-		else
-			OnEnd();
-	}
-
-	private void OnEnd()
-	{
-		GameManager.Instance.End();
 	}
 
 	private void UpdateCurrentInstruction()
@@ -28,7 +21,7 @@ public class ScreenInstructionsBuilding : MonoBehaviour, ILangUpdatable
 		screenText.text = instructions[currentIndex];
 	}
 
-	public void UpdateLang(LanguageRef lang)
+	public override void UpdateLang(Translation lang)
 	{
 		ContextAssembly assemblyContext = lang.AssemblyContext;
 		string welcome = lang.IntroductionDialogsContext.GetMessages()[0];
