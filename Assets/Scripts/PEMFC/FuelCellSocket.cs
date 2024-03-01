@@ -1,55 +1,40 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.PEMFC
 {
+	[RequireComponent(typeof(Collider))]
 	public class FuelCellSocket : MonoBehaviour
 	{
-		[Tooltip("The component the socket can receive")]
+		[Tooltip("Specific FuelCellComponent that this socket can receive.")]
 		public FuelCellComponent Target;
-		[Tooltip("The material of the simplified shape of a main component entering the socket")]
-		[SerializeField] private Material phantomMaterial;
 
-		private GameObject phantomComponent;
-		private MeshFilter phantomComponentMeshFilter;
+		[SerializeField] private GameObject phatomRendererPrefab;
+		private List<GameObject> phantomGameObjects = new();
 
-		// animation of the phantom component
-		private const float alphaMin = .5f;
-		private const float alphaMax = .6f;
-		private const float frequency = .5f;
-
-		private void Awake()
+		public void CreatePhantom(FuelCellMainComponent component)
 		{
-			phantomComponent = new GameObject("PhantomComponent", typeof(MeshRenderer), typeof(MeshFilter));
-			phantomComponentMeshFilter = phantomComponent.GetComponent<MeshFilter>();
-			phantomComponent.transform.parent = transform;
+			GameObject phantomGameObject = Instantiate(phatomRendererPrefab, transform);
+			phantomGameObject.GetComponent<PhantomRenderer>().SetMesh(component.SimplifiedMesh);
+			phantomGameObjects.Add(phantomGameObject);
 		}
 
-		private void Update()
+		public void RemovePhantom()
 		{
-			// phantom component animation
-			if (phantomComponent.activeSelf)
-			{
-				Color newColor = phantomMaterial.color;
-				float amplitude = alphaMax - alphaMin;
-				newColor.a = alphaMin + (Mathf.Sin(Time.time * frequency * Mathf.PI) * amplitude + amplitude) / 2;
-				phantomMaterial.color = newColor;
-			}
-		}
+            foreach (GameObject phantomGameObject in phantomGameObjects)
+				Destroy(phantomGameObject);
+			phantomGameObjects.Clear();
+        }
 
-		private void OnTriggerEnter(Collider other)
+		/// <summary>
+		/// Used when a component place itself in the socket to delete phantom shapes
+		/// </summary>
+		public void Deactivate()
 		{
-			if (other.TryGetComponent(out FuelCellMainComponent component))
-			{
-				phantomComponentMeshFilter.mesh = component.SimplifiedShape;
-				phantomComponent.SetActive(true);
-			}
+			if (phantomGameObjects.Count != 0)
+				RemovePhantom();
+			Destroy(this);
+			Destroy(GetComponent<Collider>());
 		}
-
-		private void OnTriggerExit(Collider other)
-		{
-			if (other.TryGetComponent<FuelCellMainComponent>(out _))
-				phantomComponent.SetActive(false);
-		}
-
 	}
 }

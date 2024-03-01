@@ -1597,7 +1597,7 @@ MonoBehaviour:
   ToShowWhenPlaced:
   - {fileID: 2721410172593161380}
   WhoAmI: 0
-  SimplifiedShape: {fileID: 0}
+  SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1142909639610928785
 GameObject:
   m_ObjectHideFlags: 0
@@ -1657,7 +1657,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: 5
-  phantomMaterial: {fileID: 2100000, guid: 9438553a0339a874a901bea78b1beede, type: 2}
+  phatomRendererPrefab: {fileID: 3262062416705652174, guid: 6b02463f00530ed4b9ae343c0261f4ce,
+    type: 3}
 --- !u!1 &1191494676084608605
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,7 +2494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ToShowWhenPlaced: []
   WhoAmI: 4
-  SimplifiedShape: {fileID: 0}
+  SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1780828107105060725
 GameObject:
   m_ObjectHideFlags: 0
@@ -2724,7 +2725,7 @@ MonoBehaviour:
   - {fileID: 5561861881177272586}
   - {fileID: 7368129761672822944}
   WhoAmI: 3
-  SimplifiedShape: {fileID: 0}
+  SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1793019267759399695
 GameObject:
   m_ObjectHideFlags: 0
@@ -4931,7 +4932,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: 0
-  phantomMaterial: {fileID: 2100000, guid: 9438553a0339a874a901bea78b1beede, type: 2}
+  phatomRendererPrefab: {fileID: 3262062416705652174, guid: 6b02463f00530ed4b9ae343c0261f4ce,
+    type: 3}
 --- !u!1 &2898382390660053931
 GameObject:
   m_ObjectHideFlags: 0
@@ -5323,7 +5325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: 6
-  phantomMaterial: {fileID: 2100000, guid: 9438553a0339a874a901bea78b1beede, type: 2}
+  phatomRendererPrefab: {fileID: 3262062416705652174, guid: 6b02463f00530ed4b9ae343c0261f4ce,
+    type: 3}
 --- !u!1 &3128873591149035139
 GameObject:
   m_ObjectHideFlags: 0
@@ -5383,7 +5386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: 7
-  phantomMaterial: {fileID: 2100000, guid: 9438553a0339a874a901bea78b1beede, type: 2}
+  phatomRendererPrefab: {fileID: 3262062416705652174, guid: 6b02463f00530ed4b9ae343c0261f4ce,
+    type: 3}
 --- !u!1 &3246760756600819578
 GameObject:
   m_ObjectHideFlags: 0
@@ -5616,7 +5620,7 @@ MonoBehaviour:
   ToShowWhenPlaced:
   - {fileID: 2485327024798418175}
   WhoAmI: 5
-  SimplifiedShape: {fileID: 0}
+  SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &3247718299521321300
 GameObject:
   m_ObjectHideFlags: 0
@@ -6041,7 +6045,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: 4
-  phantomMaterial: {fileID: 2100000, guid: 9438553a0339a874a901bea78b1beede, type: 2}
+  phatomRendererPrefab: {fileID: 3262062416705652174, guid: 6b02463f00530ed4b9ae343c0261f4ce,
+    type: 3}
 --- !u!1 &3451015650523168338
 GameObject:
   m_ObjectHideFlags: 0
@@ -7410,7 +7415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ToShowWhenPlaced: []
   WhoAmI: 7
-  SimplifiedShape: {fileID: 0}
+  SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &4069588180461829146
 GameObject:
   m_ObjectHideFlags: 0
@@ -9288,7 +9293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ToShowWhenPlaced: []
   WhoAmI: 6
-  SimplifiedShape: {fileID: 0}
+  SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5186159637864616146
 GameObject:
   m_ObjectHideFlags: 0
@@ -9923,7 +9928,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: 2
-  phantomMaterial: {fileID: 2100000, guid: 9438553a0339a874a901bea78b1beede, type: 2}
+  phatomRendererPrefab: {fileID: 3262062416705652174, guid: 6b02463f00530ed4b9ae343c0261f4ce,
+    type: 3}
 --- !u!1 &5509964295577579748
 GameObject:
   m_ObjectHideFlags: 0
@@ -10949,7 +10955,7 @@ MonoBehaviour:
   ToShowWhenPlaced:
   - {fileID: 6582539833342183460}
   WhoAmI: 1
-  SimplifiedShape: {fileID: 0}
+  SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &6316058379723355621
 GameObject:
   m_ObjectHideFlags: 0
@@ -12218,7 +12224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: 1
-  phantomMaterial: {fileID: 2100000, guid: 9438553a0339a874a901bea78b1beede, type: 2}
+  phatomRendererPrefab: {fileID: 3262062416705652174, guid: 6b02463f00530ed4b9ae343c0261f4ce,
+    type: 3}
 --- !u!1 &7147918722248349011
 GameObject:
   m_ObjectHideFlags: 0
@@ -14382,7 +14389,7 @@ MonoBehaviour:
   ToShowWhenPlaced:
   - {fileID: 6582539833342183460}
   WhoAmI: 2
-  SimplifiedShape: {fileID: 0}
+  SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &8465245168103827207
 GameObject:
   m_ObjectHideFlags: 0
@@ -14442,7 +14449,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: 3
-  phantomMaterial: {fileID: 2100000, guid: 9438553a0339a874a901bea78b1beede, type: 2}
+  phatomRendererPrefab: {fileID: 3262062416705652174, guid: 6b02463f00530ed4b9ae343c0261f4ce,
+    type: 3}
 --- !u!1 &8545919499656053912
 GameObject:
   m_ObjectHideFlags: 0

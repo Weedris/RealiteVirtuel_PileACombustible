@@ -16,25 +16,7 @@ public enum FuelCellComponent
 
 public class AssemblyGameManager : MonoBehaviour
 {
-	#region singleton
-	private static AssemblyGameManager _instance;
-	public static AssemblyGameManager Instance
-	{
-		get
-		{
-			if (_instance == null)
-			{
-				_instance = FindAnyObjectByType<AssemblyGameManager>();
-				if (_instance == null)
-				{
-					GameObject go = new("GameManager");
-					_instance = go.AddComponent<AssemblyGameManager>();
-				}
-			}
-			return _instance;
-		}
-	}
-	#endregion singleton
+	public static AssemblyGameManager Instance { get; private set; }
 
 	#region fields
 	[SerializeField] private ScreenInstructionsBuilding screenInstruction;
@@ -63,15 +45,10 @@ public class AssemblyGameManager : MonoBehaviour
 	private void Awake()
 	{
 		// singleton
-		if(_instance == null)
-		{
-			_instance = this;
-		}
-		else if (_instance != null && _instance != this)
-		{
+		if (Instance == null)
+			Instance = this;  // no DontDestroyOnLoad as it shouldn't be used in other scenes
+		else
 			Destroy(gameObject);
-			return;
-		}
 	}
 
 	private void Start()
@@ -138,7 +115,7 @@ public class AssemblyGameManager : MonoBehaviour
 		DataSaver.Instance.Log($"[End]");
 		// victory feedback
 		SoundManager.Instance.PlaySFX(SfxType.endAssembly);
-		GameMenuManager.Instance.AddMenu(endSceneDialog.gameObject);
+		endSceneDialog.gameObject.SetActive(true);
 	}
 
 	public void ResetComponentsPositionAndRotation()
