@@ -1,5 +1,4 @@
 using Assets.Scripts.PEMFC;
-using System.Linq;
 using UnityEngine;
 
 public enum FuelCellComponent
@@ -73,7 +72,7 @@ public class AssemblyGameManager : MonoBehaviour
 			component.gameObject.SetActive(true);
 
 		// don't need the introduction anymore
-		introductionDialog.gameObject.SetActive(false);
+		Destroy(introductionDialog.gameObject);
 
 		screenInstruction.NextInstruction();
 		DataSaver.Instance.Log("[Start] Finished Introduction");

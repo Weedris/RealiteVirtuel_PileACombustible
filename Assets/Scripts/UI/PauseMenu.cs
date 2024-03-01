@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+	[SerializeField] private Settings m_Settings;
+
 	[Header("Buttons")]
 	[SerializeField] private Button resumeButton;
 	[SerializeField] private Button quitButton;
@@ -26,6 +28,12 @@ public class PauseMenu : MonoBehaviour
 	[Header("Sound controllers")]
 	[SerializeField] private Slider bgmSlider;
 	[SerializeField] private Slider sfxSlider;
+
+	private void Start()
+	{
+		bgmSlider.value = m_Settings.BgmLevel;
+		sfxSlider.value = m_Settings.SfxLevel;
+	}
 
 	private void OnEnable()
 	{

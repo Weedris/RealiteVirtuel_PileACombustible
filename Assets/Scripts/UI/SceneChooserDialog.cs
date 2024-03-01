@@ -17,6 +17,11 @@ public class SceneChooserDialog : LangUpdatable
 	private Session[] sessions;
 	private int index;
 
+	private new void Start()
+	{
+		base.Start();
+	}
+
 	private void OnValidationClicked()
 	{
 		ScenesManager.Instance.LoadScene(sessions[index].Scene);
@@ -48,6 +53,8 @@ public class SceneChooserDialog : LangUpdatable
 	private void OnDisable()
 	{
 		validateButton.onClick.RemoveListener(OnValidationClicked);
+		nextButton.onClick.RemoveListener(NextSession);
+		previousButton.onClick.RemoveListener(PreviousSession);
 	}
 
 	private void UpdateCurrentSessionDescription()

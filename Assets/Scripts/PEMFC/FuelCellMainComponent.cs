@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -26,6 +24,17 @@ namespace Assets.Scripts.PEMFC
 		{
 			initialPosition = transform.localPosition;
 			initialRotation = transform.localRotation;
+		}
+
+		private void OnEnable()
+		{
+			GetComponent<XRGrabInteractable>().lastSelectExited.AddListener(XRGrabEnd);
+		}
+
+		private void XRGrabEnd(SelectExitEventArgs args)
+		{
+			DataSaver.Instance.Log($"[Debug] {name} released with args {args}");
+			TryPlace();
 		}
 
 		private void OnTriggerEnter(Collider other)

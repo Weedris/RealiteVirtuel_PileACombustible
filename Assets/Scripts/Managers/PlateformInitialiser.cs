@@ -14,6 +14,7 @@ namespace Assets.Scripts.Managers
 			XRSettings.enabled = false;
 			VR.SetActive(false);
 			PC.SetActive(true);
+			DataSaver.Instance.Log("XR was disabled");
 			Destroy(gameObject);
 			return;
 #endif
@@ -24,6 +25,7 @@ namespace Assets.Scripts.Managers
 			{
 				// configure for meta quest and other android xr devices
 			}
+			DataSaver.Instance.Log("XR was enabled");
 			Destroy(gameObject);
 		}
 	}

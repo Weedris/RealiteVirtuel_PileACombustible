@@ -36,6 +36,7 @@ public class LanguageManager : MonoBehaviour
 	public void RegisterUpdatable(LangUpdatable lu)
 	{
 		toUpdateOnLangChanged.Add(lu);
+		lu.UpdateLang(settings.currentLanguage);
 	}
 	public void ForgetUpdatable(LangUpdatable lu)
 	{

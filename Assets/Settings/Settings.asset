@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca86f9a622217f40a46afff667d3fcf, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  platform: 0
   currentLanguage: {fileID: 11400000, guid: c068bbc85baf93240a13b06f78a0e280, type: 2}
-  BgmLevel: 0.9889136
+  BgmLevel: 0.3
   SfxLevel: 1

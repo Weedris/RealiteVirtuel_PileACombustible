@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class DataSaver : MonoBehaviour
 {
@@ -38,9 +39,14 @@ public class DataSaver : MonoBehaviour
 			return;
 		}
 
-		folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+		// find the document folder depending on the os
+		string documentFolderPath = XRSettings.enabled
+			? "/storage/emulated/0/Documents/"
+			: Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+		folderPath = Path.Combine(documentFolderPath, Application.productName, Application.version);
 		fileName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-		filePath = Path.Combine(folderPath, Application.productName, Application.version, fileName + fileExtension);
+		filePath = Path.Combine(folderPath, fileName + fileExtension);
 	}
 
 	public void Log(string message)
