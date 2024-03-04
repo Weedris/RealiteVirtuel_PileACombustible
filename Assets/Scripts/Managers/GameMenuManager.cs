@@ -23,14 +23,20 @@ public class GameMenuManager : MonoBehaviour
 			return _instance;
 		}
 	}
-	[SerializeField] private Transform head;
+	
 	[SerializeField] private float spawnDistance;
 	[SerializeField] private bool menuFollowsPlayer;
+	private Transform head;
 
 	[FormerlySerializedAs("menu")][SerializeField] private GameObject pauseMenu;
 	[SerializeField] private InputActionProperty showButton;
 
 	private List<GameObject> menuStack = new();
+
+	private void Start()
+	{
+		head = Camera.main.transform;
+	}
 
 	// Update is called once per frame
 	private void Update()
@@ -40,6 +46,7 @@ public class GameMenuManager : MonoBehaviour
 			if (menuStack.Count > 0) CloseLastMenu();
 			else AddMenu(pauseMenu);
 		}
+
 		if (menuFollowsPlayer)
 		{
 			Vector3 headPosition = head.position;

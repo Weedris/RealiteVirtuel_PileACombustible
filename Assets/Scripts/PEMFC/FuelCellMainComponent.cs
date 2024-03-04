@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.XR.Interaction.Toolkit;
 
 namespace Assets.Scripts.PEMFC
@@ -11,7 +11,7 @@ namespace Assets.Scripts.PEMFC
 		[Tooltip("The components (secondary) that are shown when this component is placed correctly within the fuel cell")]
 		public GameObject[] ToShowWhenPlaced;
 		public FuelCellComponent WhoAmI;
-		[FormerlySerializedAs("SimplifiedShape")] public Mesh SimplifiedMesh;
+		public Mesh SimplifiedMesh;
 
 		private Vector3 initialPosition;
 		private Quaternion initialRotation;
@@ -26,16 +26,9 @@ namespace Assets.Scripts.PEMFC
 			initialRotation = transform.localRotation;
 		}
 
-		private void OnEnable()
-		{
-			GetComponent<XRGrabInteractable>().lastSelectExited.AddListener(XRGrabEnd);
-		}
-
-		private void XRGrabEnd(SelectExitEventArgs args)
-		{
-			DataSaver.Instance.Log($"[Debug] {name} released with args {args}");
-			TryPlace();
-		}
+		private void OnEnable() { if (TryGetComponent(out XRGrabInteractable xrGrab)) xrGrab.firstSelectEntered.AddListener(OnXrGrab); }
+		private void OnDisable() { if (TryGetComponent(out XRGrabInteractable xrGrab)) xrGrab.firstSelectEntered.RemoveListener(OnXrGrab); }
+		private void OnXrGrab(SelectEnterEventArgs arg0) { SoundManager.Instance.PlaySFX(SfxType.GrabbedObject); }
 
 		private void OnTriggerEnter(Collider other)
 		{

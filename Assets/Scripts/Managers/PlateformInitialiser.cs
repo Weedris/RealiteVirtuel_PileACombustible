@@ -17,7 +17,7 @@ namespace Assets.Scripts.Managers
 			DataSaver.Instance.Log("XR was disabled");
 			Destroy(gameObject);
 			return;
-#endif
+#else
 			XRSettings.enabled = true;
 			VR.SetActive(true);
 			PC.SetActive(false);
@@ -27,6 +27,7 @@ namespace Assets.Scripts.Managers
 			}
 			DataSaver.Instance.Log("XR was enabled");
 			Destroy(gameObject);
+#endif
 		}
 	}
 }

@@ -1,29 +1,31 @@
 /*
-* 2022-02-18
-* SoundManager
-* by Enzo Moulian
-*
-* Inspired by Tarodev
-* Link to the video : 
-* https://www.youtube.com/watch?v=tEsuLTpz_DU
-*
-* Usage : Commercial and non-commercial use
-* Credits appreciated 
-* 
-* How to set up the Sound Manager :
-* 1) Go on your 1st scene avec create an empty gameObject
-* 2) Attach this script to this empty
-* 3) Create 2 childrens empty gameObjects on the initial gameObject
-* 4) Attach an AudioSource component for each childrens
-* 5) Link parent's "BgmSource" field and "SfxSource" fields with the AudioSource component from childrens
-* 6) Modify "BgmType" and "SfxType" enumerator in this script to create as much BGM and SFX as you want in your project
-* 7) In Unity Editor, don't forget to match "L_bgms" length and "L_sfxs" length with "BgmType" length and "SfxType" length
-* 8) Check if you have an AudioListener component in your scene (like on your Camera); otherwhise, no sound will be catched
-* 9) Your SoundManager is ready !
-*
-* For each element of your bgm and sfx list ("L_bgms" and "L_sfxs"), choose the type of your sound and attach an audio clip
-* To call a sound in your scripts, use "SoundManager.Instance" and chosse the method you want to call
-*/
+ * 2024-03-01 Modified by Akira Kiryonn https://github.com/Kiryonn
+ * 
+ * 2022-02-18
+ * SoundManager
+ * by Enzo Moulian https://github.com/EnzoMoulian
+ *
+ * Inspired by Tarodev
+ * Link to the video : 
+ * https://www.youtube.com/watch?v=tEsuLTpz_DU
+ *
+ * Usage : Commercial and non-commercial use
+ * Credits appreciated 
+ * 
+ * How to set up the Sound Manager :
+ * 1) Go on your 1st scene avec create an empty gameObject
+ * 2) Attach this script to this empty
+ * 3) Create 2 childrens empty gameObjects on the initial gameObject
+ * 4) Attach an AudioSource component for each childrens
+ * 5) Link parent's "BgmSource" field and "SfxSource" fields with the AudioSource component from childrens
+ * 6) Modify "BgmType" and "SfxType" enumerator in this script to create as much BGM and SFX as you want in your project
+ * 7) In Unity Editor, don't forget to match "L_bgms" length and "L_sfxs" length with "BgmType" length and "SfxType" length
+ * 8) Check if you have an AudioListener component in your scene (like on your Camera); otherwhise, no sound will be catched
+ * 9) Your SoundManager is ready !
+ *
+ * For each element of your bgm and sfx list ("L_bgms" and "L_sfxs"), choose the type of your sound and attach an audio clip
+ * To call a sound in your scripts, use "SoundManager.Instance" and chosse the method you want to call
+ */
 
 using System.Collections.Generic;
 using UnityEngine;

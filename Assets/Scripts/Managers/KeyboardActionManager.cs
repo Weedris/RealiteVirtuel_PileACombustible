@@ -151,7 +151,8 @@ public class KeyboardActionManager : MonoBehaviour
 		grabbedObject = objToGrab;
 		grabbedRigidbody = grabbedObject.GetComponent<Rigidbody>();
 
-		// why is there french comments ?
+		// why are there french comments ?
+
 		// Créez un joint
 		joint = grabbedObject.AddComponent<FixedJoint>();
 		joint.connectedBody = pointDeGrab; // Connectez l'objet saisi au joueur
