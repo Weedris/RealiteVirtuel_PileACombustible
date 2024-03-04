@@ -31,8 +31,8 @@ public class PauseMenu : MonoBehaviour
 
 	private void Start()
 	{
-		bgmSlider.value = m_Settings.BgmLevel;
-		sfxSlider.value = m_Settings.SfxLevel;
+		bgmSlider.value = m_Settings.BgmVolume;
+		sfxSlider.value = m_Settings.SfxVolume;
 	}
 
 	private void OnEnable()

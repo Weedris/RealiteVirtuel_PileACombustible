@@ -1,10 +1,25 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LanguageManager : MonoBehaviour
 {
-	public static LanguageManager Instance;
+	private static LanguageManager _instance;
+	public static LanguageManager Instance
+	{
+		get
+		{
+			if (_instance == null)
+			{
+				_instance = FindObjectOfType<LanguageManager>();
+				if (_instance == null)
+				{
+					_instance = new LanguageManager();
+					_instance.gameObject.name = "LanguageManager";
+				}
+			}
+			return _instance;
+		}
+	}
 
 	[SerializeField] private Settings settings;
 	private HashSet<LangUpdatable> toUpdateOnLangChanged = new();
@@ -12,8 +27,11 @@ public class LanguageManager : MonoBehaviour
 	private void Awake()
 	{
 		// singleton
-		if (Instance == null) Instance = this;
-		else Destroy(gameObject);
+		if (_instance != null && _instance != this)
+		{
+			Destroy(gameObject);
+			return;
+		}
 	}
 
 	private void Start()

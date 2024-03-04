@@ -1,4 +1,5 @@
 using Assets.Scripts.PEMFC;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum FuelCellComponent
@@ -23,7 +24,7 @@ public class AssemblyGameManager : MonoBehaviour
 	[SerializeField] private EndSceneDialog endSceneDialog;
 
 	[Header("Fuel Cell")]
-	[SerializeField] private FuelCellMainComponent[] mainComponents;
+	[SerializeField] private List<FuelCellMainComponent> mainComponents;
 	[Tooltip("The array of components ordered by their order of placement (gameloop)")]
 	[SerializeField]
 	private FuelCellComponent[] steps = new FuelCellComponent[]
@@ -90,6 +91,13 @@ public class AssemblyGameManager : MonoBehaviour
 			DataSaver.Instance.Log("[Correct] " + message);
 			SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
 			component.Place(socket);
+
+			// destroys every unused components
+			// (makes it easier to control events)
+			mainComponents.Remove(component);  // so it won't try to reset unused component
+			component.Deactivate();
+			socket.Deactivate();
+
 			NextStep();
 		}
 		else

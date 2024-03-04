@@ -90,6 +90,10 @@ public class SoundManager : MonoBehaviour
 
 		foreach (var sfx in l_sfxs)
 			d_AllSfx.Add(sfx.type, sfx.clip);
+
+		// set base volume rom settings
+		ChangeBgmVolume(settings.BgmVolume);
+		ChangeSfxVolume(settings.SfxVolume);
 	}
 
 	/// <summary>Plays the bgm attached to an given BgmType</summary>
@@ -121,7 +125,7 @@ public class SoundManager : MonoBehaviour
 	/// <param name="value">Sound volume between 0.0 and 1.0</param>
 	public void ChangeBgmVolume(float value)
 	{
-		settings.BgmLevel = value;
+		settings.BgmVolume = value;
 		bgmSource.volume = value;
 	}
 
@@ -129,7 +133,7 @@ public class SoundManager : MonoBehaviour
 	/// <param name="value">Sound volume between 0.0 and 1.0</param>
 	public void ChangeSfxVolume(float value)
 	{
-		settings.SfxLevel = value;
+		settings.SfxVolume = value;
 		sfxSource.volume = value;
 	}
 

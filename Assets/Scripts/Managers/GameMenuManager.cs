@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class GameMenuManager : MonoBehaviour
 {
@@ -26,17 +25,12 @@ public class GameMenuManager : MonoBehaviour
 	
 	[SerializeField] private float spawnDistance;
 	[SerializeField] private bool menuFollowsPlayer;
-	private Transform head;
+	private Transform headTransform;
 
-	[FormerlySerializedAs("menu")][SerializeField] private GameObject pauseMenu;
+	[SerializeField] private GameObject pauseMenu;
 	[SerializeField] private InputActionProperty showButton;
 
 	private List<GameObject> menuStack = new();
-
-	private void Start()
-	{
-		head = Camera.main.transform;
-	}
 
 	// Update is called once per frame
 	private void Update()
@@ -49,11 +43,12 @@ public class GameMenuManager : MonoBehaviour
 
 		if (menuFollowsPlayer)
 		{
-			Vector3 headPosition = head.position;
+			headTransform = Camera.main.transform;
+			Vector3 headPosition = headTransform.position;
 			foreach (GameObject menu in menuStack)
 			{
 				Transform menuTransform = menu.transform;
-				menuTransform.position = headPosition + new Vector3(head.forward.x, 0, head.forward.z) * spawnDistance;
+				menuTransform.position = headPosition + new Vector3(headTransform.forward.x, 0, headTransform.forward.z) * spawnDistance;
 				menuTransform.LookAt(new Vector3(headPosition.x, menuTransform.position.y, headPosition.z));
 				menuTransform.forward *= -1;
 			}
@@ -62,14 +57,15 @@ public class GameMenuManager : MonoBehaviour
 
 	public void AddMenu(GameObject menu)
 	{
+		headTransform = Camera.main.transform;
 		menuStack.Add(menu);
 		menu.SetActive(true);
 
 		// shows the menu in front of the player
-		Vector3 headPosition = head.position;
+		Vector3 headPosition = headTransform.position;
 		Transform menuTransform = menu.transform;
 
-		menuTransform.position = headPosition + new Vector3(head.forward.x, 0, head.forward.z) * spawnDistance;
+		menuTransform.position = headPosition + new Vector3(headTransform.forward.x, 0, headTransform.forward.z) * spawnDistance;
 		menuTransform.LookAt(new Vector3(headPosition.x, menuTransform.position.y, headPosition.z));
 		menuTransform.forward *= -1;
 	}

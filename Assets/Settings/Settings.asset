@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   currentLanguage: {fileID: 11400000, guid: c068bbc85baf93240a13b06f78a0e280, type: 2}
-  BgmLevel: 0.3
-  SfxLevel: 1
+  BgmVolume: 0.3
+  SfxVolume: 1

@@ -5,6 +5,6 @@ using UnityEngine;
 public class Settings : ScriptableObject
 {
 	public Translation currentLanguage;
-	[Range(0, 1)] public float BgmLevel;
-	[Range(0, 1)] public float SfxLevel;
+	[Range(0, 1)] public float BgmVolume = .3f;
+	[Range(0, 1)] public float SfxVolume = 1f;
 }

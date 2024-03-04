@@ -6,6 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace Assets.Scripts.PEMFC
 {
+	[RequireComponent(typeof(XRGrabInteractable), typeof(Rigidbody), typeof(Collider))]
 	public class FuelCellMainComponent : MonoBehaviour
 	{
 		[Tooltip("The components (secondary) that are shown when this component is placed correctly within the fuel cell")]
@@ -79,16 +80,18 @@ namespace Assets.Scripts.PEMFC
 
 			// remove possible future interactions
 			isPlaced = true;
-			Deactivate();
-			socket.Deactivate();
 
 			// display cables and stuff that connects to this component
 			foreach (GameObject go in ToShowWhenPlaced)
 				go.SetActive(true);
 		}
 
-		private void Deactivate()
+		/// <summary>
+		/// Destroys every unused components
+		/// </summary>
+		public void Deactivate()
 		{
+			Destroy(this);
 			Destroy(GetComponent<XRGrabInteractable>());
 			Destroy(GetComponent<Rigidbody>());
 			Destroy(GetComponent<Collider>());

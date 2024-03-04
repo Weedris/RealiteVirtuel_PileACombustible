@@ -27,6 +27,7 @@ namespace Assets.Scripts.PEMFC
         }
 
 		/// <summary>
+		/// Destroys every unused components
 		/// Used when a component place itself in the socket to delete phantom shapes
 		/// </summary>
 		public void Deactivate()
