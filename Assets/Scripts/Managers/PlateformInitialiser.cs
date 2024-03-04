@@ -14,12 +14,12 @@ namespace Assets.Scripts.Managers
 			XRSettings.enabled = false;
 			PC.SetActive(true);
 			Destroy(VR);
-			DataSaver.Instance.Log("XR was disabled");
+			DataSaver.Instance.Log("[INFO] XR was disabled");
 #else
 			XRSettings.enabled = true;
 			VR.SetActive(true);
 			Destroy(PC);
-			DataSaver.Instance.Log("XR was enabled");
+			DataSaver.Instance.Log("[INFO] XR was enabled");
 			if (Application.platform == RuntimePlatform.Android)
 			{
 				// configure for meta quest and other android xr devices

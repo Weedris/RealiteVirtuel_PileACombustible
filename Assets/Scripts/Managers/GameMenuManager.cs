@@ -1,3 +1,12 @@
+/*
+ * Yeah... this ain't gonna cut it...
+ * Well, there's no point in making it better now as the only menu that pops is the pause menu
+ * If you need more, you'll have to had some kind of menu that remembers stuff it poped (probably with a prefab) then call this thing.
+ * Still, it feels like it's poorly executed, not that i know how to do better for now
+ * i need to gain more exp but don't have time to stay on this one gadget fonctinality for now
+ */
+
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -43,7 +52,6 @@ public class GameMenuManager : MonoBehaviour
 
 		if (menuFollowsPlayer)
 		{
-			headTransform = Camera.main.transform;
 			Vector3 headPosition = headTransform.position;
 			foreach (GameObject menu in menuStack)
 			{

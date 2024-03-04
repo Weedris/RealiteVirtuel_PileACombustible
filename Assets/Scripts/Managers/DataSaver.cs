@@ -1,52 +1,33 @@
 using System;
 using System.IO;
-using UnityEngine;
-using UnityEngine.XR;
 
-public class DataSaver : MonoBehaviour
+
+public class DataSaver
 {
 	private static DataSaver _instance;
 	public static DataSaver Instance
 	{
 		get
 		{
-			if (_instance == null)
-			{
-				_instance = FindObjectOfType<DataSaver>();
-				if (_instance == null)
-				{
-					_instance = new DataSaver();
-					_instance.gameObject.name = "DataSaver";
-					DontDestroyOnLoad(_instance.gameObject);
-				}
-			}
+			_instance ??= new();
 			return _instance;
 		}
 	}
 
-	private const string fileExtension = ".txt";
-	private string folderPath;
-	private string fileName;
-	private string filePath;
+	private string logFilePath;
 
-
-	private void Awake()
+	private DataSaver()
 	{
-		// singleton
-		if (_instance != null && _instance != this)
-		{
-			Destroy(gameObject);
-			return;
-		}
-
-		// find the document folder depending on the os
-		string documentFolderPath = XRSettings.enabled
+		// find the document folder depending on the os (fuck you meta quest)
+		string documentFolderPath = UnityEngine.XR.XRSettings.enabled
 			? "/storage/emulated/0/Documents/"
 			: Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-		folderPath = Path.Combine(documentFolderPath, Application.productName, Application.version);
-		fileName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-		filePath = Path.Combine(folderPath, fileName + fileExtension);
+		// retrieve date
+		string now = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+
+		// store the log file path
+		logFilePath = Path.Combine(documentFolderPath, UnityEngine.Application.productName, UnityEngine.Application.version, now + ".txt");
 	}
 
 	public void Log(string message)
@@ -54,10 +35,15 @@ public class DataSaver : MonoBehaviour
 		string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 		string fullMessage = $"[{timestamp}] {message}";
 
-		DirectoryInfo dirInfo = new(Path.GetDirectoryName(filePath));
+		// generate folder recursively if it doesn't exists
+		DirectoryInfo dirInfo = new(Path.GetDirectoryName(logFilePath));
 		if (!dirInfo.Exists)
 			dirInfo.Create();
-		using StreamWriter sw = File.Exists(filePath) ? File.AppendText(filePath) : File.CreateText(filePath);
+
+		// generate file if doesn't exist
+		using StreamWriter sw = File.Exists(logFilePath) ? File.AppendText(logFilePath) : File.CreateText(logFilePath);
+
+		// append message to the file
 		sw.WriteLine(fullMessage);
 	}
 }
