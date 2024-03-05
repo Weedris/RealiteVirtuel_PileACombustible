@@ -27,9 +27,22 @@ namespace Assets.Scripts.PEMFC
 			initialRotation = transform.localRotation;
 		}
 
-		private void OnEnable() { if (TryGetComponent(out XRGrabInteractable xrGrab)) xrGrab.firstSelectEntered.AddListener(OnXrGrab); }
-		private void OnDisable() { if (TryGetComponent(out XRGrabInteractable xrGrab)) xrGrab.firstSelectEntered.RemoveListener(OnXrGrab); }
-		private void OnXrGrab(SelectEnterEventArgs arg0) {
+		private void OnEnable()
+		{
+			if (TryGetComponent(out XRGrabInteractable xrGrab))
+			{
+				xrGrab.firstSelectEntered.AddListener(OnXrGrab);
+			}
+		}
+
+		private void OnDisable()
+		{
+			if (TryGetComponent(out XRGrabInteractable xrGrab))
+				xrGrab.firstSelectEntered.RemoveListener(OnXrGrab);
+		}
+
+		private void OnXrGrab(SelectEnterEventArgs arg0)
+		{
 			DataSaver.Instance.Log($"[INFO] Grabbed [{name}]");
 			SoundManager.Instance.PlaySFX(SfxType.GrabbedObject);
 		}
@@ -94,6 +107,7 @@ namespace Assets.Scripts.PEMFC
 		/// </summary>
 		public void Deactivate()
 		{
+			// very usefull to stop interactions when placed, also frees memory
 			Destroy(this);
 			Destroy(GetComponent<XRGrabInteractable>());
 			Destroy(GetComponent<Rigidbody>());
@@ -102,10 +116,10 @@ namespace Assets.Scripts.PEMFC
 
 		public void ResetPositionAndRotation()
 		{
-			if (!isPlaced)
+			if (!isPlaced)  // foul proof it
 			{
-				transform.SetLocalPositionAndRotation(initialPosition, initialRotation);
 				GetComponent<Rigidbody>().velocity = Vector3.zero;
+				transform.SetLocalPositionAndRotation(initialPosition, initialRotation);
 			}
 		}
 	}
