@@ -16,7 +16,7 @@ MonoBehaviour:
   welcome: Bienvenue
   goal: "L'objectif est de monter une pile \xE0 combustible."
   instruction: "Pour ce faire, veuillez suivre les instructions affich\xE9es \xE0
-    l'\xE9cran se situant \xE0 votre gauche."
+    l'\xE9cran."
   warning: Attention
   warningMessage: "Par mesure de s\xE9curit\xE9, faites attention \xE0 votre entourage.
     Si vous ne vous sentez pas bien, enlevez immediatement le casque."

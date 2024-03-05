@@ -16,7 +16,7 @@ MonoBehaviour:
   welcome: Welcome
   goal: The goal is to build a fuel cell.
   instruction: To do this, you will need to follow the instructions displayed on
-    the screen located to your left.
+    the screen.
   warning: Warning
   warningMessage: Pay attention to those around you. If you feel unwell, remove the
     headset immediately.
