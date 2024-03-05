@@ -1590,12 +1590,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1136465575621024713}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dabd2fd23881ff4a9798d750b39842e, type: 3}
+  m_Script: {fileID: 11500000, guid: bc8ff064654c5fd41af83517f5c0dc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ToShowWhenPlaced:
   - {fileID: 2721410172593161380}
-  WhoAmI: 0
+  componentType: 0
   SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1142909639610928785
 GameObject:
@@ -2488,11 +2488,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1623579992399489153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dabd2fd23881ff4a9798d750b39842e, type: 3}
+  m_Script: {fileID: 11500000, guid: bc8ff064654c5fd41af83517f5c0dc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ToShowWhenPlaced: []
-  WhoAmI: 4
+  componentType: 4
   SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1780828107105060725
 GameObject:
@@ -2717,13 +2717,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1780828107105060725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dabd2fd23881ff4a9798d750b39842e, type: 3}
+  m_Script: {fileID: 11500000, guid: bc8ff064654c5fd41af83517f5c0dc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ToShowWhenPlaced:
   - {fileID: 5561861881177272586}
   - {fileID: 7368129761672822944}
-  WhoAmI: 3
+  componentType: 3
   SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1793019267759399695
 GameObject:
@@ -5613,12 +5613,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3246760756600819578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dabd2fd23881ff4a9798d750b39842e, type: 3}
+  m_Script: {fileID: 11500000, guid: bc8ff064654c5fd41af83517f5c0dc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ToShowWhenPlaced:
   - {fileID: 2485327024798418175}
-  WhoAmI: 5
+  componentType: 5
   SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &3247718299521321300
 GameObject:
@@ -7409,12 +7409,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4029166550544172464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dabd2fd23881ff4a9798d750b39842e, type: 3}
+  m_Script: {fileID: 11500000, guid: bc8ff064654c5fd41af83517f5c0dc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ToShowWhenPlaced:
   - {fileID: 2869548702170600814}
-  WhoAmI: 7
+  componentType: 7
   SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &4069588180461829146
 GameObject:
@@ -9190,11 +9190,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5172347653928632731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dabd2fd23881ff4a9798d750b39842e, type: 3}
+  m_Script: {fileID: 11500000, guid: bc8ff064654c5fd41af83517f5c0dc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ToShowWhenPlaced: []
-  WhoAmI: 6
+  componentType: 6
   SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5186159637864616146
 GameObject:
@@ -10851,12 +10851,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6224689577282466336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dabd2fd23881ff4a9798d750b39842e, type: 3}
+  m_Script: {fileID: 11500000, guid: bc8ff064654c5fd41af83517f5c0dc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ToShowWhenPlaced:
   - {fileID: 6582539833342183460}
-  WhoAmI: 1
+  componentType: 1
   SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &6316058379723355621
 GameObject:
@@ -14285,11 +14285,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8464270756317531897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dabd2fd23881ff4a9798d750b39842e, type: 3}
+  m_Script: {fileID: 11500000, guid: bc8ff064654c5fd41af83517f5c0dc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ToShowWhenPlaced: []
-  WhoAmI: 2
+  componentType: 2
   SimplifiedMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &8465245168103827207
 GameObject:

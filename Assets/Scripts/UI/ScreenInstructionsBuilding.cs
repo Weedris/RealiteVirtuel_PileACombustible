@@ -21,7 +21,7 @@ public class ScreenInstructionsBuilding : LangUpdatable
 		screenText.text = instructions[currentIndex];
 	}
 
-	public override void UpdateLang(Translation lang)
+	public override void OnLangUpdated(Translation lang)
 	{
 		ContextAssembly assemblyContext = lang.AssemblyContext;
 		string welcome = lang.IntroductionDialogsContext.GetMessages()[0];

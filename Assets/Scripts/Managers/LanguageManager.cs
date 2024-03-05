@@ -13,7 +13,7 @@ public class LanguageManager : MonoBehaviour
 				_instance = FindObjectOfType<LanguageManager>();
 				if (_instance == null)
 				{
-					_instance = new LanguageManager();
+					_instance = new();
 					_instance.gameObject.name = "LanguageManager";
 				}
 			}
@@ -27,22 +27,14 @@ public class LanguageManager : MonoBehaviour
 	private void Awake()
 	{
 		// singleton
-		if (_instance != null && _instance != this)
-		{
-			Destroy(gameObject);
-			return;
-		}
-	}
-
-	private void Start()
-	{
-		Invoke(nameof(UpdateLang), 0.2f);
+		if (_instance == null) _instance = this;
+		else if (_instance != this) { Destroy(gameObject); return; }
 	}
 
 	private void UpdateLang()
 	{
 		foreach (LangUpdatable element in toUpdateOnLangChanged)
-			element.UpdateLang(settings.currentLanguage);
+			element.OnLangUpdated(settings.currentLanguage);
 	}
 
 	public void SwitchLanguage(Translation lang)
@@ -54,8 +46,9 @@ public class LanguageManager : MonoBehaviour
 	public void RegisterUpdatable(LangUpdatable lu)
 	{
 		toUpdateOnLangChanged.Add(lu);
-		lu.UpdateLang(settings.currentLanguage);
+		lu.OnLangUpdated(settings.currentLanguage);
 	}
+
 	public void ForgetUpdatable(LangUpdatable lu)
 	{
 		toUpdateOnLangChanged.Remove(lu);

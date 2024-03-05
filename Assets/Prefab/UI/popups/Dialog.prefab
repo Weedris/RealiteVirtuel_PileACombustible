@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 207044080565068839}
   - component: {fileID: 207044080565068888}
   m_Layer: 5
-  m_Name: Button
+  m_Name: NextButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 6333497632370548291}
   - component: {fileID: 1358964239666025069}
   - component: {fileID: 3730572245122041267}
+  - component: {fileID: 4068203052986469531}
   m_Layer: 5
   m_Name: Dialog
   m_TagString: Untagged
@@ -208,7 +209,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &6333497632370548291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +272,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &4068203052986469531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207044081139845820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c04694de2e17d489a152a1c49c62c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextButtonLabel: {fileID: 207044081855617849}
+  message: {fileID: 207044081390533628}
+  nextButton: {fileID: 207044080565068888}
 --- !u!1 &207044081390533616
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +456,7 @@ GameObject:
   - component: {fileID: 207044081855617848}
   - component: {fileID: 207044081855617849}
   m_Layer: 5
-  m_Name: ButtonText
+  m_Name: NextButtonLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

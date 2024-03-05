@@ -1,9 +1,10 @@
 using Assets.Scripts.PEMFC;
+using Assets.Scripts.UI;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum FuelCellComponent
+public enum FuelCellComponentType
 {
 	Stack,
 	HydrogenBottle,
@@ -15,6 +16,9 @@ public enum FuelCellComponent
 	Radiator
 }
 
+/// <summary>
+/// The manager responsible of the fuel cell assembly.
+/// </summary>
 public class AssemblyGameManager : MonoBehaviour
 {
 	public static AssemblyGameManager Instance { get; private set; }
@@ -28,88 +32,100 @@ public class AssemblyGameManager : MonoBehaviour
 	[SerializeField] private string mainComponentsTag;
 	[Tooltip("The array of components ordered by their order of placement (gameloop)")]
 	[SerializeField]
-	private FuelCellComponent[] steps = new FuelCellComponent[]
+	private FuelCellComponentType[] steps = new FuelCellComponentType[]
 	{
-		FuelCellComponent.Stack,
-		FuelCellComponent.HydrogenBottle,
-		FuelCellComponent.Compressor,
-		FuelCellComponent.Humidifier,
-		FuelCellComponent.NitrogenBottle,
-		FuelCellComponent.Ventilator,
-		FuelCellComponent.WaterContainer,
-		FuelCellComponent.Radiator
+		FuelCellComponentType.Stack,
+		FuelCellComponentType.HydrogenBottle,
+		FuelCellComponentType.Compressor,
+		FuelCellComponentType.Humidifier,
+		FuelCellComponentType.NitrogenBottle,
+		FuelCellComponentType.Ventilator,
+		FuelCellComponentType.WaterContainer,
+		FuelCellComponentType.Radiator
 	};
 	#endregion fields
-	private List<FuelCellMainComponent> componentsToPlace;
+
+	private List<FuelCellComponent> componentsToPlace;
 	private int currentStep = 0;
+	private int numberErrors;
 
 	private void Awake()
 	{
 		// singleton
-		if (Instance == null) Instance = this;  // don't use DontDestroyOnLoad as it shouldn't be used in other scenes
+		if (Instance == null) Instance = this;
 		else Destroy(gameObject);
 	}
 
 	private void Start()
 	{
-		// Choose a random BGM
+		// choose a random BGM
 		SoundManager.Instance.PlayBGM(BgmType.BGM_Jazz);
 
 		// retrieve components to place
 		componentsToPlace = GameObject
 			.FindGameObjectsWithTag(mainComponentsTag)
-			.Select(el => el.GetComponent<FuelCellMainComponent>())
+			.Select(el => el.GetComponent<FuelCellComponent>())
 			.Where(el => el != null)
 			.ToList();
 
-		// We don't want the player to do anything funny before (s)he finished reading
-		foreach (FuelCellMainComponent component in componentsToPlace)
+		// we don't want the player to do anything funny before (s)he finished reading
+		foreach (FuelCellComponent component in componentsToPlace)
 			component.gameObject.SetActive(false);
 
-		// events
-		// change state after instructions (start game)
 		introductionDialog.OnDialogEnd += StartPlaying;
 
-
-		DataSaver.Instance.Log("[INFO] Started Session Assembly");  // marks the session start
+		DataSaver.Instance.Log("Started Session Assembly");  // marks the session start
 	}
 
+	/// <summary>
+	/// Called when the Player finished the introduction
+	/// </summary>
 	private void StartPlaying()
 	{
-		// players now can start interacting with objects
-		foreach (FuelCellMainComponent component in componentsToPlace)
+		// players now can interact with objects
+		foreach (FuelCellComponent component in componentsToPlace)
 			component.gameObject.SetActive(true);
 
 		// don't need the introduction anymore
 		Destroy(introductionDialog.gameObject);
 
+		// displays instructions on the screen
 		screenInstruction.NextInstruction();
-		DataSaver.Instance.Log("[INFO] Finished Assembly Introduction");
+
+		// log
+		DataSaver.Instance.Log("Finished Assembly Introduction");
 	}
 
-	public void AttemptPlaceObject(FuelCellMainComponent component, FuelCellSocket socket)
+	public void AttemptPlaceObject(FuelCellComponent component, FuelCellSocket socket)
 	{
-		DataSaver.Instance.Log($"[INFO] Placing [{component.WhoAmI}] to [{socket.Target}] on step [{steps[currentStep]}]");
+		// log
+		DataSaver.Instance.Log($"Placing [{component.ComponentType}] to [{socket.Target}] on step [{steps[currentStep]}]");
 
-		bool isAwaitedComponent = component.WhoAmI == steps[currentStep];
-		bool doesSocketCorrepond = component.WhoAmI == socket.Target;
+		bool isAwaitedComponent = component.ComponentType == steps[currentStep];
+		bool doesSocketCorrepond = component.ComponentType == socket.Target;
 		bool isCorrectAnswer = isAwaitedComponent && doesSocketCorrepond;
 		if (isCorrectAnswer)
 		{
+			// correct answer feedback
 			SoundManager.Instance.PlaySFX(SfxType.GoodAnswer);
+			
+			// snap component to it's corresponding socket
 			component.Place(socket);
 
-			// destroys every unused components
-			// (makes it easier to control events)
+			// Deactivate objects that should be interacted with anymore
 			componentsToPlace.Remove(component);
 			component.Deactivate();
 			socket.Deactivate();
+
 			NextStep();
 		}
 		else
 		{
+			// bad answer feedback
 			SoundManager.Instance.PlaySFX(SfxType.BadAnswer);
+
 			component.ResetPositionAndRotation();
+			numberErrors++;
 		}
 	}
 
@@ -124,7 +140,8 @@ public class AssemblyGameManager : MonoBehaviour
 
 	public void OnEnd()
 	{
-		DataSaver.Instance.Log($"[INFO] Session End");
+		DataSaver.Instance.Log($"Session End");
+
 		// victory feedback
 		SoundManager.Instance.PlaySFX(SfxType.endAssembly);
 		endSceneDialog.gameObject.SetActive(true);
@@ -132,7 +149,7 @@ public class AssemblyGameManager : MonoBehaviour
 
 	public void ResetComponentsPositionAndRotation()
 	{
-		foreach (FuelCellMainComponent fcmc in componentsToPlace)
+		foreach (FuelCellComponent fcmc in componentsToPlace)
 			fcmc.ResetPositionAndRotation();
 	}
 }

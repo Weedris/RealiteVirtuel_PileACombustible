@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using UnityEngine;
 
 
 public class DataSaver
@@ -25,15 +26,14 @@ public class DataSaver
 
 		// retrieve date
 		string now = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-
 		// store the log file path
 		logFilePath = Path.Combine(documentFolderPath, UnityEngine.Application.productName, UnityEngine.Application.version, now + ".txt");
 	}
 
-	public void Log(string message)
+	public void Log(string message, LogType logType = LogType.Log)
 	{
 		string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-		string fullMessage = $"[{timestamp}] {message}";
+		string fullMessage = $"[{timestamp}] [{GetStringFromLogType(logType)}] {message}";
 
 		// generate folder recursively if it doesn't exists
 		DirectoryInfo dirInfo = new(Path.GetDirectoryName(logFilePath));
@@ -45,5 +45,15 @@ public class DataSaver
 
 		// append message to the file
 		sw.WriteLine(fullMessage);
+	}
+
+	private string GetStringFromLogType(LogType logType)
+	{
+		return logType switch
+		{
+			LogType.Log => "INFO",
+			LogType.Warning => "WARNING",
+			_ => "ERROR",
+		};
 	}
 }

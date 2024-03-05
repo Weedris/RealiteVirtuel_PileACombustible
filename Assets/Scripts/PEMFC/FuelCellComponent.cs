@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -7,11 +6,11 @@ using UnityEngine.XR.Interaction.Toolkit;
 namespace Assets.Scripts.PEMFC
 {
 	[RequireComponent(typeof(XRGrabInteractable), typeof(Rigidbody), typeof(Collider))]
-	public class FuelCellMainComponent : MonoBehaviour
+	public class FuelCellComponent : MonoBehaviour
 	{
 		[Tooltip("The components (secondary) that are shown when this component is placed correctly within the fuel cell")]
 		public GameObject[] ToShowWhenPlaced;
-		public FuelCellComponent WhoAmI;
+		public FuelCellComponentType ComponentType;
 		public Mesh SimplifiedMesh;
 
 		private Vector3 initialPosition;
@@ -30,9 +29,7 @@ namespace Assets.Scripts.PEMFC
 		private void OnEnable()
 		{
 			if (TryGetComponent(out XRGrabInteractable xrGrab))
-			{
 				xrGrab.firstSelectEntered.AddListener(OnXrGrab);
-			}
 		}
 
 		private void OnDisable()
@@ -43,7 +40,7 @@ namespace Assets.Scripts.PEMFC
 
 		private void OnXrGrab(SelectEnterEventArgs arg0)
 		{
-			DataSaver.Instance.Log($"[INFO] Grabbed [{name}]");
+			DataSaver.Instance.Log($"Grabbed [{name}]");
 			SoundManager.Instance.PlaySFX(SfxType.GrabbedObject);
 		}
 
@@ -105,7 +102,7 @@ namespace Assets.Scripts.PEMFC
 		/// <summary>
 		/// Destroys every unused components
 		/// </summary>
-		public void Deactivate()
+		public void Deactivate()  // should i have called it defuse instead ?
 		{
 			// very usefull to stop interactions when placed, also frees memory
 			Destroy(this);
@@ -114,9 +111,12 @@ namespace Assets.Scripts.PEMFC
 			Destroy(GetComponent<Collider>());
 		}
 
+		/// <summary>
+		/// Resets the component position, rotation and velocity
+		/// </summary>
 		public void ResetPositionAndRotation()
 		{
-			if (!isPlaced)  // foul proof it
+			if (!isPlaced)  // foolproof
 			{
 				GetComponent<Rigidbody>().velocity = Vector3.zero;
 				transform.SetLocalPositionAndRotation(initialPosition, initialRotation);

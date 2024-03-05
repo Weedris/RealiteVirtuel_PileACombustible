@@ -7,12 +7,12 @@ namespace Assets.Scripts.PEMFC
 	public class FuelCellSocket : MonoBehaviour
 	{
 		[Tooltip("Specific FuelCellComponent that this socket can receive.")]
-		public FuelCellComponent Target;
+		public FuelCellComponentType Target;
 
 		[SerializeField] private GameObject phatomRendererPrefab;
 		private List<GameObject> phantomGameObjects = new();
 
-		public void CreatePhantom(FuelCellMainComponent component)
+		public void CreatePhantom(FuelCellComponent component)
 		{
 			GameObject phantomGameObject = Instantiate(phatomRendererPrefab, transform);
 			phantomGameObject.GetComponent<PhantomRenderer>().SetMesh(component.SimplifiedMesh);

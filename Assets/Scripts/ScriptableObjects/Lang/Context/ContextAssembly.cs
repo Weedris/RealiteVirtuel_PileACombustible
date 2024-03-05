@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// This is the context that will hold everything text that has to do with the assembly of the fuel cell.
+/// </summary>
 [CreateAssetMenu(fileName = "Assembly", menuName = "ScriptableObjects/Lang/Context/Assembly")]
 public class ContextAssembly : Context
 {
@@ -27,13 +30,13 @@ public class ContextAssembly : Context
 	public string GetRadiatorInstructions() { return GetFormatedText(RadiatorInstructions); }
 	#endregion getters
 
-	
+
 	/// <summary>
-	/// Apply the translation with used tags
-	/// Ex: "<hydrogen>" is replaced with "Hydrogen" with a red color
+	/// Apply the translation with used tags.
+	/// Ex: in english, "<hydrogen>" is replaced with "Hydrogen" with a red color.
 	/// </summary>
-	/// <param name="text"></param>
-	/// <returns></returns>
+	/// <param name="text">The text that needs to be formated.</param>
+	/// <returns>The formated text.</returns>
 	private string GetFormatedText(string text)
 	{
 		// can be optimised by looking at balises instead
@@ -43,6 +46,10 @@ public class ContextAssembly : Context
 		return newText;
 	}
 
+	/// <summary>
+	/// Retrieves all instructions that needs to be displayed to the player with the correct formating.
+	/// </summary>
+	/// <returns>The array of instructions.</returns>
 	public string[] GetAllInstructions()
 	{
 		return new string[]
@@ -56,10 +63,5 @@ public class ContextAssembly : Context
 			GetWaterInstructions(),
 			GetRadiatorInstructions()
 		};
-	}
-
-	private void Awake()
-	{
-		System.Array.Sort(tags, (TextTag a, TextTag b) => Mathf.Clamp(a.replaceWith.Length - b.replaceWith.Length, -1, 1));
 	}
 }

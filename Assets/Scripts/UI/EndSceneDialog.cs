@@ -18,8 +18,9 @@ public class EndSceneDialog : LangUpdatable
 
 	private bool isLastScene;
 
-	private void Start()
+	private new void Start()
 	{
+		base.Start();
 		isLastScene = nextScene == ScenesManager.Scene.MAIN_MENU;
 		if (isLastScene)
 			nextSceneButton.gameObject.SetActive(false);
@@ -39,7 +40,7 @@ public class EndSceneDialog : LangUpdatable
 		quitButton.onClick.RemoveAllListeners();
 	}
 
-	public override void UpdateLang(Translation lang)
+	public override void OnLangUpdated(Translation lang)
 	{
 		ContextEndDialog edc = lang.EndDialogContext;
 		messageLabel.text = edc.Message;

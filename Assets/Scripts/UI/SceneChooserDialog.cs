@@ -62,7 +62,7 @@ public class SceneChooserDialog : LangUpdatable
 		currentSessionDescription.text = sessions[index].Description;
 	}
 
-	public override void UpdateLang(Translation lang)
+	public override void OnLangUpdated(Translation lang)
 	{
 		ContextMainMenu mainMenuContext = lang.MainMenuContext;
 		sessions = mainMenuContext.Sessions;

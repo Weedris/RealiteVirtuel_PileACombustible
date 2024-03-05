@@ -6,19 +6,31 @@ using UnityEngine.UI;
 /// <summary>
 /// Perfect for "press next button 2k times" kind of dialogs.
 /// </summary>
-public abstract class ContinualDialog : LangUpdatable, IEndable
+public class ContinualDialog : MonoBehaviour, IEndable
 {
 	public event Action OnDialogEnd;
-	[SerializeField] protected TMP_Text message;
-	[SerializeField] protected Button nextButton;
-	[SerializeField] protected TMP_Text nextButtonText;
 
-	protected string[] messages;
-	protected int index = 0;
+	[SerializeField] private TMP_Text nextButtonLabel;
+	[SerializeField] private TMP_Text message;
+	[SerializeField] private Button nextButton;
 
-	protected void ShowCurrentMessage()
+	private string[] messages;
+	private int index = 0;
+
+	public void ReloadCurrentMessage()
 	{
+		if (index >= messages.Length) return; // foolproof
 		message.text = messages[index];
+	}
+
+	public void SetMessages(string[] messages)
+	{
+		this.messages = messages;
+	}
+
+	public void SetNewtButtonText(string newtButtonText)
+	{
+		nextButtonLabel.text = newtButtonText;
 	}
 
 	/// <summary>
@@ -29,7 +41,7 @@ public abstract class ContinualDialog : LangUpdatable, IEndable
 	{
 		index++;
 		if (index < messages.Length)
-			ShowCurrentMessage();
+			ReloadCurrentMessage();
 		else
 			OnDialogEnd?.Invoke();
 	}
@@ -44,9 +56,8 @@ public abstract class ContinualDialog : LangUpdatable, IEndable
 		nextButton.onClick.RemoveListener(NextMessage);
 	}
 
-	private new void OnDestroy()
+	private void OnDestroy()
 	{
-		base.OnDestroy();
 		foreach (Delegate d in OnDialogEnd.GetInvocationList())
 			OnDialogEnd -= (Action)d;
 	}

@@ -139,7 +139,7 @@ public class KeyboardActionManager : MonoBehaviour
 
 		if (Physics.Raycast(ray, out RaycastHit hit, maxGrabDistance))
 		{
-			if (hit.collider.TryGetComponent(out FuelCellMainComponent component))
+			if (hit.collider.TryGetComponent(out FuelCellComponent component))
 				GrabObject(component.gameObject);
 			else if (hit.collider.GetComponent<XRSimpleInteractable>() != null) // exception for the red button i guess
 				AssemblyGameManager.Instance.ResetComponentsPositionAndRotation();
@@ -170,7 +170,7 @@ public class KeyboardActionManager : MonoBehaviour
 		Destroy(joint);
 		objectScrollVector.z = 0;
 
-		if (grabbedObject.TryGetComponent(out FuelCellMainComponent component))
+		if (grabbedObject.TryGetComponent(out FuelCellComponent component))
 			component.TryPlace();
 
 		grabbedObject = null;

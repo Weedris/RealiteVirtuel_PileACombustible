@@ -1,18 +1,17 @@
-﻿using System;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.UI
 {
-	public class IntroductionDialog : ContinualDialog
+	[RequireComponent(typeof(ContinualDialog))]
+	public class IntroductionDialog : LangUpdatable
 	{
+		[SerializeField] private ContinualDialog continualDialog;
 		public override void OnLangUpdated(Translation lang)
 		{
-			if (index >= messages.Length)  // fool proof
-				return;
-
 			ContextIntroductionDialogs introductionContext = lang.IntroductionDialogsContext;
-			messages = introductionContext.GetMessages();
-			nextButtonText.text = introductionContext.nextButtonText;
-			ShowCurrentMessage();
+			continualDialog.SetMessages(introductionContext.GetMessages());
+			continualDialog.SetNewtButtonText(introductionContext.nextButtonText);
+			continualDialog.ReloadCurrentMessage();
 		}
 	}
 }
