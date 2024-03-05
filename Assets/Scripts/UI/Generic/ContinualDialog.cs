@@ -3,21 +3,28 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ContinualDialog : LangUpdatable , IEndable
+/// <summary>
+/// Perfect for "press next button 2k times" kind of dialogs.
+/// </summary>
+public abstract class ContinualDialog : LangUpdatable, IEndable
 {
 	public event Action OnDialogEnd;
-	[SerializeField] private TMP_Text message;
-	[SerializeField] private Button nextButton;
-	[SerializeField] private TMP_Text nextButtonText;
+	[SerializeField] protected TMP_Text message;
+	[SerializeField] protected Button nextButton;
+	[SerializeField] protected TMP_Text nextButtonText;
 
-	private string[] messages;
-	private int index = 0;
+	protected string[] messages;
+	protected int index = 0;
 
-	private void ShowCurrentMessage()
+	protected void ShowCurrentMessage()
 	{
 		message.text = messages[index];
 	}
 
+	/// <summary>
+	/// Attempt to load the next message.
+	/// If there's no more message to be shown, trigger the OnDialgEnd event instead.
+	/// </summary>
 	private void NextMessage()
 	{
 		index++;
@@ -42,13 +49,5 @@ public class ContinualDialog : LangUpdatable , IEndable
 		base.OnDestroy();
 		foreach (Delegate d in OnDialogEnd.GetInvocationList())
 			OnDialogEnd -= (Action)d;
-	}
-
-	public override void UpdateLang(Translation lang)
-	{
-		ContextIntroductionDialogs introductionContext = lang.IntroductionDialogsContext;
-		messages = introductionContext.GetMessages();
-		nextButtonText.text = introductionContext.nextButtonText;
-		ShowCurrentMessage();
 	}
 }
