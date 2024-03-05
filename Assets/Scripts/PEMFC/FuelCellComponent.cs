@@ -5,6 +5,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace Assets.Scripts.PEMFC
 {
+	/// <summary>
+	/// This script is to be used on every GameObject that need to be placed on the fuel cell.
+	/// Note that it needs a <see cref="FuelCellSocket"/> to be setup in order to receive it.
+	/// </summary>
 	[RequireComponent(typeof(XRGrabInteractable), typeof(Rigidbody), typeof(Collider))]
 	public class FuelCellComponent : MonoBehaviour
 	{

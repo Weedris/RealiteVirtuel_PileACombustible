@@ -3,9 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GaugeManager : MonoBehaviour
+public class PerformanceLabGameManager : MonoBehaviour
 {
-	public static GaugeManager Instance;
+	public static PerformanceLabGameManager Instance;
 
 	[Header("Sliders")]
 	[SerializeField] private Slider _intensitySlider;
@@ -39,8 +39,8 @@ public class GaugeManager : MonoBehaviour
 	#endregion values
 
 	#region control_variables
-	[NonSerialized] public bool isHydrogenConsumptionActive = false;
-	public float lastTimeHydrogenWasConsumed;
+	public bool IsHydrogenConsumed { get; private set; } = false;
+	private float lastTimeHydrogenWasConsumed;
 	# endregion control_variables
 
 	private void Awake()
@@ -71,7 +71,7 @@ public class GaugeManager : MonoBehaviour
 
 	public void ConsumeHydrogen()
 	{
-		if (isHydrogenConsumptionActive)
+		if (IsHydrogenConsumed)
 		{
 			float now = Time.time;
 			float elapsedTime = now - lastTimeHydrogenWasConsumed;  // seconds
@@ -104,7 +104,7 @@ public class GaugeManager : MonoBehaviour
 		Intensity = _intensitySlider.value * (NbCells / _nbCellsSlider.maxValue);
 		Resistance = (float) (26.641 * Math.Pow(Intensity, -1.15)); // approximation from given data
 
-		// U = RI
+		// U = R*I
 		StackVoltage = Resistance * Intensity;
 
 		// W

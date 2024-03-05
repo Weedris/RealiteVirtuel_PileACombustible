@@ -4,6 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/*
+ * Redo it so it's independant
+ */
+
 public class CarManager : MonoBehaviour
 {
 	private Animator Animator;
@@ -94,11 +99,6 @@ public class CarManager : MonoBehaviour
 		ResetStats();
 	}
 
-	public void SetHydrogenAndResetIntensity(float hydrogenValue)
-	{
-		GaugeManager.Instance.ResetValues(hydrogenValue);
-	}
-
 	void SetCarSpeed(float speed)
 	{
 		Animator.SetFloat("Speed", speed);
@@ -121,9 +121,6 @@ public class CarManager : MonoBehaviour
 				.AppendLine("Total laps : " + totalLaps)
 				.AppendLine("Best Time Laps : " + FormatTime(bestTimeLaps));
 			finalScore.text = sb.ToString();
-
-			// Mark hydrogen consumption as inactive when car pauses
-			GaugeManager.Instance.isHydrogenConsumptionActive = false;
 		}
 	}
 
@@ -137,26 +134,24 @@ public class CarManager : MonoBehaviour
 	{
 		Animator.speed = 1f;
 		carBurningCount = BURNING_TIME;
-		GaugeManager.Instance.isHydrogenConsumptionActive = true; // Mark hydrogen consumption as active when car resumes
-		GaugeManager.Instance.lastTimeHydrogenWasConsumed = Time.time;
 	}
 
 	private void UpdateCar()
 	{
 		if (AnimatorIsPlaying())
         {
-            SetOverHeatCar(1 - GaugeManager.Instance.Efficiency);
+            SetOverHeatCar(1 - PerformanceLabGameManager.Instance.Efficiency);
 
-            GaugeManager.Instance.ConsumeHydrogen();
+            PerformanceLabGameManager.Instance.ConsumeHydrogen();
 
-			float hydrogen = GaugeManager.Instance.Hydrogen;
-			float speedMultiplier = Mathf.Lerp(0.15f, 0.5f, GaugeManager.Instance.Power / 3039.276f);
-			float efficiency = GaugeManager.Instance.Efficiency / 100;
+			float hydrogen = PerformanceLabGameManager.Instance.Hydrogen;
+			float speedMultiplier = Mathf.Lerp(0.15f, 0.5f, PerformanceLabGameManager.Instance.Power / 3039.276f);
+			float efficiency = PerformanceLabGameManager.Instance.Efficiency / 100;
 
 			float adjustedSpeed = speedMultiplier - (speedMultiplier * Mathf.Min(efficiency, hydrogen));
 			SetCarSpeed(adjustedSpeed);
 
-			if (GaugeManager.Instance.Hydrogen < ZeroTolerance)
+			if (PerformanceLabGameManager.Instance.Hydrogen < ZeroTolerance)
 				PauseAnimator(true);
 		}
 	}

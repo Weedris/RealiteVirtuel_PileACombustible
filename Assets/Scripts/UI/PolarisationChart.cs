@@ -15,7 +15,7 @@ public class PolarisationChart : MonoBehaviour
 
 	public void OnPolarisationPlotButtonPressed()
 	{
-		GaugeManager gm = GaugeManager.Instance;
+		PerformanceLabGameManager gm = PerformanceLabGameManager.Instance;
 		graph.AddPoint(gm.Intensity, gm.StackVoltage, "Polarisation");
 	}
 

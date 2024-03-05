@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.PEMFC
 {
+	/// <summary>
+	/// This needs to be placed on GameObjects that will receive a <see cref="FuelCellComponent"/>.
+	/// </summary>
 	[RequireComponent(typeof(Collider))]
 	public class FuelCellSocket : MonoBehaviour
 	{
