@@ -1981,7 +1981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4d7e597df75eb449990a95f9807e309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenInstruction: {fileID: 1891630754}
+  screenInstruction: {fileID: 0}
   introductionDialog: {fileID: 953009666}
   endSceneDialog: {fileID: 207044080682628979}
   mainComponentsTag: mainComponent
@@ -2588,6 +2588,7 @@ GameObject:
   - component: {fileID: 1779334804}
   - component: {fileID: 1779334806}
   - component: {fileID: 1779334805}
+  - component: {fileID: 1779334807}
   m_Layer: 5
   m_Name: Instructions
   m_TagString: Untagged
@@ -2713,6 +2714,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1779334803}
   m_CullTransparentMesh: 1
+--- !u!114 &1779334807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779334803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c736282e3d228541b8c6b889e4ec995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenText: {fileID: 1779334805}
 --- !u!1 &1846972342
 GameObject:
   m_ObjectHideFlags: 0
@@ -2816,18 +2830,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2893533237256175594}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1891630754 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2893533238604546376, guid: 02e13dd7ba6be63419acd8e8c9e9a0ed,
-    type: 3}
-  m_PrefabInstance: {fileID: 2893533237256175594}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c736282e3d228541b8c6b889e4ec995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1892339482
 GameObject:
   m_ObjectHideFlags: 0

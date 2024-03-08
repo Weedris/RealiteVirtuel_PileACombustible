@@ -15,7 +15,6 @@ public class KeyboardActionManager : MonoBehaviour
 	private float rotationX = 0;
 
 	private GameObject grabbedObject;
-	private Rigidbody grabbedRigidbody;
 	public Rigidbody pointDeGrab;
 	private FixedJoint joint;
 
@@ -149,14 +148,11 @@ public class KeyboardActionManager : MonoBehaviour
 	void GrabObject(GameObject objToGrab)
 	{
 		grabbedObject = objToGrab;
-		grabbedRigidbody = grabbedObject.GetComponent<Rigidbody>();
 
-		// why are there french comments ?
-
-		// Créez un joint
+		// create a joint
 		joint = grabbedObject.AddComponent<FixedJoint>();
-		joint.connectedBody = pointDeGrab; // Connectez l'objet saisi au joueur
-		joint.breakForce = Mathf.Infinity; // Ajustez la résistance du joint si nécessaire
+		joint.connectedBody = pointDeGrab;
+		joint.breakForce = Mathf.Infinity;
 		joint.breakTorque = Mathf.Infinity;
 
 		SoundManager.Instance.PlaySFX(SfxType.GrabbedObject);

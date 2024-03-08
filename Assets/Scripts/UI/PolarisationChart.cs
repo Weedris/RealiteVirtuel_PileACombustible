@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.UI.Graph;
+using UnityEngine;
 using UnityEngine.UI;
 
 
+[RequireComponent(typeof(Graph))]
 public class PolarisationChart : MonoBehaviour
 {
 	[SerializeField] private Graph graph;

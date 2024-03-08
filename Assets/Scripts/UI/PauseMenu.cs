@@ -1,8 +1,3 @@
-/*
- * Make sure the buttons in the UI are in the same order than the enum "Language".
- */
-
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
